@@ -50,3 +50,30 @@ in detail and their advantages against dynamic/static languages and
 OOP/FP.
 - Testing to check that it works!
 -->
+
+## Scope of the book
+
+This section covers the scope of the book. There may be some overlapping
+areas with the previous explanation...
+
+Also, what is outside the scope of this book. Concepts such as:
+
+- Classes,
+- objects,
+- functions,
+- lambdas,
+- high-order functions,
+- etc
+
+should be already known to the reader. However, it may be good to show a few
+definitions and simple examples to remind newcomers.
+
+## Organisation
+
+Explain that the book covers the design patterns and needs to list:
+
+- when to use it
+- advantages
+- disadvantages
+- one or more ways of creating the design pattern and its drawbacks
+- some UML?
