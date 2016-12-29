@@ -3,9 +3,8 @@
 This book was originally written for the course *Advanced Sofware Design* imparted
 at Uppsala University by Dave Clarke and Kiko Fernandez-Reyes.
 The *Advanced Software Design* course covers much more than the design patterns
-shown in this book, but was lacking on hands-on experience and application of
+shown in this book, but was lacking on hands-on experience and the application of
 design patterns in a functional setting. This book hopefully closes that gap.
-
 
 ## Who is this book for?
 
@@ -56,16 +55,8 @@ The mix of these languages covers two different paradigms (object-oriented and f
 programming) and two different type systems (languages dynamically and
 statically typed), shown in Table 1.1.
 
-     -------------------------------------------
-    | Paradigm / Type   |   Static    Dynamic   |
-    |-------------------------------------------|
-    | Object-oriented   |    Java      Python   |
-    |-------------------------------------------|
-    | Functional        |    Haskell   Clojure  |
-     -------------------------------------------
-
-    Tabla 1.1 Relation between language paradigm and type system
-
+![](chapters/img/Table-Languages.png)
+*Tabla 1.1 Relation between paradigm and type system*
 
 **Why multiple languages?**
 
@@ -77,5 +68,57 @@ For instance, Python has some functional features but, all in all,
 **Python is an object-oriented language**.
 
 <!-- NOT CLEAR! -->
-The main reason for using multiple languages in this book is to **show that different paradigms
-and type systems provide benefits and drawbacks in the application of design patterns**.
+The main reason for using multiple languages is to **show that different paradigms
+and type systems provide benefits and drawbacks in the use of design patterns**.
+
+## Organisation
+
+Explain that the book covers the design patterns and needs to list:
+
+- when to use it
+- advantages
+- disadvantages
+- one or more ways of creating the design pattern and its drawbacks
+- some UML?
+
+
+## Software requirements
+
+This book contains code written in Java, Python, Clojure and Haskell. This section
+contains the exact versions of the languages used in this book as well as simple instructions
+to install the languages. If you are not familiar with these languages, you
+may opt to install only the language that you would like to learn.
+
+### Java
+
+Java 1.8
+
+#### Installation
+
+Info on how to install in Mac and Linux. Maybe Windows.
+
+### Haskell
+
+Glasgow Haskell Platform, 7.10.2
+
+#### Installation
+
+Info on how to install in Mac and Linux. Maybe Windows.
+
+### Clojure
+
+Clojure 1.8 and Leiningen
+
+#### Installation
+
+Info on how to install in Mac and Linux. Maybe Windows.
+
+### Python 3.6
+
+#### Installation
+
+Info on how to install in Mac and Linux. Maybe Windows.
+
+## Online resources
+
+Code hosted on Github
