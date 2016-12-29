@@ -11,7 +11,7 @@ all: epub
 
 epub:
 	pandoc -S --toc -N --epub-metadata=metadata.xml -o $(RELEASE)/$(OUTPUT).epub \
-	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md \
+	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md $(SRC)/solid.md \
 	$(SRC)/grasp.md $(SRC)/dp-creational.md $(SRC)/dp-structural.md \
 	$(SRC)/dp-behavioral.md
 
@@ -21,7 +21,7 @@ pdf:
 	-V title=$(TITLE) \
 	-S --latex-engine=xelatex \
 	-o $(RELEASE)/$(OUTPUT).pdf \
-	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md \
+	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md $(SRC)/solid.md \
 	$(SRC)/grasp.md $(SRC)/dp-creational.md $(SRC)/dp-structural.md \
 	$(SRC)/dp-behavioral.md \
 	--toc
