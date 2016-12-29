@@ -71,15 +71,15 @@ For instance, Python has some functional features but, all in all,
 The main reason for using multiple languages is to **show that different paradigms
 and type systems provide benefits and drawbacks in the use of design patterns**.
 
-## Organisation
+<!-- ## Organisation -->
 
-Explain that the book covers the design patterns and needs to list:
+<!-- Explain that the book covers the design patterns and needs to list: -->
 
-- when to use it
-- advantages
-- disadvantages
-- one or more ways of creating the design pattern and its drawbacks
-- some UML?
+<!-- - when to use it -->
+<!-- - advantages -->
+<!-- - disadvantages -->
+<!-- - one or more ways of creating the design pattern and its drawbacks -->
+<!-- - some UML? -->
 
 
 ## Software requirements

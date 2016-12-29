@@ -41,11 +41,12 @@ bring inherent benefits that have to be otherwise coded in the other approach.
 ### What is a good design?
 
 <!-- good design == flexible design -->
-In general, **a good design is one that can deal with change**. A software engineer
-has to think much more abstract than a civil engineer. Let me explain this better:
-As a civil engineer, you may have to think about building a bridge that can stand
-`X` number of tons and, under any circunstance, it should not fall down. As a software engineer,
-you have to think about a piece of code that today is a car, tomorrow is a submarine
+In general, **a good design is one that can deal with change**.
+<!-- software design is all about change -> comparison with other engineers -->
+A software engineer has to think much more abstract than other engineers, e.g. civil engineer.
+For instance, as a civil engineer, you may have to think about building a bridge that can stand
+`X` number of tons and, under any circunstance, not fall down.
+As a software engineer, you have to think about a piece of code that today is a car, tomorrow is a submarine
 and the next day is a tank and this happens because it is just code, anyone can
 update it and it is not set in stone, ever.
 
@@ -63,10 +64,10 @@ A design pattern is a well-desgined solution to a common problem.
 Design patterns are expressed in a concise and clear format, and they
 follow a structure similar to the one below:
 
-- *pattern name*, which is common for everyone for easy understanding
-- *concise and well-defined problem*
+- *pattern name*, so that experts can refer to a common pattern
+- *concise and well-defined problem specification*
 - *unequivocal solution*
-- explicit mention of the *trade-offs of the pattern*
+- *trade-offs of the pattern*
 
 <!--
 Should I cover design patterns from ASD? YES
