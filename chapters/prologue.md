@@ -84,41 +84,33 @@ Explain that the book covers the design patterns and needs to list:
 
 ## Software requirements
 
-This book contains code written in Java, Python, Clojure and Haskell. This section
-contains the exact versions of the languages used in this book as well as simple instructions
-to install the languages. If you are not familiar with these languages, you
-may opt to install only the language that you would like to learn.
+This book contains code written in Java, Python, Clojure and Haskell.
+This section contains the exact versions of the languages used in this book.
+All code contained in this book can be found at
+[https://github.com/kikofernandez/asd-book](https://github.com/kikofernandez/asd-book).
 
-### Java
+### Java 8
 
-Java 1.8
+All examples written in this book has been tested using the Oracle JDK 8u111.
 
-#### Installation
-
-Info on how to install in Mac and Linux. Maybe Windows.
+Instructions on how to install Java can be found in
+[http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
 
 ### Haskell
 
-Glasgow Haskell Platform, 7.10.2
+All examples written in this book has been tested in GHC 7.10.2.
 
-#### Installation
-
-Info on how to install in Mac and Linux. Maybe Windows.
+Instructions on how to install GHC can be found in [https://www.haskell.org/ghc/](https://www.haskell.org/ghc/).
 
 ### Clojure
 
-Clojure 1.8 and Leiningen
+All examples written in this book has been tested for Clojure 1.8.0.
 
-#### Installation
-
-Info on how to install in Mac and Linux. Maybe Windows.
+Instructions on how to install Clojure can be found in [http://clojure.org/community/downloads](http://clojure.org/community/downloads).
 
 ### Python 3.6
 
-#### Installation
+All examples written in this book has been tested for Python 3.6.0.
 
-Info on how to install in Mac and Linux. Maybe Windows.
-
-## Online resources
-
-Code hosted on Github
+Instructions on how to install Python 3.6 can be found
+in [https://www.python.org/downloads/](https://www.python.org/downloads/).
