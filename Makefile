@@ -13,7 +13,7 @@ epub:
 	pandoc -S --toc -N --epub-metadata=metadata.xml -o $(RELEASE)/$(OUTPUT).epub \
 	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md $(SRC)/solid.md \
 	$(SRC)/grasp.md $(SRC)/dp-creational.md $(SRC)/dp-structural.md \
-	$(SRC)/dp-behavioral.md
+	$(SRC)/dp-behavioral.md $(SRC)/cheatsheet.md
 
 pdf:
 	pandoc -V language=english -V lang=english \
@@ -23,7 +23,7 @@ pdf:
 	-o $(RELEASE)/$(OUTPUT).pdf \
 	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md $(SRC)/solid.md \
 	$(SRC)/grasp.md $(SRC)/dp-creational.md $(SRC)/dp-structural.md \
-	$(SRC)/dp-behavioral.md \
+	$(SRC)/dp-behavioral.md $(SRC)/cheatsheet.md \
 	--toc
 
 clean:
