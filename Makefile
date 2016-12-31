@@ -11,7 +11,13 @@ all: epub
 
 epub:
 	pandoc -S --toc -N --epub-metadata=metadata.xml -o $(RELEASE)/$(OUTPUT).epub \
-	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md $(SRC)/solid.md \
+	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md $(SRC)/uml.md $(SRC)/solid.md \
+	$(SRC)/grasp.md $(SRC)/dp-creational.md $(SRC)/dp-structural.md \
+	$(SRC)/dp-behavioral.md $(SRC)/cheatsheet.md
+
+html:
+	pandoc -S --toc -N -c styles/html.css -o $(RELEASE)/$(OUTPUT).html \
+	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md $(SRC)/uml.md $(SRC)/solid.md \
 	$(SRC)/grasp.md $(SRC)/dp-creational.md $(SRC)/dp-structural.md \
 	$(SRC)/dp-behavioral.md $(SRC)/cheatsheet.md
 
@@ -21,7 +27,7 @@ pdf:
 	-V title=$(TITLE) \
 	-S --latex-engine=xelatex \
 	-o $(RELEASE)/$(OUTPUT).pdf \
-	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md $(SRC)/solid.md \
+	$(SRC)/prologue.md $(SRC)/intro.md $(SRC)/recap.md $(SRC)/uml.md $(SRC)/solid.md \
 	$(SRC)/grasp.md $(SRC)/dp-creational.md $(SRC)/dp-structural.md \
 	$(SRC)/dp-behavioral.md $(SRC)/cheatsheet.md \
 	--toc
@@ -29,4 +35,4 @@ pdf:
 clean:
 	cd $(RELEASE) && rm *.epub *.pdf
 
-.PHONY: epub pdf
+.PHONY: epub pdf html

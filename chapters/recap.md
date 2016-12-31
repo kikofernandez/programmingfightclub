@@ -4,10 +4,18 @@ This section covers basic stuff such as:
 
 - Classes,
 - objects,
-- functions,
-- lambdas,
+- inheritance,
+- interfaces,
+- abstract classes and
+- parametric classes
+
+and the following concepts from functional programming:
+
+- Anonymous functions / lambdas,
 - high-order functions,
-- some UML
-- etc
+- parametric functions,
+- algebraic data types,
+- multi-functions
+- immutability
 
 in Java, Python, Haskell and Clojure

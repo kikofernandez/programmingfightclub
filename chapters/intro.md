@@ -69,6 +69,9 @@ follow a structure similar to the one below:
 - *unequivocal solution*
 - *trade-offs of the pattern*
 
+In this book, we follow this structure together with auxiliary UML class
+diagrams (explained in later chapters).
+
 <!--
 Should I cover design patterns from ASD? YES
 
