@@ -19,6 +19,7 @@ and the following concepts from functional programming in Clojure and Haskell:
 - algebraic data types,
 - multi-functions
 - immutability
+- recursion
 
 Keep in mind that some languages have features that do not exist in other languages.
 For instance, algebraic data types exist in Haskell not in Clojure and
@@ -70,12 +71,12 @@ class Dog {
   }
 
   // getter method
-  public boolean alert(){
+  public boolean getAlert(){
     return this.alert;
   }
 
   // setter method
-  public void alert(boolean newAlert){
+  public void setAlert(boolean newAlert){
     this.alert = newAlert;
   }
 
@@ -128,6 +129,35 @@ class Dog:
 *Example 3.1.1.2 Introductory example to Python*
 
 ### Objects
+
+Objects represent instances of the class at runtime. An object gets the default
+state defined by their constructor and the behaviour defined in the class
+that it instantiates.
+
+**Java**
+
+To create an object:
+```java
+Dog dog = new Dog();
+```
+
+This calls on the constructor of the `Dog` class that sets the `alert` state
+to `false`. If the dog tries to bark nothing will happen:
+
+```java
+dog.bark()
+```
+
+The dog can bark when we update its attribute `alert` with the setter defined
+in the `Dog` class.
+
+```java
+dog.setAlert(true);
+dog.bark();
+// prints "Woof Woof"
+```
+
+**Python**
 
 ### Inheritance
 
