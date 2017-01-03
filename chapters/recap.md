@@ -45,7 +45,18 @@ is to learn the main benefits that each language brings to the table.*
 
 Classes describe the state and behaviour of an object. The state of a class
 lives in its attributes while the behaviour is expressed via its methods.
-Let's start with a typical example and work on it with in the next concepts:
+A class that hides its attributes with a `private` access modifier
+(remember `public`, `protected` and `private`?) protects its internal state
+from other classes. Now, the only way to interact with the internal state is
+via the behaviour exposed by the class, the methods.
+As a general advice, you should not expose the internal state of your class
+to others; you should expose your behaviour. This is what make great abstractions
+such as associative arrays, tasks and futures among others.
+
+Classes expose their behaviour via its methods. If those methods just get
+the attributes and set them, we call them *getters* and *setters*. Enough for
+an introduction to something that should you already now, let's see some code!
+Let's start with a typical example and work on it in the next concepts:
 
 Idea:
 Let's model a dog, who has as state her alertness and her behaviour is to bark
@@ -53,12 +64,13 @@ only when she is startled. As owner, you can check if the dog is startled or rel
 
 **Java**
 
-The class `Dog` has as state a *private* attribute `alert`. This means that
-the attribute is not accesible from outside the class. To get the attribute
-outside the class you use *getters* and *setters* methods which only get the
-data from the attribute and set the data in the attribute. The constructor
-of the class creates a new `Dog` and sets its state to some default value.
-This is represented in the Example 3.1.1.1.
+The class `Dog` has as state a *private* attribute `alert`.
+(the attribute is not accesible from outside the class).
+The constructor of the class (`public Dog()`) creates a new `Dog` and sets its
+state to some default value.
+To get the state outside the class we use *getters* and *setters* methods.
+These are preceded by the words `get` and `set` following the attributes name,
+e.g. `getAlert`. This is represented in the Example 3.1.1.1.
 
 ```java
 class Dog {
@@ -93,20 +105,40 @@ class Dog {
 
 **Python**
 
-The class `Dog` has as state the attribute `alert`, defined inside the `__init__`
-method (constructor in Python). This method also declares that it accepts
-an extra argument `alert` that, if not provided, has the default value `False`.
-Python doesn't have the `private` keyword available in Java and everything is
-public by default. However, there is a convention that attributes that has a leading
-underscore are to be considered private.
-To avoid exposing the internal state and allow easy access to attributes,
+Python doesn't have access modifiers and uses (by convention) an underscore
+(or two, let's now go into why) to mean that the attribute is private.
+The constructor `def __init__(self, alert=False)` method takes explicitly
+an instance of itself `self` and a default argument, `alert` that, if it's not
+provided, it is set to `False`. Before we continue disecting the constructor,
+let's briefly introduce getters and setters.
+
 Python provides a special syntax for
 getters and setters that wrap the attribute into a function with that very
-same name. For instance, the getter for the `alert` attribute declares
-a method with the `@property` on top of it. The body of the method just
-fetches the attribute. Setters work in the same way, except that they
-are annotate it contains the name of the attribute followed by the `setter`
-word, e.g. `@alert.setter` for the `alert` setter method.
+same name. For instance, the getter for the `alert` attribute is created by
+declaring a method with the name of the attribute and the `@property` on top of it.
+The body of the method just fetches the attribute.
+
+```python
+    @property
+    def alert(self):
+      return self.__alert
+```
+
+Setters work in the same way, except that they
+are annotated with the attribute's name followed by the `setter` word,
+e.g. `@alert.setter` for the `alert` setter method.
+From now on, when we call on `self.alert` we are actually calling the getter
+method and when we assign `self.alert = True`, we are calling the setter method.
+
+
+Now, if we go back to the `__init__` method from Example 3.1.1.2,
+we can observe that this is indeed the desire behaviour.
+
+**Why would we want to use getters and setters like that?**
+Young padawan, they are an abstraction. Now you only want to retrieve the data but,
+with this abstraction, you could be returning cached data that otherwise needs to be fetched
+from the network. Later on, we will learn about the decorator pattern and how
+it rocks in Python!
 
 ```python
 class Dog:
@@ -122,7 +154,7 @@ class Dog:
     self.__alert = new_alert
 
   def bark(self):
-    if self.__alert is True:
+    if self.alert is True:
       println("Woof Woof")
 ```
 
