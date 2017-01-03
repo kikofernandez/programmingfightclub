@@ -163,12 +163,11 @@ class Dog:
 ### Objects
 
 Objects represent instances of the class at runtime. An object gets the default
-state defined by their constructor and the behaviour defined in the class
-that it instantiates.
+state defined by their constructor and the behaviour defined from the class declaration.
 
 **Java**
 
-To create an object:
+Following the example before, let's create an object:
 ```java
 Dog dog = new Dog();
 ```
@@ -180,8 +179,7 @@ to `false`. If the dog tries to bark nothing will happen:
 dog.bark()
 ```
 
-The dog can bark when we update its attribute `alert` with the setter defined
-in the `Dog` class.
+The dog barks when it is startled, let's make her bark:
 
 ```java
 dog.setAlert(true);
