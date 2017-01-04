@@ -22,14 +22,14 @@ and the following concepts from functional programming in Clojure and Haskell:
 - recursion
 
 Keep in mind that some languages have features that do not exist in other languages.
-For instance, algebraic data types exist in Haskell not in Clojure and
+For instance, algebraic data types exist in Haskell but not in Clojure and
 parametric classes exist in Java but not in Python. In the former case,
 algebraic data types cannot be fully build in Clojure due to its dynamic typing
 nature -- Clojure cannot typecheck the difference between data types and data values
 (we'll explain what this means later on). In the latter case, parametric functions
 do not make sense for Python due to, again, its dynamic nature. If you got the
 feeling that this does not make sense and you cannot follow, everything will be
-explain with examples soon when we cover these basic concepts.
+explain with examples soon, when we cover these basic concepts.
 Let's begin!
 
 ## Object-oriented concepts
@@ -47,16 +47,18 @@ Classes describe the state and behaviour of an object. The state of a class
 lives in its attributes while the behaviour is expressed via its methods.
 A class that hides its attributes with a `private` access modifier
 (remember `public`, `protected` and `private`?) protects its internal state
-from other classes. Now, the only way to interact with the internal state is
-via the behaviour exposed by the class, the methods.
+from other classes. Now, the only way to update the internal state is
+via method calls (**they represent the behaviour of the object**).
 As a general advice, you should not expose the internal state of your class
 to others; you should expose your behaviour. This is what make great abstractions
 such as associative arrays, tasks and futures among others.
 
 Classes expose their behaviour via its methods. If those methods just get
-the attributes and set them, we call them *getters* and *setters*. Enough for
+the attributes and set them, we call them *getters* and *setters*.
+
+That's enough for
 an introduction to something that should you already now, let's see some code!
-Let's start with a typical example and work on it in the next concepts:
+Let's start with a typical example and work on it:
 
 Idea:
 Let's model a dog, who has as state her alertness and her behaviour is to bark
@@ -188,6 +190,36 @@ dog.bark();
 ```
 
 **Python**
+
+Creation of an object is similar to Java:
+
+```python
+dog = Dog()
+```
+
+To make the dog bark:
+
+```python
+dog.bark()
+```
+
+which does nothing because the dog is not startled. Let's use the setter
+to change its state and make her bark:
+
+```python
+dog.alert = True
+dog.bark()
+# prints "Woof Woof"
+```
+
+Notice that in this case, we could have set the initial state of the dog
+and would not have had to use a setter:
+
+```python
+dog = Dog(True)
+dog.bark()
+# prints "Woof Woof"
+```
 
 ### Inheritance
 
