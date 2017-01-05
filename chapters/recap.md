@@ -178,7 +178,7 @@ This calls on the constructor of the `Dog` class that sets the `alert` state
 to `false`. If the dog tries to bark nothing will happen:
 
 ```java
-dog.bark()
+dog.bark();
 ```
 
 The dog barks when it is startled, let's make her bark:
@@ -224,11 +224,49 @@ dog.bark()
 ### Inheritance
 
 A class can inherit methods from other classes, called inheritance. The class that
-inherits methods is called subclass while the class that provides them is called
-super class. Java has single inheritance, meaning that the subclass can inherit
+inherits methods is called *subclass* while the class that provides them is called
+*super class*. Java has single inheritance, meaning that the subclass can inherit
 only from a single class while Python has a limited form of multiple inheritance.
 
+Idea: A computer has various levels of memory, L1, L2, Last-level cache and main
+memory. In this example, the class `Computer` inherits operations from memory,
+so that we can call methods that retrieve objects from main memory. (this is an
+example and I would not advice any one to create a virtual machine based on
+this idea)
+
 **Java**
+
+Since Java can only inherit from a single class, we can model the idea above as shown
+in *Example 3.1.3 Java inheritance*.
+
+```java
+class Memory {
+
+  private CacheL1 l1;
+  private CacheL2 l2;
+
+  public Memory(){
+    int kilobyte = 1024*1024;
+    int megabyte = 1024 * kilobyte;
+    this.l1 = new CacheL1(512*kilobyte);
+    this.l2 = new CacheL2(3*megabyte);
+  }
+
+  public Object fetchLocation(Location lo) { // ... }
+}
+
+class Computer extends Memory {
+  public class Computer(){
+    // ...
+  }
+}
+```
+
+*Example 3.1.3 Java inheritance*
+
+The class `Computer` inherits the methods `Memory` when `Computer extends Memory`.
+This means that we can fetch objects from memory, `computer.fetchLocation(location);`.
+
 
 **Python**
 
@@ -236,7 +274,7 @@ Python supports two forms of multiple inheritance, known as old-style and
 new style. In the old-style form, the multiple inheritance works in depth-first
 and left-to-right order. For instance:
 
-```
+```python
 class L1(object):
   def send_info():
     print "Sending from L1 to bus"
@@ -259,17 +297,17 @@ c = Computer()
 c.send_info()
 ```
 
-*Example XXXX*
+*Example 3.1.3 Python old-style*
 
 In this case, the `c.send_info()` method prints `Sending info from CPU to bus`.
 If we were to change the order of the inherited classes, `class Computer(Cache, CPU)`,
 then the printing method would have been `Sending from L1 to bus`.
 
 The multiple inheritance new style kicks in when classes do not inherit from `object`
-(as opposed to what `L1` and `L2` do in *Example XXXX*). The new style considers
+(as opposed to what `L1` and `L2` do in *Example Python old-style*). The new style considers
 breath-first and left-to-right order.
 
-```
+```python
 class L1:
   def send_info():
     print "Sending from L1 to bus"
@@ -292,9 +330,9 @@ c = Computer()
 c.send_info()
 ```
 
-*Example YYY*
+*Example 3.1.3 Python new style*
 
-In *Example YYY*, the `c.send_info()` method would have printed
+In *Example 3.1.3 Python new style*, the `c.send_info()` method would have printed
 `Sending info from CPU to bus` given that `Cache` does not provide a suitable
 `send_info` method explictly.
 
