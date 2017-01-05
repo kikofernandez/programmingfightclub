@@ -340,6 +340,90 @@ In *Example 3.1.3 Python new style*, the `c.send_info()` method would have print
 
 ### Interfaces
 
+Interfaces declare a contract of the expected behaviour of the classes that implement
+the interface. An interface *merely* defines methods. Classes that would like
+to be compatible with the interface need to implement those methods. The real
+purpose of interfaces is to enable polymorphism, e.g. being able to call methods
+on different classes because they implement the same interface. Java has interfaces but Python completely
+lacks them. Dynamic languages such as Python cannot express interfaces because
+they don't have a static type system, the fact of not having static types inhibits
+interfaces.
+
+**Java**
+
+In Java an interface is declared similar to how classes are declared, except that
+you use the word `interface`.
+
+```java
+interface MemOperations {
+  public Object fetchLocation(Location loc);
+  public void flush();
+  public void sendToBus();
+}
+
+public class CacheL1 implements MemOperations {
+  public CacheL1(int size){
+    //...
+  }
+
+  public Object fetchLocation(Location loc){
+    // ...
+  }
+
+  // ...
+
+  public void flush(){
+    System.out.println("Flushing from CacheL1");
+  }
+
+}
+
+public class CacheL2 implements MemOperations {
+  // ...
+
+  public void flush(){
+    System.out.println("Flushing from CacheL2");
+  }
+}
+
+```
+
+*Example 3.1.4 Java interfaces*
+
+If you forget to implement one of the methods declared in the interface,
+the type system will throw an error and complain that you forgot to
+implement the missing methods. You won't get unexpected crashes at runtime because
+the method doesn't exist.
+
+From the *Example 3.1.4 Java Interfaces* we can create different cache levels
+and treat them as if they are just `MemOperations`. Calling methods on each
+one prints a different `String`.
+
+```
+CacheL1 c1 = new CacheL1(512);
+CacheL2 c2 = new CacheL2(2048);
+
+ArrayList<MemOperations> a = new ArrayList<MemOperations>();
+a.append(c1);
+a.append(c2);
+
+for(cache: a){
+  cache.flush();
+}
+
+// prints:
+// "Flushing from CacheL1"
+// "Flushing from CacheL2"
+```
+
+
+TODO: Should I explain polymorphism here? It's GRASP...
+
+TODO: Should I show a code example?
+
+TODO: I believe I am explaining super basic stuff and should level up...
+
+
 ### Abstract classes
 
 ### Parametric classes
