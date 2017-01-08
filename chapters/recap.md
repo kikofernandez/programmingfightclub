@@ -164,7 +164,7 @@ class Dog:
 
 ### Objects
 
-Objects represent instances of the class at runtime. An object gets the default
+Objects represent instances of the [class](#classes) at runtime. An object gets the default
 state defined by their constructor and the behaviour defined from the class declaration.
 
 **Java**
@@ -223,7 +223,7 @@ dog.bark()
 
 ### Inheritance
 
-A class can inherit methods from other classes, called inheritance. The class that
+A class can inherit methods from other [classes], called inheritance. The class that
 inherits methods is called *subclass* while the class that provides them is called
 *super class*. Java has single inheritance, meaning that the subclass can inherit
 only from a single class while Python has a limited form of multiple inheritance.
@@ -340,7 +340,9 @@ In *Example 3.1.3 Python new style*, the `c.send_info()` method would have print
 
 ### Interfaces
 
-Interfaces declare a contract of the expected behaviour of the classes that implement
+**TODO: missing default methods and static methods in interfaces (they can have implementations!)**
+
+Interfaces declare a contract of the expected behaviour of classes that implement
 the interface. An interface *merely* defines methods. Classes that would like
 to be compatible with the interface need to implement those methods. The real
 purpose of interfaces is to enable polymorphism, e.g. being able to call methods
@@ -416,15 +418,89 @@ for(cache: a){
 // "Flushing from CacheL2"
 ```
 
+As of Java 8, interfaces can declare a *default* implementation for methods.
+This is great from the design point of view: you can provide a default implementation
+as long as you rely only on the known behaviour (other public methods of the interface).
+This means that you can create a clean design that does not rely on internal state
+and/or methods.
 
-TODO: Should I explain polymorphism here? It's GRASP...
+**TODO: Template pattern fits here perfectly!**
 
-TODO: Should I show a code example?
+**TODO: Should I explain polymorphism here? It's GRASP...**
 
-TODO: I believe I am explaining super basic stuff and should level up...
+**TODO: Should I show a code example?**
+
+**TODO: I believe I am explaining super basic stuff and should level up...**
 
 
 ### Abstract classes
+
+Abstract classes can be seen as a mix between [interfaces] and [classes]:
+they can contain attributes, define methods and declare abstract methods.
+Abstract methods provide a declaration of the behaviour but not a definition (implementation).
+An abstract class cannot work on its own -- cannot be instantiated alone --
+and needs to be subclass by another class, which implements the abstract methods.
+
+**Java**
+
+It may seem as if [Interfaces] (as of Java 8) and [Abstract Classes] serve the same purpose.
+However, there is a subtle difference: an interface can only create public methods and
+constant declarations (*static* and *final* attributes) while an abstract class
+can declare and define the internal state of the class.
+
+As an advice, I would recommend to use interfaces whenever you have various subclasses
+that need to implement the same behaviour. I would consider the use of an
+abstract class in limited cases and only when there is a need to share the same private
+state among objects that are quite similar.
+
+**TODO: Favour composition over inheritance**
+
+
+```java
+abstract class Entity {
+  private int life;
+  private Equipment equipment;
+
+  public Entity(int life, Equipment Equipment){
+    this.life = life;
+    this.equipment = equipment;
+  }
+
+  public int getLife() { return this.life; }
+  public void setLife(int life) { this.life = life; }
+
+  abstract void attack(Enemy e);
+  abstract void escape();
+  // ...
+}
+
+interface Attackable {
+  public int getPower();
+
+  default void attack(Enemy e){
+    e.setLife(e.getLife() - getPower());
+  }
+}
+
+public class Hero {
+  public void attack(Enemy e){
+    // Filter equipment by things that I can attack with
+    Attackable attackable = this.equipment.attackable();
+
+    // attack
+    attackable.attack(e);
+  }
+}
+```
+
+**TODO: equipment may use the null pattern**
+
+**Python**
+
+Test [^metadata]
+
+[^metadata]: Python allows creation of abstract classes via meta classes. These
+concept is a bit more advanced and may be covered upon receiving some initial feedback.
 
 ### Parametric classes
 
