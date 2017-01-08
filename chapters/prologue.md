@@ -55,7 +55,8 @@ The mix of these languages covers two different paradigms (object-oriented and f
 programming) and two different type systems (languages dynamically and
 statically typed), shown in Table 1.1.
 
-![](chapters/img/Table-Languages.png)
+![](img/Table-Languages.png)
+
 *Tabla 1.1 Relation between paradigm and type system*
 
 **Why multiple languages?**

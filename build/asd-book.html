@@ -1,0 +1,615 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="styles/html.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#prologue"><span class="toc-section-number">1</span> Prologue</a><ul>
+<li><a href="#who-is-this-book-for"><span class="toc-section-number">1.1</span> Who is this book for?</a></li>
+<li><a href="#what-is-covered-in-this-book"><span class="toc-section-number">1.2</span> What is covered in this book?</a></li>
+<li><a href="#software-requirements"><span class="toc-section-number">1.3</span> Software requirements</a><ul>
+<li><a href="#java-8"><span class="toc-section-number">1.3.1</span> Java 8</a></li>
+<li><a href="#haskell"><span class="toc-section-number">1.3.2</span> Haskell</a></li>
+<li><a href="#clojure"><span class="toc-section-number">1.3.3</span> Clojure</a></li>
+<li><a href="#python-3.6"><span class="toc-section-number">1.3.4</span> Python 3.6</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#introduction"><span class="toc-section-number">2</span> Introduction</a><ul>
+<li><a href="#software-design"><span class="toc-section-number">2.1</span> Software Design</a><ul>
+<li><a href="#what-is-a-good-design"><span class="toc-section-number">2.1.1</span> What is a good design?</a></li>
+<li><a href="#design-patterns"><span class="toc-section-number">2.1.2</span> Design patterns</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#recap"><span class="toc-section-number">3</span> Recap</a><ul>
+<li><a href="#object-oriented-concepts"><span class="toc-section-number">3.1</span> Object-oriented concepts</a><ul>
+<li><a href="#classes"><span class="toc-section-number">3.1.1</span> Classes</a></li>
+<li><a href="#objects"><span class="toc-section-number">3.1.2</span> Objects</a></li>
+<li><a href="#inheritance"><span class="toc-section-number">3.1.3</span> Inheritance</a></li>
+<li><a href="#interfaces"><span class="toc-section-number">3.1.4</span> Interfaces</a></li>
+<li><a href="#abstract-classes"><span class="toc-section-number">3.1.5</span> Abstract classes</a></li>
+<li><a href="#parametric-classes"><span class="toc-section-number">3.1.6</span> Parametric classes</a></li>
+</ul></li>
+<li><a href="#functional-concepts"><span class="toc-section-number">3.2</span> Functional concepts</a><ul>
+<li><a href="#anonymous-functions-lambdas"><span class="toc-section-number">3.2.1</span> Anonymous functions / lambdas</a></li>
+<li><a href="#immutability"><span class="toc-section-number">3.2.2</span> Immutability</a></li>
+<li><a href="#high-order-functions"><span class="toc-section-number">3.2.3</span> High-order functions</a></li>
+<li><a href="#parametric-functions"><span class="toc-section-number">3.2.4</span> Parametric functions</a></li>
+<li><a href="#algebraic-data-types"><span class="toc-section-number">3.2.5</span> Algebraic data types</a></li>
+<li><a href="#multi-functions"><span class="toc-section-number">3.2.6</span> Multi-functions</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#uml-crash-course"><span class="toc-section-number">4</span> UML Crash course</a></li>
+<li><a href="#solid-principles"><span class="toc-section-number">5</span> SOLID principles</a><ul>
+<li><a href="#single-resposibility"><span class="toc-section-number">5.1</span> Single Resposibility</a></li>
+<li><a href="#openclose-principle"><span class="toc-section-number">5.2</span> Open/Close Principle</a></li>
+<li><a href="#liskov-substitution"><span class="toc-section-number">5.3</span> Liskov Substitution</a></li>
+<li><a href="#interface-segregation"><span class="toc-section-number">5.4</span> Interface Segregation</a></li>
+<li><a href="#dependency-inversion"><span class="toc-section-number">5.5</span> Dependency Inversion</a></li>
+</ul></li>
+<li><a href="#grasp-principles"><span class="toc-section-number">6</span> GRASP principles</a><ul>
+<li><a href="#low-coupling"><span class="toc-section-number">6.1</span> Low Coupling</a></li>
+<li><a href="#high-cohesion"><span class="toc-section-number">6.2</span> High Cohesion</a></li>
+<li><a href="#creator"><span class="toc-section-number">6.3</span> Creator</a></li>
+<li><a href="#information-expert"><span class="toc-section-number">6.4</span> Information Expert</a></li>
+<li><a href="#controller"><span class="toc-section-number">6.5</span> Controller</a></li>
+<li><a href="#polymorphism"><span class="toc-section-number">6.6</span> Polymorphism</a></li>
+<li><a href="#indirection"><span class="toc-section-number">6.7</span> Indirection</a></li>
+<li><a href="#pure-fabrication"><span class="toc-section-number">6.8</span> Pure Fabrication</a></li>
+<li><a href="#protected-variation"><span class="toc-section-number">6.9</span> Protected Variation</a></li>
+</ul></li>
+<li><a href="#design-patters-creational"><span class="toc-section-number">7</span> Design Patters: Creational</a><ul>
+<li><a href="#abstract-factory"><span class="toc-section-number">7.1</span> Abstract Factory</a></li>
+<li><a href="#builder"><span class="toc-section-number">7.2</span> Builder</a></li>
+<li><a href="#factory-method"><span class="toc-section-number">7.3</span> Factory Method</a></li>
+<li><a href="#object-pool"><span class="toc-section-number">7.4</span> Object Pool</a></li>
+<li><a href="#prototype"><span class="toc-section-number">7.5</span> Prototype</a></li>
+<li><a href="#singleton"><span class="toc-section-number">7.6</span> Singleton</a></li>
+</ul></li>
+<li><a href="#design-patters-structural"><span class="toc-section-number">8</span> Design Patters: Structural</a><ul>
+<li><a href="#adapter"><span class="toc-section-number">8.1</span> Adapter</a></li>
+<li><a href="#bridge"><span class="toc-section-number">8.2</span> Bridge</a></li>
+<li><a href="#composite"><span class="toc-section-number">8.3</span> Composite</a></li>
+<li><a href="#decorator"><span class="toc-section-number">8.4</span> Decorator</a></li>
+<li><a href="#facade"><span class="toc-section-number">8.5</span> Facade</a></li>
+<li><a href="#flyweight"><span class="toc-section-number">8.6</span> Flyweight</a></li>
+<li><a href="#proxy"><span class="toc-section-number">8.7</span> Proxy</a></li>
+</ul></li>
+<li><a href="#design-patters-behavioral"><span class="toc-section-number">9</span> Design Patters: Behavioral</a><ul>
+<li><a href="#chain-of-responsibility"><span class="toc-section-number">9.1</span> Chain of responsibility</a></li>
+<li><a href="#command"><span class="toc-section-number">9.2</span> Command</a></li>
+<li><a href="#interpreter"><span class="toc-section-number">9.3</span> Interpreter</a></li>
+<li><a href="#iterator"><span class="toc-section-number">9.4</span> Iterator</a></li>
+<li><a href="#mediator"><span class="toc-section-number">9.5</span> Mediator</a></li>
+<li><a href="#memento"><span class="toc-section-number">9.6</span> Memento</a></li>
+<li><a href="#null-object"><span class="toc-section-number">9.7</span> Null object</a></li>
+<li><a href="#observer"><span class="toc-section-number">9.8</span> Observer</a></li>
+<li><a href="#state"><span class="toc-section-number">9.9</span> State</a></li>
+<li><a href="#strategy"><span class="toc-section-number">9.10</span> Strategy</a></li>
+<li><a href="#template-method"><span class="toc-section-number">9.11</span> Template method</a></li>
+<li><a href="#visitor"><span class="toc-section-number">9.12</span> Visitor</a></li>
+</ul></li>
+<li><a href="#cheatsheet"><span class="toc-section-number">10</span> Cheatsheet</a></li>
+</ul>
+</div>
+<h1 id="prologue"><span class="header-section-number">1</span> Prologue</h1>
+<p>This book was originally written for the course <em>Advanced Sofware Design</em> imparted at Uppsala University by Dave Clarke and Kiko Fernandez-Reyes. The <em>Advanced Software Design</em> course covers much more than the design patterns shown in this book, but was lacking on hands-on experience and the application of design patterns in a functional setting. This book hopefully closes that gap.</p>
+<h2 id="who-is-this-book-for"><span class="header-section-number">1.1</span> Who is this book for?</h2>
+<p>This book is directed to students of any computer science major and young developers, engineers or programmers who have already grasped the idea behind object-oriented and/or functional programming. This book can still be used by those of you who have knowledge in an object-oriented language or a functional language althought, to get the most out of it, I would recommend to be familiar with both paradigms.</p>
+<p>The reader should <strong>already</strong> be familiar with / willing to learn on its own the following concepts from object-oriented programming:</p>
+<ul>
+<li>Classes,</li>
+<li>objects,</li>
+<li>inheritance,</li>
+<li>interfaces,</li>
+<li>abstract classes and</li>
+<li>parametric classes</li>
+</ul>
+<p>and the following concepts from functional programming:</p>
+<ul>
+<li>Anonymous functions / lambdas,</li>
+<li>high-order functions,</li>
+<li>parametric functions,</li>
+<li>algebraic data types,</li>
+<li>multi-functions</li>
+<li>immutability</li>
+</ul>
+<p>There is a <em>recap</em> chapter on these ideas but it was written as a gentle reminder. You should not expect understading object-oriented or functional programming just by reading that chapter.</p>
+<h2 id="what-is-covered-in-this-book"><span class="header-section-number">1.2</span> What is covered in this book?</h2>
+<p>This book covers design principles and advanced design patterns used today in industry. All the principles and design patterns covered in this book are written in four languages: Java, Python, Haskell and Clojure. <!-- --> These languages are already used in production in big companies and are well established. For instance, Boeing uses Clojure in their onboard diagnostic system, Facebook uses Haskell to prevent spam and phising attacks in their site, Pinterest uses Python for their backend operations and Java is widely used everywhere.</p>
+<p>The mix of these languages covers two different paradigms (object-oriented and functional programming) and two different type systems (languages dynamically and statically typed), shown in Table 1.1.</p>
+<div class="figure">
+<img src="img/Table-Languages.png" />
+
+</div>
+<p><em>Tabla 1.1 Relation between paradigm and type system</em></p>
+<p><strong>Why multiple languages?</strong></p>
+<p>You should choose the right language for the right job. Choosing a language is an important design decision as languages are tied to a paradigm and a type system, and these cannot be changed. <!--   --> For instance, Python has some functional features but, all in all, <strong>Python is an object-oriented language</strong>.</p>
+<!-- NOT CLEAR! -->
+<p>The main reason for using multiple languages is to <strong>show that different paradigms and type systems provide benefits and drawbacks in the use of design patterns</strong>.</p>
+<!-- ## Organisation -->
+<!-- Explain that the book covers the design patterns and needs to list: -->
+<!-- - when to use it -->
+<!-- - advantages -->
+<!-- - disadvantages -->
+<!-- - one or more ways of creating the design pattern and its drawbacks -->
+<!-- - some UML? -->
+<h2 id="software-requirements"><span class="header-section-number">1.3</span> Software requirements</h2>
+<p>This book contains code written in Java, Python, Clojure and Haskell. This section contains the exact versions of the languages used in this book. All code contained in this book can be found at <a href="https://github.com/kikofernandez/asd-book" class="uri">https://github.com/kikofernandez/asd-book</a>.</p>
+<h3 id="java-8"><span class="header-section-number">1.3.1</span> Java 8</h3>
+<p>All examples written in this book has been tested using the Oracle JDK 8u111.</p>
+<p>Instructions on how to install Java can be found in <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" class="uri">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a>.</p>
+<h3 id="haskell"><span class="header-section-number">1.3.2</span> Haskell</h3>
+<p>All examples written in this book has been tested in GHC 7.10.2.</p>
+<p>Instructions on how to install GHC can be found in <a href="https://www.haskell.org/ghc/" class="uri">https://www.haskell.org/ghc/</a>.</p>
+<h3 id="clojure"><span class="header-section-number">1.3.3</span> Clojure</h3>
+<p>All examples written in this book has been tested for Clojure 1.8.0.</p>
+<p>Instructions on how to install Clojure can be found in <a href="http://clojure.org/community/downloads" class="uri">http://clojure.org/community/downloads</a>.</p>
+<h3 id="python-3.6"><span class="header-section-number">1.3.4</span> Python 3.6</h3>
+<p>All examples written in this book has been tested for Python 3.6.0.</p>
+<p>Instructions on how to install Python 3.6 can be found in <a href="https://www.python.org/downloads/" class="uri">https://www.python.org/downloads/</a>.</p>
+<h1 id="introduction"><span class="header-section-number">2</span> Introduction</h1>
+<p>There is a general misconception in the software industry, specially in many startups, where you as a developer lose face if you cannot immediately solve a problem. To those who think like that, I tell you, you are wrong. Writing software is not just coding lines until you solve the problem or your software “seems” to work, it’s about <strong>making damn sure that your software is well designed</strong>.</p>
+<h2 id="software-design"><span class="header-section-number">2.1</span> Software Design</h2>
+<!-- Definition -->
+<p>Software design is the process of finding a <em>satisfactory</em> solution to a problem. Before one can start with an implementation there needs to be a clear specification of the problem to solve, maybe a domain model of the system under design (to get used to the domain jargon), an (in)formal document that describes the steps necessary to solve the problem (the Unified Modelling Language can help here with class and sequence diagrams, among others) and a well-defined architecture.</p>
+<!-- Relation to agile methodogies -->
+<p>Given the definition above, designing software seems to be completely disjoint from agile methodologies (e.g. Scrum) where you break user stories into smaller tasks until everything is clear to the whole team. In Scrum there seems to be no domain model, not a single static and/or behavioural diagram, no architecture, etc, just <em>code what the post-it says</em>. However, the post-it tells you <strong>what the problem is</strong> but not <strong>how to solve it!</strong>. The domain modelling, static and behaviour models and architectural diagrams are all tools under your belt that may be used if required, even in agile methodologies.</p>
+<!-- Design is all about making decisions -->
+<p>Software design is all about making decisions. Every problem involves taking small and big decisions and these influence the final outcome of your software. For instance, the “simple” task of choosing a programming language has a tremendous impact on your software. Choose a dynamic language and you’ll find quite a lot of errors at runtime (even if you use a test-driven development approach). Other example is choosing between a object-oriented or a functional language. No matter which one you choose, you can always write the same piece of software using one paradigm or the other. However, one of them will bring inherent benefits that have to be otherwise coded in the other approach.</p>
+<h3 id="what-is-a-good-design"><span class="header-section-number">2.1.1</span> What is a good design?</h3>
+<!-- good design == flexible design -->
+<p>In general, <strong>a good design is one that can deal with change</strong>. <!-- software design is all about change -> comparison with other engineers --> A software engineer has to think much more abstract than other engineers, e.g. civil engineer. For instance, as a civil engineer, you may have to think about building a bridge that can stand <code>X</code> number of tons and, under any circunstance, not fall down. As a software engineer, you have to think about a piece of code that today is a car, tomorrow is a submarine and the next day is a tank and this happens because it is just code, anyone can update it and it is not set in stone, ever.</p>
+<!-- intro to design patterns -->
+<p>There are many ways to solve a problem and, more often than not, there are common solutions. Because of this, many problems has been studied for many years and they have a well documented solution. These well-documented solutions are called <strong>design patterns</strong> and they exist for all kinds of paradigms. In this book, we will focus on object-oriented and functional design patterns.</p>
+<h3 id="design-patterns"><span class="header-section-number">2.1.2</span> Design patterns</h3>
+<!-- definition, adv and disv -->
+<p>A design pattern is a well-desgined solution to a common problem. Design patterns are expressed in a concise and clear format, and they follow a structure similar to the one below:</p>
+<ul>
+<li><em>pattern name</em>, so that experts can refer to a common pattern</li>
+<li><em>concise and well-defined problem specification</em></li>
+<li><em>unequivocal solution</em></li>
+<li><em>trade-offs of the pattern</em></li>
+</ul>
+<p>In this book, we follow this structure together with auxiliary UML class diagrams (explained in later chapters).</p>
+<!--
+Should I cover design patterns from ASD? YES
+
+Should I cover UML? ... maybe not!
+
+Introduction to other languages!
+
+Design patterns:
+- SOLID vs GRASP
+- Design patterns for OOP and/or FP
+- Testing to check that it works!
+-->
+<h1 id="recap"><span class="header-section-number">3</span> Recap</h1>
+<p>This section covers basic concepts from the object oriented and functional paradigms. More conretely, by the end of the chapter you should be familiar with the following concepts from object-oriented programming in Java and Python:</p>
+<ul>
+<li>Classes,</li>
+<li>objects,</li>
+<li>inheritance,</li>
+<li>interfaces,</li>
+<li>abstract classes and</li>
+<li>parametric classes</li>
+</ul>
+<p>and the following concepts from functional programming in Clojure and Haskell:</p>
+<ul>
+<li>Anonymous functions / lambdas,</li>
+<li>high-order functions,</li>
+<li>parametric functions,</li>
+<li>algebraic data types,</li>
+<li>multi-functions</li>
+<li>immutability</li>
+<li>recursion</li>
+</ul>
+<p>Keep in mind that some languages have features that do not exist in other languages. For instance, algebraic data types exist in Haskell but not in Clojure and parametric classes exist in Java but not in Python. In the former case, algebraic data types cannot be fully build in Clojure due to its dynamic typing nature – Clojure cannot typecheck the difference between data types and data values (we’ll explain what this means later on). In the latter case, parametric functions do not make sense for Python due to, again, its dynamic nature. If you got the feeling that this does not make sense and you cannot follow, everything will be explain with examples soon, when we cover these basic concepts. Let’s begin!</p>
+<h2 id="object-oriented-concepts"><span class="header-section-number">3.1</span> Object-oriented concepts</h2>
+<p>The concepts covered in this section are shown in Java and Python.</p>
+<p><em>Note: Clojure is an impure language that mixes the functional programming concepts with the object-oriented paradigm. In the remaning chapters, we omit using the object-oriented capabilities of Clojure, since the objective is to learn the main benefits that each language brings to the table.</em></p>
+<h3 id="classes"><span class="header-section-number">3.1.1</span> Classes</h3>
+<p>Classes describe the state and behaviour of an object. The state of a class lives in its attributes while the behaviour is expressed via its methods. A class that hides its attributes with a <code>private</code> access modifier (remember <code>public</code>, <code>protected</code> and <code>private</code>?) protects its internal state from other classes. Now, the only way to update the internal state is via method calls (<strong>they represent the behaviour of the object</strong>). As a general advice, you should not expose the internal state of your class to others; you should expose your behaviour. This is what make great abstractions such as associative arrays, tasks and futures among others.</p>
+<p>Classes expose their behaviour via its methods. If those methods just get the attributes and set them, we call them <em>getters</em> and <em>setters</em>.</p>
+<p>That’s enough for an introduction to something that should you already now, let’s see some code! Let’s start with a typical example and work on it:</p>
+<p>Idea: Let’s model a dog, who has as state her alertness and her behaviour is to bark only when she is startled. As owner, you can check if the dog is startled or relaxed.</p>
+<p><strong>Java</strong></p>
+<p>The class <code>Dog</code> has as state a <em>private</em> attribute <code>alert</code>. (the attribute is not accesible from outside the class). The constructor of the class (<code>public Dog()</code>) creates a new <code>Dog</code> and sets its state to some default value. To get the state outside the class we use <em>getters</em> and <em>setters</em> methods. These are preceded by the words <code>get</code> and <code>set</code> following the attributes name, e.g. <code>getAlert</code>. This is represented in the Example 3.1.1.1.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> Dog {
+  <span class="co">// state of the Dog</span>
+  <span class="kw">private</span> <span class="dt">boolean</span> alert;
+
+  <span class="co">// constructor</span>
+  <span class="kw">public</span> <span class="fu">Dog</span>(){
+    <span class="kw">this</span>.<span class="fu">alert</span> = <span class="kw">false</span>;
+  }
+
+  <span class="co">// getter method</span>
+  <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">getAlert</span>(){
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">alert</span>;
+  }
+
+  <span class="co">// setter method</span>
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setAlert</span>(<span class="dt">boolean</span> newAlert){
+    <span class="kw">this</span>.<span class="fu">alert</span> = newAlert;
+  }
+
+  <span class="co">// behaviour</span>
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">bark</span>(){
+    <span class="kw">if</span> (<span class="kw">this</span>.<span class="fu">alert</span>) {
+      <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Woof Woof&quot;</span>);
+    }
+  }
+}</code></pre></div>
+<p><em>Example 3.1.1.1. Introductory example to Java</em></p>
+<p><strong>Python</strong></p>
+<p>Python doesn’t have access modifiers and uses (by convention) an underscore (or two, let’s now go into why) to mean that the attribute is private. The constructor <code>def __init__(self, alert=False)</code> method takes explicitly an instance of itself <code>self</code> and a default argument, <code>alert</code> that, if it’s not provided, it is set to <code>False</code>. Before we continue disecting the constructor, let’s briefly introduce getters and setters.</p>
+<p>Python provides a special syntax for getters and setters that wrap the attribute into a function with that very same name. For instance, the getter for the <code>alert</code> attribute is created by declaring a method with the name of the attribute and the <code>@property</code> on top of it. The body of the method just fetches the attribute.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@property</span>
+    <span class="kw">def</span> alert(<span class="va">self</span>):
+      <span class="cf">return</span> <span class="va">self</span>.__alert</code></pre></div>
+<p>Setters work in the same way, except that they are annotated with the attribute’s name followed by the <code>setter</code> word, e.g. <code>@alert.setter</code> for the <code>alert</code> setter method. From now on, when we call on <code>self.alert</code> we are actually calling the getter method and when we assign <code>self.alert = True</code>, we are calling the setter method.</p>
+<p>Now, if we go back to the <code>__init__</code> method from Example 3.1.1.2, we can observe that this is indeed the desire behaviour.</p>
+<p><strong>Why would we want to use getters and setters like that?</strong> Young padawan, they are an abstraction. Now you only want to retrieve the data but, with this abstraction, you could be returning cached data that otherwise needs to be fetched from the network. Later on, we will learn about the decorator pattern and how it rocks in Python!</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Dog:
+  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, alert<span class="op">=</span><span class="va">False</span>):
+    <span class="va">self</span>.alert <span class="op">=</span> alert
+
+  <span class="at">@property</span>
+  <span class="kw">def</span> alert(<span class="va">self</span>):
+    <span class="cf">return</span> <span class="va">self</span>.__alert
+
+  <span class="at">@alert.setter</span>
+  <span class="kw">def</span> alert(<span class="va">self</span>, new_alert):
+    <span class="va">self</span>.__alert <span class="op">=</span> new_alert
+
+  <span class="kw">def</span> bark(<span class="va">self</span>):
+    <span class="cf">if</span> <span class="va">self</span>.alert <span class="kw">is</span> <span class="va">True</span>:
+      println(<span class="st">&quot;Woof Woof&quot;</span>)</code></pre></div>
+<p><em>Example 3.1.1.2 Introductory example to Python</em></p>
+<h3 id="objects"><span class="header-section-number">3.1.2</span> Objects</h3>
+<p>Objects represent instances of the <a href="#classes">class</a> at runtime. An object gets the default state defined by their constructor and the behaviour defined from the class declaration.</p>
+<p><strong>Java</strong></p>
+<p>Following the example before, let’s create an object:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">Dog dog = <span class="kw">new</span> <span class="fu">Dog</span>();</code></pre></div>
+<p>This calls on the constructor of the <code>Dog</code> class that sets the <code>alert</code> state to <code>false</code>. If the dog tries to bark nothing will happen:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">dog.<span class="fu">bark</span>();</code></pre></div>
+<p>The dog barks when it is startled, let’s make her bark:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">dog.<span class="fu">setAlert</span>(<span class="kw">true</span>);
+dog.<span class="fu">bark</span>();
+<span class="co">// prints &quot;Woof Woof&quot;</span></code></pre></div>
+<p><strong>Python</strong></p>
+<p>Creation of an object is similar to Java:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">dog <span class="op">=</span> Dog()</code></pre></div>
+<p>To make the dog bark:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">dog.bark()</code></pre></div>
+<p>which does nothing because the dog is not startled. Let’s use the setter to change its state and make her bark:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">dog.alert <span class="op">=</span> <span class="va">True</span>
+dog.bark()
+<span class="co"># prints &quot;Woof Woof&quot;</span></code></pre></div>
+<p>Notice that in this case, we could have set the initial state of the dog and would not have had to use a setter:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">dog <span class="op">=</span> Dog(<span class="va">True</span>)
+dog.bark()
+<span class="co"># prints &quot;Woof Woof&quot;</span></code></pre></div>
+<h3 id="inheritance"><span class="header-section-number">3.1.3</span> Inheritance</h3>
+<p>A class can inherit methods from other <a href="#classes">classes</a>, called inheritance. The class that inherits methods is called <em>subclass</em> while the class that provides them is called <em>super class</em>. Java has single inheritance, meaning that the subclass can inherit only from a single class while Python has a limited form of multiple inheritance.</p>
+<p>Idea: A computer has various levels of memory, L1, L2, Last-level cache and main memory. In this example, the class <code>Computer</code> inherits operations from memory, so that we can call methods that retrieve objects from main memory. (this is an example and I would not advice any one to create a virtual machine based on this idea)</p>
+<p><strong>Java</strong></p>
+<p>Since Java can only inherit from a single class, we can model the idea above as shown in <em>Example 3.1.3 Java inheritance</em>.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> Memory {
+
+  <span class="kw">private</span> CacheL1 l1;
+  <span class="kw">private</span> CacheL2 l2;
+
+  <span class="kw">public</span> <span class="fu">Memory</span>(){
+    <span class="dt">int</span> kilobyte = <span class="dv">1024</span>*<span class="dv">1024</span>;
+    <span class="dt">int</span> megabyte = <span class="dv">1024</span> * kilobyte;
+    <span class="kw">this</span>.<span class="fu">l1</span> = <span class="kw">new</span> <span class="fu">CacheL1</span>(<span class="dv">512</span>*kilobyte);
+    <span class="kw">this</span>.<span class="fu">l2</span> = <span class="kw">new</span> <span class="fu">CacheL2</span>(<span class="dv">3</span>*megabyte);
+  }
+
+  <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">fetchLocation</span>(<span class="bu">Location</span> lo) { <span class="co">// ... }</span>
+}
+
+<span class="kw">class</span> Computer <span class="kw">extends</span> Memory {
+  <span class="kw">public</span> <span class="kw">class</span> <span class="fu">Computer</span>(){
+    <span class="co">// ...</span>
+  }
+}</code></pre></div>
+<p><em>Example 3.1.3 Java inheritance</em></p>
+<p>The class <code>Computer</code> inherits the methods <code>Memory</code> when <code>Computer extends Memory</code>. This means that we can fetch objects from memory, <code>computer.fetchLocation(location);</code>.</p>
+<p><strong>Python</strong></p>
+<p>Python supports two forms of multiple inheritance, known as old-style and new style. In the old-style form, the multiple inheritance works in depth-first and left-to-right order. For instance:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> L1(<span class="bu">object</span>):
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending from L1 to bus&quot;</span>
+
+<span class="kw">class</span> L2(<span class="bu">object</span>):
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending from L2 to bus&quot;</span>
+
+<span class="kw">class</span> Cache(L1, L2):
+  <span class="cf">pass</span>
+
+<span class="kw">class</span> CPU(<span class="bu">object</span>):
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending info from CPU to bus&quot;</span>
+
+<span class="kw">class</span> Computer(CPU, Cache):
+  <span class="cf">pass</span>
+
+c <span class="op">=</span> Computer()
+c.send_info()</code></pre></div>
+<p><em>Example 3.1.3 Python old-style</em></p>
+<p>In this case, the <code>c.send_info()</code> method prints <code>Sending info from CPU to bus</code>. If we were to change the order of the inherited classes, <code>class Computer(Cache, CPU)</code>, then the printing method would have been <code>Sending from L1 to bus</code>.</p>
+<p>The multiple inheritance new style kicks in when classes do not inherit from <code>object</code> (as opposed to what <code>L1</code> and <code>L2</code> do in <em>Example Python old-style</em>). The new style considers breath-first and left-to-right order.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> L1:
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending from L1 to bus&quot;</span>
+
+<span class="kw">class</span> L2:
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending from L2 to bus&quot;</span>
+
+<span class="kw">class</span> Cache(L1, L2):
+  <span class="cf">pass</span>
+
+<span class="kw">class</span> CPU:
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending info from CPU to bus&quot;</span>
+
+<span class="kw">class</span> Computer(Cache, CPU):
+  <span class="cf">pass</span>
+
+c <span class="op">=</span> Computer()
+c.send_info()</code></pre></div>
+<p><em>Example 3.1.3 Python new style</em></p>
+<p>In <em>Example 3.1.3 Python new style</em>, the <code>c.send_info()</code> method would have printed <code>Sending info from CPU to bus</code> given that <code>Cache</code> does not provide a suitable <code>send_info</code> method explictly.</p>
+<p>(More details in here: http://www.python-course.eu/python3_multiple_inheritance.php)</p>
+<h3 id="interfaces"><span class="header-section-number">3.1.4</span> Interfaces</h3>
+<p><strong>TODO: missing default methods and static methods in interfaces (they can have implementations!)</strong></p>
+<p>Interfaces declare a contract of the expected behaviour of classes that implement the interface. An interface <em>merely</em> defines methods. Classes that would like to be compatible with the interface need to implement those methods. The real purpose of interfaces is to enable polymorphism, e.g. being able to call methods on different classes because they implement the same interface. Java has interfaces but Python completely lacks them. Dynamic languages such as Python cannot express interfaces because they don’t have a static type system, the fact of not having static types inhibits interfaces.</p>
+<p><strong>Java</strong></p>
+<p>In Java an interface is declared similar to how classes are declared, except that you use the word <code>interface</code>.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">interface</span> MemOperations {
+  <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">fetchLocation</span>(<span class="bu">Location</span> loc);
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">flush</span>();
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">sendToBus</span>();
+}
+
+<span class="kw">public</span> <span class="kw">class</span> CacheL1 <span class="kw">implements</span> MemOperations {
+  <span class="kw">public</span> <span class="fu">CacheL1</span>(<span class="dt">int</span> size){
+    <span class="co">//...</span>
+  }
+
+  <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">fetchLocation</span>(<span class="bu">Location</span> loc){
+    <span class="co">// ...</span>
+  }
+
+  <span class="co">// ...</span>
+
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">flush</span>(){
+    <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Flushing from CacheL1&quot;</span>);
+  }
+
+}
+
+<span class="kw">public</span> <span class="kw">class</span> CacheL2 <span class="kw">implements</span> MemOperations {
+  <span class="co">// ...</span>
+
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">flush</span>(){
+    <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Flushing from CacheL2&quot;</span>);
+  }
+}</code></pre></div>
+<p><em>Example 3.1.4 Java interfaces</em></p>
+<p>If you forget to implement one of the methods declared in the interface, the type system will throw an error and complain that you forgot to implement the missing methods. You won’t get unexpected crashes at runtime because the method doesn’t exist.</p>
+<p>From the <em>Example 3.1.4 Java Interfaces</em> we can create different cache levels and treat them as if they are just <code>MemOperations</code>. Calling methods on each one prints a different <code>String</code>.</p>
+<pre><code>CacheL1 c1 = new CacheL1(512);
+CacheL2 c2 = new CacheL2(2048);
+
+ArrayList&lt;MemOperations&gt; a = new ArrayList&lt;MemOperations&gt;();
+a.append(c1);
+a.append(c2);
+
+for(cache: a){
+  cache.flush();
+}
+
+// prints:
+// &quot;Flushing from CacheL1&quot;
+// &quot;Flushing from CacheL2&quot;</code></pre>
+<p>As of Java 8, interfaces can declare a <em>default</em> implementation for methods. This is great from the design point of view: you can provide a default implementation as long as you rely only on the known behaviour (other public methods of the interface). This means that you can create a clean design that does not rely on internal state and/or methods.</p>
+<p><strong>TODO: Template pattern fits here perfectly!</strong></p>
+<p><strong>TODO: Should I explain polymorphism here? It’s GRASP…</strong></p>
+<p><strong>TODO: Should I show a code example?</strong></p>
+<p><strong>TODO: I believe I am explaining super basic stuff and should level up…</strong></p>
+<h3 id="abstract-classes"><span class="header-section-number">3.1.5</span> Abstract classes</h3>
+<p>Abstract classes can be seen as a mix between <a href="#interfaces">interfaces</a> and <a href="#classes">classes</a>: they can contain attributes, define methods and declare abstract methods. Abstract methods provide a declaration of the behaviour but not a definition (implementation). An abstract class cannot work on its own – cannot be instantiated alone – and needs to be subclass by another class, which implements the abstract methods.</p>
+<p><strong>Java</strong></p>
+<p>It may seem as if <a href="#interfaces">Interfaces</a> (as of Java 8) and <a href="#abstract-classes">Abstract Classes</a> serve the same purpose. However, there is a subtle difference: an interface can only create public methods and constant declarations (<em>static</em> and <em>final</em> attributes) while an abstract class can declare and define the internal state of the class.</p>
+<p>As an advice, I would recommend to use interfaces whenever you have various subclasses that need to implement the same behaviour. I would consider the use of an abstract class in limited cases and only when there is a need to share the same private state among objects that are quite similar.</p>
+<p><strong>TODO: Favour composition over inheritance</strong></p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">abstract</span> <span class="kw">class</span> <span class="bu">Entity</span> {
+  <span class="kw">private</span> <span class="dt">int</span> life;
+  <span class="kw">private</span> Equipment equipment;
+
+  <span class="kw">public</span> <span class="bu">Entity</span>(<span class="dt">int</span> life, Equipment Equipment){
+    <span class="kw">this</span>.<span class="fu">life</span> = life;
+    <span class="kw">this</span>.<span class="fu">equipment</span> = equipment;
+  }
+
+  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getLife</span>() { <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">life</span>; }
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setLife</span>(<span class="dt">int</span> life) { <span class="kw">this</span>.<span class="fu">life</span> = life; }
+
+  <span class="kw">abstract</span> <span class="dt">void</span> <span class="fu">attack</span>(Enemy e);
+  <span class="kw">abstract</span> <span class="dt">void</span> <span class="fu">escape</span>();
+  <span class="co">// ...</span>
+}
+
+<span class="kw">interface</span> Attackable {
+  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getPower</span>();
+
+  <span class="kw">default</span> <span class="dt">void</span> <span class="fu">attack</span>(Enemy e){
+    e.<span class="fu">setLife</span>(e.<span class="fu">getLife</span>() - <span class="fu">getPower</span>());
+  }
+}
+
+<span class="kw">public</span> <span class="kw">class</span> Hero {
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">attack</span>(Enemy e){
+    <span class="co">// Filter equipment by things that I can attack with</span>
+    Attackable attackable = <span class="kw">this</span>.<span class="fu">equipment</span>.<span class="fu">attackable</span>();
+
+    <span class="co">// attack</span>
+    attackable.<span class="fu">attack</span>(e);
+  }
+}</code></pre></div>
+<p><strong>TODO: equipment may use the null pattern</strong></p>
+<p><strong>Python</strong></p>
+<p>Test <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<h3 id="parametric-classes"><span class="header-section-number">3.1.6</span> Parametric classes</h3>
+<h2 id="functional-concepts"><span class="header-section-number">3.2</span> Functional concepts</h2>
+<h3 id="anonymous-functions-lambdas"><span class="header-section-number">3.2.1</span> Anonymous functions / lambdas</h3>
+<h3 id="immutability"><span class="header-section-number">3.2.2</span> Immutability</h3>
+<h3 id="high-order-functions"><span class="header-section-number">3.2.3</span> High-order functions</h3>
+<h3 id="parametric-functions"><span class="header-section-number">3.2.4</span> Parametric functions</h3>
+<h3 id="algebraic-data-types"><span class="header-section-number">3.2.5</span> Algebraic data types</h3>
+<h3 id="multi-functions"><span class="header-section-number">3.2.6</span> Multi-functions</h3>
+<h1 id="uml-crash-course"><span class="header-section-number">4</span> UML Crash course</h1>
+<p>Crash course on UML class diagrams and OOP relation and code.</p>
+<p>This chapter provides a crash course for the UML class diagrams. It needs to cover:</p>
+<ul>
+<li>interfaces,</li>
+<li>classes,</li>
+<li>abstract classes</li>
+</ul>
+<p>and the following relations (arrows):</p>
+<ul>
+<li>composition,</li>
+<li>association (do not show aggregation),</li>
+<li>inheritance,</li>
+<li>implementation of interface and</li>
+<li>dependency</li>
+</ul>
+<p>After reading this chapter the reader should have a basic understanding of the follow</p>
+<h1 id="solid-principles"><span class="header-section-number">5</span> SOLID principles</h1>
+<p>TODO: Explain SOLID design principles. TODO: Put examples in Java and Python (easy) TODO: Put examples in Clojure and Haskell TODO: Fill out all principles</p>
+<h2 id="single-resposibility"><span class="header-section-number">5.1</span> Single Resposibility</h2>
+<p>Single Resposibility Principle</p>
+<h2 id="openclose-principle"><span class="header-section-number">5.2</span> Open/Close Principle</h2>
+<p>Open/Close Principle</p>
+<h2 id="liskov-substitution"><span class="header-section-number">5.3</span> Liskov Substitution</h2>
+<p>Liskov Substitution</p>
+<h2 id="interface-segregation"><span class="header-section-number">5.4</span> Interface Segregation</h2>
+<p>Interface Segregation</p>
+<h2 id="dependency-inversion"><span class="header-section-number">5.5</span> Dependency Inversion</h2>
+<p>Dependency Inversion</p>
+<h1 id="grasp-principles"><span class="header-section-number">6</span> GRASP principles</h1>
+<p>TODO: Explain GRASP design principles. TODO: Put examples in Java and Python (easy) TODO: Put examples in Clojure and Haskell TODO: Fill out all principles</p>
+<h2 id="low-coupling"><span class="header-section-number">6.1</span> Low Coupling</h2>
+<p>Low coupling</p>
+<h2 id="high-cohesion"><span class="header-section-number">6.2</span> High Cohesion</h2>
+<p>High cohesion</p>
+<h2 id="creator"><span class="header-section-number">6.3</span> Creator</h2>
+<p>Creator</p>
+<h2 id="information-expert"><span class="header-section-number">6.4</span> Information Expert</h2>
+<p>Information Expert</p>
+<h2 id="controller"><span class="header-section-number">6.5</span> Controller</h2>
+<p>Controller</p>
+<h2 id="polymorphism"><span class="header-section-number">6.6</span> Polymorphism</h2>
+<p>Polymorphism</p>
+<h2 id="indirection"><span class="header-section-number">6.7</span> Indirection</h2>
+<p>Indirection</p>
+<h2 id="pure-fabrication"><span class="header-section-number">6.8</span> Pure Fabrication</h2>
+<p>Pure fabrication</p>
+<h2 id="protected-variation"><span class="header-section-number">6.9</span> Protected Variation</h2>
+<p>Protected variation</p>
+<h1 id="design-patters-creational"><span class="header-section-number">7</span> Design Patters: Creational</h1>
+<p>Covers creational design patterns TODO: Text is copied from https://sourcemaking.com/design_patterns, do not copy this!</p>
+<h2 id="abstract-factory"><span class="header-section-number">7.1</span> Abstract Factory</h2>
+<p>Creates an instance of several families of classes</p>
+<h2 id="builder"><span class="header-section-number">7.2</span> Builder</h2>
+<p>Separates object construction from its representation</p>
+<h2 id="factory-method"><span class="header-section-number">7.3</span> Factory Method</h2>
+<p>Creates an instance of several derived classes</p>
+<h2 id="object-pool"><span class="header-section-number">7.4</span> Object Pool</h2>
+<p>Avoid expensive acquisition and release of resources by recycling objects that are no longer in use</p>
+<h2 id="prototype"><span class="header-section-number">7.5</span> Prototype</h2>
+<p>A fully initialized instance to be copied or cloned</p>
+<h2 id="singleton"><span class="header-section-number">7.6</span> Singleton</h2>
+<p>A class of which only a single instance can exist</p>
+<h1 id="design-patters-structural"><span class="header-section-number">8</span> Design Patters: Structural</h1>
+<p>Covers structural design patterns</p>
+<h2 id="adapter"><span class="header-section-number">8.1</span> Adapter</h2>
+<h2 id="bridge"><span class="header-section-number">8.2</span> Bridge</h2>
+<h2 id="composite"><span class="header-section-number">8.3</span> Composite</h2>
+<h2 id="decorator"><span class="header-section-number">8.4</span> Decorator</h2>
+<h2 id="facade"><span class="header-section-number">8.5</span> Facade</h2>
+<h2 id="flyweight"><span class="header-section-number">8.6</span> Flyweight</h2>
+<h2 id="proxy"><span class="header-section-number">8.7</span> Proxy</h2>
+<h1 id="design-patters-behavioral"><span class="header-section-number">9</span> Design Patters: Behavioral</h1>
+<p>Covers behavioral design patterns</p>
+<h2 id="chain-of-responsibility"><span class="header-section-number">9.1</span> Chain of responsibility</h2>
+<h2 id="command"><span class="header-section-number">9.2</span> Command</h2>
+<h2 id="interpreter"><span class="header-section-number">9.3</span> Interpreter</h2>
+<h2 id="iterator"><span class="header-section-number">9.4</span> Iterator</h2>
+<h2 id="mediator"><span class="header-section-number">9.5</span> Mediator</h2>
+<h2 id="memento"><span class="header-section-number">9.6</span> Memento</h2>
+<h2 id="null-object"><span class="header-section-number">9.7</span> Null object</h2>
+<h2 id="observer"><span class="header-section-number">9.8</span> Observer</h2>
+<h2 id="state"><span class="header-section-number">9.9</span> State</h2>
+<h2 id="strategy"><span class="header-section-number">9.10</span> Strategy</h2>
+<h2 id="template-method"><span class="header-section-number">9.11</span> Template method</h2>
+<h2 id="visitor"><span class="header-section-number">9.12</span> Visitor</h2>
+<h1 id="cheatsheet"><span class="header-section-number">10</span> Cheatsheet</h1>
+<p>Add tables and images that show the difference between GRASP and SOLID, and different design patterns.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Python allows creation of abstract classes via meta classes. These concept is a bit more advanced and may be covered upon receiving some initial feedback.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>
