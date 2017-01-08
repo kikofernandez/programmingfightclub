@@ -2,7 +2,7 @@
 
 This page contains **work in progress** of the book
 "Design Patters for the Object-oriented and Functional mind" that will be released
-some day in softcover, Kindle format and html.
+some day in softcover, Kindle format and html. The content of the book is the same for html and epub formats.
 
 This book contains principles and design patterns in multiple programming languages,
 taking into account the programming language paradigm and its type system.
@@ -58,8 +58,8 @@ If you want to contribute, please file issues and provide suggestions of topics 
 
 ### License
 
-The book is open source under the [CC BY-SA](LICENSE) and the content is the same
-for html, epub and softcover formats. You get better reading experience by buying
-the book and support my work for maintanance and future releases (I have in
-mind "Design patterns for the concurrent mind", depending on the experience of
-publishing an introductory level book I may go for this other one afterwards).
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+  <img alt="Creative Commons License" style="border-width:0"  src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+</a>
+<br />
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
