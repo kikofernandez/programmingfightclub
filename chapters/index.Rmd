@@ -1,0 +1,8 @@
+---
+title: "Design Patterns for the Object-oriented and Functional mind"
+author: "Kiko Fernandez-Reyes"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+link-citations: yes
+description: ""
+---

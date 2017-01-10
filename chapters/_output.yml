@@ -1,0 +1,12 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      collapse: subsection
+    search: yes
+    sharing:
+      facebook: yes
+      twitter: yes
+      google: yes
+bookdown::epub_book:
+  toc: true
