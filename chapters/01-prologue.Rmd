@@ -1,21 +1,25 @@
 # Prologue
 
-This book was originally written for the course *Advanced Sofware Design* imparted
-at Uppsala University by Dave Clarke and Kiko Fernandez-Reyes.
-The *Advanced Software Design* course covers much more than the design patterns
-shown in this book, but was lacking on hands-on experience and the application of
-design patterns in a functional setting. This book hopefully closes that gap.
+This book was originally written for the course *Advanced Sofware Design*, imparted
+at Uppsala University by Dave Clarke and Kiko Fernandez-Reyes, and provides a more practical
+hands-on experience on software design. It extends the content of the course with
+a direct application of design patterns and software principles in
+the functional and object-oriented paradigms while also considering their
+type system in a static and dynamic language.
+
+<!-- In general, the idea of this book is to point out the differences in design -->
+<!-- patterns and well-known software principles applied to different paradigms. -->
 
 ## Who is this book for?
 
-This book is directed to students of any computer science major and
+The book is directed to students of any computer science major,
 young developers, engineers or programmers who have already grasped the idea
 behind object-oriented and/or functional programming. This book can still be used by
 those of you who have knowledge in an object-oriented language or a functional language
 althought, to get the most out of it, I would recommend to be familiar with
 both paradigms.
 
-The reader should **already** be familiar with / willing to learn on its own the following concepts
+The reader should **already** be familiar with the following concepts
 from object-oriented programming:
 
 - Classes,
@@ -34,15 +38,17 @@ and the following concepts from functional programming:
 - multi-functions
 - immutability
 
-There is a *recap* chapter on these ideas but it was written as a gentle reminder.
-You should not expect understading object-oriented or functional programming
-just by reading that chapter.
+However, for those of you who just need a quick reminder, we have included a
+*recap* chapter  that summarises these concepts. If you are not familiar with
+neither object-oriented programming nor functional programming, you should
+first understand the ideas behind these paradigms and come back later to this book.
 
 
 ## What is covered in this book?
 
-This book covers design principles and advanced design patterns used today in industry.
-All the principles and design patterns covered in this book are written in
+This book covers most of the design principles and design patterns used today in industry,
+necessary for building maintable and flexible applications.
+All the principles and design patterns are written in
 four languages: Java, Python, Haskell and Clojure.
 <!-- -->
 These languages are already used in production in big companies and are
@@ -51,7 +57,7 @@ diagnostic system, Facebook uses Haskell to prevent spam and phising attacks
 in their site, Pinterest uses Python for their backend operations and
 Java is widely used everywhere.
 
-The mix of these languages covers two different paradigms (object-oriented and functional
+We are using this mix of languages to cover two different paradigms (object-oriented and functional
 programming) and two different type systems (languages dynamically and
 statically typed), shown in Table 1.1.
 
@@ -61,26 +67,46 @@ statically typed), shown in Table 1.1.
 
 **Why multiple languages?**
 
-You should choose the right language for the right job. Choosing a language
-is an important design decision as languages are tied to a paradigm and a type system,
-and these cannot be changed.
+Someone (who I don't remember) once said:
+
+> Choose the right tool for the right job.
+
+Well, choosing a language is an important design decision as languages are tied
+to a paradigm and a type system, and these cannot be changed. If you are a consultant
+(I have been one for a few years) and you are given a new project, you should
+try to avoid to go to your go-to language and think twice the requirements of the
+project and the advantages and disadvantages that each language (paradigm and type system)
+bring to the table. As usual, the more languages you know the better, since you
+have more freedom to get a good start with the main features of your chosen language.
 <!--   -->
 For instance, Python has some functional features but, all in all,
-**Python is an object-oriented language**.
+**Python is an object-oriented language**. Consider using Python for the things
+it is good for. Should I tell you what it is good for? ummm... Not that fast young padawan, it's
+only through the journey that one finds its own truth.
 
-<!-- NOT CLEAR! -->
-The main reason for using multiple languages is to **show that different paradigms
-and type systems provide benefits and drawbacks in the use of design patterns**.
+This book does not provide an absolute truth nor it tries to do so, it merely
+**show that the combination of different paradigms and type systems have inherent
+benefits and drawbacks**. You have to work the examples in the book to find your truth.
 
-<!-- ## Organisation -->
+## Organisation
 
-<!-- Explain that the book covers the design patterns and needs to list: -->
+The book is organised in 6 parts. The first part contains chapters 1 and 2 and
+puts in perspective what is software design, a recap to object-oriented
+and functional programming, as well as the main differences between static and
+dynamic type systems. The second part introduces software principles to create
+flexible and maintanable software, known as SOLID and GRASP principles. Parts 3 to 5
+explain, in depth, core design patterns that are grouped into 3 categories:
+creational, structural and behavioral patterns.
+The last part builds a text-based game using concepts and design patterns covered in the book.
 
-<!-- - when to use it -->
-<!-- - advantages -->
-<!-- - disadvantages -->
-<!-- - one or more ways of creating the design pattern and its drawbacks -->
-<!-- - some UML? -->
+
+Each software principles and design pattern is explained in depth:
+there is a clear and concise explanation of the design pattern (sometimes ilustrating
+a simple simil from the real world), its benefits and drawbacks.
+Afterwards, pattern is explained in the context of its paradigm and type system,
+and we include easy to grasp examples to get you familiar with the language and
+the design pattern. As mentioned above, for a full example that combines software principles
+and patterns, you should refer to the last part.
 
 
 ## Software requirements
