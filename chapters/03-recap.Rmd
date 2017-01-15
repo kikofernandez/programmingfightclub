@@ -142,7 +142,7 @@ with this abstraction, you could be returning cached data that otherwise needs t
 from the network. Later on, we will learn about the decorator pattern and how
 it rocks in Python!
 
-```python
+```{python PythonDog, echo=TRUE}
 class Dog:
   def __init__(self, alert=False):
     self.alert = alert
@@ -157,7 +157,7 @@ class Dog:
 
   def bark(self):
     if self.alert is True:
-      println("Woof Woof")
+      print("Woof Woof")
 ```
 
 *Example 3.1.1.2 Introductory example to Python*
@@ -193,7 +193,7 @@ dog.bark();
 
 Creation of an object is similar to Java:
 
-```python
+```{python, eval=FALSE, include=FALSE}
 dog = Dog()
 ```
 
@@ -209,7 +209,28 @@ to change its state and make her bark:
 ```python
 dog.alert = True
 dog.bark()
-# prints "Woof Woof"
+```
+
+```{python, echo=FALSE}
+class Dog:
+  def __init__(self, alert=False):
+    self.alert = alert
+
+  @property
+  def alert(self):
+    return self.__alert
+
+  @alert.setter
+  def alert(self, new_alert):
+    self.__alert = new_alert
+
+  def bark(self):
+    if self.alert is True:
+      print("Woof Woof")
+
+dog = Dog()      
+dog.alert = True
+dog.bark()
 ```
 
 Notice that in this case, we could have set the initial state of the dog
@@ -218,7 +239,28 @@ and would not have had to use a setter:
 ```python
 dog = Dog(True)
 dog.bark()
-# prints "Woof Woof"
+```
+
+```{python, echo=FALSE}
+class Dog:
+  def __init__(self, alert=False):
+    self.alert = alert
+
+  @property
+  def alert(self):
+    return self.__alert
+
+  @alert.setter
+  def alert(self, new_alert):
+    self.__alert = new_alert
+
+  def bark(self):
+    if self.alert is True:
+      print("Woof Woof")
+
+dog = Dog()      
+dog = Dog(True)
+dog.bark()
 ```
 
 ### Inheritance
