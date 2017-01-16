@@ -61,15 +61,29 @@ We are using this mix of languages to cover two different paradigms (object-orie
 programming) and two different type systems (languages dynamically and
 statically typed), shown in Table 1.1.
 
-![](../img/Table-Languages.png)
+<!-- I like the image more, but I have to keep track of the table number -->
+<!-- ![](../img/Table-Languages.png) -->
 
-*Tabla 1.1 Relation between paradigm and type system*
+<!-- TODO: Does not look good on epub -->
+```{r echo=FALSE, results='asis'}
+library(knitr)
+languages = matrix(c("Java", "Python", "Haskell", "Clojure"),
+                   nrow=2,
+                   ncol=2,
+                   byrow = TRUE)
+dimnames(languages) = list(
+  c("Object-oriented", "Functional"),
+  c("Static", "Dynamic")
+)
+kable(languages,
+      caption="Language relation between paradigm and type system")
+```
 
 **Why multiple languages?**
 
 Someone (who I don't remember) once said:
 
-> Choose the right tool for the right job.
+> "Choose the right tool for the right job."
 
 Well, choosing a language is an important design decision as languages are tied
 to a paradigm and a type system, and these cannot be changed. If you are a consultant
