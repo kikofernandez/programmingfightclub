@@ -1,10 +1,23 @@
 # Introduction
 
-There is a general misconception in the software industry, specially in many startups,
-where you as a developer lose face if you cannot immediately solve a problem.
-To those who think like that, I tell you, you are wrong. Writing software is not
-just coding lines until you solve the problem or your software "seems" to work,
-it's about **making damn sure that your software is well designed**.
+Many books explain software design with focus on one language (and paradigm) and assume that this
+knowledge can be "easily" extrapolated to other languages and/or paradigms.
+While it is true that you have to start from some point, it is also true that
+as soon as you start to put it into practice in a different language,
+their explanation may not be as easy to follow as you may have thought or may
+not even make sense from the language perspective (see Fig. \@ref(fig:taming-code)
+for an example of the author's feelings when reading such books).
+
+```{r taming-code, echo=FALSE, results='asis', fig.cap='Developer taming code'}
+knitr::include_graphics("../../img/Table-Languages.png")
+```
+
+
+<!-- ```{block2, type='note'} -->
+<!-- For more information on custom blocks, remember to visit: -->
+<!-- https://bookdown.org/yihui/bookdown/custom-blocks.html -->
+<!-- ``` -->
+
 
 ## Software Design
 <!-- Definition -->
