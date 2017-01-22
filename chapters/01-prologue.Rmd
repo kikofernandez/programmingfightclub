@@ -15,8 +15,8 @@ type system in a static and dynamic language.
 The book is directed to students of any computer science major,
 young developers, engineers or programmers who have already grasped the idea
 behind object-oriented and/or functional programming. This book can still be used by
-those of you who have knowledge in an object-oriented language or a functional language
-althought, to get the most out of it, I would recommend to be familiar with
+those who have knowledge in an object-oriented language or a functional language
+althought, to get the most out of it, it is recommended to be familiar with
 both paradigms.
 
 The reader should **already** be familiar with the following concepts
@@ -38,7 +38,7 @@ and the following concepts from functional programming:
 - multi-functions
 - immutability
 
-However, for those of you who just need a quick reminder, we have included a
+For those who just need a quick reminder, we have included a
 *recap* chapter  that summarises these concepts. If you are not familiar with
 neither object-oriented programming nor functional programming, you should
 first understand the ideas behind these paradigms and come back later to this book.
@@ -57,7 +57,7 @@ diagnostic system, Facebook uses Haskell to prevent spam and phising attacks
 in their site, Pinterest uses Python for their backend operations and
 Java is widely used everywhere.
 
-We are using this mix of languages to cover two different paradigms (object-oriented and functional
+This mix of languages covers two different paradigms (object-oriented and functional
 programming) and two different type systems (languages dynamically and
 statically typed), shown in Table 1.1.
 
@@ -81,30 +81,32 @@ kable(languages,
 
 **Why multiple languages?**
 
-Someone (who I don't remember) once said:
+There is a saying that reads:
 
 > "Choose the right tool for the right job."
 
-Well, choosing a language is an important design decision as languages are tied
-to a paradigm and a type system, and these cannot be changed. If you are a consultant
-(I have been one for a few years) and you are given a new project, you should
+Choosing a language is an important design decision as languages are tied
+to a paradigm and a type system, and these cannot be changed. If you are a consultant,
+(one of the authors was a good one a few years ago but now he just research things)
+and you are given a new project, you should
 try to avoid to go to your go-to language and think twice the requirements of the
 project and the advantages and disadvantages that each language (paradigm and type system)
-bring to the table. As usual, the more languages you know the better, since you
-have more freedom to get a good start with the main features of your chosen language.
+brings to the table. As usual, the more languages you know the better, since you
+have more freedom to get to a good start with the main features of your chosen language.
 <!--   -->
 For instance, Python has some functional features but, all in all,
 **Python is an object-oriented language**. Consider using Python for the things
 it is good for. Should I tell you what it is good for? ummm... Not that fast young padawan, it's
 only through the journey that one finds its own truth.
 
-This book does not provide an absolute truth nor it tries to do so, it merely
+In this book, we do not provide an absolute truth nor do we try to do so, we merely
 **show that the combination of different paradigms and type systems have inherent
-benefits and drawbacks**. You have to work the examples in the book to find your truth.
+benefits and drawbacks**. You have to work the examples in the book to find your
+own truth and comfort zone.
 
 ## Organisation
 
-The book is organised in 6 parts. The first part contains chapters 1 and 2 and
+The book is organised in 6 parts. The first part (chapters 1 and 2)
 puts in perspective what is software design, a recap to object-oriented
 and functional programming, as well as the main differences between static and
 dynamic type systems. The second part introduces software principles to create
@@ -117,7 +119,7 @@ The last part builds a text-based game using concepts and design patterns covere
 Each software principles and design pattern is explained in depth:
 there is a clear and concise explanation of the design pattern (sometimes ilustrating
 a simple simil from the real world), its benefits and drawbacks.
-Afterwards, pattern is explained in the context of its paradigm and type system,
+Afterwards, the pattern is explained in the context of its paradigm and type system,
 and we include easy to grasp examples to get you familiar with the language and
 the design pattern. As mentioned above, for a full example that combines software principles
 and patterns, you should refer to the last part.
