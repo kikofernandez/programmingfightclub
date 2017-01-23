@@ -1,7 +1,7 @@
 # Prologue
 
 This book was originally written for the course *Advanced Sofware Design*, imparted
-at Uppsala University by Dave Clarke and Kiko Fernandez-Reyes, and provides a more practical
+at Uppsala University by Dave Clarke and Kiko Fernandez-Reyes, and provides a practical
 hands-on experience on software design. It extends the content of the course with
 a direct application of design patterns and software principles in
 the functional and object-oriented paradigms while also considering their
@@ -26,8 +26,10 @@ from object-oriented programming:
 - objects,
 - inheritance,
 - interfaces,
-- abstract classes and
+- abstract classes,
 - parametric classes
+- mixins and
+- traits
 
 and the following concepts from functional programming:
 
@@ -35,8 +37,10 @@ and the following concepts from functional programming:
 - high-order functions,
 - parametric functions,
 - algebraic data types,
-- multi-functions
-- immutability
+- multi-functions,
+- immutability,
+- monads and
+- arrows
 
 For those who just need a quick reminder, we have included a
 *recap* chapter  that summarises these concepts. If you are not familiar with

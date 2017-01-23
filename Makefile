@@ -1,8 +1,9 @@
 # NOTE: the name `dp` stands for `design patterns`
 all:
-	cd chapters && Rscript -e "rmarkdown::render_site()"
+	Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
+	Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::epub_book')"
 
 clean:
-	cd chapters && rm -fr _book
+	rm -fr _book
 
 .PHONY: all clean

@@ -3,15 +3,23 @@
 Many books explain software design with focus on one language (and paradigm) and assume that this
 knowledge can be "easily" extrapolated to other languages and/or paradigms.
 While it is true that you have to start from some point, it is also true that
-as soon as you start to put it into practice in a different language,
-their explanation may not be as easy to follow as you may have thought or may
+as soon as you put it to practice in another language
+their explanations may not be easy follow now or may
 not even make sense from the language perspective (see Fig. \@ref(fig:taming-code)
 for an example of the author's feelings when reading such books).
 
 ```{r taming-code, echo=FALSE, results='asis', fig.cap='Developer taming code'}
-knitr::include_graphics("../../img/Table-Languages.png")
+knitr::include_graphics("img/Table-Languages.png")
 ```
 
+Our approach in this book is much more practical and can be extrapolated to other languages.
+Yes, we am not contradicting the previous paragrah, you heard correctly!
+We are going to cover software design from the perspective of different languages
+(paradigms and type systems), and we are going to show different approaches to
+solving the same problem. You will learn to take advantage of each of the
+language constructs and benefit from it.
+
+Before we start, let's do a recap on what **software design** means.
 
 <!-- ```{block2, type='note'} -->
 <!-- For more information on custom blocks, remember to visit: -->
@@ -23,7 +31,7 @@ knitr::include_graphics("../../img/Table-Languages.png")
 <!-- Definition -->
 Software design is the process of finding a *satisfactory* solution to a problem.
 Before one can start with an implementation there needs to be a clear specification of the problem to solve,
-maybe a domain model of the system under design (to get used to the domain jargon),
+a good understanding of the domain of the system under design (you can draw a domain model to clarify ideas),
 an (in)formal document that describes the steps necessary to solve the problem
 (the Unified Modelling Language can help here with class and sequence diagrams, among others)
 and a well-defined architecture.
@@ -49,6 +57,10 @@ a test-driven development approach). Other example is choosing between a
 object-oriented or a functional language. No matter which one you choose, you can always write the same
 piece of software using one paradigm or the other. However, one of them will
 bring inherent benefits that have to be otherwise coded in the other approach.
+
+```{r code-quality, echo=FALSE, results='asis', fig.cap='Code quality (http://xkcd.com/1695/)'}
+knitr::include_graphics("img/XKCD-code_quality_2.png")
+```
 
 
 ### What is a good design?
