@@ -8,6 +8,7 @@ the following concepts from object-oriented programming in Java and Python:
 - objects,
 - inheritance,
 - interfaces,
+- mixins and traits,
 - abstract classes and
 - parametric classes
 
@@ -50,8 +51,10 @@ A class that hides its attributes with a `private` access modifier
 from other classes. Now, the only way to update the internal state is
 via method calls (**they represent the behaviour of the object**).
 As a general advice, you should not expose the internal state of your class
-to others; you should expose your behaviour. This is what make great abstractions
-such as associative arrays, tasks and futures among others.
+to others; you should expose your behaviour. This is what makes abstractions great,
+trust on my behaviour and not on my internal structure. My favorite
+abstractions are tasks and futures and they hide the internal details of spawning
+a new thread.
 
 Classes expose their behaviour via its methods. If those methods just get
 the attributes and set them, we call them *getters* and *setters*.

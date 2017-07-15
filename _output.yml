@@ -1,5 +1,9 @@
 bookdown::gitbook:
   css: style.css
+  includes:
+    after_body: disqus.html
+  self_contained: false
+  lib_dir: libs
   config:
     toc:
       collapse: subsection
@@ -9,4 +13,6 @@ bookdown::gitbook:
       twitter: yes
       google: yes
 bookdown::epub_book:
+  toc: true
+bookdown::pdf_book:
   toc: true

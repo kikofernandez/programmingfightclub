@@ -12,7 +12,7 @@ type system in a static and dynamic language.
 
 ## Who is this book for?
 
-The book is directed to students of any computer science major,
+This book is directed to students of any computer science major,
 young developers, engineers or programmers who have already grasped the idea
 behind object-oriented and/or functional programming. This book can still be used by
 those who have knowledge in an object-oriented language or a functional language
@@ -61,42 +61,23 @@ diagnostic system, Facebook uses Haskell to prevent spam and phising attacks
 in their site, Pinterest uses Python for their backend operations and
 Java is widely used everywhere.
 
-This mix of languages covers two different paradigms (object-oriented and functional
-programming) and two different type systems (languages dynamically and
-statically typed), shown in Table 1.1.
+The mix of these languages covers two different paradigms (object-oriented and functional
+programming) and two different kinds of type systems (static and dynamic), shown in Table 1.1.
 
-<!-- I like the image more, but I have to keep track of the table number -->
-<!-- ![](../img/Table-Languages.png) -->
+![](img/Table-Languages.png)
 
-<!-- TODO: Does not look good on epub -->
-```{r echo=FALSE, results='asis'}
-library(knitr)
-languages = matrix(c("Java", "Python", "Haskell", "Clojure"),
-                   nrow=2,
-                   ncol=2,
-                   byrow = TRUE)
-dimnames(languages) = list(
-  c("Object-oriented", "Functional"),
-  c("Static", "Dynamic")
-)
-kable(languages,
-      caption="Language relation between paradigm and type system")
-```
+*Tabla 1.1 Relation between paradigm and type system*
 
 **Why multiple languages?**
 
-There is a saying that reads:
+Each language has its strengths and weaknesses. In this book,
+I show how to apply the same design pattern by fully exploiting
+the main strengths of each language.
 
-> "Choose the right tool for the right job."
-
-Choosing a language is an important design decision as languages are tied
-to a paradigm and a type system, and these cannot be changed. If you are a consultant,
-(one of the authors was a good one a few years ago but now he just research things)
-and you are given a new project, you should
-try to avoid to go to your go-to language and think twice the requirements of the
-project and the advantages and disadvantages that each language (paradigm and type system)
-brings to the table. As usual, the more languages you know the better, since you
-have more freedom to get to a good start with the main features of your chosen language.
+<!-- You should choose the right language for the right job. -->
+Choosing a language
+is an important design decision as languages are tied to a paradigm and a type system,
+and these cannot be changed.
 <!--   -->
 For instance, Python has some functional features but, all in all,
 **Python is an object-oriented language**. Consider using Python for the things
