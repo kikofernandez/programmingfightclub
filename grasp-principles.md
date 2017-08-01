@@ -1,4 +1,4 @@
-![](/assets/cover.jpg)# GRASP principles - Fight Club
+# GRASP principles
 
 Before you learn advanced design patterns, it's useful to look at common principles / recommendation rules to guide your design. By following these principles, you will design and write code that's easy to understand, maintain, and refactor.
 
