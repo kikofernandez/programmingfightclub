@@ -1,4 +1,8 @@
-# Introduction
+# Introduction 
+
+TODO:
+  - editing
+
 
 You worked really hard for over a year in the next billion dollar web app in a small startup: the CEO, Johan, seems happy that the product is (almost) feature complete, the designer, Anders, is happy with the UX and graphics and the CTO, Pontus, just wants to press the red button and release the product. You tell them to wait 10 more minutes, the unit tests, integration tests and system tests are still running (adding tests was a long battle with everyone because it slowed down the project quite a lot, but you are a good engineer and tests will catch many errors now and in the future).
 
