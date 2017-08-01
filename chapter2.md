@@ -1,4 +1,4 @@
-# Case Study - Fight Club
+# Case Study
 
 ![](/assets/VWKombi@theBeachbyCarolineGutman640.jpg)
 
