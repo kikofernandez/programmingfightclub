@@ -2,8 +2,10 @@
 
 ![](/assets/VWKombi@theBeachbyCarolineGutman640.jpg)
 
+---
 TODO:
   - editing
+---  
 
 The following case study will be used throughout the book to teach you important design concepts and principles. The reader exercises are also based on this case study.
 
