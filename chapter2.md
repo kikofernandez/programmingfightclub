@@ -44,4 +44,4 @@ The domain concepts represent important ideas of our domain. These will be coded
 
 We proceed to explain object-oriented programming using examples this domain.
 
-[^1]this refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.
+[^1]: this refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.
