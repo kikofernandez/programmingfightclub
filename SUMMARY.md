@@ -2,12 +2,12 @@
 
 * [Prologue](README.md)
 * Part I
-  * [Introduction](chapter1.md) (needs to be edited)
-  * [Case Study](chapter2.md) (needs to be edited)
+  * [Introduction](introduction.md)
+  * [Case Study](case-study.md)
   * Recap
 * Part II  
-  * [GRASP principles](grasp-principles.md) (In progress)
-  * SOLID principles
+  * [GRASP principles](grasp-principles.md)
+  * [SOLID principles](solid-principles.md)
 * Part III  
   * Creational Design Patterns
   * Structural Design Patterns
