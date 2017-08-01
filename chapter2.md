@@ -2,8 +2,6 @@
 
 ![](/assets/VWKombi@theBeachbyCarolineGutman640.jpg)
 
-(Image public domain https://commons.m.wikimedia.org/wiki/File:VWKombi@theBeach(byCarolineGutman).jpg)
-
 The following case study will be used throughout the book to teach you important design concepts and principles. The reader exercises are also based on this case study.
 
 **Startup idea**
