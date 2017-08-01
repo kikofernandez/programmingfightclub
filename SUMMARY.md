@@ -7,7 +7,7 @@
   * Recap
 * Part II  
   * [GRASP principles](grasp-principles.md)
-  * [SOLID principles](solid-principles.md)
+  * SOLID principles
 * Part III  
   * Creational Design Patterns
   * Structural Design Patterns
