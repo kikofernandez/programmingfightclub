@@ -20,14 +20,12 @@ Another idea is a publishing site that sells book chapters and whole books. As a
 
 Your team works using an agile methodology, Scrum, and there are post-it everywhere with the list of functional features (we will go through the list of non-functional later on).
 
-[IMAGE]
+![](/assets/Scrum_task_board.jpg)
 (Image taken by Logan Ingalls, [source](https://commons.m.wikimedia.org/wiki/File:Scrum_task_board.jpg#mw-jump-to-license) )
 
 **Coding the information**
 
-[^domain]: this refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.
-
-One way to identify classes is to look at the domain model [^domain], since the concepts from the domain need to be coded in the application. Given the sales pitch above, you can easily identify the following concepts:
+One way to identify classes is to look at the domain model [^1], since the concepts from the domain need to be coded in the application. Given the sales pitch above, you can easily identify the following concepts:
 - Lodge (Hotel, apartment, etc)
 - Point of interest (POI)
 - Restaurant
@@ -45,3 +43,5 @@ One way to identify classes is to look at the domain model [^domain], since the 
 The domain concepts represent important ideas of our domain. These will be coded into classes that represent the data layer of our application and contains business logic that is encapsulated within each of the classes.
 
 We proceed to explain object-oriented programming using examples this domain.
+
+[^1]this refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.
