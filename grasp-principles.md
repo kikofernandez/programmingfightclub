@@ -2,13 +2,14 @@
 
 ---
 TODO:
-  - work in progress (missing examples, etc)
-  - editing
+- editing
+- in progress
 ---
 
 Before you learn advanced design patterns, it's useful to look at common principles / recommendation rules to guide your design. By following these principles, you will design and write code that's easy to understand, maintain, and refactor.
 
 By the end of this chapter you will have grok these principles and they will become second nature to you. Next, we introduce these principles ( which can be applied to any object-oriented language):
+
 - low coupling,
 - high cohesion,
 - creator, 
@@ -61,7 +62,7 @@ public class Guide {
   }
 }
 ```
-Listing 1.1 Highly coupled `Guide` class
+**Listing 1.1 Highly coupled `Guide` class**
 
 Can you identify some of the problems with this design? Try to sit a few of them before you read the core issues of these design.
 
@@ -97,7 +98,7 @@ public interface IPointOfInterest {
   ...
 }
 ```
-Listing 1.2 Loosely coupled `Guide` class
+**Listing 1.2 Loosely coupled `Guide` class**
 
 **Exercise**: Given the refactoring above, how does a guide deal with its visibility?
 
@@ -134,9 +135,9 @@ public class Review {
   private List<User> friendsToNotify;
 
   public class Review (User author,
-                       String comment,
-                       Image image,
-                       List<User> notification){
+                                         String comment,
+                                         Image image,
+                                         List<User> notification){
     this.author = author;
     this.comment =comment;
     this.image = image;
@@ -145,13 +146,29 @@ public class Review {
 
   // Getters and setters
   ...
+
+  public Image show() {
+    this.image;
+  }
 }
 ```
 **Listing 1.3. Review class**
 
-The code in Listing 1.3 is
+![](https://yuml.me/8a5b9a02)
+**Fig. 1.3. `Review` class diagram**
 
-These figure further shows how a change in one class affects many other classes thus, the code becomes more complex and difficult to maintain.
+<!--
+[Review|-comment:String; |show(): Image; ...]++image-0..1>[Image]
+[Review]<>author-1>[User]
+[Review]<>notify-*>[List<User>]
+-->
+
+The code in Listing 1.3 is highly coupled for its small size and exhibits low cohesion:
+
+* this class mixes the behaviour of a review with the behaviour of some other class that should send notifications (see *Observer* pattern)
+* it's coupled to the notification engine and to the `Image` class. The consequences of coupling to an image means that, either every review has an image or your code will now have to branch when the user does not supply an image. This branching checks if `image == null`, which is a runtime check --slower code -- and an antipattern (REFERENCE HERE, use instead the *Null Object* pattern or an [option type](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html)).
+* Coupling to an image also means that you can no longer post a video review. Throwing a quick `video` attribute does not solve the problem, as the `show()` method returns an `Image` and, every caller of the`Review` class will have to explicitly handle showing an image or a video. Thus, the code becomes more complex and difficult to maintain.
+
 If we refactor this code, it ends up as listing Yyy, Figure Yy6y.
 
 (Listing Yyy)
