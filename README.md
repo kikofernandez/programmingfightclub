@@ -1,4 +1,4 @@
-# Prologue - Fight Club
+# Prologue
 
 This book was originally written for the course Advanced Software Design, imparted at Uppsala University by Kiko Fernandez-Reyes, and provides a practical hands-on experience on software design. It extends the content of the course with a direct application of design patterns and software principles in the object-oriented paradigm, exploiting the type system.
 
