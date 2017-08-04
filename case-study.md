@@ -1,11 +1,7 @@
-# Case Study
+# Case Study - Fight Club
 
 ![](/assets/VWKombi@theBeachbyCarolineGutman640.jpg)
-
----
-TODO:
-  - editing
----  
+(Image public domain https://commons.m.wikimedia.org/wiki/File:VWKombi@theBeach(byCarolineGutman).jpg)
 
 The following case study will be used throughout the book to teach you important design concepts and principles. The reader exercises are also based on this case study.
 
@@ -29,6 +25,8 @@ Your team works using an agile methodology, Scrum, and there are post-it everywh
 (Image taken by Logan Ingalls, [source](https://commons.m.wikimedia.org/wiki/File:Scrum_task_board.jpg#mw-jump-to-license) )
 
 **Coding the information**
+
+[^domain]: this refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.
 
 One way to identify classes is to look at the domain model [^1], since the concepts from the domain need to be coded in the application. Given the sales pitch above, you can easily identify the following concepts:
 - Lodge (Hotel, apartment, etc)
