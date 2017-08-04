@@ -13,8 +13,8 @@
   * Structural Design Patterns
   * Behavioral Design Patterns
 * Part IV:
-  * Analysis of JDBC library
-  * Analysis of PySpark
+  * Design of JDBC library
+  * Design of PySpark
 * Appendix:
   * UML Cheatsheet
 
