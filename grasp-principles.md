@@ -78,7 +78,7 @@ public class Guide {
 
 ![](https://yuml.me/79c2f38c)
 
-**Fig.1.1. High coupled `Guide` class**
+**Fig.1.1 High coupled `Guide` class**
 
 Can you identify some of the problems with this design? Try to name a few of them before you read any further.
 
@@ -90,7 +90,7 @@ The problems with this design are:
 * Hotels, restaurants and others should be dispatched polymorphously. If this is not the case, try adding a few new entities, e.g. `SushiBar`, and observe how you would need to add specific methods for this place or reuse a method that checks for sushi places and, if any, branches in the method,
 * the constructor receives an `ArrayList`, which binds an implementation detail to the list abstraction -- couples the abstraction with an implementation detail
 
-Now, how can we reduce coupling a guide to other elements? The most obvious alternative would be to put less responsibilities in the guide. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain. An example of this low coupled class is in listing 1.2.
+Now, how can we reduce coupling a guide to other elements? The most obvious alternative would be to put less responsibilities in the guide. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain. An example of this low coupled class is in Listing 1.2.
 
 <!--
 
@@ -133,7 +133,7 @@ public interface IPointOfInterest {
 
 **Exercise**: Given the refactoring above, how does a guide deal with its visibility?
 
-**Exercise**: why do we need so many interfaces?
+**Exercise**: Why do we need so many interfaces?
 
 <!--
 
@@ -168,7 +168,7 @@ Often, you'll see code that contains many methods, attributes, and seems to cont
 
 **Fig. 1.3.1 "The Blob", a class that swallows everything**
 
-You can observe this antipattern in Listing 1.1 or Fig. 1.3.1. This example shows a`Guide` class who exhibit multiple responsibilities, such as, keeping the data of the class, managing its visibility and each possible point of interest individually. Listing 1.2 shows a more cohesive code, where the guide is responsible for handling its content. This change keeps the class focus on what it does and it's easier to understand because the class doesn't mix different responsibilities.
+You can observe this antipattern in Listing 1.1 or Fig. 1.3.1. This example shows a `Guide` class who exhibit multiple responsibilities, such as, keeping the data of the class, managing its visibility and each possible point of interest individually. Listing 1.2 shows a more cohesive code, where the guide is responsible for handling its content. This change keeps the class focus on what it does and it's easier to understand because the class doesn't mix different responsibilities.
 
 Whenever you need to evaluate a design, you should feel optimistic, in terms of cohesive code, when:
 
@@ -180,7 +180,9 @@ Whenever you need to evaluate a design, you should feel optimistic, in terms of 
 
 *Coupling* and *cohesion* usually go hand in hand, since code with low cohesion is code that does too many things, hence it relies on too many objects.
 
-One way to look at it is to understand coupling as the relation between subsystems (modules and packages) and cohesion as the relation within a subsystem. As we argued before, Listing 1.1 is highly coupled and exhibits low cohesion. Lets look at another example that shows that these two concepts usually go hand in hand:
+One way to look at it is to understand coupling as the relation between subsystems (modules and packages) and cohesion as the relation within a subsystem. As we argued before, Listing 1.1 is highly coupled and exhibits low cohesion. 
+
+Lets look at another example that shows that these two concepts usually go hand in hand:
 
 ```
 public class Review {
@@ -208,11 +210,11 @@ public class Review {
 }
 ```
 
-**Listing 1.3.2. `Review` class**
+**Listing 1.3.2 `Review` class**
 
 ![](https://yuml.me/8a5b9a02)
 
-**Fig. 1.3.2.  `Review` class diagram**
+**Fig. 1.3.2  `Review` class diagram**
 
 <!--
 [Review|-comment:String; |show(): Image; ...]++image-0..1>[Image]
@@ -220,13 +222,13 @@ public class Review {
 [Review]<>notify-*>[List<User>]
 -->
 
-The code in Listing 1.3.2. is highly coupled for its small size and exhibits low cohesion:
+The code in Listing 1.3.2 is highly coupled for its small size and exhibits low cohesion:
 
 * this class mixes the behaviour of a review with the behaviour of some other class that should send notifications (see *Observer* pattern)
 * this class is coupled to the notification engine and to the `Image` class. The consequences of coupling to an image means that, either every review has an image or your code will now have to branch when the user does not supply an image. This branching checks if `image == null`, which is performed at runtime --slower code -- and an antipattern (REFERENCE HERE, use instead the *Null Object* pattern or an [option type](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html)).
 * Coupling to an image also means that you can no longer post a video review. Throwing a quick `video` attribute does not solve the problem, as the `show()` method returns an `Image` and, every caller of the`Review` class will have to explicitly handle showing an image or a video. Thus, the code becomes more complex and difficult to maintain.
 
-If we refactor this code, it ends up as Listing 1.3.3., Figure 1.3.3.
+If we refactor this code, it ends up as Listing 1.3.3, Fig. 1.3.3.
 
 ```
 public class Review {
@@ -254,7 +256,7 @@ public class Review {
 }
 ```
 
-**Listing 1.3.3.**
+**Listing 1.3.3 Refactored `Review` class**
 
 <!--
 [Review|show(): List<IDisplayable>; ...]++attachments->[List<IDisplayable>]
@@ -265,9 +267,9 @@ public class Review {
 
 ![](https://yuml.me/08177d8e)
 
-**Fig. 1.3.3. Refactored `Review` class**
+**Fig. 1.3.3 Refactored `Review` class**
 
-**Exercise**: Given the code in Listing 1.3.2., add the following functionality:
+**Exercise**: Given the code in Listing 1.3.2, add the following functionality:
 
 * export the comment to markdown
 * export the comment to HTML
@@ -280,14 +282,14 @@ public class Review {
 * Does it seem like such a design is flexible and easy to refactor?
 
 **Exercise**: 
-Given the code in Listing 1.3.3., add the following functionality:
+Given the code in Listing 1.3.3, add the following functionality:
 
 * export the comment to markdown
 * export the comment to HTML
 * notify interested users
 * create a `Company` class that should be notified of changes
 
-*Reflection*: does it seem like this design is flexible and easy to refactor?
+*Reflection*: Does it seem like this design is flexible and easy to refactor?
 
 ## Creator
 
@@ -301,7 +303,7 @@ This principle is likely overlooked but it plays a crucial role in object-orient
 
 For instance, *a point of interest* (*POI*) has comments, hence POI is the creator of instances of the `Comment` class. 
 
-**Exercise**: what kind of benefits and drawbacks do I get if `POI` is not the creator of comments?
+**Exercise**: What kind of benefits and drawbacks do you get if `POI` is not the creator of the comments?
 
 <!--
 
@@ -355,7 +357,20 @@ As we saw in the recap section, this polymorphism refers to classes that impleme
 
 <!-- which is also polymorphic on the (opaque or bounded) type variable.-->
 
-This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single `User` class with an attribute named `confirmedIdentity`  which sets the flag to true when the user has confirmed its identity. This design works for two kind of users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company; companies cannot create accounts, their identity is always confirmed (the cannot exist companies where the identity is not confirmed, and multiple employees from the company want to sign in using different password, one per employee. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute `confirmedIdentity` for a company's profile because we know that this will always be true. The reuse of a confirmed user as a company leaves dangling the possibility of programming mistakes where a company could be created but without a confirmed identity. The current code before the companies profiles were added are in Listing 1.4.1.
+This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single `User` class with an attribute named `confirmedIdentity`  which sets the flag to true when the user has confirmed its identity. This design works for two kind of users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company; companies cannot create accounts, their identity is always confirmed (the cannot exist companies where the identity is not confirmed, and multiple employees from the company want to sign in using different password, one per employee. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute `confirmedIdentity` for a company's profile because we know that this will always be true. The reuse of a confirmed user as a company leaves dangling the possibility of programming mistakes where a company could be created but without a confirmed identity. The current code before the companies profiles were added are in Listing 1.4.1, Fig. 1.4.1.
+
+<!--
+
+[User| -firstName: String; -last name: String; -username: String; -confirmedIdentity: Boolean| boolean login(Password pwd); Image displayImage()]
+[User]-.->[Password]
+[User]-.->[Image]
+[User]->[Email]
+
+-->
+
+![](https://yuml.me/76893e15)
+
+**Fig. 1.4.1 `User` code before existence of companies profiles**
 
 ```
 public class User {
@@ -382,7 +397,7 @@ public class User {
 } 
 ```
 
-**Listing 1.4.1. `User` code before existence companies profiles**
+**Listing 1.4.1. `User` code before existence of companies profiles**
 
 Another design could represent different users using an enum attribute. Based on this value, the `displayImage()` method adds logic to check which kind of user you are and how to display the image. You go home thinking that this is a good design, all the logic is kept in a single method.
 
