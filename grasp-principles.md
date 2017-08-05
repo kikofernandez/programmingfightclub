@@ -134,6 +134,7 @@ public interface IPointOfInterest {
 **Exercise**: Given the refactoring above, how does a guide deal with its visibility?
 
 **Exercise**: why do we need so many interfaces?
+
 <!--
 
 (Solution: we are coupling to an interface but, interfaces do not expose their implementation, so this coupling is much weaker than a direct class. Furthermore, we use interfaces in instability points. For example, the CEO may add a sushi restaurant as a point of interest and, because you know that in early stages of development things change, try to create a design as loosely coupled add possible)
