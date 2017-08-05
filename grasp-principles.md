@@ -512,6 +512,7 @@ You should apply this pattern to instability points and, specially, when using t
 
 ## Pure functions
 
+[^horizontal-scalability]: explain
+
 This principle is not part of the common and well known GRASP principles but, in my experience, you should consider it. Lambdas, closures and pure functions are ubiquitous nowadays. My advice is that you stop using closures that captures mutable state. The main reason is that, at one point or another, you'll benchmark your application and start using parallel capabilities of your computer: task, futures, actors or whatever is the next parallel abstraction. If you encapsulate mutable state in closures, you are building your own coffin for the not so far away future. Things like processing an recognitive computation cannot be used anymore if the object the closure captures is shared between two threads -- unless you can guarantee data race freedom. Data race freedom code is hard to write, maintain and make fast, so using locks may get you out of troubles at the cost of losing horizontal scalability [^horizontal-scalability].
 
-[^horizontal-scalability]: explain
