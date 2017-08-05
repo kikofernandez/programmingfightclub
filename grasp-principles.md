@@ -1,4 +1,4 @@
-# GRASP principles - Fight Club
+# GRASP principles
 
 ---
 TODO:
