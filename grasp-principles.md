@@ -2,8 +2,10 @@
 
 ---
 TODO:
-- editing
-- in progress
+
+* editing
+* in progress
+
 ---
 
 Before you learn advanced design patterns, it's useful to look at common principles / recommendation rules to guide your design. By following these principles, you will design and write code that's easy to understand, maintain, and refactor.
@@ -40,6 +42,16 @@ The reader should notice that there will always exist coupling but, dependencies
 
 The following example shows a poor design for the guides in the case study. Remember that guides contain images, visibility (who can watch the content), title, description, and reviews of restaurants, hotels, pubs, things to do, etc. All of these details are captured in the design below:
 
+<!--
+[Guide|-isPublic: bool; -friendsOnly: bool; -friendsOfFriends: bool; -title: String; -description: String]
+[Guide]++-images*>[List<Image>]
+[Guide]++-visibility*>[List<User>]
+[Guide]<>-restReview>[Map<Restaurant‚String>]
+[Guide]<>-hotelReview>[Map<Hotel‚ String>]
+
+
+-->
+
 ```
 public class Guide {
   private List<Image> images;
@@ -64,7 +76,11 @@ public class Guide {
 ```
 **Listing 1.1 Highly coupled `Guide` class**
 
-Can you identify some of the problems with this design? Try to sit a few of them before you read the core issues of these design.
+![](https://yuml.me/79c2f38c)
+
+**Fig.1.1. High coupled `Guide` class**
+
+Can you identify some of the problems with this design? Try to name a few of them before you read any further.
 
 The problems with this design are:
 
@@ -75,6 +91,20 @@ The problems with this design are:
 * the constructor receives an `ArrayList`, which binds an implementation detail to the list abstraction -- couples the abstraction with an implementation detail
 
 Now, how can we reduce coupling a guide to other elements? The most obvious alternative would be to put less responsibilities in the guide. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain. An example of this low coupled class is in listing 1.2.
+
+<!--
+
+[Guide| -title: String; -description: String]
+[Guide]++-images*>[List<IImage>]
+[Guide]<>-poi>[List<IPointOfInterest>]
+[List<IPointOfInterest>]<>->[IPointOfInterest]
+[IPointOfInterest| IReview getReview();String getAddress();void showOnMap();]
+
+-->
+
+![](https://yuml.me/7f7a63c7)
+
+**Fig. 1.2 Loosely coupled `Guide` class**
 
 ```
 public class Guide {
@@ -98,12 +128,17 @@ public interface IPointOfInterest {
   ...
 }
 ```
+
 **Listing 1.2 Loosely coupled `Guide` class**
 
 **Exercise**: Given the refactoring above, how does a guide deal with its visibility?
 
 **Exercise**: why do we need so many interfaces?
+<!--
+
 (Solution: we are coupling to an interface but, interfaces do not expose their implementation, so this coupling is much weaker than a direct class. Furthermore, we use interfaces in instability points. For example, the CEO may add a sushi restaurant as a point of interest and, because you know that in early stages of development things change, try to create a design as loosely coupled add possible)
+
+-->
 
 ## High Cohesion
 
@@ -111,9 +146,28 @@ Cohesion refers to the property of staying focus on the responsibilities of the 
 
 Often, you'll see code that contains many methods, attributes, and seems to contain a lot of logic and magic. This code is building the antipattern known as "The Blob",  which results in a highly coupled code with low cohesion.
 
-(Image of the Blob)
+<!--
 
-You can observe this antipattern in Listing 1.1. This example shows a`Guide` class who exhibit multiple responsibilities, such as, keeping the data of the class, managing its visibility and each possible point of interest individually. Listing 1.2 shows a more cohesive code, where the guide is responsible for handling its content. This change keeps the class focus on what it does and it's easier to understand because the class doesn't mix different responsibilities.
+[Guide|-isPublic: bool; -friendsOnly: bool; -friendsOfFriends: bool; -title: String; -description: String]
+[Guide]---html>[HTMLDescription]
+[Guide]---markdown>[MarkdownDescription]
+[Guide]++-images*>[List<Image>]
+[Guide]---socket>[WebSocket]
+[List<Image>]->[Image]
+[Image]->[Guide]
+[List<User>]->[User]
+[User]-includedIn-*>[Guide]
+[Guide]++-visibility*>[List<User>]
+[Guide]<>-restReview>[Map<Restaurant‚String>]
+[Guide]<>-hotelReview>[Map<Hotel‚String>]
+
+-->
+
+![](https://yuml.me/170e37f3)
+
+**Fig. 1.3.1 "The Blob", a class that swallows everything**
+
+You can observe this antipattern in Listing 1.1 or Fig. 1.3.1. This example shows a`Guide` class who exhibit multiple responsibilities, such as, keeping the data of the class, managing its visibility and each possible point of interest individually. Listing 1.2 shows a more cohesive code, where the guide is responsible for handling its content. This change keeps the class focus on what it does and it's easier to understand because the class doesn't mix different responsibilities.
 
 Whenever you need to evaluate a design, you should feel optimistic, in terms of cohesive code, when:
 
@@ -135,9 +189,9 @@ public class Review {
   private List<User> friendsToNotify;
 
   public class Review (User author,
-                                         String comment,
-                                         Image image,
-                                         List<User> notification){
+                            String comment,
+                            Image image,
+                            List<User> notification){
     this.author = author;
     this.comment =comment;
     this.image = image;
@@ -152,10 +206,12 @@ public class Review {
   }
 }
 ```
-**Listing 1.3. Review class**
+
+**Listing 1.3.2. `Review` class**
 
 ![](https://yuml.me/8a5b9a02)
-**Fig. 1.3. `Review` class diagram**
+
+**Fig. 1.3.2.  `Review` class diagram**
 
 <!--
 [Review|-comment:String; |show(): Image; ...]++image-0..1>[Image]
@@ -163,31 +219,72 @@ public class Review {
 [Review]<>notify-*>[List<User>]
 -->
 
-The code in Listing 1.3 is highly coupled for its small size and exhibits low cohesion:
+The code in Listing 1.3.2. is highly coupled for its small size and exhibits low cohesion:
 
 * this class mixes the behaviour of a review with the behaviour of some other class that should send notifications (see *Observer* pattern)
-* it's coupled to the notification engine and to the `Image` class. The consequences of coupling to an image means that, either every review has an image or your code will now have to branch when the user does not supply an image. This branching checks if `image == null`, which is a runtime check --slower code -- and an antipattern (REFERENCE HERE, use instead the *Null Object* pattern or an [option type](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html)).
+* this class is coupled to the notification engine and to the `Image` class. The consequences of coupling to an image means that, either every review has an image or your code will now have to branch when the user does not supply an image. This branching checks if `image == null`, which is performed at runtime --slower code -- and an antipattern (REFERENCE HERE, use instead the *Null Object* pattern or an [option type](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html)).
 * Coupling to an image also means that you can no longer post a video review. Throwing a quick `video` attribute does not solve the problem, as the `show()` method returns an `Image` and, every caller of the`Review` class will have to explicitly handle showing an image or a video. Thus, the code becomes more complex and difficult to maintain.
 
-If we refactor this code, it ends up as listing Yyy, Figure Yy6y.
+If we refactor this code, it ends up as Listing 1.3.3., Figure 1.3.3.
 
-(Listing Yyy)
+```
+public class Review {
+  private IComment comment;
+  private User author;
+  private List<Displayable> attachments;
+  private List<INotifier> listeners;
 
-(Figure Yy6y)
+  public class Review (User author,
+                            IComment comment,
+                            List<IDisplayable> attachments,
+                            List<INotifier> notification){
+    this.author = author;
+    this.comment = comment;
+    this.attachments = attachments;
+    this.listeners = notification;
+  }
 
-**Exercise**: given the following code, add the following functionality:
+  // Getters and setters
+  ...
 
-- feature a
-- feature b
-- feature c
+  public List<Displayable> show() {
+    return this.attachments;
+  }
+}
+```
+
+**Listing 1.3.3.**
+
+<!--
+[Review|show(): List<IDisplayable>; ...]++attachments->[List<IDisplayable>]
+[Review]-comment->[IComment]
+[Review]<>author-1>[User]
+[Review]<>observers->[List<INotifier>]
+-->
+
+![](https://yuml.me/08177d8e)
+
+**Fig. 1.3.3. Refactored `Review` class**
+
+**Exercise**: Given the code in Listing 1.3.2., add the following functionality:
+
+* export the comment to markdown
+* export the comment to HTML
+* notify interested users
+* create a `Company` class that should be notified of changes
 
 *Reflection*:
 
-- How many classes did you change?
-- does it seem like such a design is flexible and easy to refactor?
+* How many classes did you change?
+* Does it seem like such a design is flexible and easy to refactor?
 
-**Exercise**: Refactor the baseline code from the above exercise to achieve low coupling and high cohesion.
-Add more features a, b, and c.
+**Exercise**: 
+Given the code in Listing 1.3.3., add the following functionality:
+
+* export the comment to markdown
+* export the comment to HTML
+* notify interested users
+* create a `Company` class that should be notified of changes
 
 *Reflection*: does it seem like this design is flexible and easy to refactor?
 
@@ -205,7 +302,11 @@ For instance, *a point of interest* (*POI*) has comments, hence POI is the creat
 
 **Exercise**: what kind of benefits and drawbacks do I get if `POI` is not the creator of comments?
 
+<!--
+
 **Solution**: (in solutions chapter) if comments are always the same, just text, then it makes sense that `POI`is the creator. However, what if I want to support multiple kinds of comments, i.e. video comments, text, or images as à comment? In that case, you are better off injecting the comments as an extra argument to the POI object. -- does this makes sense? POI is always created first and comments are added later on, it's not an initialiser but a method that adds comments.
+
+-->
 
 ## Information Expert
 
@@ -249,23 +350,85 @@ Controller
 
 This principle is one of the most important ones in object-oriented programming and the one that makes OOP great at dividing responsibilities between classes.
 
-As we saw in the recap section, this polymorphism refers to classes that implement an interface or inherit from a top class and not to parametric classes, which is also polymorphic on the (opaque or bounded) type variable.
+As we saw in the recap section, this polymorphism refers to classes that implement an interface or inherit from a top class but, not to parametric classes. 
 
-This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single `User` class with an attribute named `confirmedIdentity`  which sets the flag to true when the user has confirmed its identity. This design works for 2 users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company instead of a person, companies cannot create accounts and they have confirmed its identity. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute `confirmedIdentity` for a company's profile because we know that this will always be true. The current code looks like listing Xxxx.
+<!-- which is also polymorphic on the (opaque or bounded) type variable.-->
 
-(Listing Xxxx)
+This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single `User` class with an attribute named `confirmedIdentity`  which sets the flag to true when the user has confirmed its identity. This design works for two kind of users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company; companies cannot create accounts, their identity is always confirmed (the cannot exist companies where the identity is not confirmed, and multiple employees from the company want to sign in using different password, one per employee. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute `confirmedIdentity` for a company's profile because we know that this will always be true. The reuse of a confirmed user as a company leaves dangling the possibility of programming mistakes where a company could be created but without a confirmed identity. The current code before the companies profiles were added are in Listing 1.4.1.
 
-Another design choice is to represent this distinction of different users using an enum attribute. Based on this value, the `displayImage()` method adds logic to check which kind of user you are and how to display the image. You go home thinking that this is a good design, all the logic it's kept in a single method.
+```
+public class User {
+  private String firstName;
+  private String lastName;
+  private boolean confirmedIdentity;
+  private String username;
+  private Email email;
+  
+  // Getters and setters
+  ...
 
-The problem with this approach, quite often used by beginners or as a shortcut, is that different classes are encoded within the same single one. This design is not maintainable in the long run because the same class encodes behaviour for different objects. Your design is abstracting at the wrong level.
+  public boolean login(Password pwd) {
+    ...
+  }
 
-A better approach is to create a class for each kind of user and dispatch dynamically. This design is easier to maintain because the behaviour is not encoded solely on the method, but on the type. The Figure Yyy shows how to dynamically dispatch based on the type.
+  public Image displayImage() {
+    if (this.confirmedIdentity) {
+      return Badge.getConfirmedImage();
+    } else {
+      return Badge.getDefaultImage();
+    }
+  }
+} 
+```
 
-**Exercise** Write the code depicted on Figure Yyy.
+**Listing 1.4.1. `User` code before existence companies profiles**
+
+Another design could represent different users using an enum attribute. Based on this value, the `displayImage()` method adds logic to check which kind of user you are and how to display the image. You go home thinking that this is a good design, all the logic is kept in a single method.
+
+The problem with this approach, quite often used by beginners or as a shortcut, is that you are encoding different classes in a single one. This design is not maintainable in the long run because the same class encodes behaviour for different objects (users). Your design is abstracting at the wrong level.
+
+A better approach is to create a class for each kind of user and dispatch dynamically. This design is easier to maintain because the behaviour is not encoded solely on the method, but on the type. The Listing 1.4.2. shows how to dynamically dispatch based on the type.
+
+```
+public class User {
+  private String firstName;
+  private String lastName;
+  private boolean confirmedIdentity;
+  private String username;
+  private Email email;
+  
+  // Getters and setters
+  ...
+
+  public boolean login(Password pwd) {
+    ...
+  }
+
+  public Image displayImage() {
+    return Badge.getDefaultImage();
+  }
+} 
+
+public class ConfirmedUser
+   extends User {
+
+  public Image displayImage() {
+    return Badge.getConfirmedImage();
+  }
+} 
+```
+
+**Listing 1.4.2. Dynamic dispatch of users**
+
+**Exercise** Add the following items:
+
+* Add a user for companies
+* Implement the `login(Password pwd)` method for default and confirmed users
+* Implement the `login(Password pwd)` method for companies
 
 **Exercise** Write the main class and show that the method performs a dynamic dispatch based on the classes.
 
-**Exercise** Write the code relying on inheritance and another version relying on interfaces. What are the benefits and drawbacks of the design and implementation decisions?
+**Exercise** The code given above (Listing 1.4.2) users inheritance. Implement the same functionality using interfaces. What are the benefits and drawbacks of this design and implementation decisions?
 
 (Note: this is distinct for Python because there's no interface etc. Think how would you explain it in python)
 
@@ -288,7 +451,12 @@ An example of this pattern (Figure zzz) is the indirection introduced between a 
 **Exercise** Following the principles of these chapter, how would you design data persistence of an object from the case study? That is, would you add CRUD (Create, Read, Update and Delete) methods to all domain objects? If so, how would you avoid the coupling introduced by this design?
 
 **Exercise** How would you design the offline mode of your application? That is, how do you deal with low connectivity or no connectivity at all?
+
+<!--
+
 Solution: you never assume that there is a connection and instead create an intermediate layer that handles the communication. If the server is unreachable, this layer handles how to proceed. An advanced design pattern that users this idea is the circuit breaker (explained in later chapters)
+
+-->
 
 ## Pure Fabrication
 
@@ -301,8 +469,20 @@ The principle adds a new indirection between two objects that would otherwise be
 Explain figure.
 
 **Exercise**:Wwhere could this principle be applied in the case study? Why? (There are many valid examples)
+
+<!--
+
 Solution: the AI algorithm that inject images to guides. If this was not there, every guide would have the same image for all guides, tying the guide to the images. With the algorithm, the same guide share with friends shows different images based on other friends and connections.
-**Exercise**: let's assume that you would like to add a notification system to the mobile app of the case study whenever a friend posts a new comment on one of her guides. What classes would you need to create? Solution: at the very least, you would need a `Notification` class that contains the text and image of the notification and some kind of notification manager that schedules and send notifications to the appropriate parties.
+
+-->
+
+**Exercise**: let's assume that you would like to add a notification system to the mobile app of the case study whenever a friend posts a new comment on one of her guides. What classes would you need to create? 
+
+<!-- 
+
+Solution: at the very least, you would need a `Notification` class that contains the text and image of the notification and some kind of notification manager that schedules and send notifications to the appropriate parties.
+
+-->
 
 ## Protected Variation
 
