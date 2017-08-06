@@ -3,7 +3,7 @@
 ---
 TODO:
 
-* editing
+* needs editing,
 * in progress
 
 ---
@@ -74,7 +74,7 @@ public class Guide {
   }
 }
 ```
-**Listing 1.1 Highly coupled `Guide` class**
+**Listing 1.1 High coupled `Guide` class**
 
 ![](https://yuml.me/79c2f38c)
 
@@ -84,25 +84,29 @@ Can you identify some of the problems with this design? Try to name a few of the
 
 The problems with this design are:
 
-* Assuming that `Image` is a class, this design couples images with a guide, but the guide should be personalised to each viewer! 
+* assuming that `Image` is a class, this design couples images with a guide, but the guide should be personalised to each viewer! 
 * the visibility maintains a list of users that can read the guide, this solution does not scale when there are many users; this same field may be used for different visibility settings, which makes the logic more difficult to test and understand as the attribute has different meaning based on other properties,
-* The use of multiple, non-overlapping booleans makes the code difficult to follow as you will introduce branches and its related logic in each case,
-* Hotels, restaurants and others should be dispatched polymorphously. If this is not the case, try adding a few new entities, e.g. `SushiBar`, and observe how you would need to add specific methods for this place or reuse a method that checks for sushi places and, if any, branches in the method,
+* the use of multiple, non-overlapping booleans makes the code difficult to follow as you will introduce branches and its related logic in each case,
+* hotels, restaurants and others should be dispatched polymorphously. If this is not the case, try adding a few new entities, e.g. `SushiBar`, and observe how you would need to add specific methods for this place or reuse a method that checks for sushi places and, if any, branches in the method,
 * the constructor receives an `ArrayList`, which binds an implementation detail to the list abstraction -- couples the abstraction with an implementation detail
 
-Now, how can we reduce coupling a guide to other elements? The most obvious alternative would be to put less responsibilities in the guide. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain. An example of this low coupled class is in Listing 1.2.
+Now, how can we reduce coupling a `Guide` to other elements? The most obvious alternative would be to put less responsibilities in the `Guide`. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain.
+
+ For example, a `Guide` does not need to be concerned about its visibility and we can group the different categories inside a guide under the idea of a point of interest (Fig. 1.2). These two changes reduces the responsibilities in the `Guide` class, thus reducing coupling (Listing 1.2).
 
 <!--
 
-[Guide| -title: String; -description: String]
-[Guide]++-images*>[List<IImage>]
-[Guide]<>-poi>[List<IPointOfInterest>]
+[Guide|-title: String;-description: String]
+[Guide]++-images>[List<IImage>]
+[Guide]<>-poi->[List<IPointOfInterest>]
+[IPointOfInterest|IReview getReview();String getAddress();void showOnMap();]
 [List<IPointOfInterest>]<>->[IPointOfInterest]
-[IPointOfInterest| IReview getReview();String getAddress();void showOnMap();]
+[IPointOfInterest]^-.-[Hotel| IReview getReview();String getAddress();void showOnMap();]
+[IPointOfInterest]^-.-[Restaurant| IReview getReview();String getAddress();void showOnMap();]
 
 -->
 
-![](https://yuml.me/7f7a63c7)
+![](https://yuml.me/47b0f363)
 
 **Fig. 1.2 Loosely coupled `Guide` class**
 
@@ -133,7 +137,9 @@ public interface IPointOfInterest {
 
 **Exercise**: Given the refactoring above, how does a guide deal with its visibility?
 
-**Exercise**: Why do we need so many interfaces?
+**Exercise**: Why should we promote interfaces over inheritance?
+
+**Exercise**: Does it make sense that the class`Hotel` declares methods that do not exist in the interface `IPointOfInterest`? (Note: this exercise may need you to read the section on polymorphism)
 
 <!--
 
@@ -143,9 +149,9 @@ public interface IPointOfInterest {
 
 ## High Cohesion
 
-Cohesion refers to the property of staying focus on the responsibilities of the class. A cohesive class does one thing and does it well. Highly cohesive code is focused and, as side effect, doesn't talk to too many objects.
+Cohesion refers to keeping the responsibilities of the class focused. A cohesive class does one thing and does it well. Highly cohesive code is focused and, as side effect, doesn't talk to too many objects.
 
-Often, you'll see code that contains many methods, attributes, and seems to contain a lot of logic and magic. This code is building the antipattern known as "The Blob",  which results in a highly coupled code with low cohesion.
+Often, you'll see code that contains many methods, attributes, and a lot of logic and magic. This code builds the antipattern known as "The Blob",  which results in high coupled code with low cohesion, e.g. Fig. 1.3.1.
 
 <!--
 
@@ -168,9 +174,9 @@ Often, you'll see code that contains many methods, attributes, and seems to cont
 
 **Fig. 1.3.1 "The Blob", a class that swallows everything**
 
-You can observe this antipattern in Listing 1.1 or Fig. 1.3.1. This example shows a `Guide` class who exhibit multiple responsibilities, such as, keeping the data of the class, managing its visibility and each possible point of interest individually. Listing 1.2 shows a more cohesive code, where the guide is responsible for handling its content. This change keeps the class focus on what it does and it's easier to understand because the class doesn't mix different responsibilities.
+This example (Listing 1.1 or Fig. 1.3.1) shows the `Guide` class, which exhibits multiple responsibilities, such as keeping the data of the class, managing its visibility and each possible point of interest, individually. Listing 1.2 shows a more cohesive code, where the guide is responsible for handling its content. This change keeps the class focus on what it does and it's easier to understand because the class doesn't mix different responsibilities.
 
-Whenever you need to evaluate a design, you should feel optimistic, in terms of cohesive code, when:
+Whenever you need to evaluate a design, a high cohesive code exhibits the following properties:
 
 - code doesn't mix responsibilities,
 - has few methods,
@@ -295,13 +301,37 @@ Given the code in Listing 1.3.3, add the following functionality:
 
 This principle is likely overlooked but it plays a crucial role in object-oriented programming; the creator *establishes who is responsible* for creating an object. If you defined it well, your code will exhibit loose coupling and high cohesion; err an you will begin your journey to maintaining spaghetti code.
 
-**Application**: a class `X` is the creator of an object `Y` if any of the following statements are satisfied:
+
+A class `X` is the creator of an object `Y` if any of the following statements are satisfied:
 
 - class `X` initialises object `Y`
 - class `X` contains object `Y`
 - class `X` closely uses and depends on class `Y`
 
-For instance, *a point of interest* (*POI*) has comments, hence POI is the creator of instances of the `Comment` class. 
+Lets see this with an example: in the case study we have hotels, restaurants, bars, museums, etc. As a user of the application, I would like to write comments, place pictures, videos of my experience in such places and give a rating. Based on this idea, who are the creators of the following classes:
+
+* `Hotel` class,
+* `Restaurant` class,
+* `Comment` class,
+* `Rating` class, and
+* `Image` class
+
+<!--
+
+[Comment]<*-1>[Hotel]
+[Comment]<*-1>[Restaurant]
+[Comment]image--0..1>[Image]
+[Comment]rating->[Rating]
+
+-->
+
+![](https://yuml.me/428b5c5e)
+
+**Fig. 1.4 Relation between comments, hotels, images, and ratings**
+
+The `Hotel` and `Restaurant` are usually created by a user, who has to fill out some details regarding these classes. This does not mean that a`User` class creates the guides, they are probably created by a controller (see the Controller principle in this chapter). The `Comment` class could be created by another controller or by a specific class such as `Hotel` and `Restaurant` (depends on the level of abstraction and design patterns used, Part III of this book). A comment has associated with it a rating of the place, for fast visual aid, and an image and should be the creator of `Image` and `Rating` classes.
+
+Lets introduce an exercise to show the implications of the creator principle: *a point of interest* groups hotels, restaurants, etc, under the same category, base class, `POI` that all points of interests need to inherit from. Based on the example from above,  a user can place comments in points of interest, hence POI is the creator of instances `Comment`. 
 
 **Exercise**: What kind of benefits and drawbacks do you get if `POI` is not the creator of the comments?
 
@@ -315,15 +345,31 @@ For instance, *a point of interest* (*POI*) has comments, hence POI is the creat
 
 Classes have methods that define their responsibility and behaviour. A class exposes its behaviour via methods and its internals should always be opaque. With this basic idea, this principle helps you to identify the behaviour of each class.
 
-A class is responsible for a behaviour if that class contains all the information to carry it out. For example, which object should be responsible for updating the description of a guide? 
+A class is responsible for a behaviour if that class contains all the information to carry it out. For example, which class should be responsible for updating the description of a guide? 
 
-a. `User` object
+a. `User` class
 
-b. `POI` (point of interest) object
+b. `POI` (point of interest) class
 
-c. `LatitudeLongitude` object
+c. `LatitudeLongitude` class
 
-d. `Guide` object
+d. `Guide` class
+
+<!--
+
+[User]++-*>[Guide]
+[Guide]<>-*>[POI]
+[POI]^-[Restaurant]
+[POI]^-[Hotel]
+[POI]<>-*>[Comment]
+[POI]->[LatitudeLongitude]
+
+-->
+
+![](https://yuml.me/aeb011be)
+
+**Listing 1.5 Relation between users, guides, point of interest, and comments**
+
 
 This one is easy. Lets consider each option:
 
@@ -357,7 +403,7 @@ As we saw in the recap section, this polymorphism refers to classes that impleme
 
 <!-- which is also polymorphic on the (opaque or bounded) type variable.-->
 
-This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single `User` class with an attribute named `confirmedIdentity`  which sets the flag to true when the user has confirmed its identity. This design works for two kind of users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company; companies cannot create accounts, their identity is always confirmed (the cannot exist companies where the identity is not confirmed, and multiple employees from the company want to sign in using different password, one per employee. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute `confirmedIdentity` for a company's profile because we know that this will always be true. The reuse of a confirmed user as a company leaves dangling the possibility of programming mistakes where a company could be created but without a confirmed identity. The current code before the companies profiles were added are in Listing 1.4.1, Fig. 1.4.1.
+This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single `User` class with an attribute named `confirmedIdentity`  which sets the flag to true when the user has confirmed its identity. This design works for two kind of users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company; companies cannot create accounts, their identity is always confirmed (the cannot exist companies where the identity is not confirmed, and multiple employees from the company want to sign in using different password, one per employee. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute `confirmedIdentity` for a company's profile because we know that this will always be true. The reuse of a confirmed user as a company leaves dangling the possibility of programming mistakes where a company could be created but without a confirmed identity. The current code before the companies profiles were added are in Listing 1.6.1, Fig. 1.6.1.
 
 <!--
 
@@ -370,7 +416,7 @@ This principle allows classes to specify the same responsibilities via an interf
 
 ![](https://yuml.me/76893e15)
 
-**Fig. 1.4.1 `User` code before existence of companies profiles**
+**Fig. 1.6.1 `User` code before existence of companies profiles**
 
 ```
 public class User {
@@ -397,13 +443,13 @@ public class User {
 } 
 ```
 
-**Listing 1.4.1. `User` code before existence of companies profiles**
+**Listing 1.6.1. `User` code before existence of companies profiles**
 
 Another design could represent different users using an enum attribute. Based on this value, the `displayImage()` method adds logic to check which kind of user you are and how to display the image. You go home thinking that this is a good design, all the logic is kept in a single method.
 
 The problem with this approach, quite often used by beginners or as a shortcut, is that you are encoding different classes in a single one. This design is not maintainable in the long run because the same class encodes behaviour for different objects (users). Your design is abstracting at the wrong level.
 
-A better approach is to create a class for each kind of user and dispatch dynamically. This design is easier to maintain because the behaviour is not encoded solely on the method, but on the type. The Listing 1.4.2. shows how to dynamically dispatch based on the type.
+A better approach is to create a class for each kind of user and dispatch dynamically. This design is easier to maintain because the behaviour is not encoded solely on the method, but on the type. The Listing 1.6.2. shows how to dynamically dispatch based on the type.
 
 ```
 public class User {
@@ -434,7 +480,7 @@ public class ConfirmedUser
 } 
 ```
 
-**Listing 1.4.2. Dynamic dispatch of users**
+**Listing 1.6.2. Dynamic dispatch of users**
 
 **Exercise** Add the following items:
 
@@ -444,11 +490,11 @@ public class ConfirmedUser
 
 **Exercise** Write the main class and show that the method performs a dynamic dispatch based on the classes.
 
-**Exercise** The code given above (Listing 1.4.2) users inheritance. Implement the same functionality using interfaces. What are the benefits and drawbacks of this design and implementation decisions?
+**Exercise** The code given above (Listing 1.6.2) users inheritance. Implement the same functionality using interfaces. What are the benefits and drawbacks of this design and implementation decisions?
 
 (Note: this is distinct for Python because there's no interface etc. Think how would you explain it in python)
 
-Python is a dynamic language with a weak type system. This means the language assigns types at runtime, but you as a developer won't get any type error at compilation time. In Python polymorphism is always given and you as developer are in charge of ending that the methods you call exist or you will get a runtime error. As we said, the are no interfaces that we are bound to and python supports what's called duck typing, which is an idea much closer to how things work in real life. Let me show this with an example: you can read articles, news, cereal boxes and anything that has text. In Java you are bound by the type of object you are but in Python you are bound to the behaviour you have. A method call on `newspaper. hasText()` and `cerealBox.hasText()` works in Python independent from their type; Java would make this work only when they belong to the sand type or interface. For this reason, Python is more expressive in this regard, although it sacrifices static typing guarantees and forces the developer to either handle exceptions or crash and burn at runtime if the object on which the program calls the method `hasText()` does not provide such behaviour.
+Python is a dynamic language with strong typing. This means the language assigns types at runtime, but you as a developer won't get any type error at compilation time. In Python polymorphism is always given and you as developer are in charge of ending that the methods you call exist or you will get a runtime error. As we said, the are no interfaces that we are bound to and python supports what's called duck typing, which is an idea much closer to how things work in real life. Let me show this with an example: you can read articles, news, cereal boxes and anything that has text. In Java you are bound by the type of object you are but in Python you are bound to the behaviour you have. A method call on `newspaper. hasText()` and `cerealBox.hasText()` works in Python independent from their type; Java would make this work only when they belong to the sand type or interface. For this reason, Python is more expressive in this regard, although it sacrifices static typing guarantees and forces the developer to either handle exceptions or crash and burn at runtime if the object on which the program calls the method `hasText()` does not provide such behaviour.
 
 **Exercise** write the code depicted on Figure Yyy in Python. Do not forget to handle exceptional cases.
 
@@ -458,13 +504,58 @@ Python is a dynamic language with a weak type system. This means the language as
 
 Domain objects may end up being coupled to other objects in the first iteration of your design. This principle states that you should create an intermediate object that mediates between these two, hence reducing coupling. 
 
-To the untrained eye, it may seem as if two objects that where coupled, after applying the principle,  are still coupled but to other object. This reasoning is right, except that this indirection breaks the idea of once object having a direct relation to the other one. The layer in between breaks the coupling direction and creates a more flexible design, since the two initially coupled objects do not need to know anything about each other anymore.
+To the untrained eye, after applying the principle, it may seem as if two objects that were coupled are still coupled but to an intermediary object. This is right, except that this indirection breaks the idea of one object having a direct relation to the other one. The layer in between breaks the coupling directionality, and creates a more flexible design, since the two initially coupled objects do not need to know anything about each other anymore. Lets out this principle in perspective with an example and an analysis of the solutions prior to the introduction of this principle.
 
-An example of this pattern (Figure zzz) is the indirection introduced between a guides and the images that belong to the guides. The idea here is that the same guide is shared among friends and each one of them may potentially see a different cover image. Prior to this principle, your initial solution was to duplicate the guide for each friend and recalculate the cover image for each of them. This solution is redundant, consumes memory, and duplicates data, so an update on one description involves updating all data in all copies of the guide. A better solution is to add a new level of indirection between a guide and its cover image, 'CoverManager`, that knows how to retrieve the best cover image for the calling object. Internally, the manager may have to call the AI algorithm from time to time to update the image, cache it if the same user keeps coming to the same guide and even persist this mapping of guide-cover image in the database if the cover image doesn't change that often.
+*A guide can be seen by multiple friends and each of your friends may see a different cover image.*
+
+<!--
+
+[user1: User]->[madrid: Guide]
+[user2: User]->[madridCopy: Guide]
+[madrid: Guide]coverImage->[elPrado: Image]
+[madridCopy: Guide]coverImage->[cibeles: Image]
+[madrid: Guide]<>-*>[POI]
+[madridCopy: Guide]<>-*>[POI]
+[POI]^-[Restaurant]
+[POI]^-[Hotel]
+[POI]<>-*>[Comment]
+
+-->
+
+![](https://yuml.me/9c88723b)
+
+**Fig. 1.7 Duplication of guides**
+
+A poor strawman's solution duplicates the guide for each friend and recalculates the cover image for each friend. This is a really bad design, as it's redundant, consumes memory, and duplicates data. Moreover, an update on one guide's description involves updating all copies of that guide.
+
+<!--
+
+[user1: User]->[madrid: Guide]
+[user2: User]->[madrid: Guide]
+[madrid: Guide]coverNanager->[CoverManager]
+[CoverManager]images<>-*>[Image]
+[madrid: Guide]<>-*>[POI]
+[POI]^-[Restaurant]
+[POI]^-[Hotel]
+[POI]<>-*>[Comment]
+
+-->
+
+![](https://yuml.me/a59a3a5f)
+
+**Fig. 1.7.2 Example after application of indirection principle**
+
+A better solution, applying this principle, is to add a new level of indirection between a guide and its cover image, named `CoverManager` (Fig. 1.7.2). The `CoverManager` knows how to retrieve the best cover image for the calling object. Internally, the manager may have to call the AI algorithm from time to time to update the image, cache it if the same user keeps coming to the same guide, and even persist in the database this mapping of guide-cover image.
+
+<!--
+
+An example of this pattern (Figure zzz) is the indirection introduced between the images and the guides. The idea here is that the same guide is shared among friends, and each of your friends may potentially see a different cover image. Prior to this principle, your initial solution was to duplicate the guide for each friend and recalculate the cover image for each of them. This solution is redundant, consumes memory, and duplicates data, so an update on one description involves updating all data in all copies of the guide. A better solution is to add a new level of indirection between a guide and its cover image, 'CoverManager`, that knows how to retrieve the best cover image for the calling object. Internally, the manager may have to call the AI algorithm from time to time to update the image, cache it if the same user keeps coming to the same guide and even persist this mapping of guide-cover image in the database if the cover image doesn't change that often.
 
 (Figure zzz)
 
-**Exercise** Following the principles of these chapter, how would you design data persistence of an object from the case study? That is, would you add CRUD (Create, Read, Update and Delete) methods to all domain objects? If so, how would you avoid the coupling introduced by this design?
+-->
+
+**Exercise** Following the principles of these chapter, how would you design data persistence of an object from the case study? That is, would you add CRUD (Create, Read, Update and Delete) methods to all domain objects, e.g. your `Guide` class? If so, how would you avoid the coupling introduced by this design?
 
 **Exercise** How would you design the offline mode of your application? That is, how do you deal with low connectivity or no connectivity at all?
 
