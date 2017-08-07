@@ -3,7 +3,7 @@
 ---
 TODO:
 
-* needs editing,
+* needs editing
 * in progress
 
 ---
@@ -26,11 +26,18 @@ There are exercises for each principle at the end of the chapter to help you und
 
 ## Low Coupling
 
-This principle states that a class should only depend on the minimum and required amount of classes, no more and no less. A low coupled class is easy to maintain and refactor because it interacts with a minimum amount of objects. A high coupled class has many dependencies to other objects and has low cohesion, i. e. it is not focused, has too many responsibilities and does too many things.
+This principle states that a class should only depend on the minimum and required amount of classes, no more and no less. A low coupled class is easy to maintain and refactor because it interacts with a minimum amount of objects. 
 
-A low coupled design is easy to change and the changes do not spread across multiple classes. In the beginning of your journey to become a better programmer, it's difficult to acknowledge this principle until you deal with its counterpart, a high coupled bowl of spaghetti code. For this reason, it is much easier to spot a highly coupled design than to identify a low coupled one.
+When a design is low coupled, changes in a class do not spread across multiple classes.
+On the opposite side, high coupled designs contain classes with many dependencies to other objects, which makes them rigid and difficult to maintain.
 
-We define coupling as any code that satisfies items in the following list:
+<!--
+ and has low cohesion, i. e. it is not focused, has too many responsibilities and does too many things.
+-->
+
+In the beginning of your journey to become a better programmer, it's difficult to acknowledge this principle until you deal with its counterpart, a high coupled design, a.k.a. a bowl of spaghetti code. If you find yourself with code that is rigid, hard to maintain and even more difficult to deal with when adding new features or making changes, then you are the owner of a high coupled design, and a refactoring is advisable.
+
+To make the idea of coupling more concrete, we define coupling as any code that satisfies items in the following list:
 
 - the class has an attribute to another object,
 - calls on methods of other objects, 
@@ -38,17 +45,17 @@ We define coupling as any code that satisfies items in the following list:
 - implements one or more interfaces, and
 - inherits mixins
 
-The reader should notice that there will always exist coupling but, dependencies to stable items are not problematic -- standard library -- because these have been well designed and do not change often. The problem is not coupling per se, but creating a highly coupled design to unstable objects.
+The reader should notice that there will always exist coupling but, dependencies to stable items are not problematic -- standard library -- because these have been well designed and do not change often. In general, the problem is not coupling per se, but creating a coupled design to unstable elements.
 
-The following example shows a poor design for the guides in the case study. Remember that guides contain images, visibility (who can watch the content), title, description, and reviews of restaurants, hotels, pubs, things to do, etc. All of these details are captured in the design below:
+An example of a poor design drawing ideas from the case study is shown in Fig. 1.1, Listing 1.1. In this example, guides contain images, visibility (who can watch the content), title, description, and reviews of restaurants, hotels, pubs, things to do, etc.
 
 <!--
+
 [Guide|-isPublic: bool; -friendsOnly: bool; -friendsOfFriends: bool; -title: String; -description: String]
 [Guide]++-images*>[List<Image>]
 [Guide]++-visibility*>[List<User>]
 [Guide]<>-restReview>[Map<Restaurant‚String>]
 [Guide]<>-hotelReview>[Map<Hotel‚ String>]
-
 
 -->
 
@@ -80,19 +87,19 @@ public class Guide {
 
 **Fig.1.1 High coupled `Guide` class**
 
-Can you identify some of the problems with this design? Try to name a few of them before you read any further.
+Before we analyse this design: Can you identify some poor design decisions? Try to name a few of them before you read any further.
 
 The problems with this design are:
 
-* assuming that `Image` is a class, this design couples images with a guide, but the guide should be personalised to each viewer! 
-* the visibility maintains a list of users that can read the guide, this solution does not scale when there are many users; this same field may be used for different visibility settings, which makes the logic more difficult to test and understand as the attribute has different meaning based on other properties,
-* the use of multiple, non-overlapping booleans makes the code difficult to follow as you will introduce branches and its related logic in each case,
-* hotels, restaurants and others should be dispatched polymorphously. If this is not the case, try adding a few new entities, e.g. `SushiBar`, and observe how you would need to add specific methods for this place or reuse a method that checks for sushi places and, if any, branches in the method,
-* the constructor receives an `ArrayList`, which binds an implementation detail to the list abstraction -- couples the abstraction with an implementation detail
+* assuming that `Image` is a class, this design couples images with a guide, but the guide should display images personalised to each viewer! (See section Case study),
+* the visibility attribute maintains a list of users that can read the guide; this solution does not scale when there are many users. The same field may be used for different visibility settings, which makes the logic more difficult to test and understand, since the attribute has different meaning based on other properties,
+* the use of multiple, non-overlapping, booleans makes the code difficult to follow as you will introduce branches and its related logic in each case,
+* hotels, restaurants and others should implement a common interface, si that you can dispatch polymorphously. If you don't do this, adding a few new places, e.g. `SushiBar` class, implies the creation of more attributes and respective methods to get those elements, 
+* the constructor receives an `ArrayList`, which binds an implementation detail to the list abstraction.
 
-Now, how can we reduce coupling a `Guide` to other elements? The most obvious alternative would be to put less responsibilities in the `Guide`. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain.
+So, given this poor design (Fig 1.1, Listing 1.1), how could we reduce coupling a `Guide` to other elements? The most obvious alternative would be to put less responsibilities in the `Guide`. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain.
 
- For example, a `Guide` does not need to be concerned about its visibility and we can group the different categories inside a guide under the idea of a point of interest (Fig. 1.2). These two changes reduces the responsibilities in the `Guide` class, thus reducing coupling (Listing 1.2).
+ For example, a `Guide` does not need to be concerned about its visibility and we can group different places (restaurants, hotels, bars, etc) contained in a guide under the idea of a point of interest (Fig. 1.2). These two changes reduce the responsibilities of the `Guide` class, thus reducing coupling (Listing 1.2).
 
 <!--
 
@@ -139,7 +146,7 @@ public interface IPointOfInterest {
 
 **Exercise**: Why should we promote interfaces over inheritance?
 
-**Exercise**: Does it make sense that the class`Hotel` declares methods that do not exist in the interface `IPointOfInterest`? (Note: this exercise may need you to read the section on polymorphism)
+**Exercise**: Does it make sense that the class`Hotel` declares methods that do not exist in the interface `IPointOfInterest`? (Note:  you may need to read the section on polymorphism)
 
 <!--
 
@@ -234,6 +241,10 @@ The code in Listing 1.3.2 is highly coupled for its small size and exhibits low 
 * this class is coupled to the notification engine and to the `Image` class. The consequences of coupling to an image means that, either every review has an image or your code will now have to branch when the user does not supply an image. This branching checks if `image == null`, which is performed at runtime --slower code -- and an antipattern (REFERENCE HERE, use instead the *Null Object* pattern or an [option type](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html)).
 * Coupling to an image also means that you can no longer post a video review. Throwing a quick `video` attribute does not solve the problem, as the `show()` method returns an `Image` and, every caller of the`Review` class will have to explicitly handle showing an image or a video. Thus, the code becomes more complex and difficult to maintain.
 
+We improve this current design by:
+
+* setting a comment to be anything that implements the interface `IComment`. This allows us to define new classes, e.g. `VideoComment` as long as it implements the methods of the interface.
+* the `Image` class has been updated to an `IDisplayable` which...
 If we refactor this code, it ends up as Listing 1.3.3, Fig. 1.3.3.
 
 ```
@@ -567,15 +578,24 @@ Solution: you never assume that there is a connection and instead create an inte
 
 ## Pure Fabrication
 
-The term pure fabrication means to make something up. Use this principle whenever you observe that your domain classes are getting too overloaded, i.e., the start to exhibit high coupling and low cohesion. 
+The term "pure fabrication" means to make something up. You should use this principle whenever you observe that your domain classes are getting too overloaded, i.e., the start to exhibit high coupling and low cohesion. 
 
-The principle adds a new indirection between two objects that would otherwise be directly connected (coupled). The indirection means adding a new object that mediates the communication between two other entities. This indirection object is not part of the domain and will be a made software concept. Examples of this principle are: object pools, database classes, and pretty much any object that sits in between two domain objects. In terms of design patterns, this principle is observe in the adapter pattern, shown in Figure xyz.
+The principle adds a new indirection between two domain objects that would otherwise be directly connected (coupled). The indirection means adding a new object that mediates the communication between two other entities. This mediator is not part of the domain, that is, it is a software concept. Examples of this principle are: object pools, database classes, and pretty much any class that sits in between two domain objects. This principle is quite common in the adapter pattern (Fig. 1.8)
 
-(Figure xyz)
+<!--
 
-Explain figure.
+[PaymentAdapter|PaymentAdapter(Paypal); PaymentAdapter(CreditCard); boolean pay(amount);] , [PaymentAdapter] -.-> [Paypal|boolean sendPayment(amount);], [PaymentAdapter] -.-> [CreditCard|boolean creditPayment(amount);]
 
-**Exercise**:Wwhere could this principle be applied in the case study? Why? (There are many valid examples)
+-->
+
+![](https://yuml.me/e693266d)
+
+**Fig. 1.8 Adapter pattern**
+
+In this example (Fig. 1.8), the `PaymentAdapter` has an overloaded constructor, taking either a `Paypal` or a `CreditCard` object. A user that calls on the `pay` method does *not* need to know whether this class, `PaymentAdapter` does the payment using a credit card or a paypal account, the implementation of the adapter solves this issue.
+
+**Exercise**:Where could this principle be applied in the case study? Why? (There are many valid examples)
+**Exercise**: What happens if you add 6 different payment methods? (What are the drawbacks, if any?)
 
 <!--
 
@@ -583,7 +603,7 @@ Solution: the AI algorithm that inject images to guides. If this was not there, 
 
 -->
 
-**Exercise**: let's assume that you would like to add a notification system to the mobile app of the case study whenever a friend posts a new comment on one of her guides. What classes would you need to create? 
+**Exercise**: Lets assume that you would like to get a phone notification whenever a friend posts a new comment on one of her guides. What classes would you need to create?  What classes are a pure fabrication?
 
 <!-- 
 
