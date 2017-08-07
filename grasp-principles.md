@@ -503,6 +503,8 @@ public class ConfirmedUser
 
 **Exercise** The code given above (Listing 1.6.2) users inheritance. Implement the same functionality using interfaces. What are the benefits and drawbacks of this design and implementation decisions?
 
+<!--
+
 (Note: this is distinct for Python because there's no interface etc. Think how would you explain it in python)
 
 Python is a dynamic language with strong typing. This means the language assigns types at runtime, but you as a developer won't get any type error at compilation time. In Python polymorphism is always given and you as developer are in charge of ending that the methods you call exist or you will get a runtime error. As we said, the are no interfaces that we are bound to and python supports what's called duck typing, which is an idea much closer to how things work in real life. Let me show this with an example: you can read articles, news, cereal boxes and anything that has text. In Java you are bound by the type of object you are but in Python you are bound to the behaviour you have. A method call on `newspaper. hasText()` and `cerealBox.hasText()` works in Python independent from their type; Java would make this work only when they belong to the sand type or interface. For this reason, Python is more expressive in this regard, although it sacrifices static typing guarantees and forces the developer to either handle exceptions or crash and burn at runtime if the object on which the program calls the method `hasText()` does not provide such behaviour.
@@ -510,6 +512,8 @@ Python is a dynamic language with strong typing. This means the language assigns
 **Exercise** write the code depicted on Figure Yyy in Python. Do not forget to handle exceptional cases.
 
 **Exercise** Write the main class and show that the method performs a dynamic dispatch based on the classes.
+
+-->
 
 ## Indirection
 
@@ -613,13 +617,31 @@ Solution: at the very least, you would need a `Notification` class that contains
 
 ## Protected Variation
 
+<!--
+
 This principle is easy to apply and, in practice, requires you to be good at forecasting future pivot points or changes of direction. 
 
-The core idea of this principle is to shield your code in places where you expect changes, let that be via interfaces or other means. For example, if we were to provide special guides that users can buy, we would need to integrate with a payment platform. If you are not sure which one is best, you'll end up picking one and calling their methods where necessary. However, what happens if you see that platform Z has low commissions? You would want to change. ReFactoring may not be so easy because both payment solutions have different libraries with different API. So, you need to change all those specific calls by whatever the new API and workflow mandates. 
+-->
 
-One way of solving this problem is via an interface and different classes that implement those methods (Figure XYZ). In this design, you are protecting yourself from future changes. Your concrete classes that implement the interface maintain the workflow and your only job is to create a new concrete class that implements your interface. 
+The core idea of this principle is to shield your code in places where you expect changes, let that be via interfaces or other means. For example, from the case study, if we were to provide special guides that users can buy, we would need to integrate with a payment platform. If you are not sure which one is best, you'll end up picking one that seems good enough, and call their methods where necessary. However, what happens when CEO Johan finds out that there is a new platform that has lower commissions? He wants you to change to this better option. Refactoring may not be so easy because both payment solutions have different libraries with different APIs. Now, you need to change all those specific method calls from the old library to the new library, possibly including changes in the workflow.
 
-You should apply this pattern to instability points and, specially, when using third party libraries that you don't have previous experience with.
+<!--
+
+[;IPayment|;pay();...]
+[;IPayment]^-[StripeAdapter]
+[;IPayment]^-[PaypalAdapter]
+[StripeAdapter]->[;Stripe.Invoice;|pay()]
+[PaypalAdapter]->[;Paypal.Payment|sendPayment()]
+
+-->
+
+![](https://yuml.me/b252a56f)
+
+**Fig. 1.9 Example of protected variation principle**
+
+One way of solving this problem is via an interface (`IPayment`) and different classes that implement those methods (Fig. 1.9). In this design, you are protecting yourself from future changes. Your concrete classes, the ones implementing the interface (`PaypalAdapter` and `StripeAdapter`), work out of the box. This means that, adding a new payment method, e.g. `ApplePay`, should be as simple as creating a class that implements the interface and hides the details of the concrete method calls of `ApplePay`. 
+
+You should apply this pattern in instability points (classes) and, specially, when using third party libraries that you don't have previous experience with.
 
 ## Pure functions
 
