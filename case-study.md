@@ -62,6 +62,6 @@ The domain concepts represent important ideas of our domain. These will be coded
 
 We proceed to explain object-oriented programming using examples this domain.
 
-[^1]: code is always in constant flux: it needs to be maintained and improved. Your design will change too. A good design helps you to create software that is flexible and as much pain free as possible (with respect to refactorings).
+[^1]: Code is always in constant flux: it needs to be maintained and improved. Your design will change too. A good design helps you to create software that is flexible and as much pain free as possible (with respect to refactorings).
 
-[^2]: this refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.
+[^2]: This refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.
