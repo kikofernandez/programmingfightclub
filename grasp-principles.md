@@ -379,7 +379,7 @@ d. `Guide` class
 
 ![](https://yuml.me/aeb011be)
 
-**Listing 1.5 Relation between users, guides, point of interest, and comments**
+**Fig. 1.5 Relation between users, guides, point of interest, and comments**
 
 
 This one is easy. Lets consider each option:
@@ -404,7 +404,27 @@ c. `Review` object
 
 ## Controller
 
-Controller
+Most applications have a user interface (UI), which limits the actions that users can take. The user interface needs to communicate to other layers of your software. This principle tell us which object receives and handles events / actions coming from the UI. For example, a mobile application talks to the server via a [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer), i.e. whenever the user clicks on an icon on the phone, the mobile application sends a packet to your server, which responds with the requested information. Using this principle, you can decouple the user interface from the class that takes action on the event.
+
+<!--
+
+[GuidesView]->[Routes]
+[Routes]-／guide ̸* ->[GuideController]
+[Routes]-／comment ̸*->[CommentController]
+[Routes]-／user ̸*->[UserController]
+[GuideController]->[GuideModel]
+[UserController]->[UserModel]
+[CommentController]->[CommentModel]
+
+-->
+
+![](https://yuml.me/5f661ffd)
+
+**Fig. 1.6 Controller**
+
+The example in Fig. 1.6 represents the most common pattern in web frameworks, Model-View-Controller (*MVC*). The `GuideView` is decoupled from its model (`GuideModel`), which is the class in charge of business logic, including saving and retrieving guides from a database . This design pattern, *MVC*, is explained in further chapters. 
+
+**Exercise** What does the class `Routes` represent in the example?
 
 ## Polymorphism
 
@@ -414,7 +434,7 @@ As we saw in the recap section, this polymorphism refers to classes that impleme
 
 <!-- which is also polymorphic on the (opaque or bounded) type variable.-->
 
-This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single `User` class with an attribute named `confirmedIdentity`  which sets the flag to true when the user has confirmed its identity. This design works for two kind of users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company; companies cannot create accounts, their identity is always confirmed (the cannot exist companies where the identity is not confirmed, and multiple employees from the company want to sign in using different password, one per employee. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute `confirmedIdentity` for a company's profile because we know that this will always be true. The reuse of a confirmed user as a company leaves dangling the possibility of programming mistakes where a company could be created but without a confirmed identity. The current code before the companies profiles were added are in Listing 1.6.1, Fig. 1.6.1.
+This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single `User` class with an attribute named `confirmedIdentity`  which sets the flag to true when the user has confirmed its identity. This design works for two kind of users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company; companies cannot create accounts, their identity is always confirmed (the cannot exist companies where the identity is not confirmed, and multiple employees from the company want to sign in using different password, one per employee. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute `confirmedIdentity` for a company's profile because we know that this will always be true. The reuse of a confirmed user as a company leaves dangling the possibility of programming mistakes where a company could be created but without a confirmed identity. The current code before the companies profiles were added are in Listing 1.7.1, Fig. 1.7.1.
 
 <!--
 
@@ -427,7 +447,7 @@ This principle allows classes to specify the same responsibilities via an interf
 
 ![](https://yuml.me/76893e15)
 
-**Fig. 1.6.1 `User` code before existence of companies profiles**
+**Fig. 1.7.1 `User` code before existence of companies profiles**
 
 ```
 public class User {
@@ -454,13 +474,13 @@ public class User {
 } 
 ```
 
-**Listing 1.6.1. `User` code before existence of companies profiles**
+**Listing 1.7.1. `User` code before existence of companies profiles**
 
 Another design could represent different users using an enum attribute. Based on this value, the `displayImage()` method adds logic to check which kind of user you are and how to display the image. You go home thinking that this is a good design, all the logic is kept in a single method.
 
 The problem with this approach, quite often used by beginners or as a shortcut, is that you are encoding different classes in a single one. This design is not maintainable in the long run because the same class encodes behaviour for different objects (users). Your design is abstracting at the wrong level.
 
-A better approach is to create a class for each kind of user and dispatch dynamically. This design is easier to maintain because the behaviour is not encoded solely on the method, but on the type. The Listing 1.6.2. shows how to dynamically dispatch based on the type.
+A better approach is to create a class for each kind of user and dispatch dynamically. This design is easier to maintain because the behaviour is not encoded solely on the method, but on the type. The Listing 1.7.2. shows how to dynamically dispatch based on the type.
 
 ```
 public class User {
@@ -491,7 +511,7 @@ public class ConfirmedUser
 } 
 ```
 
-**Listing 1.6.2. Dynamic dispatch of users**
+**Listing 1.7.2. Dynamic dispatch of users**
 
 **Exercise** Add the following items:
 
@@ -501,7 +521,7 @@ public class ConfirmedUser
 
 **Exercise** Write the main class and show that the method performs a dynamic dispatch based on the classes.
 
-**Exercise** The code given above (Listing 1.6.2) users inheritance. Implement the same functionality using interfaces. What are the benefits and drawbacks of this design and implementation decisions?
+**Exercise** The code given above (Listing 1.7.2) users inheritance. Implement the same functionality using interfaces. What are the benefits and drawbacks of this design and implementation decisions?
 
 <!--
 
@@ -539,7 +559,7 @@ To the untrained eye, after applying the principle, it may seem as if two object
 
 ![](https://yuml.me/9c88723b)
 
-**Fig. 1.7 Duplication of guides**
+**Fig. 1.8.1 Duplication of guides**
 
 A poor strawman's solution duplicates the guide for each friend and recalculates the cover image for each friend. This is a really bad design, as it's redundant, consumes memory, and duplicates data. Moreover, an update on one guide's description involves updating all copies of that guide.
 
@@ -558,9 +578,9 @@ A poor strawman's solution duplicates the guide for each friend and recalculates
 
 ![](https://yuml.me/a59a3a5f)
 
-**Fig. 1.7.2 Example after application of indirection principle**
+**Fig. 1.8.2 Example after application of indirection principle**
 
-A better solution, applying this principle, is to add a new level of indirection between a guide and its cover image, named `CoverManager` (Fig. 1.7.2). The `CoverManager` knows how to retrieve the best cover image for the calling object. Internally, the manager may have to call the AI algorithm from time to time to update the image, cache it if the same user keeps coming to the same guide, and even persist in the database this mapping of guide-cover image.
+A better solution, applying this principle, is to add a new level of indirection between a guide and its cover image, named `CoverManager` (Fig. 1.8.2). The `CoverManager` knows how to retrieve the best cover image for the calling object. Internally, the manager may have to call the AI algorithm from time to time to update the image, cache it if the same user keeps coming to the same guide, and even persist in the database this mapping of guide-cover image.
 
 <!--
 
@@ -584,7 +604,7 @@ Solution: you never assume that there is a connection and instead create an inte
 
 The term "pure fabrication" means to make something up. You should use this principle whenever you observe that your domain classes are getting too overloaded, i.e., the start to exhibit high coupling and low cohesion. 
 
-The principle adds a new indirection between two domain objects that would otherwise be directly connected (coupled). The indirection means adding a new object that mediates the communication between two other entities. This mediator is not part of the domain, that is, it is a software concept. Examples of this principle are: object pools, database classes, and pretty much any class that sits in between two domain objects. This principle is quite common in the adapter pattern (Fig. 1.8)
+The principle adds a new indirection between two domain objects that would otherwise be directly connected (coupled). The indirection means adding a new object that mediates the communication between two other entities. This mediator is not part of the domain, that is, it is a software concept. Examples of this principle are: object pools, database classes, and pretty much any class that sits in between two domain objects. This principle is quite common in the adapter pattern (Fig. 1.9)
 
 <!--
 
@@ -594,9 +614,9 @@ The principle adds a new indirection between two domain objects that would other
 
 ![](https://yuml.me/e693266d)
 
-**Fig. 1.8 Adapter pattern**
+**Fig. 1.9 Adapter pattern using pure fabrication**
 
-In this example (Fig. 1.8), the `PaymentAdapter` has an overloaded constructor, taking either a `Paypal` or a `CreditCard` object. A user that calls on the `pay` method does *not* need to know whether this class, `PaymentAdapter` does the payment using a credit card or a paypal account, the implementation of the adapter solves this issue.
+In this example (Fig. 1.9), the `PaymentAdapter` has an overloaded constructor, taking either a `Paypal` or a `CreditCard` object. A user that calls on the `pay` method does *not* need to know whether this class, `PaymentAdapter` does the payment using a credit card or a paypal account, the implementation of the adapter solves this issue.
 
 **Exercise**:Where could this principle be applied in the case study? Why? (There are many valid examples)
 **Exercise**: What happens if you add 6 different payment methods? (What are the drawbacks, if any?)
@@ -637,9 +657,9 @@ The core idea of this principle is to shield your code in places where you expec
 
 ![](https://yuml.me/b252a56f)
 
-**Fig. 1.9 Example of protected variation principle**
+**Fig. 1.10 Example of protected variation principle**
 
-One way of solving this problem is via an interface (`IPayment`) and different classes that implement those methods (Fig. 1.9). In this design, you are protecting yourself from future changes. Your concrete classes, the ones implementing the interface (`PaypalAdapter` and `StripeAdapter`), work out of the box. This means that, adding a new payment method, e.g. `ApplePay`, should be as simple as creating a class that implements the interface and hides the details of the concrete method calls of `ApplePay`. 
+One way of solving this problem is via an interface (`IPayment`) and different classes that implement those methods (Fig. 1.10). In this design, you are protecting yourself from future changes. Your concrete classes, the ones implementing the interface (`PaypalAdapter` and `StripeAdapter`), work out of the box. This means that, adding a new payment method, e.g. `ApplePay`, should be as simple as creating a class that implements the interface and hides the details of the concrete method calls of `ApplePay`. 
 
 You should apply this pattern in instability points (classes) and, specially, when using third party libraries that you don't have previous experience with.
 
