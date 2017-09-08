@@ -4,15 +4,10 @@
 * Part I
   * [Introduction](introduction.md)
   * [Case Study](case-study.md)
-  * [Recap](recap.md)
 * Part II  
+  * [Recap](recap.md)
   * [GRASP principles](grasp-principles.md)
-  * SOLID principles
-* Part III  
-  * Creational Design Patterns
-  * Structural Design Patterns
-  * Behavioral Design Patterns
-* Part IV:
+* Part III:
   * Design of JDBC library
   * Design of PySpark
 * Appendix:
