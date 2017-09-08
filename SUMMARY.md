@@ -4,7 +4,7 @@
 * Part I
   * [Introduction](introduction.md)
   * [Case Study](case-study.md)
-  * Recap
+  * [Recap](recap.md)
 * Part II  
   * [GRASP principles](grasp-principles.md)
   * SOLID principles
