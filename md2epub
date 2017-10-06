@@ -1,0 +1,2 @@
+pandoc -s --toc --epub-cover-image=img/PLFIGHTCLUB.png \
+       --number-sections *.Rmd metadata.yaml -o test.epub

@@ -1,0 +1,14 @@
+---
+title:
+- type: main
+  text: GRASP principles for the Object-Oriented mind
+- type: subtitle
+  text: A type systems approach
+- type: collection
+  text: Programming Language Fight Club
+creator:
+- role: author
+  text: Kiko Fernandez-Reyes
+cover-image: img/PLFIGHTCLUB.png
+rights: © 2017 Kiko Fernandez-Reyes, CC BY-NC 4.0
+---

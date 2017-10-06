@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Design Patterns for the Object-oriented and Functional mind</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Design Patterns for the Object-oriented and Functional mind">
+  <meta name="generator" content="bookdown 0.3.6 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Design Patterns for the Object-oriented and Functional mind" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Design Patterns for the Object-oriented and Functional mind" />
+  
+  
+  
+
+<meta name="author" content="Kiko Fernandez-Reyes">
+
+
+<meta name="date" content="2017-07-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="recap.html">
+<link rel="next" href="design-patters-creational.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="prologue.html"><a href="prologue.html"><i class="fa fa-check"></i><b>1</b> Prologue</a><ul>
+<li class="chapter" data-level="1.1" data-path="prologue.html"><a href="prologue.html#who-is-this-book-for"><i class="fa fa-check"></i><b>1.1</b> Who is this book for?</a></li>
+<li class="chapter" data-level="1.2" data-path="prologue.html"><a href="prologue.html#what-is-covered-in-this-book"><i class="fa fa-check"></i><b>1.2</b> What is covered in this book?</a></li>
+<li class="chapter" data-level="1.3" data-path="prologue.html"><a href="prologue.html#organisation"><i class="fa fa-check"></i><b>1.3</b> Organisation</a></li>
+<li class="chapter" data-level="1.4" data-path="prologue.html"><a href="prologue.html#software-requirements"><i class="fa fa-check"></i><b>1.4</b> Software requirements</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="prologue.html"><a href="prologue.html#java-8"><i class="fa fa-check"></i><b>1.4.1</b> Java 8</a></li>
+<li class="chapter" data-level="1.4.2" data-path="prologue.html"><a href="prologue.html#python-3.6"><i class="fa fa-check"></i><b>1.4.2</b> Python 3.6</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#software-design"><i class="fa fa-check"></i><b>2.1</b> Software Design</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction.html"><a href="introduction.html#agile-methodologies"><i class="fa fa-check"></i><b>2.1.1</b> Agile methodologies</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction.html"><a href="introduction.html#what-is-a-good-design"><i class="fa fa-check"></i><b>2.1.2</b> What is a good design?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#design-patterns"><i class="fa fa-check"></i><b>2.2</b> Design patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="recap.html"><a href="recap.html"><i class="fa fa-check"></i><b>3</b> Recap</a><ul>
+<li class="chapter" data-level="3.1" data-path="recap.html"><a href="recap.html#type-systems"><i class="fa fa-check"></i><b>3.1</b> Type systems</a></li>
+<li class="chapter" data-level="3.2" data-path="recap.html"><a href="recap.html#object-oriented-concepts"><i class="fa fa-check"></i><b>3.2</b> Object-oriented concepts</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="recap.html"><a href="recap.html#classes"><i class="fa fa-check"></i><b>3.2.1</b> Classes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="recap.html"><a href="recap.html#objects"><i class="fa fa-check"></i><b>3.2.2</b> Objects</a></li>
+<li class="chapter" data-level="3.2.3" data-path="recap.html"><a href="recap.html#inheritance"><i class="fa fa-check"></i><b>3.2.3</b> Inheritance</a></li>
+<li class="chapter" data-level="3.2.4" data-path="recap.html"><a href="recap.html#interfaces"><i class="fa fa-check"></i><b>3.2.4</b> Interfaces</a></li>
+<li class="chapter" data-level="3.2.5" data-path="recap.html"><a href="recap.html#abstract-classes"><i class="fa fa-check"></i><b>3.2.5</b> Abstract classes</a></li>
+<li class="chapter" data-level="3.2.6" data-path="recap.html"><a href="recap.html#parametric-classes"><i class="fa fa-check"></i><b>3.2.6</b> Parametric classes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="recap.html"><a href="recap.html#functional-concepts"><i class="fa fa-check"></i><b>3.3</b> Functional concepts</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="recap.html"><a href="recap.html#anonymous-functions-lambdas"><i class="fa fa-check"></i><b>3.3.1</b> Anonymous functions / lambdas</a></li>
+<li class="chapter" data-level="3.3.2" data-path="recap.html"><a href="recap.html#immutability"><i class="fa fa-check"></i><b>3.3.2</b> Immutability</a></li>
+<li class="chapter" data-level="3.3.3" data-path="recap.html"><a href="recap.html#high-order-functions"><i class="fa fa-check"></i><b>3.3.3</b> High-order functions</a></li>
+<li class="chapter" data-level="3.3.4" data-path="recap.html"><a href="recap.html#parametric-functions"><i class="fa fa-check"></i><b>3.3.4</b> Parametric functions</a></li>
+<li class="chapter" data-level="3.3.5" data-path="recap.html"><a href="recap.html#algebraic-data-types"><i class="fa fa-check"></i><b>3.3.5</b> Algebraic data types</a></li>
+<li class="chapter" data-level="3.3.6" data-path="recap.html"><a href="recap.html#multi-functions"><i class="fa fa-check"></i><b>3.3.6</b> Multi-functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="recap.html"><a href="recap.html#case-study"><i class="fa fa-check"></i><b>3.4</b> Case Study</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="grasp-principles.html"><a href="grasp-principles.html"><i class="fa fa-check"></i><b>4</b> GRASP principles</a><ul>
+<li class="chapter" data-level="4.1" data-path="grasp-principles.html"><a href="grasp-principles.html#low-coupling"><i class="fa fa-check"></i><b>4.1</b> Low Coupling</a></li>
+<li class="chapter" data-level="4.2" data-path="grasp-principles.html"><a href="grasp-principles.html#high-cohesion"><i class="fa fa-check"></i><b>4.2</b> High Cohesion</a></li>
+<li class="chapter" data-level="4.3" data-path="grasp-principles.html"><a href="grasp-principles.html#creator"><i class="fa fa-check"></i><b>4.3</b> Creator</a></li>
+<li class="chapter" data-level="4.4" data-path="grasp-principles.html"><a href="grasp-principles.html#information-expert"><i class="fa fa-check"></i><b>4.4</b> Information Expert</a></li>
+<li class="chapter" data-level="4.5" data-path="grasp-principles.html"><a href="grasp-principles.html#controller"><i class="fa fa-check"></i><b>4.5</b> Controller</a></li>
+<li class="chapter" data-level="4.6" data-path="grasp-principles.html"><a href="grasp-principles.html#polymorphism"><i class="fa fa-check"></i><b>4.6</b> Polymorphism</a></li>
+<li class="chapter" data-level="4.7" data-path="grasp-principles.html"><a href="grasp-principles.html#indirection"><i class="fa fa-check"></i><b>4.7</b> Indirection</a></li>
+<li class="chapter" data-level="4.8" data-path="grasp-principles.html"><a href="grasp-principles.html#pure-fabrication"><i class="fa fa-check"></i><b>4.8</b> Pure Fabrication</a></li>
+<li class="chapter" data-level="4.9" data-path="grasp-principles.html"><a href="grasp-principles.html#protected-variation"><i class="fa fa-check"></i><b>4.9</b> Protected Variation</a></li>
+<li class="chapter" data-level="4.10" data-path="grasp-principles.html"><a href="grasp-principles.html#pure-functions"><i class="fa fa-check"></i><b>4.10</b> Pure functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="design-patters-creational.html"><a href="design-patters-creational.html"><i class="fa fa-check"></i><b>5</b> Design Patters: Creational</a><ul>
+<li class="chapter" data-level="5.1" data-path="design-patters-creational.html"><a href="design-patters-creational.html#abstract-factory"><i class="fa fa-check"></i><b>5.1</b> Abstract Factory</a></li>
+<li class="chapter" data-level="5.2" data-path="design-patters-creational.html"><a href="design-patters-creational.html#builder"><i class="fa fa-check"></i><b>5.2</b> Builder</a></li>
+<li class="chapter" data-level="5.3" data-path="design-patters-creational.html"><a href="design-patters-creational.html#factory-method"><i class="fa fa-check"></i><b>5.3</b> Factory Method</a></li>
+<li class="chapter" data-level="5.4" data-path="design-patters-creational.html"><a href="design-patters-creational.html#object-pool"><i class="fa fa-check"></i><b>5.4</b> Object Pool</a></li>
+<li class="chapter" data-level="5.5" data-path="design-patters-creational.html"><a href="design-patters-creational.html#prototype"><i class="fa fa-check"></i><b>5.5</b> Prototype</a></li>
+<li class="chapter" data-level="5.6" data-path="design-patters-creational.html"><a href="design-patters-creational.html#singleton"><i class="fa fa-check"></i><b>5.6</b> Singleton</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="design-patters-structural.html"><a href="design-patters-structural.html"><i class="fa fa-check"></i><b>6</b> Design Patters: Structural</a><ul>
+<li class="chapter" data-level="6.1" data-path="design-patters-structural.html"><a href="design-patters-structural.html#adapter"><i class="fa fa-check"></i><b>6.1</b> Adapter</a></li>
+<li class="chapter" data-level="6.2" data-path="design-patters-structural.html"><a href="design-patters-structural.html#bridge"><i class="fa fa-check"></i><b>6.2</b> Bridge</a></li>
+<li class="chapter" data-level="6.3" data-path="design-patters-structural.html"><a href="design-patters-structural.html#composite"><i class="fa fa-check"></i><b>6.3</b> Composite</a></li>
+<li class="chapter" data-level="6.4" data-path="design-patters-structural.html"><a href="design-patters-structural.html#decorator"><i class="fa fa-check"></i><b>6.4</b> Decorator</a></li>
+<li class="chapter" data-level="6.5" data-path="design-patters-structural.html"><a href="design-patters-structural.html#facade"><i class="fa fa-check"></i><b>6.5</b> Facade</a></li>
+<li class="chapter" data-level="6.6" data-path="design-patters-structural.html"><a href="design-patters-structural.html#flyweight"><i class="fa fa-check"></i><b>6.6</b> Flyweight</a></li>
+<li class="chapter" data-level="6.7" data-path="design-patters-structural.html"><a href="design-patters-structural.html#proxy"><i class="fa fa-check"></i><b>6.7</b> Proxy</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html"><i class="fa fa-check"></i><b>7</b> Design Patters: Behavioral</a><ul>
+<li class="chapter" data-level="7.1" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#chain-of-responsibility"><i class="fa fa-check"></i><b>7.1</b> Chain of responsibility</a></li>
+<li class="chapter" data-level="7.2" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#command"><i class="fa fa-check"></i><b>7.2</b> Command</a></li>
+<li class="chapter" data-level="7.3" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#interpreter"><i class="fa fa-check"></i><b>7.3</b> Interpreter</a></li>
+<li class="chapter" data-level="7.4" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#iterator"><i class="fa fa-check"></i><b>7.4</b> Iterator</a></li>
+<li class="chapter" data-level="7.5" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#mediator"><i class="fa fa-check"></i><b>7.5</b> Mediator</a></li>
+<li class="chapter" data-level="7.6" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#memento"><i class="fa fa-check"></i><b>7.6</b> Memento</a></li>
+<li class="chapter" data-level="7.7" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#null-object"><i class="fa fa-check"></i><b>7.7</b> Null object</a></li>
+<li class="chapter" data-level="7.8" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#observer"><i class="fa fa-check"></i><b>7.8</b> Observer</a></li>
+<li class="chapter" data-level="7.9" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#state"><i class="fa fa-check"></i><b>7.9</b> State</a></li>
+<li class="chapter" data-level="7.10" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#strategy"><i class="fa fa-check"></i><b>7.10</b> Strategy</a></li>
+<li class="chapter" data-level="7.11" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#template-method"><i class="fa fa-check"></i><b>7.11</b> Template method</a></li>
+<li class="chapter" data-level="7.12" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#visitor"><i class="fa fa-check"></i><b>7.12</b> Visitor</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="cheatsheet.html"><a href="cheatsheet.html"><i class="fa fa-check"></i><b>8</b> Cheatsheet</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design Patterns for the Object-oriented and Functional mind</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="grasp-principles" class="section level1">
+<h1><span class="header-section-number">4</span> GRASP principles</h1>
+<p>Before you learn advanced design patterns, it’s useful to look at common principles / recommendation rules to guide your design. By following these principles, you will design and write code that’s easy to understand, maintain, and refactor.</p>
+<p>By the end of this chapter you will have grok these principles and they will become second nature to you. Next, we introduce these principles ( which can be applied to any object-oriented language): - low coupling, - high cohesion, - creator, - information expert, - controller, - polymorphism, - indirection, - pure fabrication, and - protected variation.</p>
+<p>There are exercises for each principle at the end of the chapter to help you understand the difference between them.</p>
+<div id="low-coupling" class="section level2">
+<h2><span class="header-section-number">4.1</span> Low Coupling</h2>
+<p>This principle states that a class should only depend on the minimum and required amount of classes, no more and no less. A low coupled class is easy to maintain and refactor because it interacts with a minimum amount of objects. A high coupled class has many dependencies to other objects and has low cohesion, i. e. it is not focused, has too many responsibilities and does too many things.</p>
+<p>A low coupled design is easy to change and the changes do not spread across multiple classes. In the beginning of your journey to become a better programmer, it’s difficult to acknowledge this principle until you deal with its counterpart, a high coupled bowl of spaghetti code. For this reason, it is much easier to spot a highly coupled design than to identify a low coupled one.</p>
+<p>We define coupling as any code that satisfies items in the following list: - the class has an attribute to another object, - calls on methods of other objects, - inherits from another class, - implements one or more interfaces, and - inherits mixins</p>
+<p>The reader should notice that there will always exist coupling but, dependencies to stable items are not problematic – standard library – because these have been well designed and do not change often. The problem is not coupling per se, but creating a highly coupled design to unstable objects.</p>
+<p>Example: (Example of high coupled design)</p>
+<p>Better alternative is the following code:</p>
+<p>(Example of low coupled code)</p>
+<p><strong>Exercise based on case study</strong></p>
+</div>
+<div id="high-cohesion" class="section level2">
+<h2><span class="header-section-number">4.2</span> High Cohesion</h2>
+<p>Cohesion refers to the property of staying focus on the responsibilities of the class. A cohesive class does one thing and does it well. Highly cohesive code is focused and, as side effect, doesn’t talk to too many objects.</p>
+<p>Often you’ll see code that contains many methods, attributes and seems to contain a lot of logic and magic. From now on, please know that this is the antipattern known as“The Blob”, result of a high coupling and low cohesion.</p>
+<p>(Image of the Blob)</p>
+<p>Example of The Blob antipattern:</p>
+<p>(Code, better if it’s from a real example)</p>
+<p>You can identify highly cohesive code if: - code doesn’t mix responsibilities, - has few methods, - doesn’t talk too many objects.</p>
+<p><strong>Dependence relationship</strong>: <em>Coupling</em> and <em>cohesion</em> usually go hand in hand, since code with low cohesion is code that does too many things, hence it relies on too many objects.</p>
+<p>One way to look at it is to understand coupling as the relation between subsystem and cohesion as the relation within a subsystem. For instance, the following code shows these two weaknesses in Figure X.</p>
+<p>(Listing of high coupled and low cohesion code)</p>
+<p>(Figure X)</p>
+<p>These figure further shows how a change in one class affects many other classes thus, the code becomes more complex and difficult to maintain. If we refactor this code, it ends up as listing Yyy, Figure Yy6y.</p>
+<p>(Listing Yyy)</p>
+<p>(Figure Yy6y)</p>
+<p><strong>Exercise</strong>: given the following code, add the following functionality: - feature a - feature b - feature c <em>Reflection</em>: - How many classes did you change? - does it seem like such a design is flexible and easy to refactor?</p>
+<p><strong>Exercise</strong>: Refactor the baseline code from the above exercise to achieve low coupling and high cohesion. Add more features a, b, and c. <em>Reflection</em>: does it seem like this design is flexible and easy to refactor?</p>
+</div>
+<div id="creator" class="section level2">
+<h2><span class="header-section-number">4.3</span> Creator</h2>
+<p>This principle is likely overlooked but it plays a crucial role in object-oriented programming; the creator <em>establishes who is responsible</em> for creating an object. If you defined it well, your code will exhibit loose coupling and high cohesion; err an you will begin your journey to maintaining spaghetti code.</p>
+<p><strong>Application</strong>: a class <code>X</code> is the creator of an object <code>Y</code> if any of the following statements are satisfied: - class <code>X</code> initialises object <code>Y</code> - class <code>X</code> contains object <code>Y</code> - class <code>X</code> closely uses and depends on class <code>Y</code></p>
+<p>For instance, a point of interest (POI) has comments, hence POI is the creator of instances of the <code>Comment</code> class.</p>
+<p><strong>Exercise</strong>: what kind of benefits and drawbacks do I get if <code>POI</code> is not the creator of comments? Solution: if comments are always the same, just text, then it makes sense that <code>POI</code>is the creator. However, what if I want to support multiple kinds of comments, i.e. video comments, text, or images as à comment? In that case, you are better off injecting the comments as an extra argument to the POI object. – does this makes sense? POI is always created first and comments are added later on, it’s not an initialiser but a method that adds comments.</p>
+</div>
+<div id="information-expert" class="section level2">
+<h2><span class="header-section-number">4.4</span> Information Expert</h2>
+<p>Classes have methods that define their responsibility and behaviour. A class exposes its behaviour via methods and its internals should always be opaque. With this basic idea, this principle helps you to identify the behaviour of each class.</p>
+<p>A class is responsible for a behaviour if that class contains all the information to carry it out. For example, which object should be responsible for updating the description of a guide? a. <code>User</code> object b. <code>POI</code> (point of interest) object c. <code>LatitudeLongitude</code> object d. <code>Guide</code> object</p>
+<p>This one is easy. Lets consider each option: a. If we update the guide description via <code>this.user.setGuideDescription(newDescription)</code> it implies that each user has a single guide, otherwise we would not know which guide we are updating. It could also mean that each user may be uniquely identified by its email and its guide. This is a really bad design from the relational point of view, database-wise. When representing the data layer from a NoSQL database this is allowed and I have seen it in use. I do not think this is a good model since, in the database, each record with the the same email is treated independently. b. A point of interest, such as a view, may be linked to multiple guides. For this reason, similar to above, such a design is non-maintainable. c. This really does not make sense. d. We have a winner! The guide instance has all the information to update the guide.</p>
+<p>The information expert assigns responsibilities to the classes that have all the information to fulfill the action.</p>
+<p><strong>Exercise</strong>: A user wants to submit a few pictures with a review of her favourite restaurant in Málaga, Spain. Which of the following classes should be the information expert and provide that behaviour? a. <code>User</code> object b. <code>Guide</code> object c. <code>Review</code> object</p>
+</div>
+<div id="controller" class="section level2">
+<h2><span class="header-section-number">4.5</span> Controller</h2>
+<p>Controller</p>
+</div>
+<div id="polymorphism" class="section level2">
+<h2><span class="header-section-number">4.6</span> Polymorphism</h2>
+<p>This principle is one of the most important ones in object-oriented programming and the one that makes OOP great at dividing responsibilities between classes.</p>
+<p>As we saw in the recap section, this polymorphism refers to classes that implement an interface or inherit from a top class and not to parametric classes, which is also polymorphic on the (opaque or bounded) type variable.</p>
+<p>This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single <code>User</code> class with an attribute named <code>confirmedIdentity</code> which sets the flag to true when the user has confirmed its identity. This design works for 2 users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company instead of a person, companies cannot create accounts and they have confirmed its identity. Creating a company’s profile as a confirmed user seems wrong and error prone, it makes no sense the attribute <code>confirmedIdentity</code> for a company’s profile because we know that this will always be true. The current code looks like listing Xxxx.</p>
+<p>(Listing Xxxx)</p>
+<p>Another design choice is to represent this distinction of different users using an enum attribute. Based on this value, the <code>displayImage()</code> method adds logic to check which kind of user you are and how to display the image. You go home thinking that this is a good design, all the logic it’s kept in a single method.</p>
+<p>The problem with this approach, quite often used by beginners or as a shortcut, is that different classes are encoded within the same single one. This design is not maintainable in the long run because the same class encodes behaviour for different objects. Your design is abstracting at the wrong level.</p>
+<p>A better approach is to create a class for each kind of user and dispatch dynamically. This design is easier to maintain because the behaviour is not encoded solely on the method, but on the type. The Figure Yyy shows how to dynamically dispatch based on the type.</p>
+<p><strong>Exercise</strong> Write the code depicted on Figure Yyy.</p>
+<p><strong>Exercise</strong> Write the main class and show that the method performs a dynamic dispatch based on the classes.</p>
+<p><strong>Exercise</strong> Write the code relying on inheritance and another version relying on interfaces. What are the benefits and drawbacks of the design and implementation decisions?</p>
+<p>(Note: this is distinct for Python because there’s no interface etc. Think how would you explain it in python)</p>
+<p>Python is a dynamic language with a weak type system. This means the language assigns types at runtime, but you as a developer won’t get any type error at compilation time. In Python polymorphism is always given and you as developer are in charge of ending that the methods you call exist or you will get a runtime error. As we said, the are no interfaces that we are bound to and python supports what’s called duck typing, which is an idea much closer to how things work in real life. Let me show this with an example: you can read articles, news, cereal boxes and anything that has text. In Java you are bound by the type of object you are but in Python you are bound to the behaviour you have. A method call on <code>newspaper. hasText()</code> and <code>cerealBox.hasText()</code> works in Python independent from their type; Java would make this work only when they belong to the sand type or interface. For this reason, Python is more expressive in this regard, although it sacrifices static typing guarantees and forces the developer to either handle exceptions or crash and burn at runtime if the object on which the program calls the method <code>hasText()</code> does not provide such behaviour.</p>
+<p><strong>Exercise</strong> write the code depicted on Figure Yyy in Python. Do not forget to handle exceptional cases.</p>
+<p><strong>Exercise</strong> Write the main class and show that the method performs a dynamic dispatch based on the classes.</p>
+</div>
+<div id="indirection" class="section level2">
+<h2><span class="header-section-number">4.7</span> Indirection</h2>
+<p>Domain objects may end up being coupled to other objects in the first iteration of your design. This principle states that you should create an intermediate object that mediates between these two, hence reducing coupling.</p>
+<p>To the untrained eye, it may seem as if two objects that where coupled, after applying the principle, are still coupled but to other object. This reasoning is right, except that this indirection breaks the idea of once object having a direct relation to the other one. The layer in between breaks the coupling direction and creates a more flexible design, since the two initially coupled objects do not need to know anything about each other anymore.</p>
+<p>An example of this pattern (Figure zzz) is the indirection introduced between a guides and the images that belong to the guides. The idea here is that the same guide is shared among friends and each one of them may potentially see a different cover image. Prior to this principle, your initial solution was to duplicate the guide for each friend and recalculate the cover image for each of them. This solution is redundant, consumes memory, and duplicates data, so an update on one description involves updating all data in all copies of the guide. A better solution is to add a new level of indirection between a guide and its cover image, ’CoverManager`, that knows how to retrieve the best cover image for the calling object. Internally, the manager may have to call the AI algorithm from time to time to update the image, cache it if the same user keeps coming to the same guide and even persist this mapping of guide-cover image in the database if the cover image doesn’t change that often.</p>
+<p>(Figure zzz)</p>
+<p><strong>Exercise</strong> Following the principles of these chapter, how would you design data persistence of an object from the case study? That is, would you add CRUD (Create, Read, Update and Delete) methods to all domain objects? If so, how would you avoid the coupling introduced by this design?</p>
+<p><strong>Exercise</strong> How would you design the offline mode of your application? That is, how do you deal with low connectivity or no connectivity at all? Solution: you never assume that there is a connection and instead create an intermediate layer that handles the communication. If the server is unreachable, this layer handles how to proceed. An advanced design pattern that users this idea is the circuit breaker (explained in later chapters)</p>
+</div>
+<div id="pure-fabrication" class="section level2">
+<h2><span class="header-section-number">4.8</span> Pure Fabrication</h2>
+<p>The term pure fabrication means to make something up. Use this principle whenever you observe that your domain classes are getting too overloaded, i.e., the start to exhibit high coupling and low cohesion.</p>
+<p>The principle adds a new indirection between two objects that would otherwise be directly connected (coupled). The indirection means adding a new object that mediates the communication between two other entities. This indirection object is not part of the domain and will be a made software concept. Examples of this principle are: object pools, database classes, and pretty much any object that sits in between two domain objects. In terms of design patterns, this principle is observe in the adapter pattern, shown in Figure xyz.</p>
+<p>(Figure xyz)</p>
+<p>Explain figure.</p>
+<p><strong>Exercise</strong>:Wwhere could this principle be applied in the case study? Why? (There are many valid examples) Solution: the AI algorithm that inject images to guides. If this was not there, every guide would have the same image for all guides, tying the guide to the images. With the algorithm, the same guide share with friends shows different images based on other friends and connections. <strong>Exercise</strong>: let’s assume that you would like to add a notification system to the mobile app of the case study whenever a friend posts a new comment on one of her guides. What classes would you need to create? Solution: at the very least, you would need a <code>Notification</code> class that contains the text and image of the notification and some kind of notification manager that schedules and send notifications to the appropriate parties.</p>
+</div>
+<div id="protected-variation" class="section level2">
+<h2><span class="header-section-number">4.9</span> Protected Variation</h2>
+<p>This principle is easy to apply and, in practice, requires you to be good at forecasting future pivot points or changes of direction.</p>
+<p>The core idea of this principle is to shield your code in places where you expect changes, let that be via interfaces or other means. For example, if we were to provide special guides that users can buy, we would need to integrate with a payment platform. If you are not sure which one is best, you’ll end up picking one and calling their methods where necessary. However, what happens if you see that platform Z has low commissions? You would want to change. ReFactoring may not be so easy because both payment solutions have different libraries with different API. So, you need to change all those specific calls by whatever the new API and workflow mandates.</p>
+<p>One way of solving this problem is via an interface and different classes that implement those methods (Figure XYZ). In this design, you are protecting yourself from future changes. Your concrete classes that implement the interface maintain the workflow and your only job is to create a new concrete class that implements your interface.</p>
+<p>You should apply this pattern to instability points and, specially, when using third party libraries that you don’t have previous experience with.</p>
+</div>
+<div id="pure-functions" class="section level2">
+<h2><span class="header-section-number">4.10</span> Pure functions</h2>
+<p>This principle is not part of the common and well known GRASP principles but, in my experience, you should consider it. Lambdas, closures and pure functions are ubiquitous nowadays. My advice is that you stop using closures that captures mutable state. The main reason is that, at one point or another, you’ll benchmark your application and start using parallel capabilities of your computer: task, futures, actors or whatever is the next parallel abstraction. If you encapsulate mutable state in closures, you are building your own coffin for the not so far away future. Things like processing an recognitive computation cannot be used anymore if the object the closure captures is shared between two threads – unless you can guarantee data race freedom. Data race freedom code is hard to write, maintain and make fast, so using locks may get you out of troubles at the cost of losing horizontal scalability <a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>explain<a href="grasp-principles.html#fnref4">↩</a></p></li>
+</ol>
+</div>
+<script src="libs/inlineDisqussions.js"></script>
+<link rel="stylesheet" type="text/css" href="libs/inlineDisqussions.css" />
+<script>
+  disqus_shortname = 'kikofernandezreyes';
+  jQuery(document).ready(function() {
+    jQuery("p").inlineDisqussions({
+      identifier: 'disqussion',
+      displayCount: true,
+      highlighted: false,
+      position: 'right',
+      background: 'white',
+      maxWidth: 9999
+    });
+  });
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="recap.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="design-patters-creational.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": true,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>

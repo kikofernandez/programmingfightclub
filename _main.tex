@@ -1,0 +1,1541 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Design Patterns for the Object-oriented and Functional mind},
+            pdfauthor={Kiko Fernandez-Reyes},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{{#1}}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Design Patterns for the Object-oriented and Functional mind}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Kiko Fernandez-Reyes}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{2017-07-27}
+
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{Prologue}\label{prologue}
+
+This book was originally written for the course Advanced Software
+Design, imparted at Uppsala University by Kiko Fernandez-Reyes, and
+provides a practical hands-on experience on software design. It extends
+the content of the course with a direct application of design patterns
+and software principles in the object-oriented paradigm, exploiting the
+type system.
+
+\subsection{Who is this book for?}\label{who-is-this-book-for}
+
+This book is directed to students of any computer science major, young
+developers, engineers or programmers who have already grasped the idea
+behind object-oriented programming.
+
+The reader should already be familiar with the following concepts from
+object-oriented programming:
+
+\begin{itemize}
+\tightlist
+\item
+  Classes,
+\item
+  objects,
+\item
+  inheritance,
+\item
+  interfaces,
+\item
+  abstract classes,
+\item
+  parametric classes
+\item
+  mixins and traits
+\item
+  lambdas and closures
+\end{itemize}
+
+\emph{Lambdas} and \emph{closures} belong to functional programming but
+they have become ubiquitous in the object-oriented paradigm too.
+
+For those in need of a quick reminder, I have included a recap chapter
+that summarises these concepts. If you are not familiar with
+object-oriented programming, you should first understand the ideas
+behind this paradigms and come back later to this book.
+
+\subsection{What is covered in this
+book?}\label{what-is-covered-in-this-book}
+
+This book covers most of the design principles and design patterns used
+today in industry, necessary for building \emph{maintainable} and
+\emph{flexible} applications. All the principles and design patterns are
+written in two languages: Java and Python. These languages are already
+used in production in big companies and are well established. For
+instance, Pinterest uses Python for their backend operations and Java is
+widely used everywhere.
+
+The mix of these two languages covers two different type systems: static
+and dynamic.
+
+\textbf{Why multiple languages?}
+
+Each language has its strengths and weaknesses. In this book, I show how
+to apply the same design pattern by fully exploiting the main strengths
+of each language. In a typed language, you use polymorphism to guarantee
+that the object that you interact with satisfies its expected behaviour,
+while in an untyped system you exchange freedom from the safety (and
+sometimes rigidity) of a type system.
+
+Choosing a language is \emph{already} an important \emph{design
+decision} as languages are tied to a paradigm and a type system, and
+these cannot be changed. For this reason, it's important to evaluate the
+language features and what the type system buys for us. For example: -
+Is it a pain to use the command pattern in Java using lambda notation? -
+Is Python (and its untyped nature) the best way to go to write large
+code bases that are resilient to change?
+
+In this book, we do not provide an absolute truth nor do we try to do
+so; we show that static and dynamic type systems have inherent benefits
+and drawbacks. You have to work through the examples and exercises to
+find your own truth and comfort zone.
+
+\subsection{Organisation}\label{organisation}
+
+The book is organised in 4 parts. The first part (chapters 1 and 2) puts
+in perspective what is software design, why design patterns are
+important and described the case study that we are going to build and
+refer to throughout the book. The second part introduces software
+principles to create flexible and maintainable software, known as GRASP
+and SOLID principles. Part 3 explains, in depth, core design patterns
+that are grouped into 3 categories: \emph{creational}, \emph{structural}
+and \emph{behavioural} patterns. The last part builds a Web application
+using most of the patterns presented in this book.
+
+For each design pattern, there is a clear and concise explanation of the
+design pattern (sometimes illustrating a simple simile from the real
+world), its benefits and drawbacks. Afterwards, the pattern is
+explained, we include easy to grasp examples to get you familiar with
+the language and the design pattern. As mentioned above, for a full
+example that combines software principles and patterns, you should refer
+to the last chapter.
+
+\subsection{Software requirements}\label{software-requirements}
+
+This book contains code written in Java and Python. This section
+contains the exact versions of the languages used in this book.
+
+\subsubsection{Java 8}\label{java-8}
+
+All examples written in this book has been tested using the Oracle JDK
+8u111.
+
+Instructions on how to install Java can be found in
+\url{http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html}.
+
+\subsubsection{Python 3.6}\label{python-3.6}
+
+All examples written in this book has been tested for Python 3.6.0.
+
+Instructions on how to install Python 3.6 can be found in
+\url{https://www.python.org/downloads/}.
+
+\section{Introduction}\label{introduction}
+
+You worked really hard for over a year in the next billion dollar web
+app in a small startup: the CEO, Johan, seems happy that the product is
+(almost) feature complete, the designer, Anders, is happy with the UX
+and graphics and the CTO, Pontus, just wants to press the red button and
+release the product. You tell them to wait 10 more minutes, the unit
+tests, integration tests and system tests are still running (adding
+tests was a long battle with everyone because it slowed down the project
+quite a lot, but you are a good engineer and tests will catch many
+errors now and in the future).
+
+\begin{itemize}
+\tightlist
+\item
+  Ding, ding, ding (sound)
+\end{itemize}
+
+You look at the screen, all 142 tests are green! You tell Pontus to push
+the red button; deployment scripts start, your software is being
+installed on all the AWS servers the company could afford, a few
+database servers with replication for faster reads and a single leader
+for the writes, load balancers, reverse proxy servers for serving static
+data and another bunch of servers running your application. After a few
+minutes, the deployment is a success, your baby is ALIVE and by tomorrow
+morning your product will be featured in all the Swedish newspapers (you
+live in Stockholm, the European capital for startups).
+
+The next day comes, you try the webapp and observe that the system is
+just f****** slow. It seems that connections time out and you observe in
+your monitoring tools that the server is not processing that many
+requests. What the hell is going on!?
+
+The CTO has the intuition that it could be related to that lock that was
+introduced for the concurrent writes to the database and it may be as
+simple as releasing the lock. If his intuition is right, you'll fix the
+code, add the test that should have covered that case and be presto in 5
+min to re-deploy the application.
+
+There is one problem though, the code doesn't have a well defined
+structure and the lock somehow was passed inside a lambda -- you had to
+try out lambdas in Java, they are cool -- so you have no way to
+releasing the lock directly. More over, you are passing a bunch of
+lambdas and there's no easy way to tell which one has the damn lock!
+Shit, if only you knew when made sense to use lambdas and all the cool
+features of the language! .
+
+\subsubsection{How did you end up in this
+situation?}\label{how-did-you-end-up-in-this-situation}
+
+You coded a system considering all the functional requirements and the
+architecture but you failed to create a good design. The hype of new
+features seemed like a silver bullet and everyone is using them (same
+thing happens with new frameworks all the time). The problem is
+understanding when to use those shiny new features and how they affect
+your design.
+
+\subsubsection{Software Design in this
+book}\label{software-design-in-this-book}
+
+Many books explain software design with focus on one language and assume
+that this knowledge can be ``easily'' extrapolated to other languages
+and/or paradigms. While it is true that you have to start from
+somewhere, it is also true that as soon as try to put design patterns
+into practice in another language their explanations may not be easy to
+follow or may not even make sense, from the language's perspective.
+
+\includegraphics{https://imgs.xkcd.com/comics/code_quality.png} (image
+from \url{https://xkcd.com/1513/})
+
+Our approach in this book is much more practical and can only be
+extrapolated to other languages once there is a common understanding of
+how the type system interplays with the most common software design
+patterns.
+
+For this reason, we are going to cover design patterns from the
+perspective of different languages and type systems, and we are going to
+show different approaches to solving the same problem. You will learn to
+take advantage of each of the language constructs, when to use them and
+when avoid them.
+
+Before we start, let's do a recap on what software design means.
+
+\subsection{Software Design}\label{software-design}
+
+Software design is the process of finding a satisfactory solution to a
+problem.
+
+Before one can start with an implementation there needs to be a clear
+specification of the problem to solve and a good understanding of the
+domain of the system under design (you can draw a domain model to
+clarify ideas). You can also write an informal document that describes
+the steps necessary to solve the problem (class and sequence diagrams
+can help here) and notes about the expected non-functional requirements,
+i.e., importing your friends' favourite places cannot block the main
+thread and should finish in less than 30 seconds.
+
+\subsubsection{Connecting the dots with agile
+methodologies}\label{connecting-the-dots-with-agile-methodologies}
+
+Given the definition above, designing software seems to be completely
+disjoint from agile methodologies, e.g.~Scrum, where you break user
+stories into smaller tasks until everything is clear to the whole team.
+In Scrum there seems to be no domain model, not a single static and/or
+behavioural diagram, no architecture, etc, just code-what-the-post-it
+says. There is one problem if this approach is taken literally though:
+the post-it tells you what the problem is but not how to design it! You,
+as a software engineer, should look at domain modelling, static and
+behaviour models and architectural diagrams as tools under your belt
+that may be used if required, even in agile methodologies.
+
+Software design is all about making decisions.
+
+Every problem involves taking small and big decisions and these
+influence the final outcome of your software. For instance, the
+``simple'' task of choosing a programming language has a tremendous
+impact on your software. Choose a dynamic language and you'll find quite
+a lot of errors at runtime (even if you use a test-driven development
+approach). Other example is choosing between a object-oriented or a
+functional language. You can always write the same piece of software
+using one paradigm or the other. However, one of them will bring
+inherent benefits while the other one puts some extra burden in your
+code.
+
+\includegraphics{https://imgs.xkcd.com/comics/code_quality_2.png} (Image
+from \url{http://xkcd.com/1695/})
+
+\subsubsection{What is a good design?}\label{what-is-a-good-design}
+
+In general, a good design is one that can deal with change.
+
+A software engineer has to think much more abstract than other
+engineers, e.g.~civil engineer. For instance, as a civil engineer, you
+may have to think about building a bridge that can stand X number of
+tons and, under any circumstance fall down. As a software engineer, you
+have to think about a piece of code that today is a car, tomorrow is a
+submarine and the next day is a tank and this happens because it is just
+code, anyone can update it and it is not set in stone, ever.
+
+There are many ways to solve a problem and, more often than not, there
+exist well-study common solutions. These well-documented solutions are
+called design patterns and they exist for all kinds of paradigms. In
+this book, we will focus on object-oriented design patterns.
+
+\subsubsection{Design patterns}\label{design-patterns}
+
+A design pattern is a well-designed solution to a common problem. Design
+patterns are expressed in a concise and clear format, and they follow a
+structure similar to the one below:
+
+\begin{itemize}
+\tightlist
+\item
+  pattern name, so that experts can refer to a common pattern
+\item
+  concise and well-defined problem specification
+\item
+  unequivocal solution
+\item
+  trade-offs of the pattern
+\end{itemize}
+
+In this book, we follow this structure together with auxiliary UML class
+diagrams (explained in later chapters).
+
+\section{Recap}\label{recap}
+
+This section covers basic concepts from the object oriented and
+functional paradigms. More conretely, by the end of the chapter you
+should be familiar with the following concepts from object-oriented
+programming in Java and Python:
+
+\begin{itemize}
+\tightlist
+\item
+  Classes,
+\item
+  objects,
+\item
+  inheritance,
+\item
+  interfaces,
+\item
+  mixins and traits,
+\item
+  abstract classes and
+\item
+  parametric classes
+\end{itemize}
+
+and the following concepts from functional programming in Clojure and
+Haskell:
+
+\begin{itemize}
+\tightlist
+\item
+  Anonymous functions / lambdas,
+\item
+  high-order functions,
+\item
+  parametric functions,
+\item
+  algebraic data types,
+\item
+  multi-functions
+\item
+  immutability
+\item
+  recursion
+\end{itemize}
+
+Keep in mind that some languages have features that do not exist in
+other languages. For instance, algebraic data types exist in Haskell but
+not in Clojure and parametric classes exist in Java but not in Python.
+In the former case, algebraic data types cannot be fully build in
+Clojure due to its dynamic typing nature -- Clojure cannot typecheck the
+difference between data types and data values (we'll explain what this
+means later on). In the latter case, parametric functions do not make
+sense for Python due to, again, its dynamic nature. If you got the
+feeling that this does not make sense and you cannot follow, everything
+will be explain with examples soon, when we cover these basic concepts.
+Let's begin!
+
+\subsection{Object-oriented concepts}\label{object-oriented-concepts}
+
+The concepts covered in this section are shown in Java and Python.
+
+\emph{Note: Clojure is an impure language that mixes the functional
+programming concepts with the object-oriented paradigm. In the remaning
+chapters, we omit using the object-oriented capabilities of Clojure,
+since the objective is to learn the main benefits that each language
+brings to the table.}
+
+\hypertarget{classes}{\subsubsection{Classes}\label{classes}}
+
+Classes describe the state and behaviour of an object. The state of a
+class lives in its attributes while the behaviour is expressed via its
+methods. A class that hides its attributes with a \texttt{private}
+access modifier (remember \texttt{public}, \texttt{protected} and
+\texttt{private}?) protects its internal state from other classes. Now,
+the only way to update the internal state is via method calls
+(\textbf{they represent the behaviour of the object}). As a general
+advice, you should not expose the internal state of your class to
+others; you should expose your behaviour. This is what makes
+abstractions great, trust on my behaviour and not on my internal
+structure. My favorite abstractions are tasks and futures and they hide
+the internal details of spawning a new thread.
+
+Classes expose their behaviour via its methods. If those methods just
+get the attributes and set them, we call them \emph{getters} and
+\emph{setters}.
+
+That's enough for an introduction to something that should you already
+now, let's see some code! Let's start with a typical example and work on
+it:
+
+Idea: Let's model a dog, who has as state her alertness and her
+behaviour is to bark only when she is startled. As owner, you can check
+if the dog is startled or relaxed.
+
+\textbf{Java}
+
+The class \texttt{Dog} has as state a \emph{private} attribute
+\texttt{alert}. (the attribute is not accesible from outside the class).
+The constructor of the class (\texttt{public\ Dog()}) creates a new
+\texttt{Dog} and sets its state to some default value. To get the state
+outside the class we use \emph{getters} and \emph{setters} methods.
+These are preceded by the words \texttt{get} and \texttt{set} following
+the attributes name, e.g. \texttt{getAlert}. This is represented in the
+Example 3.1.1.1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class} \NormalTok{Dog \{}
+  \CommentTok{// state of the Dog}
+  \KeywordTok{private} \DataTypeTok{boolean} \NormalTok{alert;}
+
+  \CommentTok{// constructor}
+  \KeywordTok{public} \FunctionTok{Dog}\NormalTok{()\{}
+    \KeywordTok{this}\NormalTok{.}\FunctionTok{alert} \NormalTok{= }\KeywordTok{false}\NormalTok{;}
+  \NormalTok{\}}
+
+  \CommentTok{// getter method}
+  \KeywordTok{public} \DataTypeTok{boolean} \FunctionTok{getAlert}\NormalTok{()\{}
+    \KeywordTok{return} \KeywordTok{this}\NormalTok{.}\FunctionTok{alert}\NormalTok{;}
+  \NormalTok{\}}
+
+  \CommentTok{// setter method}
+  \KeywordTok{public} \DataTypeTok{void} \FunctionTok{setAlert}\NormalTok{(}\DataTypeTok{boolean} \NormalTok{newAlert)\{}
+    \KeywordTok{this}\NormalTok{.}\FunctionTok{alert} \NormalTok{= newAlert;}
+  \NormalTok{\}}
+
+  \CommentTok{// behaviour}
+  \KeywordTok{public} \DataTypeTok{void} \FunctionTok{bark}\NormalTok{()\{}
+    \KeywordTok{if} \NormalTok{(}\KeywordTok{this}\NormalTok{.}\FunctionTok{alert}\NormalTok{) \{}
+      \BuiltInTok{System}\NormalTok{.}\FunctionTok{out}\NormalTok{.}\FunctionTok{println}\NormalTok{(}\StringTok{"Woof Woof"}\NormalTok{);}
+    \NormalTok{\}}
+  \NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Example 3.1.1.1. Introductory example to Java}
+
+\textbf{Python}
+
+Python doesn't have access modifiers and uses (by convention) an
+underscore (or two, let's now go into why) to mean that the attribute is
+private. The constructor \texttt{def\ \_\_init\_\_(self,\ alert=False)}
+method takes explicitly an instance of itself \texttt{self} and a
+default argument, \texttt{alert} that, if it's not provided, it is set
+to \texttt{False}. Before we continue disecting the constructor, let's
+briefly introduce getters and setters.
+
+Python provides a special syntax for getters and setters that wrap the
+attribute into a function with that very same name. For instance, the
+getter for the \texttt{alert} attribute is created by declaring a method
+with the name of the attribute and the \texttt{@property} on top of it.
+The body of the method just fetches the attribute.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+    \AttributeTok{@property}
+    \KeywordTok{def} \NormalTok{alert(}\VariableTok{self}\NormalTok{):}
+      \ControlFlowTok{return} \VariableTok{self}\NormalTok{.__alert}
+\end{Highlighting}
+\end{Shaded}
+
+Setters work in the same way, except that they are annotated with the
+attribute's name followed by the \texttt{setter} word, e.g.
+\texttt{@alert.setter} for the \texttt{alert} setter method. From now
+on, when we call on \texttt{self.alert} we are actually calling the
+getter method and when we assign \texttt{self.alert\ =\ True}, we are
+calling the setter method.
+
+Now, if we go back to the \texttt{\_\_init\_\_} method from Example
+3.1.1.2, we can observe that this is indeed the desire behaviour.
+
+\textbf{Why would we want to use getters and setters like that?} Young
+padawan, they are an abstraction. Now you only want to retrieve the data
+but, with this abstraction, you could be returning cached data that
+otherwise needs to be fetched from the network. Later on, we will learn
+about the decorator pattern and how it rocks in Python!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class} \NormalTok{Dog:}
+  \KeywordTok{def} \FunctionTok{__init__}\NormalTok{(}\VariableTok{self}\NormalTok{, alert}\OperatorTok{=}\VariableTok{False}\NormalTok{):}
+    \VariableTok{self}\NormalTok{.alert }\OperatorTok{=} \NormalTok{alert}
+
+  \AttributeTok{@property}
+  \KeywordTok{def} \NormalTok{alert(}\VariableTok{self}\NormalTok{):}
+    \ControlFlowTok{return} \VariableTok{self}\NormalTok{.__alert}
+
+  \AttributeTok{@alert.setter}
+  \KeywordTok{def} \NormalTok{alert(}\VariableTok{self}\NormalTok{, new_alert):}
+    \VariableTok{self}\NormalTok{.__alert }\OperatorTok{=} \NormalTok{new_alert}
+
+  \KeywordTok{def} \NormalTok{bark(}\VariableTok{self}\NormalTok{):}
+    \ControlFlowTok{if} \VariableTok{self}\NormalTok{.alert }\KeywordTok{is} \VariableTok{True}\NormalTok{:}
+      \BuiltInTok{print}\NormalTok{(}\StringTok{"Woof Woof"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Example 3.1.1.2 Introductory example to Python}
+
+\subsubsection{Objects}\label{objects}
+
+Objects represent instances of the \protect\hyperlink{classes}{class} at
+runtime. An object gets the default state defined by their constructor
+and the behaviour defined from the class declaration.
+
+\textbf{Java}
+
+Following the example before, let's create an object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Dog dog = }\KeywordTok{new} \FunctionTok{Dog}\NormalTok{();}
+\end{Highlighting}
+\end{Shaded}
+
+This calls on the constructor of the \texttt{Dog} class that sets the
+\texttt{alert} state to \texttt{false}. If the dog tries to bark nothing
+will happen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dog.}\FunctionTok{bark}\NormalTok{();}
+\end{Highlighting}
+\end{Shaded}
+
+The dog barks when it is startled, let's make her bark:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dog.}\FunctionTok{setAlert}\NormalTok{(}\KeywordTok{true}\NormalTok{);}
+\NormalTok{dog.}\FunctionTok{bark}\NormalTok{();}
+\CommentTok{// prints "Woof Woof"}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Python}
+
+Creation of an object is similar to Java:
+
+To make the dog bark:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dog.bark()}
+\end{Highlighting}
+\end{Shaded}
+
+which does nothing because the dog is not startled. Let's use the setter
+to change its state and make her bark:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dog.alert }\OperatorTok{=} \VariableTok{True}
+\NormalTok{dog.bark()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Woof Woof
+\end{verbatim}
+
+Notice that in this case, we could have set the initial state of the dog
+and would not have had to use a setter:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dog }\OperatorTok{=} \NormalTok{Dog(}\VariableTok{True}\NormalTok{)}
+\NormalTok{dog.bark()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Woof Woof
+\end{verbatim}
+
+\subsubsection{Inheritance}\label{inheritance}
+
+A class can inherit methods from other
+\protect\hyperlink{classes}{classes}, called inheritance. The class that
+inherits methods is called \emph{subclass} while the class that provides
+them is called \emph{super class}. Java has single inheritance, meaning
+that the subclass can inherit only from a single class while Python has
+a limited form of multiple inheritance.
+
+Idea: A computer has various levels of memory, L1, L2, Last-level cache
+and main memory. In this example, the class \texttt{Computer} inherits
+operations from memory, so that we can call methods that retrieve
+objects from main memory. (this is an example and I would not advice any
+one to create a virtual machine based on this idea)
+
+\textbf{Java}
+
+Since Java can only inherit from a single class, we can model the idea
+above as shown in \emph{Example 3.1.3 Java inheritance}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class} \NormalTok{Memory \{}
+
+  \KeywordTok{private} \NormalTok{CacheL1 l1;}
+  \KeywordTok{private} \NormalTok{CacheL2 l2;}
+
+  \KeywordTok{public} \FunctionTok{Memory}\NormalTok{()\{}
+    \DataTypeTok{int} \NormalTok{kilobyte = }\DecValTok{1024}\NormalTok{*}\DecValTok{1024}\NormalTok{;}
+    \DataTypeTok{int} \NormalTok{megabyte = }\DecValTok{1024} \NormalTok{* kilobyte;}
+    \KeywordTok{this}\NormalTok{.}\FunctionTok{l1} \NormalTok{= }\KeywordTok{new} \FunctionTok{CacheL1}\NormalTok{(}\DecValTok{512}\NormalTok{*kilobyte);}
+    \KeywordTok{this}\NormalTok{.}\FunctionTok{l2} \NormalTok{= }\KeywordTok{new} \FunctionTok{CacheL2}\NormalTok{(}\DecValTok{3}\NormalTok{*megabyte);}
+  \NormalTok{\}}
+
+  \KeywordTok{public} \BuiltInTok{Object} \FunctionTok{fetchLocation}\NormalTok{(}\BuiltInTok{Location} \NormalTok{lo) \{ }\CommentTok{// ... \}}
+\NormalTok{\}}
+
+\KeywordTok{class} \NormalTok{Computer }\KeywordTok{extends} \NormalTok{Memory \{}
+  \KeywordTok{public} \KeywordTok{class} \FunctionTok{Computer}\NormalTok{()\{}
+    \CommentTok{// ...}
+  \NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Example 3.1.3 Java inheritance}
+
+The class \texttt{Computer} inherits the methods \texttt{Memory} when
+\texttt{Computer\ extends\ Memory}. This means that we can fetch objects
+from memory, \texttt{computer.fetchLocation(location);}.
+
+\textbf{Python}
+
+Python supports two forms of multiple inheritance, known as old-style
+and new style. In the old-style form, the multiple inheritance works in
+depth-first and left-to-right order. For instance:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class} \NormalTok{L1(}\BuiltInTok{object}\NormalTok{):}
+  \KeywordTok{def} \NormalTok{send_info():}
+    \BuiltInTok{print} \StringTok{"Sending from L1 to bus"}
+
+\KeywordTok{class} \NormalTok{L2(}\BuiltInTok{object}\NormalTok{):}
+  \KeywordTok{def} \NormalTok{send_info():}
+    \BuiltInTok{print} \StringTok{"Sending from L2 to bus"}
+
+\KeywordTok{class} \NormalTok{Cache(L1, L2):}
+  \ControlFlowTok{pass}
+
+\KeywordTok{class} \NormalTok{CPU(}\BuiltInTok{object}\NormalTok{):}
+  \KeywordTok{def} \NormalTok{send_info():}
+    \BuiltInTok{print} \StringTok{"Sending info from CPU to bus"}
+
+\KeywordTok{class} \NormalTok{Computer(CPU, Cache):}
+  \ControlFlowTok{pass}
+
+\NormalTok{c }\OperatorTok{=} \NormalTok{Computer()}
+\NormalTok{c.send_info()}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Example 3.1.3 Python old-style}
+
+In this case, the \texttt{c.send\_info()} method prints
+\texttt{Sending\ info\ from\ CPU\ to\ bus}. If we were to change the
+order of the inherited classes, \texttt{class\ Computer(Cache,\ CPU)},
+then the printing method would have been
+\texttt{Sending\ from\ L1\ to\ bus}.
+
+The multiple inheritance new style kicks in when classes do not inherit
+from \texttt{object} (as opposed to what \texttt{L1} and \texttt{L2} do
+in \emph{Example Python old-style}). The new style considers
+breath-first and left-to-right order.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class} \NormalTok{L1:}
+  \KeywordTok{def} \NormalTok{send_info():}
+    \BuiltInTok{print} \StringTok{"Sending from L1 to bus"}
+
+\KeywordTok{class} \NormalTok{L2:}
+  \KeywordTok{def} \NormalTok{send_info():}
+    \BuiltInTok{print} \StringTok{"Sending from L2 to bus"}
+
+\KeywordTok{class} \NormalTok{Cache(L1, L2):}
+  \ControlFlowTok{pass}
+
+\KeywordTok{class} \NormalTok{CPU:}
+  \KeywordTok{def} \NormalTok{send_info():}
+    \BuiltInTok{print} \StringTok{"Sending info from CPU to bus"}
+
+\KeywordTok{class} \NormalTok{Computer(Cache, CPU):}
+  \ControlFlowTok{pass}
+
+\NormalTok{c }\OperatorTok{=} \NormalTok{Computer()}
+\NormalTok{c.send_info()}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Example 3.1.3 Python new style}
+
+In \emph{Example 3.1.3 Python new style}, the \texttt{c.send\_info()}
+method would have printed \texttt{Sending\ info\ from\ CPU\ to\ bus}
+given that \texttt{Cache} does not provide a suitable
+\texttt{send\_info} method explictly.
+
+(More details in here:
+\url{http://www.python-course.eu/python3_multiple_inheritance.php})
+
+\hypertarget{interfaces}{\subsubsection{Interfaces}\label{interfaces}}
+
+\textbf{TODO: missing default methods and static methods in interfaces
+(they can have implementations!)}
+
+Interfaces declare a contract of the expected behaviour of classes that
+implement the interface. An interface \emph{merely} defines methods.
+Classes that would like to be compatible with the interface need to
+implement those methods. The real purpose of interfaces is to enable
+polymorphism, e.g.~being able to call methods on different classes
+because they implement the same interface. Java has interfaces but
+Python completely lacks them. Dynamic languages such as Python cannot
+express interfaces because they don't have a static type system, the
+fact of not having static types inhibits interfaces.
+
+\textbf{Java}
+
+In Java an interface is declared similar to how classes are declared,
+except that you use the word \texttt{interface}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{interface} \NormalTok{MemOperations \{}
+  \KeywordTok{public} \BuiltInTok{Object} \FunctionTok{fetchLocation}\NormalTok{(}\BuiltInTok{Location} \NormalTok{loc);}
+  \KeywordTok{public} \DataTypeTok{void} \FunctionTok{flush}\NormalTok{();}
+  \KeywordTok{public} \DataTypeTok{void} \FunctionTok{sendToBus}\NormalTok{();}
+\NormalTok{\}}
+
+\KeywordTok{public} \KeywordTok{class} \NormalTok{CacheL1 }\KeywordTok{implements} \NormalTok{MemOperations \{}
+  \KeywordTok{public} \FunctionTok{CacheL1}\NormalTok{(}\DataTypeTok{int} \NormalTok{size)\{}
+    \CommentTok{//...}
+  \NormalTok{\}}
+
+  \KeywordTok{public} \BuiltInTok{Object} \FunctionTok{fetchLocation}\NormalTok{(}\BuiltInTok{Location} \NormalTok{loc)\{}
+    \CommentTok{// ...}
+  \NormalTok{\}}
+
+  \CommentTok{// ...}
+
+  \KeywordTok{public} \DataTypeTok{void} \FunctionTok{flush}\NormalTok{()\{}
+    \BuiltInTok{System}\NormalTok{.}\FunctionTok{out}\NormalTok{.}\FunctionTok{println}\NormalTok{(}\StringTok{"Flushing from CacheL1"}\NormalTok{);}
+  \NormalTok{\}}
+
+\NormalTok{\}}
+
+\KeywordTok{public} \KeywordTok{class} \NormalTok{CacheL2 }\KeywordTok{implements} \NormalTok{MemOperations \{}
+  \CommentTok{// ...}
+
+  \KeywordTok{public} \DataTypeTok{void} \FunctionTok{flush}\NormalTok{()\{}
+    \BuiltInTok{System}\NormalTok{.}\FunctionTok{out}\NormalTok{.}\FunctionTok{println}\NormalTok{(}\StringTok{"Flushing from CacheL2"}\NormalTok{);}
+  \NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Example 3.1.4 Java interfaces}
+
+If you forget to implement one of the methods declared in the interface,
+the type system will throw an error and complain that you forgot to
+implement the missing methods. You won't get unexpected crashes at
+runtime because the method doesn't exist.
+
+From the \emph{Example 3.1.4 Java Interfaces} we can create different
+cache levels and treat them as if they are just \texttt{MemOperations}.
+Calling methods on each one prints a different \texttt{String}.
+
+\begin{verbatim}
+CacheL1 c1 = new CacheL1(512);
+CacheL2 c2 = new CacheL2(2048);
+
+ArrayList<MemOperations> a = new ArrayList<MemOperations>();
+a.append(c1);
+a.append(c2);
+
+for(cache: a){
+  cache.flush();
+}
+
+// prints:
+// "Flushing from CacheL1"
+// "Flushing from CacheL2"
+\end{verbatim}
+
+As of Java 8, interfaces can declare a \emph{default} implementation for
+methods. This is great from the design point of view: you can provide a
+default implementation as long as you rely only on the known behaviour
+(other public methods of the interface). This means that you can create
+a clean design that does not rely on internal state and/or methods.
+
+\textbf{TODO: Template pattern fits here perfectly!}
+
+\textbf{TODO: Should I explain polymorphism here? It's GRASP\ldots{}}
+
+\textbf{TODO: Should I show a code example?}
+
+\textbf{TODO: I believe I am explaining super basic stuff and should
+level up\ldots{}}
+
+\hypertarget{abstract-classes}{\subsubsection{Abstract
+classes}\label{abstract-classes}}
+
+Abstract classes can be seen as a mix between
+\protect\hyperlink{interfaces}{interfaces} and
+\protect\hyperlink{classes}{classes}: they can contain attributes,
+define methods and declare abstract methods. Abstract methods provide a
+declaration of the behaviour but not a definition (implementation). An
+abstract class cannot work on its own -- cannot be instantiated alone --
+and needs to be subclass by another class, which implements the abstract
+methods.
+
+\textbf{Java}
+
+It may seem as if \protect\hyperlink{interfaces}{Interfaces} (as of Java
+8) and \protect\hyperlink{abstract-classes}{Abstract Classes} serve the
+same purpose. However, there is a subtle difference: an interface can
+only create public methods and constant declarations (\emph{static} and
+\emph{final} attributes) while an abstract class can declare and define
+the internal state of the class.
+
+As an advice, I would recommend to use interfaces whenever you have
+various subclasses that need to implement the same behaviour. I would
+consider the use of an abstract class in limited cases and only when
+there is a need to share the same private state among objects that are
+quite similar.
+
+\textbf{TODO: Favour composition over inheritance}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{abstract} \KeywordTok{class} \BuiltInTok{Entity} \NormalTok{\{}
+  \KeywordTok{private} \DataTypeTok{int} \NormalTok{life;}
+  \KeywordTok{private} \NormalTok{Equipment equipment;}
+
+  \KeywordTok{public} \BuiltInTok{Entity}\NormalTok{(}\DataTypeTok{int} \NormalTok{life, Equipment Equipment)\{}
+    \KeywordTok{this}\NormalTok{.}\FunctionTok{life} \NormalTok{= life;}
+    \KeywordTok{this}\NormalTok{.}\FunctionTok{equipment} \NormalTok{= equipment;}
+  \NormalTok{\}}
+
+  \KeywordTok{public} \DataTypeTok{int} \FunctionTok{getLife}\NormalTok{() \{ }\KeywordTok{return} \KeywordTok{this}\NormalTok{.}\FunctionTok{life}\NormalTok{; \}}
+  \KeywordTok{public} \DataTypeTok{void} \FunctionTok{setLife}\NormalTok{(}\DataTypeTok{int} \NormalTok{life) \{ }\KeywordTok{this}\NormalTok{.}\FunctionTok{life} \NormalTok{= life; \}}
+
+  \KeywordTok{abstract} \DataTypeTok{void} \FunctionTok{attack}\NormalTok{(Enemy e);}
+  \KeywordTok{abstract} \DataTypeTok{void} \FunctionTok{escape}\NormalTok{();}
+  \CommentTok{// ...}
+\NormalTok{\}}
+
+\KeywordTok{interface} \NormalTok{Attackable \{}
+  \KeywordTok{public} \DataTypeTok{int} \FunctionTok{getPower}\NormalTok{();}
+
+  \KeywordTok{default} \DataTypeTok{void} \FunctionTok{attack}\NormalTok{(Enemy e)\{}
+    \NormalTok{e.}\FunctionTok{setLife}\NormalTok{(e.}\FunctionTok{getLife}\NormalTok{() - }\FunctionTok{getPower}\NormalTok{());}
+  \NormalTok{\}}
+\NormalTok{\}}
+
+\KeywordTok{public} \KeywordTok{class} \NormalTok{Hero \{}
+  \KeywordTok{public} \DataTypeTok{void} \FunctionTok{attack}\NormalTok{(Enemy e)\{}
+    \CommentTok{// Filter equipment by things that I can attack with}
+    \NormalTok{Attackable attackable = }\KeywordTok{this}\NormalTok{.}\FunctionTok{equipment}\NormalTok{.}\FunctionTok{attackable}\NormalTok{();}
+
+    \CommentTok{// attack}
+    \NormalTok{attackable.}\FunctionTok{attack}\NormalTok{(e);}
+  \NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{TODO: equipment may use the null pattern}
+
+\textbf{Python}
+
+Test \footnote{Python allows creation of abstract classes via meta
+  classes. These concept is a bit more advanced and may be covered upon
+  receiving some initial feedback.}
+
+\subsubsection{Parametric classes}\label{parametric-classes}
+
+\subsection{Functional concepts}\label{functional-concepts}
+
+\subsubsection{Anonymous functions /
+lambdas}\label{anonymous-functions-lambdas}
+
+\subsubsection{Immutability}\label{immutability}
+
+\subsubsection{High-order functions}\label{high-order-functions}
+
+\subsubsection{Parametric functions}\label{parametric-functions}
+
+\subsubsection{Algebraic data types}\label{algebraic-data-types}
+
+\subsubsection{Multi-functions}\label{multi-functions}
+
+\subsection{Case Study}\label{case-study}
+
+(Image public domain
+\url{https://commons.m.wikimedia.org/wiki/File:VWKombi@theBeach(byCarolineGutman).jpg})
+
+The following case study will be used throughout the book to teach you
+important design concepts and principles. The reader exercises are also
+based on this case study.
+
+\textbf{Startup idea}
+
+The startup you work for has this idea of building a travelling social
+network: a mix of Twitter, TripAdvisor and Pinterest all in one site. To
+build this idea, there will be a web server (backend) and a mobile app
+(front-end). The idea is the following:
+
+\emph{Based on your friends recommendations, you get your own personal
+guides with places to visit, restaurants, hotels, etc., all based on
+curated content from people you trust. These guides don't show the
+typical and perfect pictures from the owner of the place, but the ones
+your friends have uploaded. If there are too many pictures from your
+friends, the system selects the best pictures using an AI algorithm and
+shows these in the cover of the guide. The comments are limited to 200
+characters, making sure recommendations go directly to the point. Future
+work will allow any use to post also video comment of no more than 30
+seconds.}
+
+\emph{In the beginning, your friends may not yet be part of this
+platform. To get you started with the most relevant content from your
+friends, you can enable the integration with TripAdvisor and we will
+import your reviews, your friends' and also photos from your friends and
+people you follow.}
+
+\emph{Another important feature is to show the location of the places
+(in a guide) in a map and pinpoint exactly the distance to the place and
+average time by public transport and walking time. All of these features
+are meaningless unless you can use the app offline. Thus, the app should
+work in offline mode and sync with the server once there is internet
+connection.}
+
+Your team works using an agile methodology, Scrum, and there are post-it
+everywhere with the list of functional features (we will go through the
+list of non-functional later on).
+
+{[}IMAGE{]} (Image taken by Logan Ingalls,
+\href{https://commons.m.wikimedia.org/wiki/File:Scrum_task_board.jpg\#mw-jump-to-license}{source}
+)
+
+\textbf{Coding the information}
+
+One way to identify classes is to look at the domain model \footnote{this
+  refers to the concepts of the domain in discourse, that is, the
+  entities and ideas that make up the travelling social network.}, since
+the concepts from the domain need to be coded in the application. Given
+the sales pitch above, you can easily identify the following concepts: -
+Lodge (Hotel, apartment, etc) - Point of interest (POI) - Restaurant -
+Bar - Nightclub - Person - Friend - Picture - Video - Comment - Review -
+Guide - etc (enough for now)
+
+The domain concepts represent important ideas of our domain. These will
+be coded into classes that represent the data layer of our application
+and contains business logic that is encapsulated within each of the
+classes.
+
+We proceed to explain object-oriented programming using examples this
+domain.
+
+\section{GRASP principles}\label{grasp-principles}
+
+Before you learn advanced design patterns, it's useful to look at common
+principles / recommendation rules to guide your design. By following
+these principles, you will design and write code that's easy to
+understand, maintain, and refactor.
+
+By the end of this chapter you will have grok these principles and they
+will become second nature to you. Next, we introduce these principles (
+which can be applied to any object-oriented language): - low coupling, -
+high cohesion, - creator, - information expert, - controller, -
+polymorphism, - indirection, - pure fabrication, and - protected
+variation.
+
+There are exercises for each principle at the end of the chapter to help
+you understand the difference between them.
+
+\subsection{Low Coupling}\label{low-coupling}
+
+This principle states that a class should only depend on the minimum and
+required amount of classes, no more and no less. A low coupled class is
+easy to maintain and refactor because it interacts with a minimum amount
+of objects. A high coupled class has many dependencies to other objects
+and has low cohesion, i. e. it is not focused, has too many
+responsibilities and does too many things.
+
+A low coupled design is easy to change and the changes do not spread
+across multiple classes. In the beginning of your journey to become a
+better programmer, it's difficult to acknowledge this principle until
+you deal with its counterpart, a high coupled bowl of spaghetti code.
+For this reason, it is much easier to spot a highly coupled design than
+to identify a low coupled one.
+
+We define coupling as any code that satisfies items in the following
+list: - the class has an attribute to another object, - calls on methods
+of other objects, - inherits from another class, - implements one or
+more interfaces, and - inherits mixins
+
+The reader should notice that there will always exist coupling but,
+dependencies to stable items are not problematic -- standard library --
+because these have been well designed and do not change often. The
+problem is not coupling per se, but creating a highly coupled design to
+unstable objects.
+
+Example: (Example of high coupled design)
+
+Better alternative is the following code:
+
+(Example of low coupled code)
+
+\textbf{Exercise based on case study}
+
+\subsection{High Cohesion}\label{high-cohesion}
+
+Cohesion refers to the property of staying focus on the responsibilities
+of the class. A cohesive class does one thing and does it well. Highly
+cohesive code is focused and, as side effect, doesn't talk to too many
+objects.
+
+Often you'll see code that contains many methods, attributes and seems
+to contain a lot of logic and magic. From now on, please know that this
+is the antipattern known as``The Blob'', result of a high coupling and
+low cohesion.
+
+(Image of the Blob)
+
+Example of The Blob antipattern:
+
+(Code, better if it's from a real example)
+
+You can identify highly cohesive code if: - code doesn't mix
+responsibilities, - has few methods, - doesn't talk too many objects.
+
+\textbf{Dependence relationship}: \emph{Coupling} and \emph{cohesion}
+usually go hand in hand, since code with low cohesion is code that does
+too many things, hence it relies on too many objects.
+
+One way to look at it is to understand coupling as the relation between
+subsystem and cohesion as the relation within a subsystem. For instance,
+the following code shows these two weaknesses in Figure X.
+
+(Listing of high coupled and low cohesion code)
+
+(Figure X)
+
+These figure further shows how a change in one class affects many other
+classes thus, the code becomes more complex and difficult to maintain.
+If we refactor this code, it ends up as listing Yyy, Figure Yy6y.
+
+(Listing Yyy)
+
+(Figure Yy6y)
+
+\textbf{Exercise}: given the following code, add the following
+functionality: - feature a - feature b - feature c \emph{Reflection}: -
+How many classes did you change? - does it seem like such a design is
+flexible and easy to refactor?
+
+\textbf{Exercise}: Refactor the baseline code from the above exercise to
+achieve low coupling and high cohesion. Add more features a, b, and c.
+\emph{Reflection}: does it seem like this design is flexible and easy to
+refactor?
+
+\subsection{Creator}\label{creator}
+
+This principle is likely overlooked but it plays a crucial role in
+object-oriented programming; the creator \emph{establishes who is
+responsible} for creating an object. If you defined it well, your code
+will exhibit loose coupling and high cohesion; err an you will begin
+your journey to maintaining spaghetti code.
+
+\textbf{Application}: a class \texttt{X} is the creator of an object
+\texttt{Y} if any of the following statements are satisfied: - class
+\texttt{X} initialises object \texttt{Y} - class \texttt{X} contains
+object \texttt{Y} - class \texttt{X} closely uses and depends on class
+\texttt{Y}
+
+For instance, a point of interest (POI) has comments, hence POI is the
+creator of instances of the \texttt{Comment} class.
+
+\textbf{Exercise}: what kind of benefits and drawbacks do I get if
+\texttt{POI} is not the creator of comments? Solution: if comments are
+always the same, just text, then it makes sense that \texttt{POI}is the
+creator. However, what if I want to support multiple kinds of comments,
+i.e.~video comments, text, or images as à comment? In that case, you are
+better off injecting the comments as an extra argument to the POI
+object. -- does this makes sense? POI is always created first and
+comments are added later on, it's not an initialiser but a method that
+adds comments.
+
+\subsection{Information Expert}\label{information-expert}
+
+Classes have methods that define their responsibility and behaviour. A
+class exposes its behaviour via methods and its internals should always
+be opaque. With this basic idea, this principle helps you to identify
+the behaviour of each class.
+
+A class is responsible for a behaviour if that class contains all the
+information to carry it out. For example, which object should be
+responsible for updating the description of a guide? a. \texttt{User}
+object b. \texttt{POI} (point of interest) object c.
+\texttt{LatitudeLongitude} object d. \texttt{Guide} object
+
+This one is easy. Lets consider each option: a. If we update the guide
+description via \texttt{this.user.setGuideDescription(newDescription)}
+it implies that each user has a single guide, otherwise we would not
+know which guide we are updating. It could also mean that each user may
+be uniquely identified by its email and its guide. This is a really bad
+design from the relational point of view, database-wise. When
+representing the data layer from a NoSQL database this is allowed and I
+have seen it in use. I do not think this is a good model since, in the
+database, each record with the the same email is treated independently.
+b. A point of interest, such as a view, may be linked to multiple
+guides. For this reason, similar to above, such a design is
+non-maintainable. c. This really does not make sense. d. We have a
+winner! The guide instance has all the information to update the guide.
+
+The information expert assigns responsibilities to the classes that have
+all the information to fulfill the action.
+
+\textbf{Exercise}: A user wants to submit a few pictures with a review
+of her favourite restaurant in Málaga, Spain. Which of the following
+classes should be the information expert and provide that behaviour? a.
+\texttt{User} object b. \texttt{Guide} object c. \texttt{Review} object
+
+\subsection{Controller}\label{controller}
+
+Controller
+
+\subsection{Polymorphism}\label{polymorphism}
+
+This principle is one of the most important ones in object-oriented
+programming and the one that makes OOP great at dividing
+responsibilities between classes.
+
+As we saw in the recap section, this polymorphism refers to classes that
+implement an interface or inherit from a top class and not to parametric
+classes, which is also polymorphic on the (opaque or bounded) type
+variable.
+
+This principle allows classes to specify the same responsibilities via
+an interface but decouples the behaviour for each type. For instance, in
+our application, we want to show a special logo on top of the pictures
+of famous users who have confirmed their identity. A valid design, that
+does not scale, has a single \texttt{User} class with an attribute named
+\texttt{confirmedIdentity} which sets the flag to true when the user has
+confirmed its identity. This design works for 2 users, the normal and
+confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user
+who represents a company instead of a person, companies cannot create
+accounts and they have confirmed its identity. Creating a company's
+profile as a confirmed user seems wrong and error prone, it makes no
+sense the attribute \texttt{confirmedIdentity} for a company's profile
+because we know that this will always be true. The current code looks
+like listing Xxxx.
+
+(Listing Xxxx)
+
+Another design choice is to represent this distinction of different
+users using an enum attribute. Based on this value, the
+\texttt{displayImage()} method adds logic to check which kind of user
+you are and how to display the image. You go home thinking that this is
+a good design, all the logic it's kept in a single method.
+
+The problem with this approach, quite often used by beginners or as a
+shortcut, is that different classes are encoded within the same single
+one. This design is not maintainable in the long run because the same
+class encodes behaviour for different objects. Your design is
+abstracting at the wrong level.
+
+A better approach is to create a class for each kind of user and
+dispatch dynamically. This design is easier to maintain because the
+behaviour is not encoded solely on the method, but on the type. The
+Figure Yyy shows how to dynamically dispatch based on the type.
+
+\textbf{Exercise} Write the code depicted on Figure Yyy.
+
+\textbf{Exercise} Write the main class and show that the method performs
+a dynamic dispatch based on the classes.
+
+\textbf{Exercise} Write the code relying on inheritance and another
+version relying on interfaces. What are the benefits and drawbacks of
+the design and implementation decisions?
+
+(Note: this is distinct for Python because there's no interface etc.
+Think how would you explain it in python)
+
+Python is a dynamic language with a weak type system. This means the
+language assigns types at runtime, but you as a developer won't get any
+type error at compilation time. In Python polymorphism is always given
+and you as developer are in charge of ending that the methods you call
+exist or you will get a runtime error. As we said, the are no interfaces
+that we are bound to and python supports what's called duck typing,
+which is an idea much closer to how things work in real life. Let me
+show this with an example: you can read articles, news, cereal boxes and
+anything that has text. In Java you are bound by the type of object you
+are but in Python you are bound to the behaviour you have. A method call
+on \texttt{newspaper.\ hasText()} and \texttt{cerealBox.hasText()} works
+in Python independent from their type; Java would make this work only
+when they belong to the sand type or interface. For this reason, Python
+is more expressive in this regard, although it sacrifices static typing
+guarantees and forces the developer to either handle exceptions or crash
+and burn at runtime if the object on which the program calls the method
+\texttt{hasText()} does not provide such behaviour.
+
+\textbf{Exercise} write the code depicted on Figure Yyy in Python. Do
+not forget to handle exceptional cases.
+
+\textbf{Exercise} Write the main class and show that the method performs
+a dynamic dispatch based on the classes.
+
+\subsection{Indirection}\label{indirection}
+
+Domain objects may end up being coupled to other objects in the first
+iteration of your design. This principle states that you should create
+an intermediate object that mediates between these two, hence reducing
+coupling.
+
+To the untrained eye, it may seem as if two objects that where coupled,
+after applying the principle, are still coupled but to other object.
+This reasoning is right, except that this indirection breaks the idea of
+once object having a direct relation to the other one. The layer in
+between breaks the coupling direction and creates a more flexible
+design, since the two initially coupled objects do not need to know
+anything about each other anymore.
+
+An example of this pattern (Figure zzz) is the indirection introduced
+between a guides and the images that belong to the guides. The idea here
+is that the same guide is shared among friends and each one of them may
+potentially see a different cover image. Prior to this principle, your
+initial solution was to duplicate the guide for each friend and
+recalculate the cover image for each of them. This solution is
+redundant, consumes memory, and duplicates data, so an update on one
+description involves updating all data in all copies of the guide. A
+better solution is to add a new level of indirection between a guide and
+its cover image, 'CoverManager`, that knows how to retrieve the best
+cover image for the calling object. Internally, the manager may have to
+call the AI algorithm from time to time to update the image, cache it if
+the same user keeps coming to the same guide and even persist this
+mapping of guide-cover image in the database if the cover image doesn't
+change that often.
+
+(Figure zzz)
+
+\textbf{Exercise} Following the principles of these chapter, how would
+you design data persistence of an object from the case study? That is,
+would you add CRUD (Create, Read, Update and Delete) methods to all
+domain objects? If so, how would you avoid the coupling introduced by
+this design?
+
+\textbf{Exercise} How would you design the offline mode of your
+application? That is, how do you deal with low connectivity or no
+connectivity at all? Solution: you never assume that there is a
+connection and instead create an intermediate layer that handles the
+communication. If the server is unreachable, this layer handles how to
+proceed. An advanced design pattern that users this idea is the circuit
+breaker (explained in later chapters)
+
+\subsection{Pure Fabrication}\label{pure-fabrication}
+
+The term pure fabrication means to make something up. Use this principle
+whenever you observe that your domain classes are getting too
+overloaded, i.e., the start to exhibit high coupling and low cohesion.
+
+The principle adds a new indirection between two objects that would
+otherwise be directly connected (coupled). The indirection means adding
+a new object that mediates the communication between two other entities.
+This indirection object is not part of the domain and will be a made
+software concept. Examples of this principle are: object pools, database
+classes, and pretty much any object that sits in between two domain
+objects. In terms of design patterns, this principle is observe in the
+adapter pattern, shown in Figure xyz.
+
+(Figure xyz)
+
+Explain figure.
+
+\textbf{Exercise}:Wwhere could this principle be applied in the case
+study? Why? (There are many valid examples) Solution: the AI algorithm
+that inject images to guides. If this was not there, every guide would
+have the same image for all guides, tying the guide to the images. With
+the algorithm, the same guide share with friends shows different images
+based on other friends and connections. \textbf{Exercise}: let's assume
+that you would like to add a notification system to the mobile app of
+the case study whenever a friend posts a new comment on one of her
+guides. What classes would you need to create? Solution: at the very
+least, you would need a \texttt{Notification} class that contains the
+text and image of the notification and some kind of notification manager
+that schedules and send notifications to the appropriate parties.
+
+\subsection{Protected Variation}\label{protected-variation}
+
+This principle is easy to apply and, in practice, requires you to be
+good at forecasting future pivot points or changes of direction.
+
+The core idea of this principle is to shield your code in places where
+you expect changes, let that be via interfaces or other means. For
+example, if we were to provide special guides that users can buy, we
+would need to integrate with a payment platform. If you are not sure
+which one is best, you'll end up picking one and calling their methods
+where necessary. However, what happens if you see that platform Z has
+low commissions? You would want to change. ReFactoring may not be so
+easy because both payment solutions have different libraries with
+different API. So, you need to change all those specific calls by
+whatever the new API and workflow mandates.
+
+One way of solving this problem is via an interface and different
+classes that implement those methods (Figure XYZ). In this design, you
+are protecting yourself from future changes. Your concrete classes that
+implement the interface maintain the workflow and your only job is to
+create a new concrete class that implements your interface.
+
+You should apply this pattern to instability points and, specially, when
+using third party libraries that you don't have previous experience
+with.
+
+\subsection{Pure functions}\label{pure-functions}
+
+This principle is not part of the common and well known GRASP principles
+but, in my experience, you should consider it. Lambdas, closures and
+pure functions are ubiquitous nowadays. My advice is that you stop using
+closures that captures mutable state. The main reason is that, at one
+point or another, you'll benchmark your application and start using
+parallel capabilities of your computer: task, futures, actors or
+whatever is the next parallel abstraction. If you encapsulate mutable
+state in closures, you are building your own coffin for the not so far
+away future. Things like processing an recognitive computation cannot be
+used anymore if the object the closure captures is shared between two
+threads -- unless you can guarantee data race freedom. Data race freedom
+code is hard to write, maintain and make fast, so using locks may get
+you out of troubles at the cost of losing horizontal scalability
+\footnote{explain}.
+
+\section{Design Patters: Creational}\label{design-patters-creational}
+
+Covers creational design patterns TODO: Text is copied from
+\url{https://sourcemaking.com/design_patterns}, do not copy this!
+
+\subsection{Abstract Factory}\label{abstract-factory}
+
+Creates an instance of several families of classes
+
+\subsection{Builder}\label{builder}
+
+Separates object construction from its representation
+
+\subsection{Factory Method}\label{factory-method}
+
+Creates an instance of several derived classes
+
+\subsection{Object Pool}\label{object-pool}
+
+Avoid expensive acquisition and release of resources by recycling
+objects that are no longer in use
+
+\subsection{Prototype}\label{prototype}
+
+A fully initialized instance to be copied or cloned
+
+\subsection{Singleton}\label{singleton}
+
+A class of which only a single instance can exist
+
+\section{Design Patters: Structural}\label{design-patters-structural}
+
+Covers structural design patterns
+
+\subsection{Adapter}\label{adapter}
+
+\subsection{Bridge}\label{bridge}
+
+\subsection{Composite}\label{composite}
+
+\subsection{Decorator}\label{decorator}
+
+\subsection{Facade}\label{facade}
+
+\subsection{Flyweight}\label{flyweight}
+
+\subsection{Proxy}\label{proxy}
+
+\section{Design Patters: Behavioral}\label{design-patters-behavioral}
+
+Covers behavioral design patterns
+
+\subsection{Chain of responsibility}\label{chain-of-responsibility}
+
+\subsection{Command}\label{command}
+
+\subsection{Interpreter}\label{interpreter}
+
+\subsection{Iterator}\label{iterator}
+
+\subsection{Mediator}\label{mediator}
+
+\subsection{Memento}\label{memento}
+
+\subsection{Null object}\label{null-object}
+
+\subsection{Observer}\label{observer}
+
+\subsection{State}\label{state}
+
+\subsection{Strategy}\label{strategy}
+
+\subsection{Template method}\label{template-method}
+
+\subsection{Visitor}\label{visitor}
+
+\section{Cheatsheet}\label{cheatsheet}
+
+Add tables and images that show the difference between GRASP and SOLID,
+and different design patterns.
+
+
+\end{document}

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Design Patterns for the Object-oriented and Functional mind</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Design Patterns for the Object-oriented and Functional mind">
+  <meta name="generator" content="bookdown 0.3.6 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Design Patterns for the Object-oriented and Functional mind" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Design Patterns for the Object-oriented and Functional mind" />
+  
+  
+  
+
+<meta name="author" content="Kiko Fernandez-Reyes">
+
+
+<meta name="date" content="2017-07-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="introduction.html">
+<link rel="next" href="grasp-principles.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="prologue.html"><a href="prologue.html"><i class="fa fa-check"></i><b>1</b> Prologue</a><ul>
+<li class="chapter" data-level="1.1" data-path="prologue.html"><a href="prologue.html#who-is-this-book-for"><i class="fa fa-check"></i><b>1.1</b> Who is this book for?</a></li>
+<li class="chapter" data-level="1.2" data-path="prologue.html"><a href="prologue.html#what-is-covered-in-this-book"><i class="fa fa-check"></i><b>1.2</b> What is covered in this book?</a></li>
+<li class="chapter" data-level="1.3" data-path="prologue.html"><a href="prologue.html#organisation"><i class="fa fa-check"></i><b>1.3</b> Organisation</a></li>
+<li class="chapter" data-level="1.4" data-path="prologue.html"><a href="prologue.html#software-requirements"><i class="fa fa-check"></i><b>1.4</b> Software requirements</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="prologue.html"><a href="prologue.html#java-8"><i class="fa fa-check"></i><b>1.4.1</b> Java 8</a></li>
+<li class="chapter" data-level="1.4.2" data-path="prologue.html"><a href="prologue.html#python-3.6"><i class="fa fa-check"></i><b>1.4.2</b> Python 3.6</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#software-design"><i class="fa fa-check"></i><b>2.1</b> Software Design</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction.html"><a href="introduction.html#agile-methodologies"><i class="fa fa-check"></i><b>2.1.1</b> Agile methodologies</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction.html"><a href="introduction.html#what-is-a-good-design"><i class="fa fa-check"></i><b>2.1.2</b> What is a good design?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#design-patterns"><i class="fa fa-check"></i><b>2.2</b> Design patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="recap.html"><a href="recap.html"><i class="fa fa-check"></i><b>3</b> Recap</a><ul>
+<li class="chapter" data-level="3.1" data-path="recap.html"><a href="recap.html#type-systems"><i class="fa fa-check"></i><b>3.1</b> Type systems</a></li>
+<li class="chapter" data-level="3.2" data-path="recap.html"><a href="recap.html#object-oriented-concepts"><i class="fa fa-check"></i><b>3.2</b> Object-oriented concepts</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="recap.html"><a href="recap.html#classes"><i class="fa fa-check"></i><b>3.2.1</b> Classes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="recap.html"><a href="recap.html#objects"><i class="fa fa-check"></i><b>3.2.2</b> Objects</a></li>
+<li class="chapter" data-level="3.2.3" data-path="recap.html"><a href="recap.html#inheritance"><i class="fa fa-check"></i><b>3.2.3</b> Inheritance</a></li>
+<li class="chapter" data-level="3.2.4" data-path="recap.html"><a href="recap.html#interfaces"><i class="fa fa-check"></i><b>3.2.4</b> Interfaces</a></li>
+<li class="chapter" data-level="3.2.5" data-path="recap.html"><a href="recap.html#abstract-classes"><i class="fa fa-check"></i><b>3.2.5</b> Abstract classes</a></li>
+<li class="chapter" data-level="3.2.6" data-path="recap.html"><a href="recap.html#parametric-classes"><i class="fa fa-check"></i><b>3.2.6</b> Parametric classes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="recap.html"><a href="recap.html#functional-concepts"><i class="fa fa-check"></i><b>3.3</b> Functional concepts</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="recap.html"><a href="recap.html#anonymous-functions-lambdas"><i class="fa fa-check"></i><b>3.3.1</b> Anonymous functions / lambdas</a></li>
+<li class="chapter" data-level="3.3.2" data-path="recap.html"><a href="recap.html#immutability"><i class="fa fa-check"></i><b>3.3.2</b> Immutability</a></li>
+<li class="chapter" data-level="3.3.3" data-path="recap.html"><a href="recap.html#high-order-functions"><i class="fa fa-check"></i><b>3.3.3</b> High-order functions</a></li>
+<li class="chapter" data-level="3.3.4" data-path="recap.html"><a href="recap.html#parametric-functions"><i class="fa fa-check"></i><b>3.3.4</b> Parametric functions</a></li>
+<li class="chapter" data-level="3.3.5" data-path="recap.html"><a href="recap.html#algebraic-data-types"><i class="fa fa-check"></i><b>3.3.5</b> Algebraic data types</a></li>
+<li class="chapter" data-level="3.3.6" data-path="recap.html"><a href="recap.html#multi-functions"><i class="fa fa-check"></i><b>3.3.6</b> Multi-functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="recap.html"><a href="recap.html#case-study"><i class="fa fa-check"></i><b>3.4</b> Case Study</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="grasp-principles.html"><a href="grasp-principles.html"><i class="fa fa-check"></i><b>4</b> GRASP principles</a><ul>
+<li class="chapter" data-level="4.1" data-path="grasp-principles.html"><a href="grasp-principles.html#low-coupling"><i class="fa fa-check"></i><b>4.1</b> Low Coupling</a></li>
+<li class="chapter" data-level="4.2" data-path="grasp-principles.html"><a href="grasp-principles.html#high-cohesion"><i class="fa fa-check"></i><b>4.2</b> High Cohesion</a></li>
+<li class="chapter" data-level="4.3" data-path="grasp-principles.html"><a href="grasp-principles.html#creator"><i class="fa fa-check"></i><b>4.3</b> Creator</a></li>
+<li class="chapter" data-level="4.4" data-path="grasp-principles.html"><a href="grasp-principles.html#information-expert"><i class="fa fa-check"></i><b>4.4</b> Information Expert</a></li>
+<li class="chapter" data-level="4.5" data-path="grasp-principles.html"><a href="grasp-principles.html#controller"><i class="fa fa-check"></i><b>4.5</b> Controller</a></li>
+<li class="chapter" data-level="4.6" data-path="grasp-principles.html"><a href="grasp-principles.html#polymorphism"><i class="fa fa-check"></i><b>4.6</b> Polymorphism</a></li>
+<li class="chapter" data-level="4.7" data-path="grasp-principles.html"><a href="grasp-principles.html#indirection"><i class="fa fa-check"></i><b>4.7</b> Indirection</a></li>
+<li class="chapter" data-level="4.8" data-path="grasp-principles.html"><a href="grasp-principles.html#pure-fabrication"><i class="fa fa-check"></i><b>4.8</b> Pure Fabrication</a></li>
+<li class="chapter" data-level="4.9" data-path="grasp-principles.html"><a href="grasp-principles.html#protected-variation"><i class="fa fa-check"></i><b>4.9</b> Protected Variation</a></li>
+<li class="chapter" data-level="4.10" data-path="grasp-principles.html"><a href="grasp-principles.html#pure-functions"><i class="fa fa-check"></i><b>4.10</b> Pure functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="design-patters-creational.html"><a href="design-patters-creational.html"><i class="fa fa-check"></i><b>5</b> Design Patters: Creational</a><ul>
+<li class="chapter" data-level="5.1" data-path="design-patters-creational.html"><a href="design-patters-creational.html#abstract-factory"><i class="fa fa-check"></i><b>5.1</b> Abstract Factory</a></li>
+<li class="chapter" data-level="5.2" data-path="design-patters-creational.html"><a href="design-patters-creational.html#builder"><i class="fa fa-check"></i><b>5.2</b> Builder</a></li>
+<li class="chapter" data-level="5.3" data-path="design-patters-creational.html"><a href="design-patters-creational.html#factory-method"><i class="fa fa-check"></i><b>5.3</b> Factory Method</a></li>
+<li class="chapter" data-level="5.4" data-path="design-patters-creational.html"><a href="design-patters-creational.html#object-pool"><i class="fa fa-check"></i><b>5.4</b> Object Pool</a></li>
+<li class="chapter" data-level="5.5" data-path="design-patters-creational.html"><a href="design-patters-creational.html#prototype"><i class="fa fa-check"></i><b>5.5</b> Prototype</a></li>
+<li class="chapter" data-level="5.6" data-path="design-patters-creational.html"><a href="design-patters-creational.html#singleton"><i class="fa fa-check"></i><b>5.6</b> Singleton</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="design-patters-structural.html"><a href="design-patters-structural.html"><i class="fa fa-check"></i><b>6</b> Design Patters: Structural</a><ul>
+<li class="chapter" data-level="6.1" data-path="design-patters-structural.html"><a href="design-patters-structural.html#adapter"><i class="fa fa-check"></i><b>6.1</b> Adapter</a></li>
+<li class="chapter" data-level="6.2" data-path="design-patters-structural.html"><a href="design-patters-structural.html#bridge"><i class="fa fa-check"></i><b>6.2</b> Bridge</a></li>
+<li class="chapter" data-level="6.3" data-path="design-patters-structural.html"><a href="design-patters-structural.html#composite"><i class="fa fa-check"></i><b>6.3</b> Composite</a></li>
+<li class="chapter" data-level="6.4" data-path="design-patters-structural.html"><a href="design-patters-structural.html#decorator"><i class="fa fa-check"></i><b>6.4</b> Decorator</a></li>
+<li class="chapter" data-level="6.5" data-path="design-patters-structural.html"><a href="design-patters-structural.html#facade"><i class="fa fa-check"></i><b>6.5</b> Facade</a></li>
+<li class="chapter" data-level="6.6" data-path="design-patters-structural.html"><a href="design-patters-structural.html#flyweight"><i class="fa fa-check"></i><b>6.6</b> Flyweight</a></li>
+<li class="chapter" data-level="6.7" data-path="design-patters-structural.html"><a href="design-patters-structural.html#proxy"><i class="fa fa-check"></i><b>6.7</b> Proxy</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html"><i class="fa fa-check"></i><b>7</b> Design Patters: Behavioral</a><ul>
+<li class="chapter" data-level="7.1" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#chain-of-responsibility"><i class="fa fa-check"></i><b>7.1</b> Chain of responsibility</a></li>
+<li class="chapter" data-level="7.2" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#command"><i class="fa fa-check"></i><b>7.2</b> Command</a></li>
+<li class="chapter" data-level="7.3" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#interpreter"><i class="fa fa-check"></i><b>7.3</b> Interpreter</a></li>
+<li class="chapter" data-level="7.4" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#iterator"><i class="fa fa-check"></i><b>7.4</b> Iterator</a></li>
+<li class="chapter" data-level="7.5" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#mediator"><i class="fa fa-check"></i><b>7.5</b> Mediator</a></li>
+<li class="chapter" data-level="7.6" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#memento"><i class="fa fa-check"></i><b>7.6</b> Memento</a></li>
+<li class="chapter" data-level="7.7" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#null-object"><i class="fa fa-check"></i><b>7.7</b> Null object</a></li>
+<li class="chapter" data-level="7.8" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#observer"><i class="fa fa-check"></i><b>7.8</b> Observer</a></li>
+<li class="chapter" data-level="7.9" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#state"><i class="fa fa-check"></i><b>7.9</b> State</a></li>
+<li class="chapter" data-level="7.10" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#strategy"><i class="fa fa-check"></i><b>7.10</b> Strategy</a></li>
+<li class="chapter" data-level="7.11" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#template-method"><i class="fa fa-check"></i><b>7.11</b> Template method</a></li>
+<li class="chapter" data-level="7.12" data-path="design-patters-behavioral.html"><a href="design-patters-behavioral.html#visitor"><i class="fa fa-check"></i><b>7.12</b> Visitor</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="cheatsheet.html"><a href="cheatsheet.html"><i class="fa fa-check"></i><b>8</b> Cheatsheet</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design Patterns for the Object-oriented and Functional mind</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="recap" class="section level1">
+<h1><span class="header-section-number">3</span> Recap</h1>
+<p>This section covers basic concepts from <em>type theory</em> and the object-oriented paradigm.</p>
+<p>Today’s object-oriented paradigm borrows two concepts from functional programming: lambdas and closures. During this recap, we will go through the core ideas of object-oriented programming using Java and Python <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p>By the end of this chapter, you should understand:</p>
+<ul>
+<li>difference between Java’s and Python’s type systems,</li>
+<li>classes and objects,</li>
+<li>inheritance,</li>
+<li>interfaces,</li>
+<li>traits and mixins,</li>
+<li>abstract classes,</li>
+<li>parametric classes and</li>
+<li>lambdas and closures</li>
+</ul>
+<!--
+Another idea is a publishing site that sells book chapters and whole books. As a user, you can buy a few chapters to see whether the story is interesting and stop reading if you don't find it appealing. Have you ever thought about introductory books from which you know most of the content except one chapter or two. With this platform, you can buy those individual chapters alone and focus on your needs. Start learning smart!
+-->
+<div id="type-systems" class="section level2">
+<h2><span class="header-section-number">3.1</span> Type systems</h2>
+<ul>
+<li>Talk about the main difference between Java and Python</li>
+<li>duck typing</li>
+<li>weakly typed</li>
+<li>strongly typed</li>
+</ul>
+</div>
+<div id="object-oriented-concepts" class="section level2">
+<h2><span class="header-section-number">3.2</span> Object-oriented concepts</h2>
+<p>We proceed to explain the core ideas of object-oriented programming using examples from the case study.</p>
+<div id="classes" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Classes</h3>
+<p>Classes declare and implement the state and behaviour of an object. <em>The state of a class lives in its attributes while the behaviour is expressed via its methods</em>. A class that hides its attributes with a <code>private</code> access modifier (remember <code>public</code>, <code>protected</code> and <code>private</code>?) protects its internal state from other classes, so that the only way to update the internal state is via method calls. Method calls <em>represent the behaviour of the object</em>. As a general advice, you should not expose the internal state of your class to others; you should expose your behaviour. This is what make great abstractions easy to use and understand. For example, when using the <code>future</code> API, you do not have to think about the possible locks that may exist in the internal representation of a <code>CompletableFuture</code>, you just use it according to its defined behaviour, public methods.</p>
+<p>Classes expose their behaviour via their methods. If these methods just get the attributes and set them, we call them <em>getters</em> and <em>setters</em>.</p>
+<p>That’s enough for a short introduction. Let’s write the <code>Restaurant</code> class to remember how to write Java:</p>
+<p><strong>Java</strong></p>
+<p>The class <code>Restaurant</code> has all attributes defined as private (not accesible from outside the class). The constructor of the class (<code>public Restaurant(...)</code>) creates a new <code>Restaurant</code> and sets its state to some default value.</p>
+<p>To get the state outside the class we use <em>getters</em> and <em>setters</em> methods. These are preceded by the words <code>get</code> and <code>set</code> following the attributes name, e.g. <code>getStars()</code> (Example 3.1.1.1).</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">enum</span> Stars {
+  ONE_STAR, TWO_STAR, THREE_STAR,
+  FOUR_STAR, FIVE_STAR, ZERO_STAR
+}
+
+<span class="kw">public</span> <span class="kw">class</span> Restaurant {
+  <span class="co">// Michelin stars</span>
+  <span class="kw">private</span> Stars stars;
+  
+  <span class="kw">private</span> <span class="bu">String</span> street;
+  <span class="kw">private</span> <span class="dt">int</span> zipcode; 
+  <span class="kw">private</span> Country country;
+
+  <span class="co">// constructor</span>
+  <span class="kw">public</span> <span class="fu">Restaurant</span>(Stars stars, <span class="bu">String</span> street, <span class="dt">int</span> zipcode, Country country){
+    <span class="kw">this</span>.<span class="fu">stars</span> = stars;
+    <span class="kw">this</span>.<span class="fu">street</span> = street;
+    <span class="kw">this</span>.<span class="fu">zipcode</span> = zipcode;
+    <span class="kw">this</span>.<span class="fu">country</span> = country;
+  }
+
+  <span class="co">// getter method</span>
+  <span class="kw">public</span> Stars <span class="fu">getStars</span>(){
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">stars</span>;
+  }
+
+  <span class="co">// setter method</span>
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setStars</span>(Stars stars){
+    <span class="kw">this</span>.<span class="fu">stars</span> = stars;
+  }
+
+  ...
+}</code></pre></div>
+<p><em>Example 3.1.1.1. Introductory example to Java</em></p>
+<p><strong>Python</strong></p>
+<p>Python doesn’t have access modifiers and uses (by convention) an underscore to mean that the attribute is private. The constructor <code>def __init__(self, alert=False)</code> method takes explicitly an instance of itself <code>self</code> and a default argument, <code>alert</code> that, if it’s not provided, it is set to <code>False</code>. Before we continue disecting the constructor, let’s briefly introduce getters and setters.</p>
+<p>Python provides a special syntax for getters and setters that wrap the attribute into a function with that very same name. For instance, the getter for the <code>alert</code> attribute is created by declaring a method with the name of the attribute and the <code>@property</code> on top of it. The body of the method just fetches the attribute.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@property</span>
+    <span class="kw">def</span> alert(<span class="va">self</span>):
+      <span class="cf">return</span> <span class="va">self</span>.__alert</code></pre></div>
+<p>Setters work in the same way, except that they are annotated with the attribute’s name followed by the <code>setter</code> word, e.g. <code>@alert.setter</code> for the <code>alert</code> setter method. From now on, when we call on <code>self.alert</code> we are actually calling the getter method and when we assign <code>self.alert = True</code>, we are calling the setter method.</p>
+<p>Now, if we go back to the <code>__init__</code> method from Example 3.1.1.2, we can observe that this is indeed the desire behaviour.</p>
+<p><strong>Why would we want to use getters and setters like that?</strong> Young padawan, they are an abstraction. Now you only want to retrieve the data but, with this abstraction, you could be returning cached data that otherwise needs to be fetched from the network. Later on, we will learn about the decorator pattern and how it rocks in Python!</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Dog:
+  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, alert<span class="op">=</span><span class="va">False</span>):
+    <span class="va">self</span>.alert <span class="op">=</span> alert
+
+  <span class="at">@property</span>
+  <span class="kw">def</span> alert(<span class="va">self</span>):
+    <span class="cf">return</span> <span class="va">self</span>.__alert
+
+  <span class="at">@alert.setter</span>
+  <span class="kw">def</span> alert(<span class="va">self</span>, new_alert):
+    <span class="va">self</span>.__alert <span class="op">=</span> new_alert
+
+  <span class="kw">def</span> bark(<span class="va">self</span>):
+    <span class="cf">if</span> <span class="va">self</span>.alert <span class="kw">is</span> <span class="va">True</span>:
+      println(<span class="st">&quot;Woof Woof&quot;</span>)</code></pre></div>
+<p><em>Example 3.1.1.2 Introductory example to Python</em></p>
+</div>
+<div id="objects" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Objects</h3>
+<p>Objects represent instances of the <a href="recap.html#classes">class</a> at runtime. An object gets the default state defined by their constructor and the behaviour defined from the class declaration.</p>
+<p><strong>Java</strong></p>
+<p>Following the example before, let’s create an object:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">Dog dog = <span class="kw">new</span> <span class="fu">Dog</span>();</code></pre></div>
+<p>This calls on the constructor of the <code>Dog</code> class that sets the <code>alert</code> state to <code>false</code>. If the dog tries to bark nothing will happen:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">dog.<span class="fu">bark</span>();</code></pre></div>
+<p>The dog barks when it is startled, let’s make her bark:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">dog.<span class="fu">setAlert</span>(<span class="kw">true</span>);
+dog.<span class="fu">bark</span>();
+<span class="co">// prints &quot;Woof Woof&quot;</span></code></pre></div>
+<p><strong>Python</strong></p>
+<p>Creation of an object is similar to Java:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">dog <span class="op">=</span> Dog()</code></pre></div>
+<p>To make the dog bark:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">dog.bark()</code></pre></div>
+<p>which does nothing because the dog is not startled. Let’s use the setter to change its state and make her bark:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">dog.alert <span class="op">=</span> <span class="va">True</span>
+dog.bark()
+<span class="co"># prints &quot;Woof Woof&quot;</span></code></pre></div>
+<p>Notice that in this case, we could have set the initial state of the dog and would not have had to use a setter:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">dog <span class="op">=</span> Dog(<span class="va">True</span>)
+dog.bark()
+<span class="co"># prints &quot;Woof Woof&quot;</span></code></pre></div>
+</div>
+<div id="inheritance" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Inheritance</h3>
+<p>A class can inherit methods from other <a href="recap.html#classes">classes</a>, called inheritance. The class that inherits methods is called <em>subclass</em> while the class that provides them is called <em>super class</em>. Java has single inheritance, meaning that the subclass can inherit only from a single class while Python has a limited form of multiple inheritance.</p>
+<p>Idea: A computer has various levels of memory, L1, L2, Last-level cache and main memory. In this example, the class <code>Computer</code> inherits operations from memory, so that we can call methods that retrieve objects from main memory. (this is an example and I would not advice any one to create a virtual machine based on this idea)</p>
+<p><strong>Java</strong></p>
+<p>Since Java can only inherit from a single class, we can model the idea above as shown in <em>Example 3.1.3 Java inheritance</em>.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> Memory {
+
+  <span class="kw">private</span> CacheL1 l1;
+  <span class="kw">private</span> CacheL2 l2;
+
+  <span class="kw">public</span> <span class="fu">Memory</span>(){
+    <span class="dt">int</span> kilobyte = <span class="dv">1024</span>*<span class="dv">1024</span>;
+    <span class="dt">int</span> megabyte = <span class="dv">1024</span> * kilobyte;
+    <span class="kw">this</span>.<span class="fu">l1</span> = <span class="kw">new</span> <span class="fu">CacheL1</span>(<span class="dv">512</span>*kilobyte);
+    <span class="kw">this</span>.<span class="fu">l2</span> = <span class="kw">new</span> <span class="fu">CacheL2</span>(<span class="dv">3</span>*megabyte);
+  }
+
+  <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">fetchLocation</span>(<span class="bu">Location</span> lo) { <span class="co">// ... }</span>
+}
+
+<span class="kw">class</span> Computer <span class="kw">extends</span> Memory {
+  <span class="kw">public</span> <span class="kw">class</span> <span class="fu">Computer</span>(){
+    <span class="co">// ...</span>
+  }
+}</code></pre></div>
+<p><em>Example 3.1.3 Java inheritance</em></p>
+<p>The class <code>Computer</code> inherits the methods <code>Memory</code> when <code>Computer extends Memory</code>. This means that we can fetch objects from memory, <code>computer.fetchLocation(location);</code>.</p>
+<p><strong>Python</strong></p>
+<p>Python supports two forms of multiple inheritance, known as old-style and new style. In the old-style form, the multiple inheritance works in depth-first and left-to-right order. For instance:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> L1(<span class="bu">object</span>):
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending from L1 to bus&quot;</span>
+
+<span class="kw">class</span> L2(<span class="bu">object</span>):
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending from L2 to bus&quot;</span>
+
+<span class="kw">class</span> Cache(L1, L2):
+  <span class="cf">pass</span>
+
+<span class="kw">class</span> CPU(<span class="bu">object</span>):
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending info from CPU to bus&quot;</span>
+
+<span class="kw">class</span> Computer(CPU, Cache):
+  <span class="cf">pass</span>
+
+c <span class="op">=</span> Computer()
+c.send_info()</code></pre></div>
+<p><em>Example 3.1.3 Python old-style</em></p>
+<p>In this case, the <code>c.send_info()</code> method prints <code>Sending info from CPU to bus</code>. If we were to change the order of the inherited classes, <code>class Computer(Cache, CPU)</code>, then the printing method would have been <code>Sending from L1 to bus</code>.</p>
+<p>The multiple inheritance new style kicks in when classes do not inherit from <code>object</code> (as opposed to what <code>L1</code> and <code>L2</code> do in <em>Example Python old-style</em>). The new style considers breath-first and left-to-right order.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> L1:
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending from L1 to bus&quot;</span>
+
+<span class="kw">class</span> L2:
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending from L2 to bus&quot;</span>
+
+<span class="kw">class</span> Cache(L1, L2):
+  <span class="cf">pass</span>
+
+<span class="kw">class</span> CPU:
+  <span class="kw">def</span> send_info():
+    <span class="bu">print</span> <span class="st">&quot;Sending info from CPU to bus&quot;</span>
+
+<span class="kw">class</span> Computer(Cache, CPU):
+  <span class="cf">pass</span>
+
+c <span class="op">=</span> Computer()
+c.send_info()</code></pre></div>
+<p><em>Example 3.1.3 Python new style</em></p>
+<p>In <em>Example 3.1.3 Python new style</em>, the <code>c.send_info()</code> method would have printed <code>Sending info from CPU to bus</code> given that <code>Cache</code> does not provide a suitable <code>send_info</code> method explictly.</p>
+<p>(More details in here: <a href="http://www.python-course.eu/python3_multiple_inheritance.php" class="uri">http://www.python-course.eu/python3_multiple_inheritance.php</a>)</p>
+</div>
+<div id="interfaces" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> Interfaces</h3>
+<p><strong>TODO: missing default methods and static methods in interfaces (they can have implementations!)</strong></p>
+<p>Interfaces declare a contract of the expected behaviour of classes that implement the interface. An interface <em>merely</em> defines methods. Classes that would like to be compatible with the interface need to implement those methods. The real purpose of interfaces is to enable polymorphism, e.g. being able to call methods on different classes because they implement the same interface. Java has interfaces but Python completely lacks them. Dynamic languages such as Python cannot express interfaces because they don’t have a static type system, the fact of not having static types inhibits interfaces.</p>
+<p><strong>Java</strong></p>
+<p>In Java an interface is declared similar to how classes are declared, except that you use the word <code>interface</code>.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">interface</span> MemOperations {
+  <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">fetchLocation</span>(<span class="bu">Location</span> loc);
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">flush</span>();
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">sendToBus</span>();
+}
+
+<span class="kw">public</span> <span class="kw">class</span> CacheL1 <span class="kw">implements</span> MemOperations {
+  <span class="kw">public</span> <span class="fu">CacheL1</span>(<span class="dt">int</span> size){
+    <span class="co">//...</span>
+  }
+
+  <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">fetchLocation</span>(<span class="bu">Location</span> loc){
+    <span class="co">// ...</span>
+  }
+
+  <span class="co">// ...</span>
+
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">flush</span>(){
+    <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Flushing from CacheL1&quot;</span>);
+  }
+
+}
+
+<span class="kw">public</span> <span class="kw">class</span> CacheL2 <span class="kw">implements</span> MemOperations {
+  <span class="co">// ...</span>
+
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">flush</span>(){
+    <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Flushing from CacheL2&quot;</span>);
+  }
+}</code></pre></div>
+<p><em>Example 3.1.4 Java interfaces</em></p>
+<p>If you forget to implement one of the methods declared in the interface, the type system will throw an error and complain that you forgot to implement the missing methods. You won’t get unexpected crashes at runtime because the method doesn’t exist.</p>
+<p>From the <em>Example 3.1.4 Java Interfaces</em> we can create different cache levels and treat them as if they are just <code>MemOperations</code>. Calling methods on each one prints a different <code>String</code>.</p>
+<pre><code>CacheL1 c1 = new CacheL1(512);
+CacheL2 c2 = new CacheL2(2048);
+
+ArrayList&lt;MemOperations&gt; a = new ArrayList&lt;MemOperations&gt;();
+a.append(c1);
+a.append(c2);
+
+for(cache: a){
+  cache.flush();
+}
+
+// prints:
+// &quot;Flushing from CacheL1&quot;
+// &quot;Flushing from CacheL2&quot;</code></pre>
+<p>As of Java 8, interfaces can declare a <em>default</em> implementation for methods. This is great from the design point of view: you can provide a default implementation as long as you rely only on the known behaviour (other public methods of the interface). This means that you can create a clean design that does not rely on internal state and/or methods.</p>
+<p><strong>TODO: Template pattern fits here perfectly!</strong></p>
+<p><strong>TODO: Should I explain polymorphism here? It’s GRASP…</strong></p>
+<p><strong>TODO: Should I show a code example?</strong></p>
+<p><strong>TODO: I believe I am explaining super basic stuff and should level up…</strong></p>
+</div>
+<div id="abstract-classes" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> Abstract classes</h3>
+<p>Abstract classes can be seen as a mix between <a href="recap.html#interfaces">interfaces</a> and <a href="recap.html#classes">classes</a>: they can contain attributes, define methods and declare abstract methods. Abstract methods provide a declaration of the behaviour but not a definition (implementation). An abstract class cannot work on its own – cannot be instantiated alone – and needs to be subclass by another class, which implements the abstract methods.</p>
+<p><strong>Java</strong></p>
+<p>It may seem as if <a href="recap.html#interfaces">Interfaces</a> (as of Java 8) and <a href="recap.html#abstract-classes">Abstract Classes</a> serve the same purpose. However, there is a subtle difference: an interface can only create public methods and constant declarations (<em>static</em> and <em>final</em> attributes) while an abstract class can declare and define the internal state of the class.</p>
+<p>As an advice, I would recommend to use interfaces whenever you have various subclasses that need to implement the same behaviour. I would consider the use of an abstract class in limited cases and only when there is a need to share the same private state among objects that are quite similar.</p>
+<p><strong>TODO: Favour composition over inheritance</strong></p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">abstract</span> <span class="kw">class</span> <span class="bu">Entity</span> {
+  <span class="kw">private</span> <span class="dt">int</span> life;
+  <span class="kw">private</span> Equipment equipment;
+
+  <span class="kw">public</span> <span class="bu">Entity</span>(<span class="dt">int</span> life, Equipment Equipment){
+    <span class="kw">this</span>.<span class="fu">life</span> = life;
+    <span class="kw">this</span>.<span class="fu">equipment</span> = equipment;
+  }
+
+  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getLife</span>() { <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">life</span>; }
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setLife</span>(<span class="dt">int</span> life) { <span class="kw">this</span>.<span class="fu">life</span> = life; }
+
+  <span class="kw">abstract</span> <span class="dt">void</span> <span class="fu">attack</span>(Enemy e);
+  <span class="kw">abstract</span> <span class="dt">void</span> <span class="fu">escape</span>();
+  <span class="co">// ...</span>
+}
+
+<span class="kw">interface</span> Attackable {
+  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getPower</span>();
+
+  <span class="kw">default</span> <span class="dt">void</span> <span class="fu">attack</span>(Enemy e){
+    e.<span class="fu">setLife</span>(e.<span class="fu">getLife</span>() - <span class="fu">getPower</span>());
+  }
+}
+
+<span class="kw">public</span> <span class="kw">class</span> Hero {
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">attack</span>(Enemy e){
+    <span class="co">// Filter equipment by things that I can attack with</span>
+    Attackable attackable = <span class="kw">this</span>.<span class="fu">equipment</span>.<span class="fu">attackable</span>();
+
+    <span class="co">// attack</span>
+    attackable.<span class="fu">attack</span>(e);
+  }
+}</code></pre></div>
+<p><strong>TODO: equipment may use the null pattern</strong></p>
+<p><strong>Python</strong></p>
+<p>Test <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+</div>
+<div id="parametric-classes" class="section level3">
+<h3><span class="header-section-number">3.2.6</span> Parametric classes</h3>
+</div>
+</div>
+<div id="functional-concepts" class="section level2">
+<h2><span class="header-section-number">3.3</span> Functional concepts</h2>
+<div id="anonymous-functions-lambdas" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Anonymous functions / lambdas</h3>
+</div>
+<div id="immutability" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Immutability</h3>
+</div>
+<div id="high-order-functions" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> High-order functions</h3>
+</div>
+<div id="parametric-functions" class="section level3">
+<h3><span class="header-section-number">3.3.4</span> Parametric functions</h3>
+</div>
+<div id="algebraic-data-types" class="section level3">
+<h3><span class="header-section-number">3.3.5</span> Algebraic data types</h3>
+</div>
+<div id="multi-functions" class="section level3">
+<h3><span class="header-section-number">3.3.6</span> Multi-functions</h3>
+
+</div>
+</div>
+<div id="case-study" class="section level2">
+<h2><span class="header-section-number">3.4</span> Case Study</h2>
+<p>(Image public domain <a href="https://commons.m.wikimedia.org/wiki/File:VWKombi@theBeach(byCarolineGutman).jpg" class="uri">https://commons.m.wikimedia.org/wiki/File:VWKombi@theBeach(byCarolineGutman).jpg</a>)</p>
+<p>The following case study will be used throughout the book to teach you important design concepts and principles. The reader exercises are also based on this case study.</p>
+<p><strong>Startup idea</strong></p>
+<p>The startup you work for has this idea of building a travelling social network: a mix of Twitter, TripAdvisor and Pinterest all in one site. To build this idea, there will be a web server (backend) and a mobile app (front-end). The idea is the following:</p>
+<p><em>Based on your friends recommendations, you get your own personal guides with places to visit, restaurants, hotels, etc., all based on curated content from people you trust. These guides don’t show the typical and perfect pictures from the owner of the place, but the ones your friends have uploaded. If there are too many pictures from your friends, the system selects the best pictures using an AI algorithm and shows these in the cover of the guide. The comments are limited to 200 characters, making sure recommendations go directly to the point. Future work will allow any use to post also video comment of no more than 30 seconds.</em></p>
+<p><em>In the beginning, your friends may not yet be part of this platform. To get you started with the most relevant content from your friends, you can enable the integration with TripAdvisor and we will import your reviews, your friends’ and also photos from your friends and people you follow.</em></p>
+<p><em>Another important feature is to show the location of the places (in a guide) in a map and pinpoint exactly the distance to the place and average time by public transport and walking time. All of these features are meaningless unless you can use the app offline. Thus, the app should work in offline mode and sync with the server once there is internet connection.</em></p>
+<!--
+Another idea is a publishing site that sells book chapters and whole books. As a user, you can buy a few chapters to see whether the story is interesting and stop reading if you don't find it appealing. Have you ever thought about introductory books from which you know most of the content except one chapter or two. With this platform, you can buy those individual chapters alone and focus on your needs. Start learning smart!
+-->
+<p>Your team works using an agile methodology, Scrum, and there are post-it everywhere with the list of functional features (we will go through the list of non-functional later on).</p>
+<p>[IMAGE] (Image taken by Logan Ingalls, <a href="https://commons.m.wikimedia.org/wiki/File:Scrum_task_board.jpg#mw-jump-to-license">source</a> )</p>
+<p><strong>Coding the information</strong></p>
+<p>One way to identify classes is to look at the domain model <a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>, since the concepts from the domain need to be coded in the application. Given the sales pitch above, you can easily identify the following concepts: - Lodge (Hotel, apartment, etc) - Point of interest (POI) - Restaurant - Bar - Nightclub - Person - Friend - Picture - Video - Comment - Review - Guide - etc (enough for now)</p>
+<p>The domain concepts represent important ideas of our domain. These will be coded into classes that represent the data layer of our application and contains business logic that is encapsulated within each of the classes.</p>
+<p>We proceed to explain object-oriented programming using examples this domain.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>We cannot cover the object-oriented core ideas in depth; the reader should understand this chapter as a quick reminder of concepts that are you are familiar with. Thus, if you are not familiar with the notions presented in this chapter, we would recommend the following reading material: * Reading material<a href="recap.html#fnref1">↩</a></p></li>
+<li id="fn2"><p>Python allows creation of abstract classes via meta classes. These concept is a bit more advanced and may be covered upon receiving some initial feedback.<a href="recap.html#fnref2">↩</a></p></li>
+<li id="fn3"><p>this refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.<a href="recap.html#fnref3">↩</a></p></li>
+</ol>
+</div>
+<script src="libs/inlineDisqussions.js"></script>
+<link rel="stylesheet" type="text/css" href="libs/inlineDisqussions.css" />
+<script>
+  disqus_shortname = 'kikofernandezreyes';
+  jQuery(document).ready(function() {
+    jQuery("p").inlineDisqussions({
+      identifier: 'disqussion',
+      displayCount: true,
+      highlighted: false,
+      position: 'right',
+      background: 'white',
+      maxWidth: 9999
+    });
+  });
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="grasp-principles.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": true,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -15,5 +15,3 @@ bookdown::gitbook:
 bookdown::epub_book:
   toc: true
   cover_image: img/PLFIGHTCLUB.png
-bookdown::pdf_book:
-  toc: true

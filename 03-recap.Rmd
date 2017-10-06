@@ -1,108 +1,89 @@
 # Recap
 
-This section covers basic concepts from the object oriented and functional
-paradigms. More conretely, by the end of the chapter you should be familiar with
-the following concepts from object-oriented programming in Java and Python:
+This section covers basic concepts from *type theory* and the object-oriented paradigm.
 
-- Classes,
-- objects,
-- inheritance,
-- interfaces,
-- mixins and traits,
-- abstract classes and
-- parametric classes
+Today's object-oriented paradigm borrows two concepts from functional programming: lambdas and closures. During this recap, we will go through the core ideas of object-oriented programming using Java and Python [^recap-note] 
 
-and the following concepts from functional programming in Clojure and Haskell:
+[^recap-note]: We cannot cover the object-oriented core ideas in depth; the reader should understand this chapter as a quick reminder of concepts that are you are familiar with. Thus, if you are not familiar with the notions presented in this chapter, we would recommend the following reading material:
+* Reading material
 
-- Anonymous functions / lambdas,
-- high-order functions,
-- parametric functions,
-- algebraic data types,
-- multi-functions
-- immutability
-- recursion
+By the end of this chapter, you should understand:
 
-Keep in mind that some languages have features that do not exist in other languages.
-For instance, algebraic data types exist in Haskell but not in Clojure and
-parametric classes exist in Java but not in Python. In the former case,
-algebraic data types cannot be fully build in Clojure due to its dynamic typing
-nature -- Clojure cannot typecheck the difference between data types and data values
-(we'll explain what this means later on). In the latter case, parametric functions
-do not make sense for Python due to, again, its dynamic nature. If you got the
-feeling that this does not make sense and you cannot follow, everything will be
-explain with examples soon, when we cover these basic concepts.
-Let's begin!
+* difference between Java's and Python's type systems,
+* classes and objects,
+* inheritance,
+* interfaces,
+* traits and mixins, 
+* abstract classes,
+* parametric classes and 
+* lambdas and closures
+
+<!--
+Another idea is a publishing site that sells book chapters and whole books. As a user, you can buy a few chapters to see whether the story is interesting and stop reading if you don't find it appealing. Have you ever thought about introductory books from which you know most of the content except one chapter or two. With this platform, you can buy those individual chapters alone and focus on your needs. Start learning smart!
+-->
+
+## Type systems
+
+- Talk about the main difference between Java and Python
+- duck typing
+- weakly typed
+- strongly typed
 
 ## Object-oriented concepts
 
-The concepts covered in this section are shown in Java and Python.
-
-*Note: Clojure is an impure language that mixes the functional programming
-concepts with the object-oriented paradigm. In the remaning chapters,
-we omit using the object-oriented capabilities of Clojure, since the objective
-is to learn the main benefits that each language brings to the table.*
+We proceed to explain the core ideas of object-oriented programming using examples from the case study.
 
 ### Classes
 
-Classes describe the state and behaviour of an object. The state of a class
-lives in its attributes while the behaviour is expressed via its methods.
-A class that hides its attributes with a `private` access modifier
-(remember `public`, `protected` and `private`?) protects its internal state
-from other classes. Now, the only way to update the internal state is
-via method calls (**they represent the behaviour of the object**).
-As a general advice, you should not expose the internal state of your class
-to others; you should expose your behaviour. This is what makes abstractions great,
-trust on my behaviour and not on my internal structure. My favorite
-abstractions are tasks and futures and they hide the internal details of spawning
-a new thread.
+Classes declare and implement the state and behaviour of an object. *The state of a class lives in its attributes while the behaviour is expressed via its methods*. A class that hides its attributes with a `private` access modifier (remember `public`, `protected` and `private`?) protects its internal state
+from other classes, so that the only way to update the internal state is via method calls. Method calls *represent the behaviour of the object*. As a general advice, you should not expose the internal state of your class to others; you should expose your behaviour. This is what make great abstractions easy to use and understand. For example, when using the `future` API, you do not have to think about the possible locks that may exist in the internal representation of a `CompletableFuture`, you just use it according to its defined behaviour, public methods.
 
-Classes expose their behaviour via its methods. If those methods just get
-the attributes and set them, we call them *getters* and *setters*.
+Classes expose their behaviour via their methods. If these methods just get the attributes and set them, we call them *getters* and *setters*.
 
-That's enough for
-an introduction to something that should you already now, let's see some code!
-Let's start with a typical example and work on it:
-
-Idea:
-Let's model a dog, who has as state her alertness and her behaviour is to bark
-only when she is startled. As owner, you can check if the dog is startled or relaxed.
+That's enough for a short introduction. Let's write the `Restaurant` class to remember how to write Java:
 
 **Java**
 
-The class `Dog` has as state a *private* attribute `alert`.
-(the attribute is not accesible from outside the class).
-The constructor of the class (`public Dog()`) creates a new `Dog` and sets its
+The class `Restaurant` has all attributes defined as private (not accesible from outside the class).
+The constructor of the class (`public Restaurant(...)`) creates a new `Restaurant` and sets its
 state to some default value.
-To get the state outside the class we use *getters* and *setters* methods.
-These are preceded by the words `get` and `set` following the attributes name,
-e.g. `getAlert`. This is represented in the Example 3.1.1.1.
+
+To get the state outside the class we use *getters* and *setters* methods. These are preceded by the words `get` and `set` following the attributes name,
+e.g. `getStars()` (Example 3.1.1.1).
 
 ```java
-class Dog {
-  // state of the Dog
-  private boolean alert;
+public enum Stars {
+  ONE_STAR, TWO_STAR, THREE_STAR,
+  FOUR_STAR, FIVE_STAR, ZERO_STAR
+}
+
+public class Restaurant {
+  // Michelin stars
+  private Stars stars;
+  
+  private String street;
+  private int zipcode; 
+  private Country country;
 
   // constructor
-  public Dog(){
-    this.alert = false;
+  public Restaurant(Stars stars, String street, int zipcode, Country country){
+    this.stars = stars;
+    this.street = street;
+    this.zipcode = zipcode;
+    this.country = country;
   }
 
   // getter method
-  public boolean getAlert(){
-    return this.alert;
+  public Stars getStars(){
+    return this.stars;
   }
 
   // setter method
-  public void setAlert(boolean newAlert){
-    this.alert = newAlert;
+  public void setStars(Stars stars){
+    this.stars = stars;
   }
 
-  // behaviour
-  public void bark(){
-    if (this.alert) {
-      System.out.println("Woof Woof");
-    }
-  }
+  ...
 }
 ```
 
@@ -110,18 +91,11 @@ class Dog {
 
 **Python**
 
-Python doesn't have access modifiers and uses (by convention) an underscore
-(or two, let's now go into why) to mean that the attribute is private.
-The constructor `def __init__(self, alert=False)` method takes explicitly
-an instance of itself `self` and a default argument, `alert` that, if it's not
-provided, it is set to `False`. Before we continue disecting the constructor,
-let's briefly introduce getters and setters.
+Python doesn't have access modifiers and uses (by convention) an underscore to mean that the attribute is private. The constructor `def __init__(self, alert=False)` method takes explicitly an instance of itself `self` and a default argument, `alert` that, if it's not provided, it is set to `False`. Before we continue disecting the constructor, let's briefly introduce getters and setters.
 
 Python provides a special syntax for
-getters and setters that wrap the attribute into a function with that very
-same name. For instance, the getter for the `alert` attribute is created by
-declaring a method with the name of the attribute and the `@property` on top of it.
-The body of the method just fetches the attribute.
+getters and setters that wrap the attribute into a function with that very same name. For instance, the getter for the `alert` attribute is created by
+declaring a method with the name of the attribute and the `@property` on top of it. The body of the method just fetches the attribute.
 
 ```python
     @property
@@ -130,22 +104,16 @@ The body of the method just fetches the attribute.
 ```
 
 Setters work in the same way, except that they
-are annotated with the attribute's name followed by the `setter` word,
-e.g. `@alert.setter` for the `alert` setter method.
-From now on, when we call on `self.alert` we are actually calling the getter
+are annotated with the attribute's name followed by the `setter` word, e.g. `@alert.setter` for the `alert` setter method. From now on, when we call on `self.alert` we are actually calling the getter
 method and when we assign `self.alert = True`, we are calling the setter method.
 
 
-Now, if we go back to the `__init__` method from Example 3.1.1.2,
-we can observe that this is indeed the desire behaviour.
+Now, if we go back to the `__init__` method from Example 3.1.1.2, we can observe that this is indeed the desire behaviour.
 
 **Why would we want to use getters and setters like that?**
-Young padawan, they are an abstraction. Now you only want to retrieve the data but,
-with this abstraction, you could be returning cached data that otherwise needs to be fetched
-from the network. Later on, we will learn about the decorator pattern and how
-it rocks in Python!
+Young padawan, they are an abstraction. Now you only want to retrieve the data but, with this abstraction, you could be returning cached data that otherwise needs to be fetched from the network. Later on, we will learn about the decorator pattern and how it rocks in Python!
 
-```{python PythonDog, echo=TRUE}
+```python
 class Dog:
   def __init__(self, alert=False):
     self.alert = alert
@@ -160,7 +128,7 @@ class Dog:
 
   def bark(self):
     if self.alert is True:
-      print("Woof Woof")
+      println("Woof Woof")
 ```
 
 *Example 3.1.1.2 Introductory example to Python*
@@ -196,7 +164,7 @@ dog.bark();
 
 Creation of an object is similar to Java:
 
-```{python, eval=FALSE, include=FALSE}
+```python
 dog = Dog()
 ```
 
@@ -212,28 +180,7 @@ to change its state and make her bark:
 ```python
 dog.alert = True
 dog.bark()
-```
-
-```{python, echo=FALSE}
-class Dog:
-  def __init__(self, alert=False):
-    self.alert = alert
-
-  @property
-  def alert(self):
-    return self.__alert
-
-  @alert.setter
-  def alert(self, new_alert):
-    self.__alert = new_alert
-
-  def bark(self):
-    if self.alert is True:
-      print("Woof Woof")
-
-dog = Dog()      
-dog.alert = True
-dog.bark()
+# prints "Woof Woof"
 ```
 
 Notice that in this case, we could have set the initial state of the dog
@@ -242,28 +189,7 @@ and would not have had to use a setter:
 ```python
 dog = Dog(True)
 dog.bark()
-```
-
-```{python, echo=FALSE}
-class Dog:
-  def __init__(self, alert=False):
-    self.alert = alert
-
-  @property
-  def alert(self):
-    return self.__alert
-
-  @alert.setter
-  def alert(self, new_alert):
-    self.__alert = new_alert
-
-  def bark(self):
-    if self.alert is True:
-      print("Woof Woof")
-
-dog = Dog()      
-dog = Dog(True)
-dog.bark()
+# prints "Woof Woof"
 ```
 
 ### Inheritance
