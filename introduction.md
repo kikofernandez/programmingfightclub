@@ -1,30 +1,47 @@
 # Introduction
 
----
-
-TODO:
-
-- editing
-
-----
-
-You worked really hard for over a year in the next billion dollar web app in a small startup: the CEO, Johan, seems happy that the product is (almost) feature complete, the designer, Anders, is happy with the UX and graphics and the CTO, Pontus, just wants to press the red button and release the product. You tell them to wait 10 more minutes, the unit tests, integration tests and system tests are still running (adding tests was a long battle with everyone because it slowed down the project quite a lot, but you are a good engineer and tests will catch many errors now and in the future).
+You worked really hard for over a year in the next billion dollar web app in a
+small startup: the CEO, Johan, seems happy that the product is (almost) feature
+complete, the designer, Anders, is happy with the UX and graphics and the CTO, Pontus,
+just wants to press the red button and release the product. You tell them to wait
+10 more minutes, the unit tests, integration tests and system tests are still running
+(adding tests was a long battle with management because it slowed down the project
+quite a lot, but you are a good engineer and tests will catch many errors in the future).
 
 - Ding, ding, ding (sound)
 
-You look at the screen, all 142 tests are green! You tell Pontus to push the red button; deployment scripts start, your software is being installed on all the AWS servers the company could afford, a few database servers with replication for faster reads and a single leader for the writes, load balancers, reverse proxy servers for serving static data and another bunch of servers running your application. After a few minutes, the deployment is a success, your baby is ALIVE and by tomorrow morning your product will be featured in all the Swedish newspapers (you live in Stockholm, the European capital for startups).
+You look at the screen, all 142 tests are green! You tell Pontus to push the red button;
+deployment scripts start, your software is being installed on all the AWS servers the
+company could afford, a few database servers with replication for faster reads and
+a single leader for the writes, load balancers, reverse proxy servers for serving
+static data and another bunch of servers running your application. After a few minutes,
+the deployment is a success, your baby is ALIVE and by tomorrow morning your product will
+be featured in all the Swedish newspapers (you live in Stockholm, the European capital for startups).
 
-The next day comes, you try the app and observe that the system is just f************** slow. It seems that connections time out and you observe in your monitoring tools that the server is not processing that many requests. What the hell is going on!?
+The next day comes, you try the app and observe that the system is just f****** slow.
+It seems that connections time out and you observe in your monitoring tools that the
+server is not processing that many requests. *What the hell is going on!?*
 
-The CTO has the intuition that it could be related to that lock that was introduced for the concurrent writes to the database and it may be as simple as releasing the lock. If his intuition is right, you'll fix the code, add the test that should have covered that case and be presto in 5 min to re-deploy the application.
+The CTO has the intuition that it could be related to the query that
+updates a bunch of fields from different objects and needs to save them into
+the database, atomically. There were many things going on there and, to guarantee
+that all objects (tables) were seen as an atomic update, someone in the team
+introduced a lock on that method. You think that the first thing to check is
+if you are *releasing* the lock. If his intuition is right, you'll fix the code,
+add the test that should have covered that case and be presto in 5 min to re-deploy the application.
 
-There is one problem though, the code doesn't have a well defined structure and the lock somehow was passed inside a lambda -- you had to try out lambdas in Java, they are cool -- so you have no way to releasing the lock directly. More over, you are passing a bunch of lambdas and there's no easy way to tell which one has the damn lock! Shit, if only you knew when made sense to use lambdas and all the cool features of the language! .
+There is one problem though, the code doesn't have a well defined structure and the
+lock somehow was passed inside a lambda - someone had to try out lambdas in Java,
+they are cool - so you have no way to releasing the lock directly. Moreover,
+you are passing a bunch of lambdas and there's no easy way to tell which one has
+the damn lock! Shit, if only you knew when made sense to use lambdas and all the
+cool features of the language!
 
 **How did you end up in this situation?**
 
 You coded a system considering all the functional requirements and the architecture but you failed to create a good design. The hype of new features seemed like a silver bullet and everyone is using them (same thing happens with new frameworks all the time). The problem is understanding when to use those shiny new features and how they affect your design.
 
-## Software Design 
+## Software Design
 
 Many books explain software design with focus on one language and assume that this knowledge can be "easily" extrapolated to other languages and/or paradigms. While it is true that you have to start from somewhere, it is also true that as soon as try to put design patterns into practice in another language their explanations may not be easy to follow or may not even make sense, from the language's perspective.
 
@@ -76,3 +93,5 @@ A design pattern is a well-designed solution to a common problem. Design pattern
 - trade-offs of the pattern
 
 In this book, we follow this structure together with auxiliary UML class diagrams (explained in later chapters).
+
+[Next chapter: Case Study](case-study.html)
