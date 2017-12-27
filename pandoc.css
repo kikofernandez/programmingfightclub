@@ -134,6 +134,11 @@ pre {
     word-wrap: break-word;
 }
 
+pre.sourceCode {
+    background-color: #eff2f5;
+    padding: 10pt;
+}
+
 b, strong {
     font-weight: bold;
 }
