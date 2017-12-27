@@ -1,6 +1,6 @@
 # Case Study
 
-![](assets/VWKombi@theBeachbyCarolineGutman640.jpg)
+![](MEDIA/assets/VWKombi@theBeachbyCarolineGutman640.jpg)
 
 (Image public domain https://commons.m.wikimedia.org/wiki/File:VWKombi@theBeach(byCarolineGutman).jpg)
 

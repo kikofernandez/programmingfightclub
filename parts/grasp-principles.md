@@ -65,7 +65,7 @@ public class Guide {
 ```
 **Listing 1.1 High coupled `Guide` class**
 
-![](assets/grasp/GuideUML.png)
+![](MEDIA/assets/grasp/GuideUML.png)
 
 **Fig.1.1 High coupled `Guide` class**
 
@@ -83,7 +83,7 @@ So, given this poor design (Fig 1.1, Listing 1.1), how could we reduce coupling 
 
  For example, a `Guide` does not need to be concerned about its visibility and we can group different places (restaurants, hotels, bars, etc) contained in a guide under the idea of a point of interest (Fig. 1.2). These two changes reduce the responsibilities of the `Guide` class, thus reducing coupling (Listing 1.2).
 
-![](assets/grasp/LooselyGuideUML.png)
+![](MEDIA/assets/grasp/LooselyGuideUML.png)
 
 **Fig. 1.2 Loosely coupled `Guide` class**
 
@@ -130,7 +130,7 @@ Cohesion refers to keeping the responsibilities of the class focused. A cohesive
 
 Often, you'll see code that contains many methods, attributes, and a lot of logic and magic. This code builds the antipattern known as "The Blob",  which results in high coupled code with low cohesion, e.g. Fig. 1.3.1.
 
-![](assets/grasp/TheBlob.png)
+![](MEDIA/assets/grasp/TheBlob.png)
 
 **Fig. 1.3.1 "The Blob", a class that swallows everything**
 
@@ -178,7 +178,7 @@ public class Review {
 
 **Listing 1.3.2 `Review` class**
 
-![](assets/grasp/Review.png)
+![](MEDIA/assets/grasp/Review.png)
 
 **Fig. 1.3.2  `Review` class diagram**
 
@@ -222,7 +222,7 @@ public class Review {
 
 **Listing 1.3.3 Refactored `Review` class**
 
-![](assets/grasp/RefactoredReview.png)
+![](MEDIA/assets/grasp/RefactoredReview.png)
 
 **Fig. 1.3.3 Refactored `Review` class**
 
@@ -267,7 +267,7 @@ Lets see this with an example: in the case study we have hotels, restaurants, ba
 * `Rating` class, and
 * `Image` class
 
-![](assets/grasp/Comment.png)
+![](MEDIA/assets/grasp/Comment.png)
 
 **Fig. 1.4 Relation between comments, hotels, images, and ratings**
 
@@ -297,7 +297,7 @@ c. `LatitudeLongitude` class
 
 d. `Guide` class
 
-![](assets/grasp/UsersGuidePOI.png)
+![](MEDIA/assets/grasp/UsersGuidePOI.png)
 
 **Fig. 1.5 Relation between users, guides, point of interest, and comments**
 
@@ -326,7 +326,7 @@ c. `Review` object
 
 Most applications have a user interface (UI), which limits the actions that users can take. The user interface needs to communicate to other layers of your software. This principle tell us which object receives and handles events / actions coming from the UI. For example, a mobile application talks to the server via a [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer), i.e. whenever the user clicks on an icon on the phone, the mobile application sends a packet to your server, which responds with the requested information. Using this principle, you can decouple the user interface from the class that takes action on the event.
 
-![](assets/grasp/Controller.png)
+![](MEDIA/assets/grasp/Controller.png)
 
 **Fig. 1.6 Controller**
 
@@ -344,7 +344,7 @@ As we saw in the recap section, this polymorphism refers to classes that impleme
 
 This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single `User` class with an attribute named `confirmedIdentity`  which sets the flag to true when the user has confirmed its identity. This design works for two kind of users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company; companies cannot create accounts, their identity is always confirmed (the cannot exist companies where the identity is not confirmed, and multiple employees from the company want to sign in using different password, one per employee. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute `confirmedIdentity` for a company's profile because we know that this will always be true. The reuse of a confirmed user as a company leaves dangling the possibility of programming mistakes where a company could be created but without a confirmed identity. The current code before the companies profiles were added are in Listing 1.7.1, Fig. 1.7.1.
 
-![](assets/grasp/UserBorePolymorphism.png)
+![](MEDIA/assets/grasp/UserBorePolymorphism.png)
 
 **Fig. 1.7.1 `User` code before existence of companies profiles**
 
@@ -442,13 +442,13 @@ To the untrained eye, after applying the principle, it may seem as if two object
 
 *A guide can be seen by multiple friends and each of your friends may see a different cover image.*
 
-![](assets/grasp/IndirectionDuplication.png)
+![](MEDIA/assets/grasp/IndirectionDuplication.png)
 
 **Fig. 1.8.1 Duplication of guides**
 
 A poor strawman's solution duplicates the guide for each friend and recalculates the cover image for each friend. This is a really bad design, as it's redundant, consumes memory, and duplicates data. Moreover, an update on one guide's description involves updating all copies of that guide.
 
-![](assets/grasp/IndirectionAfterApplication.png)
+![](MEDIA/assets/grasp/IndirectionAfterApplication.png)
 
 **Fig. 1.8.2 Example after application of indirection principle**
 
@@ -478,7 +478,7 @@ The term "pure fabrication" means to make something up. You should use this prin
 
 The principle adds a new indirection between two domain objects that would otherwise be directly connected (coupled). The indirection means adding a new object that mediates the communication between two other entities. This mediator is not part of the domain, that is, it is a software concept. Examples of this principle are: object pools, database classes, and pretty much any class that sits in between two domain objects. This principle is quite common in the adapter pattern (Fig. 1.9)
 
-![](assets/grasp/AdapterPureFabrication.png)
+![](MEDIA/assets/grasp/AdapterPureFabrication.png)
 
 **Fig. 1.9 Adapter pattern using pure fabrication**
 
@@ -511,7 +511,7 @@ This principle is easy to apply and, in practice, requires you to be good at for
 
 The core idea of this principle is to shield your code in places where you expect changes, let that be via interfaces or other means. For example, from the case study, if we were to provide special guides that users can buy, we would need to integrate with a payment platform. If you are not sure which one is best, you'll end up picking one that seems good enough, and call their methods where necessary. However, what happens when CEO Johan finds out that there is a new platform that has lower commissions? He wants you to change to this better option. Refactoring may not be so easy because both payment solutions have different libraries with different APIs. Now, you need to change all those specific method calls from the old library to the new library, possibly including changes in the workflow.
 
-![](assets/grasp/ProtectedVariation.png)
+![](MEDIA/assets/grasp/ProtectedVariation.png)
 
 **Fig. 1.10 Example of protected variation principle**
 
