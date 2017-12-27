@@ -11,28 +11,29 @@ CSS=pandoc.css
 
 all: epub web
 
-epub:
+# Building and cleaning an .epub file
+epub: clean
 	@mkdir -p $(EPUB_PROD)/parts
-	@cp parts/$@.md $(EPUB_PROD)/parts
-	@sed -ie 's/MEDIA//g' $(EPUB_PROD)/parts/$@.md
-	@pandoc -s --toc metadata.yaml $(EPUB_PROD)$/parts/(DEPENDENCIES:=.md) -o book.epub
-	# pandoc -s --toc metadata.yaml introduction.md case-study.md \
-	# recap.md grasp-principles.md -o test.epub
+	@cp -r parts $(EPUB_PROD)
+	@find $(EPUB_PROD)/./ -type f -exec sed -i '' -e 's/MEDIA/..\/..\//g' {} \;
+	@cd $(EPUB_PROD)/parts && pandoc -s --toc ../../metadata.yaml $(DEPENDENCIES:=.md) -o ../book.epub
+epub_clean:
+	@rm -rf $(EPUB_PROD)
 
-web: web_clean $(CSS) $(DEPENDENCIES)
+# Building the web version
+web: web_clean pandoc $(DEPENDENCIES)
 
 web_clean:
 	@rm -rf $(WEB_PROD)
 
-$(CSS):
-	@mkdir -p $(WEB_PROD)/parts && cp pandoc.css $(WEB_PROD)
+pandoc:
+	@mkdir -p $(WEB_PROD)/parts && cp $(CSS) $(WEB_PROD)
 
 $(DEPENDENCIES):
 	@cp parts/$@.md $(WEB_PROD)/parts
-	@sed -ie 's/MEDIA/../g' $(WEB_PROD)/parts/$@.md
+	@sed -i '' -e 's/MEDIA/../g' $(WEB_PROD)/parts/$@.md
 	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md --css pandoc.css -o $(WEB_PROD)/$@.html
 
-.PHONY: $(DEPENDENCIES) $(CSS)
+clean: web_clean epub_clean
 
-clean:
-	@rm -rf $(WEB_PROD) $(EPUB_PROD)
+.PHONY: clean $(DEPENDENCIES) pandoc web_clean epub_clean epub
