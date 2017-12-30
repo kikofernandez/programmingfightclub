@@ -1,14 +1,17 @@
 # Case Study
 
+<div class="figure">
 ![](MEDIA/assets/VWKombi@theBeachbyCarolineGutman640.jpg)
-
+<p>
 (Image public domain https://commons.m.wikimedia.org/wiki/File:VWKombi@theBeach(byCarolineGutman).jpg)
+</p>
+</div>
 
-The following case study will be used throughout the book to teach you important design concepts and principles. The reader exercises are also based on this case study.
+<span class="firstcharacter">T</span> he following case study will be used throughout the book to teach you important design concepts and principles. The reader exercises are also based on this case study.
 
-**Startup idea**
+### Startup idea
 
-The startup you work for has this idea of building a travelling social network: a mix of Twitter, TripAdvisor and Pinterest all in one site.
+<span class="firstcharacter">T</span> he startup you work for has this idea of building a travelling social network: a mix of Twitter, TripAdvisor and Pinterest all in one site.
 
 To build this idea, there will be a web server (backend) and a  mobile app (front-end). The backend is were your logic lives: getting information from database, handling submission of pictures, resizing algorithm, AI for choosing the most relevant guide cover, recommendation system, etc. The front-end talks to the server via a REST API, shows the information on screen, handles cases with poor internet connection, and syncs with the server. In the examples of this book, we will mainly focus on the backend, although mobile devices are getting faster and many of the design patterns covered in the book are also well suited for programming mobile devices.
 
@@ -32,11 +35,12 @@ Your team uses an agile methodology, *Scrum*, and there are post-it everywhere w
 
 -->
 
-**How to get started?**
+#### **How to get started?**
 
-More often than not, when given a big task, such as the case study from above, you may be wondering how you should begin to work on this behemoth task. My recommendation is to start by identifying classes and build, little by little, the layers of abstraction that your software requires [^1].
+<span class="firstcharacter">M</span> ore often than not, when given a big task, such as the case study from above, you may be wondering how you should begin to work on this behemoth task. My recommendation is to start by identifying classes and build, little by little, the layers of abstraction that your software requires [^1].
 
 One way to identify classes is to look at the *domain model* [^2], since the concepts from the domain need to be coded in the application. Given the sales pitch above, you can easily identify the following concepts:
+
 - Lodge (Hotel, apartment, etc)
 - Point of interest (POI)
 - Restaurant

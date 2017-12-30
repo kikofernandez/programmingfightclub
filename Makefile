@@ -7,6 +7,7 @@ DEPENDENCIES=introduction case-study recap grasp-principles
 # Production ready folder for web and epub
 WEB_PROD=web_prod
 EPUB_PROD=epub_prod
+ASSETS=assets
 CSS=pandoc.css
 
 all: epub web
@@ -15,8 +16,8 @@ all: epub web
 epub: clean
 	@mkdir -p $(EPUB_PROD)/parts
 	@cp -r parts $(EPUB_PROD)
-	@find $(EPUB_PROD)/./ -type f -exec sed -i '' -e 's/MEDIA/..\/..\//g' {} \;
-	@cd $(EPUB_PROD)/parts && pandoc -s --toc ../../metadata.yaml $(DEPENDENCIES:=.md) -o ../book.epub
+	@find $(EPUB_PROD)/./ -type f -exec sed -i '' -e 's/MEDIA/./g' {} \;
+	@pandoc -s --toc metadata.yaml $(addprefix $(EPUB_PROD)/parts/, $(DEPENDENCIES:=.md)) -o $(EPUB_PROD)/book.epub
 epub_clean:
 	@rm -rf $(EPUB_PROD)
 
@@ -27,12 +28,12 @@ web_clean:
 	@rm -rf $(WEB_PROD)
 
 pandoc:
-	@mkdir -p $(WEB_PROD)/parts && cp $(CSS) $(WEB_PROD)
+	@mkdir -p $(WEB_PROD)/parts && cp $(ASSETS)/$(CSS) $(WEB_PROD)
 
 $(DEPENDENCIES):
 	@cp parts/$@.md $(WEB_PROD)/parts
 	@sed -i '' -e 's/MEDIA/../g' $(WEB_PROD)/parts/$@.md
-	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md --css pandoc.css -o $(WEB_PROD)/$@.html
+	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c pandoc.css -o $(WEB_PROD)/$@.html
 
 clean: web_clean epub_clean
 

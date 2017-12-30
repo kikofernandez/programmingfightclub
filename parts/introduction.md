@@ -45,8 +45,10 @@ You coded a system considering all the functional requirements and the architect
 
 Many books explain software design with focus on one language and assume that this knowledge can be "easily" extrapolated to other languages and/or paradigms. While it is true that you have to start from somewhere, it is also true that as soon as try to put design patterns into practice in another language their explanations may not be easy to follow or may not even make sense, from the language's perspective.
 
+<div class="figure">
 ![](https://imgs.xkcd.com/comics/code_quality.png)
-(image from https://xkcd.com/1513/)
+<p>(Image from https://xkcd.com/1513/)</p>
+</div>
 
 Our approach in this book is much more practical and can only be extrapolated to other languages once there is a common understanding of how the type system interplays with the most common software design patterns.
 
@@ -66,8 +68,10 @@ Software design is all about making decisions.
 
 Every problem involves taking small and big decisions and these influence the final outcome of your software. For instance, the "simple" task of choosing a programming language has a tremendous impact on your software. Choose a dynamic language and you'll find quite a lot of errors at runtime (even if you use a test-driven development approach). Other example is choosing between a object-oriented or a functional language. You can always write the same piece of software using one paradigm or the other. However, one of them will bring inherent benefits while the other one puts some extra burden in your code.
 
+<div class="figure">
 ![](https://imgs.xkcd.com/comics/code_quality_2.png)
-(Image from http://xkcd.com/1695/)
+<p>(Image from http://xkcd.com/1695/)</p>
+</div>
 
 ### What is a good design?
 
