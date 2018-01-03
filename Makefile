@@ -1,4 +1,4 @@
-DEPENDENCIES=introduction case-study recap grasp-principles
+DEPENDENCIES=preface introduction case-study recap grasp-principles
 
 # Media path for epub and web
 # EPUB_MEDIA=
@@ -8,7 +8,6 @@ DEPENDENCIES=introduction case-study recap grasp-principles
 WEB_PROD=web_prod
 EPUB_PROD=epub_prod
 ASSETS=assets
-CSS=pandoc.css
 
 all: epub web
 
@@ -28,7 +27,7 @@ web_clean:
 	@rm -rf $(WEB_PROD)
 
 pandoc:
-	@mkdir -p $(WEB_PROD)/parts && cp $(ASSETS)/$(CSS) $(WEB_PROD)
+	@mkdir -p $(WEB_PROD)/parts && cp $(ASSETS)/pandoc.css $(WEB_PROD)
 
 $(DEPENDENCIES):
 	@cp parts/$@.md $(WEB_PROD)/parts
