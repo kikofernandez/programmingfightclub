@@ -135,9 +135,7 @@ hr {
 pre, code, kbd, samp {
     color: #000;
     font-family: 'Inconsolata', monospace;
-    /* font-family: monospace, monospace; */
-    /* _font-family: 'courier new', monospace; */
-    font-size: 0.98em;
+    font-size: 0.9em;
 }
 
 pre {

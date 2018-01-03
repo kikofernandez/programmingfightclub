@@ -11,7 +11,8 @@ The first part of the book starts with a reminder of UML notation and basic conc
 programming. The second part explains each GRASP principle with examples from
 a case study and compare and contrast the benefits and the approaches of each
 language. The third part analyses real world, open source projects and localises
-the points where GRASP principles have been used.
+the points where GRASP principles have been used. In the last Part, you can
+read the solution to the exercises proposed throughout the book.
 
 Part I:
 
