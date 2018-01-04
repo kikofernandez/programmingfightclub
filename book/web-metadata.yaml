@@ -6,6 +6,7 @@ stylesheet: assets/pandoc.css
 header-includes: '<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Inconsolata" rel="stylesheet">
   <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+  <!--
   <style type="text/css">
          #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
   </style>
@@ -17,5 +18,6 @@ header-includes: '<link href="https://fonts.googleapis.com/css?family=Inconsolat
        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
        </div>
      </form>
-  </div>'
+  </div>
+  -->'
 ...

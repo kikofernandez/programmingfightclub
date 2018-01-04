@@ -9,7 +9,7 @@ DOCS=../docs
 all: epub web
 
 # Building and cleaning an .epub file
-epub: clean
+epub: epub_clean
 	@mkdir -p $(EPUB_PROD)/parts
 	@cp -r parts $(EPUB_PROD)
 	@find $(EPUB_PROD)/./ -type f -exec sed -i '' -e 's/MEDIA/./g' {} \;
@@ -18,9 +18,12 @@ epub_clean:
 	@rm -rf $(EPUB_PROD)
 
 # Building the web version
-web: web_clean pandoc $(DEPENDENCIES)
+web_test: web_clean pandoc $(DEPENDENCIES) local
+
+web_prod: web_clean pandoc $(DEPENDENCIES)
 	@mkdir -p $(DOCS)
 	@cp -r ../web_assets $(DOCS)
+	@cp -r assets $(DOCS)
 	@mv $(WEB_PROD)/* $(DOCS)
 	@cp parts/index.html $(DOCS)/index.html
 	@rm -rf $(DOCS)/parts
@@ -29,14 +32,19 @@ web_clean:
 	@rm -rf $(WEB_PROD) $(DOCS)
 
 pandoc:
-	@mkdir -p $(WEB_PROD)/parts # && cp $(ASSETS)/pandoc.css $(WEB_PROD)
+	@mkdir -p $(WEB_PROD)/parts #&& cp $(ASSETS)/pandoc.css $(WEB_PROD)
 
 $(DEPENDENCIES):
 	@mkdir -p $(WEB_PROD)/$@
 	@cp parts/$@.md $(WEB_PROD)/parts
 	@sed -i '' -e 's/MEDIA/../g' $(WEB_PROD)/parts/$@.md
-	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c assets/pandoc.css -o $(WEB_PROD)/$@/index.html
+	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c "/assets/pandoc.css" -o $(WEB_PROD)/$@/index.html
+
+local:
+	for chapter in $(DEPENDENCIES); do \
+	  pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$$chapter.md -c "../assets/pandoc.css" -o $(WEB_PROD)/$$chapter.html ; \
+	done
 
 clean: web_clean epub_clean
 
-.PHONY: clean $(DEPENDENCIES) pandoc web_clean epub_clean epub
+.PHONY: clean $(DEPENDENCIES) pandoc web_clean epub_clean epub web_prod local

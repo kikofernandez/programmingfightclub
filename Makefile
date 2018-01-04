@@ -2,7 +2,10 @@ SRC=book
 
 all: web
 
-web:
+web_prod:
+	make -C $(SRC) $@
+
+web_test:
 	make -C $(SRC) $@
 
 clean:
