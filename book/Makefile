@@ -20,19 +20,22 @@ epub_clean:
 # Building the web version
 web: web_clean pandoc $(DEPENDENCIES)
 	@mkdir -p $(DOCS)
-	@mv $(WEB_PROD)/parts/* $(DOCS)
+	@cp -r ../web_assets $(DOCS)
+	@mv $(WEB_PROD)/* $(DOCS)
+	@cp parts/index.html $(DOCS)/index.html
+	@rm -rf $(DOCS)/parts
 
 web_clean:
-	@rm -rf $(WEB_PROD)
+	@rm -rf $(WEB_PROD) $(DOCS)
 
 pandoc:
-	@mkdir -p $(WEB_PROD)/parts && cp $(ASSETS)/pandoc.css $(WEB_PROD)
+	@mkdir -p $(WEB_PROD)/parts # && cp $(ASSETS)/pandoc.css $(WEB_PROD)
 
 $(DEPENDENCIES):
 	@mkdir -p $(WEB_PROD)/$@
 	@cp parts/$@.md $(WEB_PROD)/parts
 	@sed -i '' -e 's/MEDIA/../g' $(WEB_PROD)/parts/$@.md
-	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c pandoc.css -o $(WEB_PROD)/$@/index.html
+	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c assets/pandoc.css -o $(WEB_PROD)/$@/index.html
 
 clean: web_clean epub_clean
 
