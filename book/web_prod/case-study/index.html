@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Kiko Fernandez-Reyes" />
+  <title>GRASP principles</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="pandoc.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> <link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Inconsolata" rel="stylesheet"> <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+  <style type="text/css"> #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;} </style>
+  <div id="mc_embed_signup">
+  <form action="https://wordpress.us16.list-manage.com/subscribe/post?u=a7901243cc48256f8de50e906&amp;id=746329749a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+  <div id="mc_embed_signup_scroll">
+  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+  <input type="text" name="b_a7901243cc48256f8de50e906_746329749a" tabindex="-1" value="">
+  </div>
+  <div class="clear">
+  <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+  </div>
+  </div>
+  </form>
+  </div>
+</head>
+<body>
+<div id="header">
+<h1 class="title">GRASP principles</h1>
+<h2 class="author">Kiko Fernandez-Reyes</h2>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#case-study">Case Study</a><ul>
+<li><a href="#startup-idea">Startup idea</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="case-study">Case Study</h1>
+<div class="figure">
+<img src="../assets/VWKombi@theBeachbyCarolineGutman640.jpg" />
+<p>
+(Image public domain https://commons.m.wikimedia.org/wiki/File:VWKombi@theBeach(byCarolineGutman).jpg)
+</p>
+</div>
+<p><span class="firstcharacter">T</span> he following case study will be used throughout the book to teach you important design concepts and principles. The reader exercises are also based on this case study.</p>
+<h3 id="startup-idea">Startup idea</h3>
+<p><span class="firstcharacter">T</span> he startup you work for has this idea of building a travelling social network: a mix of Twitter, TripAdvisor and Pinterest all in one site.</p>
+<p>To build this idea, there will be a web server (backend) and a mobile app (front-end). The backend is were your logic lives: getting information from database, handling submission of pictures, resizing algorithm, AI for choosing the most relevant guide cover, recommendation system, etc. The front-end talks to the server via a REST API, shows the information on screen, handles cases with poor internet connection, and syncs with the server. In the examples of this book, we will mainly focus on the backend, although mobile devices are getting faster and many of the design patterns covered in the book are also well suited for programming mobile devices.</p>
+<p>The startup that you work for has the following idea:</p>
+<ul>
+<li><p>Based on your friends recommendations, you get your own personal guides with places to visit, restaurants, hotels, etc., all based on curated content from people you trust. These guides don't show the typical and perfect pictures from the owner of the place, but the ones your friends have uploaded. If there are too many pictures from your friends, the system selects the best pictures using an AI algorithm and shows these in the cover of the guide. The comments are limited to 200 characters, making sure recommendations go directly to the point. Future work will allow any use to post also video comment of no more than 30 seconds.*</p></li>
+<li><p>Another important feature is to show the location of the places (in a guide) in a map and pinpoint the exact distance to the place and average time by public transport and walking time.*</p></li>
+<li><p>All of these features are meaningless unless you can use the app offline. Thus, the app should work in offline mode and sync with the server once there is internet connection.*</p></li>
+<li><p>In the beginning, your friends may not yet be part of this platform. If this is the case, one way to get you started with relevant content from your friends is to enable the integration with TripAdvisor, where we will import your reviews, your friends' and also photos from your friends and people you follow.*</p></li>
+</ul>
+<!--
+Another idea is a publishing site that sells book chapters and whole books. As a user, you can buy a few chapters to see whether the story is interesting and stop reading if you don't find it appealing. Have you ever thought about introductory books from which you know most of the content except one chapter or two. With this platform, you can buy those individual chapters alone and focus on your needs. Start learning smart!
+
+Your team uses an agile methodology, *Scrum*, and there are post-it everywhere with the list of functional features (we will go through the list of non-functional later on).
+
+![](/assets/Scrum_task_board.jpg)
+(Image taken by Logan Ingalls, [source](https://commons.m.wikimedia.org/wiki/File:Scrum_task_board.jpg#mw-jump-to-license) )
+
+-->
+<h4 id="how-to-get-started"><strong>How to get started?</strong></h4>
+<p><span class="firstcharacter">M</span> ore often than not, when given a big task, such as the case study from above, you may be wondering how you should begin to work on this behemoth task. My recommendation is to start by identifying classes and build, little by little, the layers of abstraction that your software requires <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>One way to identify classes is to look at the <em>domain model</em> <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>, since the concepts from the domain need to be coded in the application. Given the sales pitch above, you can easily identify the following concepts:</p>
+<ul>
+<li>Lodge (Hotel, apartment, etc)</li>
+<li>Point of interest (POI)</li>
+<li>Restaurant</li>
+<li>Bar</li>
+<li>Nightclub</li>
+<li>Person</li>
+<li>Friend</li>
+<li>Picture</li>
+<li>Video</li>
+<li>Comment</li>
+<li>Review</li>
+<li>Guide</li>
+<li>etc (enough for now)</li>
+</ul>
+<p>The domain concepts represent important ideas of our domain. These will be coded into classes that represent the data layer of our application and contains business logic that is encapsulated within each of the classes.</p>
+<p>We proceed to explain object-oriented programming using examples this domain.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Code is always in constant flux: it needs to be maintained and improved. Your design will change too. A good design helps you to create software that is flexible and as much pain free as possible (with respect to refactorings).<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>This refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+---
+title: GRASP principles
+author: Kiko Fernandez-Reyes
+rights: 2017 Kiko Fernandez-Reyes, CC-BY-SA 4.0 International
+stylesheet: assets/pandoc.css
+header-includes: '<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Inconsolata" rel="stylesheet">
+  <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+         #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+  </style>
+  <div id="mc_embed_signup">
+     <form action="https://wordpress.us16.list-manage.com/subscribe/post?u=a7901243cc48256f8de50e906&amp;id=746329749a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+     <div id="mc_embed_signup_scroll">
+       <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+       <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a7901243cc48256f8de50e906_746329749a" tabindex="-1" value=""></div>
+       <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+       </div>
+     </form>
+  </div>'
+...
