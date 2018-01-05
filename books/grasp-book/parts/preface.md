@@ -17,7 +17,7 @@ read the solution to the exercises proposed throughout the book.
 
 Part I:
 
-* [Chapter 1: Introduction](/asd-book/docs/introduction/)
+* [Chapter 1: Introduction](/asd-book/grasp-principles/introduction/)
 * Chapter 2: UML <span style="color: #9d85b5">(COMING SOON)</span>
 * Chapter 3: Object-oriented Reminder <span style="color: #9d85b5">(COMING SOON)</span>
 
@@ -37,7 +37,7 @@ Part IV:
 
 * Solution to exercises <span style="color: #9d85b5">(COMING SOON)</span>
 
-<link href="http://cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
 #mc_embed_signup .button {
