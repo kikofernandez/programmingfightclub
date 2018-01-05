@@ -1,0 +1,504 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Kiko Fernandez-Reyes" />
+  <title>GRASP principles for the Object-oriented mind</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="/asd-book/grasp-principles/assets/pandoc.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> <link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Inconsolata" rel="stylesheet">
+</head>
+<body>
+<div id="header">
+<h1 class="title">GRASP principles for the Object-oriented mind</h1>
+<h2 class="author">Kiko Fernandez-Reyes</h2>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#grasp-principles">GRASP principles</a><ul>
+<li><a href="#low-coupling">Low Coupling</a></li>
+<li><a href="#high-cohesion">High Cohesion</a></li>
+<li><a href="#creator">Creator</a></li>
+<li><a href="#information-expert">Information Expert</a></li>
+<li><a href="#controller">Controller</a></li>
+<li><a href="#polymorphism">Polymorphism</a></li>
+<li><a href="#indirection">Indirection</a></li>
+<li><a href="#pure-fabrication">Pure Fabrication</a></li>
+<li><a href="#protected-variation">Protected Variation</a></li>
+<li><a href="#pure-functions">Pure functions</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="grasp-principles">GRASP principles</h1>
+<p>Before you learn advanced design patterns, it's useful to look at common principles / recommendation rules to guide your design. By following these principles, you will design and write code that's easy to understand, maintain, and refactor.</p>
+<p>By the end of this chapter you will have grok these principles and they will become second nature to you. Next, we introduce these principles ( which can be applied to any object-oriented language):</p>
+<ul>
+<li>low coupling,</li>
+<li>high cohesion,</li>
+<li>creator,</li>
+<li>information expert,</li>
+<li>controller,</li>
+<li>polymorphism,</li>
+<li>indirection,</li>
+<li>pure fabrication, and</li>
+<li>protected variation.</li>
+</ul>
+<p>There are exercises for each principle at the end of the chapter to help you understand the difference between them.</p>
+<h2 id="low-coupling">Low Coupling</h2>
+<p>This principle states that a class should only depend on the minimum and required amount of classes, no more and no less. A low coupled class is easy to maintain and refactor because it interacts with a minimum amount of objects.</p>
+<p>When a design is low coupled, changes in a class do not spread across multiple classes. On the opposite side, high coupled designs contain classes with many dependencies to other objects, which makes them rigid and difficult to maintain.</p>
+<!--
+ and has low cohesion, i. e. it is not focused, has too many responsibilities and does too many things.
+-->
+<p>In the beginning of your journey to become a better programmer, it's difficult to acknowledge this principle until you deal with its counterpart, a high coupled design, a.k.a. a bowl of spaghetti code. If you find yourself with code that is rigid, hard to maintain and even more difficult to deal with when adding new features or making changes, then you are the owner of a high coupled design, and a refactoring is advisable.</p>
+<p>To make the idea of coupling more concrete, we define coupling as any code that satisfies items in the following list:</p>
+<ul>
+<li>the class has an attribute to another object,</li>
+<li>calls on methods of other objects,</li>
+<li>inherits from another class,</li>
+<li>implements one or more interfaces, and</li>
+<li>inherits mixins</li>
+</ul>
+<p>The reader should notice that there will always exist coupling but, dependencies to stable items are not problematic - standard library - because these have been well designed and do not change often. In general, the problem is not coupling per se, but creating a coupled design to unstable elements.</p>
+<p>An example of a poor design drawing ideas from the case study is shown in Fig. 1.1, Listing 1.1. In this example, guides contain images, visibility (who can watch the content), title, description, and reviews of restaurants, hotels, pubs, things to do, etc.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> Guide {
+  <span class="kw">private</span> <span class="bu">List</span>&lt;<span class="bu">Image</span>&gt; images;
+  <span class="kw">private</span> <span class="bu">List</span>&lt;User&gt; visibility;
+  <span class="kw">private</span> <span class="dt">boolean</span> isPublic;
+  <span class="kw">private</span> <span class="dt">boolean</span> friendsOnly;
+  <span class="kw">private</span> <span class="dt">boolean</span> friendsOfFriends;
+  <span class="kw">private</span> <span class="bu">String</span> title;
+  <span class="kw">private</span> <span class="bu">String</span> description;
+  <span class="kw">private</span> <span class="bu">Map</span>&lt;Restaurant, <span class="bu">String</span>&gt; restReview;
+  <span class="kw">private</span> <span class="bu">Map</span>&lt;Hotel, <span class="bu">String</span>&gt; hotelReview;
+
+  <span class="kw">public</span> <span class="fu">Guide</span>(<span class="bu">ArrayList</span>&lt;<span class="bu">Image</span>&gt; images,
+                          <span class="bu">ArrayList</span>&lt;User&gt; visibility,
+                          <span class="dt">boolean</span> isPublic,
+                          <span class="dt">boolean</span> friendsOnly,
+                          ...){
+    \\ Initialise method
+    ...
+  }
+}</code></pre></div>
+<p><strong>Listing 1.1 High coupled <code>Guide</code> class</strong></p>
+<div class="figure">
+<img src="../assets/grasp/GuideUML.png" />
+
+</div>
+<p><strong>Fig.1.1 High coupled <code>Guide</code> class</strong></p>
+<p>Before we analyse this design: Can you identify some poor design decisions? Try to name a few of them before you read any further.</p>
+<p>The problems with this design are:</p>
+<ul>
+<li>assuming that <code>Image</code> is a class, this design couples images with a guide, but the guide should display images personalised to each viewer! (See section Case study),</li>
+<li>the visibility attribute maintains a list of users that can read the guide; this solution does not scale when there are many users. The same field may be used for different visibility settings, which makes the logic more difficult to test and understand, since the attribute has different meaning based on other properties,</li>
+<li>the use of multiple, non-overlapping, booleans makes the code difficult to follow as you will introduce branches and its related logic in each case,</li>
+<li>hotels, restaurants and others should implement a common interface, si that you can dispatch polymorphously. If you don't do this, adding a few new places, e.g. <code>SushiBar</code> class, implies the creation of more attributes and respective methods to get those elements,</li>
+<li>the constructor receives an <code>ArrayList</code>, which binds an implementation detail to the list abstraction.</li>
+</ul>
+<p>So, given this poor design (Fig 1.1, Listing 1.1), how could we reduce coupling a <code>Guide</code> to other elements? The most obvious alternative would be to put less responsibilities in the <code>Guide</code>. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain.</p>
+<p>For example, a <code>Guide</code> does not need to be concerned about its visibility and we can group different places (restaurants, hotels, bars, etc) contained in a guide under the idea of a point of interest (Fig. 1.2). These two changes reduce the responsibilities of the <code>Guide</code> class, thus reducing coupling (Listing 1.2).</p>
+<div class="figure">
+<img src="../assets/grasp/LooselyGuideUML.png" />
+
+</div>
+<p><strong>Fig. 1.2 Loosely coupled <code>Guide</code> class</strong></p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> Guide {
+  <span class="kw">private</span> <span class="bu">List</span>&lt;IImage&gt; images;
+  <span class="kw">private</span> <span class="bu">String</span> title;
+  <span class="kw">private</span> <span class="bu">String</span> description;
+  <span class="kw">private</span> <span class="bu">List</span>&lt;IPointOfInterest&gt; poi;
+
+  <span class="kw">public</span> <span class="fu">Guide</span>(<span class="bu">ArrayList</span>&lt;IImage&gt; images,
+                          <span class="bu">String</span> title,
+                          <span class="bu">String</span> description){
+    \\ Initialise method
+    ...
+  }
+}
+
+<span class="kw">public</span> <span class="kw">interface</span> IPointOfInterest {
+  <span class="kw">public</span> IReview <span class="fu">getReview</span>();
+  <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getAddress</span>();
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">showOnMap</span>();
+  ...
+}</code></pre></div>
+<p><strong>Listing 1.2 Loosely coupled <code>Guide</code> class</strong></p>
+<p><strong>Exercise</strong>: Given the refactoring above, how does a guide deal with its visibility?</p>
+<p><strong>Exercise</strong>: Why should we promote interfaces over inheritance?</p>
+<p><strong>Exercise</strong>: Does it make sense that the class<code>Hotel</code> declares methods that do not exist in the interface <code>IPointOfInterest</code>? (Note: you may need to read the section on polymorphism)</p>
+<!--
+
+(Solution: we are coupling to an interface but, interfaces do not expose their implementation, so this coupling is much weaker than a direct class. Furthermore, we use interfaces in instability points. For example, the CEO may add a sushi restaurant as a point of interest and, because you know that in early stages of development things change, try to create a design as loosely coupled add possible)
+
+-->
+<h2 id="high-cohesion">High Cohesion</h2>
+<p>Cohesion refers to keeping the responsibilities of the class focused. A cohesive class does one thing and does it well. Highly cohesive code is focused and, as side effect, doesn't talk to too many objects.</p>
+<p>Often, you'll see code that contains many methods, attributes, and a lot of logic and magic. This code builds the antipattern known as &quot;The Blob&quot;, which results in high coupled code with low cohesion, e.g. Fig. 1.3.1.</p>
+<div class="figure">
+<img src="../assets/grasp/TheBlob.png" />
+
+</div>
+<p><strong>Fig. 1.3.1 &quot;The Blob&quot;, a class that swallows everything</strong></p>
+<p>This example (Listing 1.1 or Fig. 1.3.1) shows the <code>Guide</code> class, which exhibits multiple responsibilities, such as keeping the data of the class, managing its visibility and each possible point of interest, individually. Listing 1.2 shows a more cohesive code, where the guide is responsible for handling its content. This change keeps the class focus on what it does and it's easier to understand because the class doesn't mix different responsibilities.</p>
+<p>Whenever you need to evaluate a design, a high cohesive code exhibits the following properties:</p>
+<ul>
+<li>code doesn't mix responsibilities,</li>
+<li>has few methods,</li>
+<li>doesn't talk too many objects.</li>
+</ul>
+<p><strong>Dependence relationship</strong>:</p>
+<p><em>Coupling</em> and <em>cohesion</em> usually go hand in hand, since code with low cohesion is code that does too many things, hence it relies on too many objects.</p>
+<p>One way to look at it is to understand coupling as the relation between subsystems (modules and packages) and cohesion as the relation within a subsystem. As we argued before, Listing 1.1 is highly coupled and exhibits low cohesion.</p>
+<p>Lets look at another example that shows that these two concepts usually go hand in hand:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> Review {
+  <span class="kw">private</span> <span class="bu">String</span> comment;
+  <span class="kw">private</span> User author;
+  <span class="kw">private</span> <span class="bu">Image</span> image;
+  <span class="kw">private</span> <span class="bu">List</span>&lt;User&gt; friendsToNotify;
+
+  <span class="kw">public</span> <span class="kw">class</span> <span class="fu">Review</span> (User author,
+                            <span class="bu">String</span> comment,
+                            <span class="bu">Image</span> image,
+                            <span class="bu">List</span>&lt;User&gt; notification){
+    <span class="kw">this</span>.<span class="fu">author</span> = author;
+    <span class="kw">this</span>.<span class="fu">comment</span> =comment;
+    <span class="kw">this</span>.<span class="fu">image</span> = image;
+    <span class="kw">this</span>.<span class="fu">friendsToNotify</span> = notification;
+  }
+
+  <span class="co">// Getters and setters</span>
+  ...
+
+  <span class="kw">public</span> <span class="bu">Image</span> <span class="fu">show</span>() {
+    <span class="kw">this</span>.<span class="fu">image</span>;
+  }
+}</code></pre></div>
+<p><strong>Listing 1.3.2 <code>Review</code> class</strong></p>
+<div class="figure">
+<img src="../assets/grasp/Review.png" />
+
+</div>
+<p><strong>Fig. 1.3.2 <code>Review</code> class diagram</strong></p>
+<p>The code in Listing 1.3.2 is highly coupled for its small size and exhibits low cohesion:</p>
+<ul>
+<li>this class mixes the behaviour of a review with the behaviour of some other class that should send notifications (see <em>Observer</em> pattern)</li>
+<li>this class is coupled to the notification engine and to the <code>Image</code> class. The consequences of coupling to an image means that, either every review has an image or your code will now have to branch when the user does not supply an image. This branching checks if <code>image == null</code>, which is performed at runtime - slower code - and an antipattern (REFERENCE HERE, use instead the <em>Null Object</em> pattern or an <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">option type</a>).</li>
+<li>Coupling to an image also means that you can no longer post a video review. Throwing a quick <code>video</code> attribute does not solve the problem, as the <code>show()</code> method returns an <code>Image</code> and, every caller of the<code>Review</code> class will have to explicitly handle showing an image or a video. Thus, the code becomes more complex and difficult to maintain.</li>
+</ul>
+<p>We improve this current design by:</p>
+<ul>
+<li>setting a comment to be anything that implements the interface <code>IComment</code>. This allows us to define new classes, e.g. <code>VideoComment</code> as long as it implements the methods of the interface.</li>
+<li>the <code>Image</code> class has been updated to an <code>IDisplayable</code> which... If we refactor this code, it ends up as Listing 1.3.3, Fig. 1.3.3.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> Review {
+  <span class="kw">private</span> IComment comment;
+  <span class="kw">private</span> User author;
+  <span class="kw">private</span> <span class="bu">List</span>&lt;Displayable&gt; attachments;
+  <span class="kw">private</span> <span class="bu">List</span>&lt;INotifier&gt; listeners;
+
+  <span class="kw">public</span> <span class="kw">class</span> <span class="fu">Review</span> (User author,
+                            IComment comment,
+                            <span class="bu">List</span>&lt;IDisplayable&gt; attachments,
+                            <span class="bu">List</span>&lt;INotifier&gt; notification){
+    <span class="kw">this</span>.<span class="fu">author</span> = author;
+    <span class="kw">this</span>.<span class="fu">comment</span> = comment;
+    <span class="kw">this</span>.<span class="fu">attachments</span> = attachments;
+    <span class="kw">this</span>.<span class="fu">listeners</span> = notification;
+  }
+
+  <span class="co">// Getters and setters</span>
+  ...
+
+  <span class="kw">public</span> <span class="bu">List</span>&lt;Displayable&gt; <span class="fu">show</span>() {
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">attachments</span>;
+  }
+}</code></pre></div>
+<p><strong>Listing 1.3.3 Refactored <code>Review</code> class</strong></p>
+<div class="figure">
+<img src="../assets/grasp/RefactoredReview.png" />
+
+</div>
+<p><strong>Fig. 1.3.3 Refactored <code>Review</code> class</strong></p>
+<p><strong>Exercise</strong>: Given the code in Listing 1.3.2, add the following functionality:</p>
+<ul>
+<li>export the comment to markdown</li>
+<li>export the comment to HTML</li>
+<li>notify interested users</li>
+<li>create a <code>Company</code> class that should be notified of changes</li>
+</ul>
+<p><em>Reflection</em>:</p>
+<ul>
+<li>How many classes did you change?</li>
+<li>Does it seem like such a design is flexible and easy to refactor?</li>
+</ul>
+<p><strong>Exercise</strong>: Given the code in Listing 1.3.3, add the following functionality:</p>
+<ul>
+<li>export the comment to markdown</li>
+<li>export the comment to HTML</li>
+<li>notify interested users</li>
+<li>create a <code>Company</code> class that should be notified of changes</li>
+</ul>
+<p><em>Reflection</em>: Does it seem like this design is flexible and easy to refactor?</p>
+<h2 id="creator">Creator</h2>
+<p>This principle is likely overlooked but it plays a crucial role in object-oriented programming; the creator <em>establishes who is responsible</em> for creating an object. If you defined it well, your code will exhibit loose coupling and high cohesion; err an you will begin your journey to maintaining spaghetti code.</p>
+<p>A class <code>X</code> is the creator of an object <code>Y</code> if any of the following statements are satisfied:</p>
+<ul>
+<li>class <code>X</code> initialises object <code>Y</code></li>
+<li>class <code>X</code> contains object <code>Y</code></li>
+<li>class <code>X</code> closely uses and depends on class <code>Y</code></li>
+</ul>
+<p>Lets see this with an example: in the case study we have hotels, restaurants, bars, museums, etc. As a user of the application, I would like to write comments, place pictures, videos of my experience in such places and give a rating. Based on this idea, who are the creators of the following classes:</p>
+<ul>
+<li><code>Hotel</code> class,</li>
+<li><code>Restaurant</code> class,</li>
+<li><code>Comment</code> class,</li>
+<li><code>Rating</code> class, and</li>
+<li><code>Image</code> class</li>
+</ul>
+<div class="figure">
+<img src="../assets/grasp/Comment.png" />
+
+</div>
+<p><strong>Fig. 1.4 Relation between comments, hotels, images, and ratings</strong></p>
+<p>The <code>Hotel</code> and <code>Restaurant</code> are usually created by a user, who has to fill out some details regarding these classes. This does not mean that a<code>User</code> class creates the guides, they are probably created by a controller (see the Controller principle in this chapter). The <code>Comment</code> class could be created by another controller or by a specific class such as <code>Hotel</code> and <code>Restaurant</code> (depends on the level of abstraction and design patterns used, Part III of this book). A comment has associated with it a rating of the place, for fast visual aid, and an image and should be the creator of <code>Image</code> and <code>Rating</code> classes.</p>
+<p>Lets introduce an exercise to show the implications of the creator principle: <em>a point of interest</em> groups hotels, restaurants, etc, under the same category, base class, <code>POI</code> that all points of interests need to inherit from. Based on the example from above, a user can place comments in points of interest, hence POI is the creator of instances <code>Comment</code>.</p>
+<p><strong>Exercise</strong>: What kind of benefits and drawbacks do you get if <code>POI</code> is not the creator of the comments?</p>
+<!--
+
+**Solution**: (in solutions chapter) if comments are always the same, just text, then it makes sense that `POI`is the creator. However, what if I want to support multiple kinds of comments, i.e. video comments, text, or images as à comment? In that case, you are better off injecting the comments as an extra argument to the POI object. - does this makes sense? POI is always created first and comments are added later on, it's not an initialiser but a method that adds comments.
+
+-->
+<h2 id="information-expert">Information Expert</h2>
+<p>Classes have methods that define their responsibility and behaviour. A class exposes its behaviour via methods and its internals should always be opaque. With this basic idea, this principle helps you to identify the behaviour of each class.</p>
+<p>A class is responsible for a behaviour if that class contains all the information to carry it out. For example, which class should be responsible for updating the description of a guide?</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><code>User</code> class</p></li>
+<li><p><code>POI</code> (point of interest) class</p></li>
+<li><p><code>LatitudeLongitude</code> class</p></li>
+<li><p><code>Guide</code> class</p></li>
+</ol>
+<div class="figure">
+<img src="../assets/grasp/UsersGuidePOI.png" />
+
+</div>
+<p><strong>Fig. 1.5 Relation between users, guides, point of interest, and comments</strong></p>
+<p>This one is easy. Lets consider each option:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>If we update the guide description via <code>this.user.setGuideDescription(newDescription)</code> it implies that each user has a single guide, otherwise we would not know which guide we are updating. It could also mean that each user may be uniquely identified by its email and its guide. This is a really bad design from the relational point of view, database-wise. When representing the data layer from a NoSQL database this is allowed and I have seen it in use. I do not think this is a good model since, in the database, each record with the the same email is treated independently.</p></li>
+<li><p>A point of interest, such as a view, may be linked to multiple guides. For this reason, similar to above, such a design is non-maintainable.</p></li>
+<li><p>This really does not make sense.</p></li>
+<li><p>We have a winner! The guide instance has all the information to update the guide.</p></li>
+</ol>
+<p>The information expert assigns responsibilities to the classes that have all the information to fulfill the action.</p>
+<p><strong>Exercise</strong>: A user wants to submit a few pictures with a review of her favourite restaurant in Málaga, Spain. Which of the following classes should be the information expert and provide that behaviour? Why?</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><code>User</code> object</p></li>
+<li><p><code>Guide</code> object</p></li>
+<li><p><code>Review</code> object</p></li>
+</ol>
+<h2 id="controller">Controller</h2>
+<p>Most applications have a user interface (UI), which limits the actions that users can take. The user interface needs to communicate to other layers of your software. This principle tell us which object receives and handles events / actions coming from the UI. For example, a mobile application talks to the server via a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a>, i.e. whenever the user clicks on an icon on the phone, the mobile application sends a packet to your server, which responds with the requested information. Using this principle, you can decouple the user interface from the class that takes action on the event.</p>
+<div class="figure">
+<img src="../assets/grasp/Controller.png" />
+
+</div>
+<p><strong>Fig. 1.6 Controller</strong></p>
+<p>The example in Fig. 1.6 represents the most common pattern in web frameworks, Model-View-Controller (<em>MVC</em>). The <code>GuideView</code> is decoupled from its model (<code>GuideModel</code>), which is the class in charge of business logic, including saving and retrieving guides from a database . This design pattern, <em>MVC</em>, is explained in further chapters.</p>
+<p><strong>Exercise</strong> What does the class <code>Routes</code> represent in the example?</p>
+<h2 id="polymorphism">Polymorphism</h2>
+<p>This principle is one of the most important ones in object-oriented programming and the one that makes OOP great at dividing responsibilities between classes.</p>
+<p>As we saw in the recap section, this polymorphism refers to classes that implement an interface or inherit from a top class but, not to parametric classes.</p>
+<!-- which is also polymorphic on the (opaque or bounded) type variable.-->
+<p>This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single <code>User</code> class with an attribute named <code>confirmedIdentity</code> which sets the flag to true when the user has confirmed its identity. This design works for two kind of users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company; companies cannot create accounts, their identity is always confirmed (the cannot exist companies where the identity is not confirmed, and multiple employees from the company want to sign in using different password, one per employee. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute <code>confirmedIdentity</code> for a company's profile because we know that this will always be true. The reuse of a confirmed user as a company leaves dangling the possibility of programming mistakes where a company could be created but without a confirmed identity. The current code before the companies profiles were added are in Listing 1.7.1, Fig. 1.7.1.</p>
+<div class="figure">
+<img src="../assets/grasp/UserBorePolymorphism.png" />
+
+</div>
+<p><strong>Fig. 1.7.1 <code>User</code> code before existence of companies profiles</strong></p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> User {
+  <span class="kw">private</span> <span class="bu">String</span> firstName;
+  <span class="kw">private</span> <span class="bu">String</span> lastName;
+  <span class="kw">private</span> <span class="dt">boolean</span> confirmedIdentity;
+  <span class="kw">private</span> <span class="bu">String</span> username;
+  <span class="kw">private</span> Email email;
+
+  <span class="co">// Getters and setters</span>
+  ...
+
+  <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">login</span>(Password pwd) {
+    ...
+  }
+
+  <span class="kw">public</span> <span class="bu">Image</span> <span class="fu">displayImage</span>() {
+    <span class="kw">if</span> (<span class="kw">this</span>.<span class="fu">confirmedIdentity</span>) {
+      <span class="kw">return</span> Badge.<span class="fu">getConfirmedImage</span>();
+    } <span class="kw">else</span> {
+      <span class="kw">return</span> Badge.<span class="fu">getDefaultImage</span>();
+    }
+  }
+}</code></pre></div>
+<p><strong>Listing 1.7.1. <code>User</code> code before existence of companies profiles</strong></p>
+<p>Another design could represent different users using an enum attribute. Based on this value, the <code>displayImage()</code> method adds logic to check which kind of user you are and how to display the image. You go home thinking that this is a good design, all the logic is kept in a single method.</p>
+<p>The problem with this approach, quite often used by beginners or as a shortcut, is that you are encoding different classes in a single one. This design is not maintainable in the long run because the same class encodes behaviour for different objects (users). Your design is abstracting at the wrong level.</p>
+<p>A better approach is to create a class for each kind of user and dispatch dynamically. This design is easier to maintain because the behaviour is not encoded solely on the method, but on the type. The Listing 1.7.2. shows how to dynamically dispatch based on the type.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> User {
+  <span class="kw">private</span> <span class="bu">String</span> firstName;
+  <span class="kw">private</span> <span class="bu">String</span> lastName;
+  <span class="kw">private</span> <span class="dt">boolean</span> confirmedIdentity;
+  <span class="kw">private</span> <span class="bu">String</span> username;
+  <span class="kw">private</span> Email email;
+
+  <span class="co">// Getters and setters</span>
+  ...
+
+  <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">login</span>(Password pwd) {
+    ...
+  }
+
+  <span class="kw">public</span> <span class="bu">Image</span> <span class="fu">displayImage</span>() {
+    <span class="kw">return</span> Badge.<span class="fu">getDefaultImage</span>();
+  }
+}
+
+<span class="kw">public</span> <span class="kw">class</span> ConfirmedUser
+   <span class="kw">extends</span> User {
+
+  <span class="kw">public</span> <span class="bu">Image</span> <span class="fu">displayImage</span>() {
+    <span class="kw">return</span> Badge.<span class="fu">getConfirmedImage</span>();
+  }
+}</code></pre></div>
+<p><strong>Listing 1.7.2. Dynamic dispatch of users</strong></p>
+<p><strong>Exercise</strong> Add the following items:</p>
+<ul>
+<li>Add a user for companies</li>
+<li>Implement the <code>login(Password pwd)</code> method for default and confirmed users</li>
+<li>Implement the <code>login(Password pwd)</code> method for companies</li>
+</ul>
+<p><strong>Exercise</strong> Write the main class and show that the method performs a dynamic dispatch based on the classes.</p>
+<p><strong>Exercise</strong> The code given above (Listing 1.7.2) users inheritance. Implement the same functionality using interfaces. What are the benefits and drawbacks of this design and implementation decisions?</p>
+<!--
+
+(Note: this is distinct for Python because there's no interface etc. Think how would you explain it in python)
+
+Python is a dynamic language with strong typing. This means the language assigns types at runtime, but you as a developer won't get any type error at compilation time. In Python polymorphism is always given and you as developer are in charge of ending that the methods you call exist or you will get a runtime error. As we said, the are no interfaces that we are bound to and python supports what's called duck typing, which is an idea much closer to how things work in real life. Let me show this with an example: you can read articles, news, cereal boxes and anything that has text. In Java you are bound by the type of object you are but in Python you are bound to the behaviour you have. A method call on `newspaper. hasText()` and `cerealBox.hasText()` works in Python independent from their type; Java would make this work only when they belong to the sand type or interface. For this reason, Python is more expressive in this regard, although it sacrifices static typing guarantees and forces the developer to either handle exceptions or crash and burn at runtime if the object on which the program calls the method `hasText()` does not provide such behaviour.
+
+**Exercise** write the code depicted on Figure Yyy in Python. Do not forget to handle exceptional cases.
+
+**Exercise** Write the main class and show that the method performs a dynamic dispatch based on the classes.
+
+-->
+<h2 id="indirection">Indirection</h2>
+<p>Domain objects may end up being coupled to other objects in the first iteration of your design. This principle states that you should create an intermediate object that mediates between these two, hence reducing coupling.</p>
+<p>To the untrained eye, after applying the principle, it may seem as if two objects that were coupled are still coupled but to an intermediary object. This is right, except that this indirection breaks the idea of one object having a direct relation to the other one. The layer in between breaks the coupling directionality, and creates a more flexible design, since the two initially coupled objects do not need to know anything about each other anymore. Lets out this principle in perspective with an example and an analysis of the solutions prior to the introduction of this principle.</p>
+<p><em>A guide can be seen by multiple friends and each of your friends may see a different cover image.</em></p>
+<div class="figure">
+<img src="../assets/grasp/IndirectionDuplication.png" />
+
+</div>
+<p><strong>Fig. 1.8.1 Duplication of guides</strong></p>
+<p>A poor strawman's solution duplicates the guide for each friend and recalculates the cover image for each friend. This is a really bad design, as it's redundant, consumes memory, and duplicates data. Moreover, an update on one guide's description involves updating all copies of that guide.</p>
+<div class="figure">
+<img src="../assets/grasp/IndirectionAfterApplication.png" />
+
+</div>
+<p><strong>Fig. 1.8.2 Example after application of indirection principle</strong></p>
+<p>A better solution, applying this principle, is to add a new level of indirection between a guide and its cover image, named <code>CoverManager</code> (Fig. 1.8.2). The <code>CoverManager</code> knows how to retrieve the best cover image for the calling object. Internally, the manager may have to call the AI algorithm from time to time to update the image, cache it if the same user keeps coming to the same guide, and even persist in the database this mapping of guide-cover image.</p>
+<!--
+
+An example of this pattern (Figure zzz) is the indirection introduced between the images and the guides. The idea here is that the same guide is shared among friends, and each of your friends may potentially see a different cover image. Prior to this principle, your initial solution was to duplicate the guide for each friend and recalculate the cover image for each of them. This solution is redundant, consumes memory, and duplicates data, so an update on one description involves updating all data in all copies of the guide. A better solution is to add a new level of indirection between a guide and its cover image, 'CoverManager`, that knows how to retrieve the best cover image for the calling object. Internally, the manager may have to call the AI algorithm from time to time to update the image, cache it if the same user keeps coming to the same guide and even persist this mapping of guide-cover image in the database if the cover image doesn't change that often.
+
+(Figure zzz)
+
+-->
+<p><strong>Exercise</strong> Following the principles of these chapter, how would you design data persistence of an object from the case study? That is, would you add CRUD (Create, Read, Update and Delete) methods to all domain objects, e.g. your <code>Guide</code> class? If so, how would you avoid the coupling introduced by this design?</p>
+<p><strong>Exercise</strong> How would you design the offline mode of your application? That is, how do you deal with low connectivity or no connectivity at all?</p>
+<!--
+
+Solution: you never assume that there is a connection and instead create an intermediate layer that handles the communication. If the server is unreachable, this layer handles how to proceed. An advanced design pattern that users this idea is the circuit breaker (explained in later chapters)
+
+-->
+<h2 id="pure-fabrication">Pure Fabrication</h2>
+<p>The term &quot;pure fabrication&quot; means to make something up. You should use this principle whenever you observe that your domain classes are getting too overloaded, i.e., the start to exhibit high coupling and low cohesion.</p>
+<p>The principle adds a new indirection between two domain objects that would otherwise be directly connected (coupled). The indirection means adding a new object that mediates the communication between two other entities. This mediator is not part of the domain, that is, it is a software concept. Examples of this principle are: object pools, database classes, and pretty much any class that sits in between two domain objects. This principle is quite common in the adapter pattern (Fig. 1.9)</p>
+<div class="figure">
+<img src="../assets/grasp/AdapterPureFabrication.png" />
+
+</div>
+<p><strong>Fig. 1.9 Adapter pattern using pure fabrication</strong></p>
+<p>In this example (Fig. 1.9), the <code>PaymentAdapter</code> has an overloaded constructor, taking either a <code>Paypal</code> or a <code>CreditCard</code> object. A user that calls on the <code>pay</code> method does <em>not</em> need to know whether this class, <code>PaymentAdapter</code> does the payment using a credit card or a paypal account, the implementation of the adapter solves this issue.</p>
+<p><strong>Exercise</strong>:Where could this principle be applied in the case study? Why? (There are many valid examples) <strong>Exercise</strong>: What happens if you add 6 different payment methods? (What are the drawbacks, if any?)</p>
+<!--
+
+Solution: the AI algorithm that inject images to guides. If this was not there, every guide would have the same image for all guides, tying the guide to the images. With the algorithm, the same guide share with friends shows different images based on other friends and connections.
+
+-->
+<p><strong>Exercise</strong>: Lets assume that you would like to get a phone notification whenever a friend posts a new comment on one of her guides. What classes would you need to create? What classes are a pure fabrication?</p>
+<!--
+
+Solution: at the very least, you would need a `Notification` class that contains the text and image of the notification and some kind of notification manager that schedules and send notifications to the appropriate parties.
+
+-->
+<h2 id="protected-variation">Protected Variation</h2>
+<!--
+
+This principle is easy to apply and, in practice, requires you to be good at forecasting future pivot points or changes of direction.
+
+-->
+<p>The core idea of this principle is to shield your code in places where you expect changes, let that be via interfaces or other means. For example, from the case study, if we were to provide special guides that users can buy, we would need to integrate with a payment platform. If you are not sure which one is best, you'll end up picking one that seems good enough, and call their methods where necessary. However, what happens when CEO Johan finds out that there is a new platform that has lower commissions? He wants you to change to this better option. Refactoring may not be so easy because both payment solutions have different libraries with different APIs. Now, you need to change all those specific method calls from the old library to the new library, possibly including changes in the workflow.</p>
+<div class="figure">
+<img src="../assets/grasp/ProtectedVariation.png" />
+
+</div>
+<p><strong>Fig. 1.10 Example of protected variation principle</strong></p>
+<p>One way of solving this problem is via an interface (<code>IPayment</code>) and different classes that implement those methods (Fig. 1.10). In this design, you are protecting yourself from future changes. Your concrete classes, the ones implementing the interface (<code>PaypalAdapter</code> and <code>StripeAdapter</code>), work out of the box. This means that, adding a new payment method, e.g. <code>ApplePay</code>, should be as simple as creating a class that implements the interface and hides the details of the concrete method calls of <code>ApplePay</code>.</p>
+<p>You should apply this pattern in instability points (classes) and, specially, when using third party libraries that you don't have previous experience with.</p>
+<h2 id="pure-functions">Pure functions</h2>
+<p>This principle is not part of the common and well known GRASP principles but, in my experience, you should consider it. Lambdas, closures and pure functions are ubiquitous nowadays. My advice is that you stop using closures that captures mutable state. The main reason is that, at one point or another, you'll benchmark your application and start using parallel capabilities of your computer: task, futures, actors or whatever is the next parallel abstraction. If you encapsulate mutable state in closures, you are building your own coffin for the not so far away future. Things like processing an recognitive computation cannot be used anymore if the object the closure captures is shared between two threads -- unless you can guarantee data race freedom. Data race freedom code is hard to write, maintain and make fast, so using locks may get you out of troubles at the cost of losing horizontal scalability <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>TODO: Explain horizontal scalability<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>

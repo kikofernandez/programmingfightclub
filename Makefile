@@ -1,11 +1,11 @@
-SRC=book
+SRC=books
 
-all: web
+all: web_prod
 
-web_prod:
+web_grasp:
 	make -C $(SRC) $@
 
-web_test:
+web_grasp_test:
 	make -C $(SRC) $@
 
 clean:
