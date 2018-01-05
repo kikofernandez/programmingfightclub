@@ -1,0 +1,9 @@
+---
+title: Lambda Calculus for the Working Programmer
+author: Kiko Fernandez-Reyes
+rights: 2018 Kiko Fernandez-Reyes, CC-BY-SA 4.0 International
+stylesheet: assets/pandoc.css
+header-includes: '<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Inconsolata" rel="stylesheet">
+  '
+...
