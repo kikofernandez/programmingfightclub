@@ -17,7 +17,7 @@ read the solution to the exercises proposed throughout the book.
 
 Part I:
 
-* Chapter 1: Introduction <span style="color: #9d85b5">(COMING SOON)</span>
+* [Chapter 1: Introduction](/asd-book/docs/introduction/)
 * Chapter 2: UML <span style="color: #9d85b5">(COMING SOON)</span>
 * Chapter 3: Object-oriented Reminder <span style="color: #9d85b5">(COMING SOON)</span>
 
