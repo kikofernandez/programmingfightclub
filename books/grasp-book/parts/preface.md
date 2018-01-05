@@ -112,6 +112,16 @@ Part IV:
 </div>
 </form>
 </div>
-
 </div>
 </article>
+
+<div class="container">
+ <nav class="pagination" role="pagination">
+ <ul>
+  <p><span class="page-number">Designed with</span> ❤️  <span class="page-number" style="margin-left: 4pt"> from Uppsala, Sweden</span></p>
+  <p>
+  <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+  </p>
+ </ul>
+ </nav>
+</div>
