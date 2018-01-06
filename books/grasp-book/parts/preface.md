@@ -17,7 +17,7 @@ read the solution to the exercises proposed throughout the book.
 
 Part I:
 
-* [Chapter 1: Introduction](/asd-book/grasp-principles/introduction/)
+* [Chapter 1: Introduction](/grasp-principles/introduction/)
 * Chapter 2: UML <span style="color: #9d85b5">(COMING SOON)</span>
 * Chapter 3: Object-oriented Reminder <span style="color: #9d85b5">(COMING SOON)</span>
 
@@ -118,7 +118,7 @@ Part IV:
 <div class="container">
  <nav class="pagination" role="pagination">
  <ul>
-  <p><span class="page-number">Designed with</span> ❤️  <span class="page-number" style="margin-left: 4pt"> from Uppsala, Sweden</span></p>
+  <p><span class="page-number">Designed with</span> ❤️  <span class="page-number"> from Uppsala, Sweden</span></p>
   <p>
   <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
   </p>

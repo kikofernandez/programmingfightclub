@@ -42,7 +42,7 @@ $(DEPENDENCIES):
 	@mkdir -p $(WEB_PROD)/$@
 	@cp parts/$@.md $(WEB_PROD)/parts
 	@sed -i '' -e 's/MEDIA/../g' $(WEB_PROD)/parts/$@.md
-	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c $(addprefix /asd-book/, $(BOOK_FOLDER)/assets/pandoc.css) -o $(WEB_PROD)/$@/index.html
+	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(WEB_PROD)/$@/index.html
 
 local:
 	for chapter in $(DEPENDENCIES); do \
