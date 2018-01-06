@@ -1,19 +1,32 @@
-# Recap
+# Object-oriented concepts, revisited
 
-This section covers basic concepts from *type theory* and the object-oriented paradigm.
-
-Today's object-oriented paradigm borrows two concepts from functional programming: lambdas and closures. During this recap, we will go through the core ideas of object-oriented programming using Java and Python. [^recap-note]
+<span class="firstcharacter">I</span>n this chapter we cover basic concepts
+from *type theory* as well as common concepts from object-oriented languages.
+Apart from these, we cover two concepts that object-oriented languages borrowed
+from the functional paradigm: *lambdas* and *closures*.
 
 By the end of this chapter, you should understand:
 
-* difference between Java's and Python's type systems,
+* difference between static and dynamic type systems,
 * classes and objects,
 * inheritance,
 * interfaces,
-* traits and mixins, 
+* traits and mixins,
 * abstract classes,
-* parametric classes and 
+* parametric classes and
 * lambdas and closures
+
+
+
+<!-- Among these abstractions, we will remind the reader about important concepts such -->
+<!-- as classes, parametric polymorphism (*generics* in Java), interfaces, abstract -->
+<!-- classes, mixins and lambdas and closures. -->
+
+<!-- This section covers basic concepts from *type theory* and the object-oriented paradigm. -->
+
+<!-- Today's object-oriented paradigm borrows two concepts from functional programming: lambdas and closures. -->
+<!-- During this recap, we will go through the core ideas of object-oriented programming using Java and Python. [^recap-note] -->
+
 
 
 ## Type systems
@@ -31,9 +44,18 @@ We proceed to explain the core ideas of object-oriented programming using exampl
 
 ### Classes
 
-Classes declare and implement the state and behaviour of an object. *The state of a class lives in its attributes while the behaviour is expressed via its methods*. A class that hides its attributes with a `private` access modifier (remember `public`, `protected` and `private`?) protects its internal state from other classes. The only way to update the internal state is via method calls on the object. Method calls *represent the behaviour of the object*. 
+Classes declare and implement the state and behaviour of an object.
+*The state of a class lives in its attributes while the behaviour is expressed via its methods*.
+A class that hides its attributes with a `private` access modifier
+(remember `public`, `protected` and `private`?) protects its internal state from other
+classes. The only way to update the internal state is via method calls on the object.
+Method calls *represent the behaviour of the object*.
 
-As a general advice, you should not expose the internal state of your class to others; you should expose your behaviour. This is what make great abstractions easy to use and understand. For example, when using the `future` API, you do not have to think about the possible locks that may exist in the internal representation of a `CompletableFuture`, you just use it according to its defined behaviour, i.e. public methods.
+As a general advice, you should not expose the internal state of your class to others;
+you should expose your behaviour. This is what make great abstractions easy to use and
+understand. For example, when using the `future` API, you do not have to think about the
+possible locks that may exist in the internal representation of a `CompletableFuture`, you
+just use it according to its defined behaviour, i.e. public methods.
 
 #### Getters and setters
 
@@ -47,8 +69,8 @@ The class `Restaurant` has all attributes defined as private (not accesible from
 The constructor of the class (`public Restaurant(...)`) creates a new `Restaurant` and sets its
 state.
 
-To get the state outside the class we use *getters* and *setters* methods. These are preceded by the words `get` and `set` following the attributes name,
-e.g. `getStars()` (Example 3.1.1.1).
+To get the state outside the class we use *getters* and *setters* methods. These are preceded
+by the words `get` and `set` following the attributes name, e.g. `getStars()` (Example 3.1.1.1).
 
 ```java
 public enum Stars {
@@ -59,9 +81,9 @@ public enum Stars {
 public class Restaurant {
   // Michelin stars
   private Stars stars;
-  
+
   private String street;
-  private int zipcode; 
+  private int zipcode;
   private Country country;
 
   // constructor
@@ -90,9 +112,13 @@ public class Restaurant {
 
 **Python**
 
-Python doesn't have access modifiers and uses (by convention) two underscores to mean that the attribute is private, i.e. the attribute `stars` should be written `__stars`. If you want the attribute to be public, just remove the double underscore. 
+Python doesn't have access modifiers and uses (by convention) two underscores to
+mean that the attribute is private, i.e. the attribute `stars` should be written
+`__stars`. If you want the attribute to be public, just remove the double underscore.
 
-Unlike Java, the name of the class is not the constructor[^constructor], but rather the method `def __init__(self)`. The example we wrote above (in Java) is written in Python as follows:
+Unlike Java, the name of the class is not the constructor[^constructor], but rather
+the method `def __init__(self)`. The example we wrote above (in Java) is written in
+Python as follows:
 
 ```python
 class Restaurant:
@@ -111,13 +137,15 @@ class Restaurant:
     self.__stars = stars
 ```
 
-The constructor `def __init__(self, stars, street, zipcode, country):` method takes explicitly an instance of itself (`self`) and the remaining arguments.
+The constructor `def __init__(self, stars, street, zipcode, country):` method
+takes explicitly an instance of itself (`self`) and the remaining arguments.
 
 [^constructor]: this is not technically a constructor, although it is called right after the creation of the object and, for all terms and purposes in this book, it is the same.
 
 
-Python provides a special syntax for getters and setters that wrap the attribute into a function with that very same name.
-For instance, the getter for the `stars` attribute is created by declaring a method with the name of the attribute and the
+Python provides a special syntax for getters and setters that wrap the attribute
+into a function with that very same name. For instance, the getter for the `stars`
+attribute is created by declaring a method with the name of the attribute and the
 `@property` on top of it. The body of the method just fetches the attribute.
 
 ```python
@@ -133,7 +161,9 @@ restaurant = Restaurant(3. "Lane Street", 75421, "Sweden")
 restaurant.stars
 ```
 
-Setters work in the same way, except that they are annotated with the attribute's name followed by the `setter` word, e.g. `@stars.setter` for the `stars` setter method. From now on, we can set the attribute as if we had access to the internal attributes:
+Setters work in the same way, except that they are annotated with the attribute's
+name followed by the `setter` word, e.g. `@stars.setter` for the `stars` setter method.
+From now on, we can set the attribute as if we had access to the internal attributes:
 
 ```python
 restaurant = Restaurant(3. "Lane Street", 75421, "Sweden")
@@ -142,7 +172,9 @@ restaurant.stars = 5
 
 **Why would we want to use getters and setters like that?**
 
-**They are an abstraction**. Today, you only want to retrieve the data but, with this abstraction, you could be returning cached data that otherwise needs to be fetched from the network.
+**They are an abstraction**. Today, you only want to retrieve the data but, with this
+abstraction, you could be returning cached data that otherwise needs to be fetched from
+the network.
 
 ```python
 class Restaurant:
