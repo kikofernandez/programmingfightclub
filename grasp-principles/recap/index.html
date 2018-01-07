@@ -46,6 +46,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   </style>
   <link rel="stylesheet" href="/grasp-principles/assets/pandoc.css" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> <link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Inconsolata" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112034462-1"></script>
+  <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag("js", new Date());
+  gtag("config", "UA-112034462-1"); </script>
 </head>
 <body>
 <div id="header">
@@ -54,7 +57,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="TOC">
 <ul>
-<li><a href="#recap">Recap</a><ul>
+<li><a href="#object-oriented-concepts-revisited">Object-oriented concepts, revisited</a><ul>
 <li><a href="#type-systems">Type systems</a></li>
 <li><a href="#object-oriented-concepts">Object-oriented concepts</a><ul>
 <li><a href="#classes">Classes</a></li>
@@ -72,12 +75,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul>
 </div>
-<h1 id="recap">Recap</h1>
-<p>This section covers basic concepts from <em>type theory</em> and the object-oriented paradigm.</p>
-<p>Today's object-oriented paradigm borrows two concepts from functional programming: lambdas and closures. During this recap, we will go through the core ideas of object-oriented programming using Java and Python. <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<h1 id="object-oriented-concepts-revisited">Object-oriented concepts, revisited</h1>
+<p><span class="firstcharacter">I</span>n this chapter we cover basic concepts from <em>type theory</em> as well as common concepts from object-oriented languages. Apart from these, we cover two concepts that object-oriented languages borrowed from the functional paradigm: <em>lambdas</em> and <em>closures</em>.</p>
 <p>By the end of this chapter, you should understand:</p>
 <ul>
-<li>difference between Java's and Python's type systems,</li>
+<li>difference between static and dynamic type systems,</li>
 <li>classes and objects,</li>
 <li>inheritance,</li>
 <li>interfaces,</li>
@@ -86,6 +88,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>parametric classes and</li>
 <li>lambdas and closures</li>
 </ul>
+<!-- Among these abstractions, we will remind the reader about important concepts such -->
+<!-- as classes, parametric polymorphism (*generics* in Java), interfaces, abstract -->
+<!-- classes, mixins and lambdas and closures. -->
+<!-- This section covers basic concepts from *type theory* and the object-oriented paradigm. -->
+<!-- Today's object-oriented paradigm borrows two concepts from functional programming: lambdas and closures. -->
+<!-- During this recap, we will go through the core ideas of object-oriented programming using Java and Python. [^recap-note] -->
 <h2 id="type-systems">Type systems</h2>
 <p>TODO:</p>
 <ul>
@@ -112,9 +120,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">public</span> <span class="kw">class</span> Restaurant {
   <span class="co">// Michelin stars</span>
   <span class="kw">private</span> Stars stars;
-  
+
   <span class="kw">private</span> <span class="bu">String</span> street;
-  <span class="kw">private</span> <span class="dt">int</span> zipcode; 
+  <span class="kw">private</span> <span class="dt">int</span> zipcode;
   <span class="kw">private</span> Country country;
 
   <span class="co">// constructor</span>
@@ -140,7 +148,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><em>Example 3.1.1.1. Introductory example to Java</em></p>
 <p><strong>Python</strong></p>
 <p>Python doesn't have access modifiers and uses (by convention) two underscores to mean that the attribute is private, i.e. the attribute <code>stars</code> should be written <code>__stars</code>. If you want the attribute to be public, just remove the double underscore.</p>
-<p>Unlike Java, the name of the class is not the constructor<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>, but rather the method <code>def __init__(self)</code>. The example we wrote above (in Java) is written in Python as follows:</p>
+<p>Unlike Java, the name of the class is not the constructor<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, but rather the method <code>def __init__(self)</code>. The example we wrote above (in Java) is written in Python as follows:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Restaurant:
   <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, stars, street, zipcode, country):
     <span class="va">self</span>.__stars  <span class="op">=</span> stars
@@ -210,8 +218,7 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>We cannot cover the object-oriented core ideas in depth; the reader should understand this chapter as a quick reminder; if you are not familiar with the notions presented in this chapter, we would recommend the following reading material: Reading material<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>this is not technically a constructor, although it is called right after the creation of the object and, for all terms and purposes in this book, it is the same.<a href="#fnref2">↩</a></p></li>
+<li id="fn1"><p>this is not technically a constructor, although it is called right after the creation of the object and, for all terms and purposes in this book, it is the same.<a href="#fnref1">↩</a></p></li>
 </ol>
 </div>
 </body>
