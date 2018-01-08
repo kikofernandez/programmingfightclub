@@ -1,4 +1,4 @@
-DEPENDENCIES=preface
+DEPENDENCIES=toc
 
 # Production ready folder for web and epub
 WEB_ASSETS=../../web_assets

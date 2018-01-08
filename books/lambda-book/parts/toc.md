@@ -1,4 +1,4 @@
-# Preface
+# Table of Contents
 
 Part I: Introduction to programming languages
 
