@@ -95,13 +95,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <!-- Today's object-oriented paradigm borrows two concepts from functional programming: lambdas and closures. -->
 <!-- During this recap, we will go through the core ideas of object-oriented programming using Java and Python. [^recap-note] -->
 <h2 id="type-systems">Type systems</h2>
-<p>TODO:</p>
-<ul>
-<li>Talk about the main difference between Java and Python</li>
-<li>duck typing</li>
-<li>weakly typed</li>
-<li>strongly typed</li>
-</ul>
+<p>A type system assigns types to programming constructs; type systems are a set of mathematical rules that are applied to a programming language. The main function of a type system is to remove bugs in software, through a phase known as type checking, where the compiler assigns types to constructs and builds a sound mathematical model. Sound means that the type system guarantees that your program behaves accordingly, always rejecting programs that are illegal according to the mathematical rules<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>Type checking can happen at compile time or at run time; when the type checking happens at compile time, we have a statically typed language. If the type checking happens at runtime, we have a dynamically typed language. For all purposes in this book, there are only static and dynamic type systems<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> <span class="bu">Reader</span> {
+  <span class="kw">public</span> [<span class="bu">String</span>] <span class="fu">readingString</span>(<span class="bu">String</span> s){ s.<span class="fu">toArray</span>(); }
+}</code></pre></div>
+<p>Java is a statically typed language and would reject the program above at compile time if you call the method <code>readingString</code> with an argument of type <code>int</code> (e.g. <code>reader.readingString(34)</code>). This is because the method expects an argument with a <code>String</code> type, not an argument with type <code>int</code>.</p>
+<p>On the other side, we have dynamic languages such as Python. Most dynamic languages use <em>duck typing</em>. Duck typing means that we do not rely on types to specify whether the methods of an object exists; call methods on objects as if they exist and, at runtime, if they do, great, if they don't, the program throws an error. From another point of view, you are telling the object the behaviour that it should implement, whether it does or not is another story that you need to ensure by yourself. Going back to the previous example, now written in Python:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Reader(<span class="bu">object</span>):
+  <span class="kw">def</span> readingString(s):
+    s.toArray()</code></pre></div>
+<p>If I have an instance of a <code>Reader</code>, I can potentially call <code>reader.readingString(&quot;Test&quot;)</code> and it will work. However, I can also call <code>reader.readingString(None)</code>, and the program will throw an error at runtime -- <code>None</code> does not have a method called <code>toArray()</code>.</p>
+<p>TODO: OVerview of dynamic and static languages!</p>
+<p>It is completely normal if you do not fully understand everything mentioned in this section. II that is the case, please continue ahead and go back to this section once you have gone through the <a href="#object-oriented-concepts">Object-oriented reminder</a>.</p>
 <h2 id="object-oriented-concepts">Object-oriented concepts</h2>
 <p>We proceed to explain the core ideas of object-oriented programming using examples from the case study.</p>
 <h3 id="classes">Classes</h3>
@@ -148,7 +154,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><em>Example 3.1.1.1. Introductory example to Java</em></p>
 <p><strong>Python</strong></p>
 <p>Python doesn't have access modifiers and uses (by convention) two underscores to mean that the attribute is private, i.e. the attribute <code>stars</code> should be written <code>__stars</code>. If you want the attribute to be public, just remove the double underscore.</p>
-<p>Unlike Java, the name of the class is not the constructor<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, but rather the method <code>def __init__(self)</code>. The example we wrote above (in Java) is written in Python as follows:</p>
+<p>Unlike Java, the name of the class is not the constructor<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>, but rather the method <code>def __init__(self)</code>. The example we wrote above (in Java) is written in Python as follows:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Restaurant:
   <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, stars, street, zipcode, country):
     <span class="va">self</span>.__stars  <span class="op">=</span> stars
@@ -218,7 +224,9 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>this is not technically a constructor, although it is called right after the creation of the object and, for all terms and purposes in this book, it is the same.<a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p>For more information on these mathematical models, subscribe to the <a href="/lambda-calculus/toc/">Lambda Calculus for the Working Programmer</a> book.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>In the research literature, there are languages that mix static and dynamic type systems but these are outside the scope of the book.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>this is not technically a constructor, although it is called right after the creation of the object and, for all terms and purposes in this book, it is the same.<a href="#fnref3">↩</a></p></li>
 </ol>
 </div>
 </body>

@@ -31,12 +31,60 @@ By the end of this chapter, you should understand:
 
 ## Type systems
 
-TODO:
+A type system assigns types to programming constructs; type systems are a set
+of mathematical rules that are applied to a programming language. The main function of a
+type system is to remove bugs in software, through a phase known as type checking,
+where the compiler assigns types to constructs and builds a sound mathematical model.
+Sound means that the type system guarantees that your program
+behaves accordingly, always rejecting programs that are illegal according to
+the mathematical rules[^oop-lambda-calculus].
 
-- Talk about the main difference between Java and Python
-- duck typing
-- weakly typed
-- strongly typed
+[^oop-lambda-calculus]: For more information on these mathematical models, subscribe to the
+  [Lambda Calculus for the Working Programmer](/lambda-calculus/toc/) book.
+
+Type checking can happen at compile time or at run time; when the type checking
+happens at compile time, we have a statically typed language. If the type checking
+happens at runtime, we have a dynamically typed language.
+For all purposes in this book, there are only static and dynamic type systems[^oop-type-system-notes].
+
+```java
+public class Reader {
+  public [String] readingString(String s){ s.toArray(); }
+}
+```
+
+Java is a statically typed language and would reject the program above at compile time if you
+call the method `readingString` with an argument of type `int` (e.g. `reader.readingString(34)`).
+This is because the method expects an argument with a `String` type, not an
+argument with type `int`.
+
+
+On the other side, we have dynamic languages such as Python. Most dynamic languages
+use *duck typing*. Duck typing means that we do not rely on types to
+specify whether the methods of an object exists; call methods on objects
+as if they exist and, at runtime, if they do, great, if they don't, the program throws
+an error. From another point of view, you are telling the object the behaviour
+that it should implement, whether it does or not is another story that you
+need to ensure by yourself. Going back to the previous example, now written in Python:
+
+```python
+class Reader(object):
+  def readingString(s):
+    s.toArray()
+```
+
+If I have an instance of a `Reader`, I can potentially call `reader.readingString("Test")`
+and it will work. However, I can also call `reader.readingString(None)`, and
+the program will throw an error at runtime -- `None` does not have a method called `toArray()`.
+
+[^oop-type-system-notes]: In the research literature, there are languages that
+  mix static and dynamic type systems but these are outside the scope of the book.
+
+TODO: OVerview of dynamic and static languages!
+
+It is completely normal if you do not fully understand everything mentioned in
+this section. II that is the case, please continue ahead and go back to
+this section once you have gone through the [Object-oriented reminder](#object-oriented-concepts).
 
 ## Object-oriented concepts
 
