@@ -80,10 +80,20 @@ the program will throw an error at runtime -- `None` does not have a method call
 [^oop-type-system-notes]: In the research literature, there are languages that
   mix static and dynamic type systems but these are outside the scope of the book.
 
-TODO: OVerview of dynamic and static languages!
++-------------------------------------+------------------------------------------+
+|             Static                  |              Dynamic                     |
++=====================================+==========================================+
+| * Specify behaviour based on types  | * Declare behaviour that you expect      |
+|                                     |                                          |
+| * The type annotations ensure that  | * For each method, ensure that you       |
+| only constructs that respect the    |   pass  arguments that your declared     |
+| types can run                       |   behaviour                              |
++-------------------------------------+------------------------------------------+
+
+Table: Static vs Dynamic type systems from pragmatic point of view.
 
 It is completely normal if you do not fully understand everything mentioned in
-this section. II that is the case, please continue ahead and go back to
+this section. If that is the case, please continue ahead and go back to
 this section once you have gone through the [Object-oriented reminder](#object-oriented-concepts).
 
 ## Object-oriented concepts

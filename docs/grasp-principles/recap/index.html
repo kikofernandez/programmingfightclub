@@ -106,8 +106,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="kw">def</span> readingString(s):
     s.toArray()</code></pre></div>
 <p>If I have an instance of a <code>Reader</code>, I can potentially call <code>reader.readingString(&quot;Test&quot;)</code> and it will work. However, I can also call <code>reader.readingString(None)</code>, and the program will throw an error at runtime -- <code>None</code> does not have a method called <code>toArray()</code>.</p>
-<p>TODO: OVerview of dynamic and static languages!</p>
-<p>It is completely normal if you do not fully understand everything mentioned in this section. II that is the case, please continue ahead and go back to this section once you have gone through the <a href="#object-oriented-concepts">Object-oriented reminder</a>.</p>
+<table>
+<caption>Static vs Dynamic type systems from pragmatic point of view.</caption>
+<colgroup>
+<col width="46%" />
+<col width="53%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Static</th>
+<th>Dynamic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><ul>
+<li><p>Specify behaviour based on types</p></li>
+<li><p>The type annotations ensure that only constructs that respect the types can run</p></li>
+</ul></td>
+<td><ul>
+<li><p>Declare behaviour that you expect</p></li>
+<li><p>For each method, ensure that you pass arguments that your declared behaviour</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<p>It is completely normal if you do not fully understand everything mentioned in this section. If that is the case, please continue ahead and go back to this section once you have gone through the <a href="#object-oriented-concepts">Object-oriented reminder</a>.</p>
 <h2 id="object-oriented-concepts">Object-oriented concepts</h2>
 <p>We proceed to explain the core ideas of object-oriented programming using examples from the case study.</p>
 <h3 id="classes">Classes</h3>
