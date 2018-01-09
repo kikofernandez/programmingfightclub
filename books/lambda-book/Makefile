@@ -1,7 +1,6 @@
 DEPENDENCIES=toc
 
 # Production ready folder for web and epub
-WEB_ASSETS=../../web_assets
 WEB_PROD=web_prod
 
 # Enable for an ebook
@@ -9,7 +8,8 @@ WEB_PROD=web_prod
 
 ASSETS=assets
 BOOK_FOLDER=lambda-calculus
-DOCS=../../$(BOOK_FOLDER)
+DOC_FOLDER=docs
+DOCS=../../$(DOC_FOLDER)/$(BOOK_FOLDER)
 
 all: web
 
@@ -30,6 +30,7 @@ web_prod: web_clean pandoc $(DEPENDENCIES)
 	@mkdir -p $(DOCS)
 	@cp -r assets $(DOCS)
 	@mv $(WEB_PROD)/* $(DOCS)
+	@cp $(DOCS)/toc/index.html $(DOCS)
 	@rm -rf $(DOCS)/parts
 
 web_clean:

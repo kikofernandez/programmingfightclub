@@ -1,12 +1,12 @@
 DEPENDENCIES=toc preface introduction case-study recap grasp-principles
 
 # Production ready folder for web and epub
-WEB_ASSETS=../../web_assets
 WEB_PROD=web_prod
 EPUB_PROD=epub_prod
 ASSETS=assets
+DOC_FOLDER=docs
 BOOK_FOLDER=grasp-principles
-DOCS=../../$(BOOK_FOLDER)
+DOCS=../../$(DOC_FOLDER)/$(BOOK_FOLDER)
 
 all: epub web
 
@@ -26,13 +26,14 @@ web_prod: web_clean pandoc $(DEPENDENCIES)
 	@mkdir -p $(DOCS)
 	@cp -r assets $(DOCS)
 	@mv $(WEB_PROD)/* $(DOCS)
+	@cp $(DOCS)/toc/index.html $(DOCS)
 	@rm -rf $(DOCS)/parts
 
 web_clean:
 	@rm -rf $(WEB_PROD) $(DOCS)
 
 pandoc:
-	@mkdir -p $(WEB_PROD)/parts #&& cp $(ASSETS)/pandoc.css $(WEB_PROD)
+	@mkdir -p $(WEB_PROD)/parts
 
 $(DEPENDENCIES):
 	@mkdir -p $(WEB_PROD)/$@
