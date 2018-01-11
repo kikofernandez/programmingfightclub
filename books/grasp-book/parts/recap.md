@@ -83,11 +83,14 @@ the program will throw an error at runtime -- `None` does not have a method call
 +-------------------------------------+------------------------------------------+
 |             Static                  |              Dynamic                     |
 +=====================================+==========================================+
-| * Specify behaviour based on types  | * Declare behaviour that you expect      |
+| * Specify allowed behaviour based   | * Declare behaviour that you expect      |
+| on types                            |                                          |
 |                                     |                                          |
-| * The type annotations ensure that  | * For each method, ensure that you       |
+| * Type annotations ensure that      | * For each method, ensure that you       |
 | only constructs that respect the    |   pass  arguments that your declared     |
 | types can run                       |   behaviour                              |
+|                                     |                                          |
+| * Catches errors at compile time    | * Catches error at runtime               |
 +-------------------------------------+------------------------------------------+
 
 Table: Static vs Dynamic type systems from pragmatic point of view.
