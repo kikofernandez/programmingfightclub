@@ -102,7 +102,10 @@ this section once you have gone through the [Object-oriented reminder](#object-o
 
 ## Object-oriented concepts
 
-We proceed to explain the core ideas of object-oriented programming using examples from the case study.
+This section is a basic reminder of the main concepts of object-oriented programming
+using Java and Python. If you are already familiar with object-oriented programming,
+you can go ahead and move to the next chapter. If you would like to review
+a few concepts, jump in to the one you would need to remember / clarify.
 
 ### Classes
 
@@ -114,16 +117,16 @@ classes. The only way to update the internal state is via method calls on the ob
 Method calls *represent the behaviour of the object*.
 
 As a general advice, you should not expose the internal state of your class to others;
-you should expose your behaviour. This is what make great abstractions easy to use and
-understand. For example, when using the `future` API, you do not have to think about the
+you should expose your behaviour. This makes great abstractions easy to use and
+understand. For example, when using the `Future` API in Java 8, you do not have to think about the
 possible locks that may exist in the internal representation of a `CompletableFuture`, you
 just use it according to its defined behaviour, i.e. public methods.
 
 #### Getters and setters
 
 Methods that get attributes and set them are called *getters* and *setters*.
-Let's see a simple example: the `Restaurant` class in your application. A restaurant should
-have a number of starts and a well defined location:
+As an example, imagine that you have been asked to create a restaurant guide app
+that shows restaurants nearby with their ratings.
 
 **Java**
 
@@ -179,14 +182,13 @@ mean that the attribute is private, i.e. the attribute `stars` should be written
 `__stars`. If you want the attribute to be public, just remove the double underscore.
 
 Unlike Java, the name of the class is not the constructor[^constructor], but rather
-the method `def __init__(self)`. The example we wrote above (in Java) is written in
-Python as follows:
+the method `def __init__(self)`. If you write the example above in Python:
 
 ```python
 class Restaurant:
   def __init__(self, stars, street, zipcode, country):
     self.__stars  = stars
-    self.__sttreet = street
+    self.__street = street
     self.__zipcode = zipcode
     self.__country  = country
 
@@ -199,10 +201,13 @@ class Restaurant:
     self.__stars = stars
 ```
 
+Lets examine this code in more detail.
+
 The constructor `def __init__(self, stars, street, zipcode, country):` method
 takes explicitly an instance of itself (`self`) and the remaining arguments.
 
-[^constructor]: this is not technically a constructor, although it is called right after the creation of the object and, for all terms and purposes in this book, it is the same.
+[^constructor]: this is not technically a constructor, although it is called right
+after the creation of the object and, for all purposes in this book, it is the same.
 
 
 Python provides a special syntax for getters and setters that wrap the attribute
@@ -232,32 +237,40 @@ restaurant = Restaurant(3. "Lane Street", 75421, "Sweden")
 restaurant.stars = 5
 ```
 
-**Why would we want to use getters and setters like that?**
+#### **Why would we want to use getters and setters like that?**
 
 **They are an abstraction**. Today, you only want to retrieve the data but, with this
 abstraction, you could be returning cached data that otherwise needs to be fetched from
-the network.
+a database, or some remote server. For instance, lets assume that the mobile application
+you are building uses an external API to fetch data from nearby restaurants and, you map
+this information to the class below. You use fields such as `street`, `zipcode` and
+`country` from the external API, but the `star` rating and `id` come from your application.
+Using the external API, your class partially contains all the values, except
+the ratings, which you pull on demand. Thanks to the decorator, you can
+refer to `restaurant.stars` and the method will transparently handle
+if the information already exists from a previous visit or if there is
+a need to connect to the server a get the information.
 
 ```python
 class Restaurant:
-  def __init__(self, stars, street, zipcode, country):
+  def __init__(self, name, street, zipcode, country, stars=None):
+    self.__id = -1
+    self.__api = GuideSingleton()
     self.__stars  = stars
-    self.__sttreet = street
+    self.__street = street
     self.__zipcode = zipcode
     self.__country  = country
-    self.__db = ...
-    self.__id = ...
+    self.__name = name
 
   @property
   def stars(self):
-    return self.__stars
+    if self.__stars:
+      return self.__stars
+    else:
+      self.__stars = self.__api.find_stars(street=this.__street, name=this.__name)
 
   @stars.setter
   def stars(self, stars):
-    if self.__db.ready():
-      self.__db.update(self.__id, stars)
-    else:
-      raise
     self.__stars = stars
 ```
 
