@@ -1,20 +1,20 @@
 # Introduction
 
-<span class="firstcharacter">Y</span>ou worked really hard for over a year in the next billion dollar web app in a
+<span class="firstcharacter">Y</span>ou worked hard for over a year in the next billion dollar web app in a
 small startup: the CEO, Johan, seems happy that the product is (almost) feature
 complete; the designer, Anders, is happy with the UX and graphics and the CTO, Pontus,
 just wants to press the red button and release the product. You tell them to wait
-10 more minutes, the unit tests, integration tests and system tests are still running
-(adding tests was a long battle with management because it slowed down the project
-quite a lot, but you are a good engineer and tests will catch many errors in the future).
+10 more minutes, the unit tests, integration tests and system tests are still running.
+Adding tests was a long battle with management because it slowed down the project
+quite a lot, but you are a good engineer and tests will catch many errors in the future.
 
 - Ding, ding, ding (sound)
 
 You look at the screen, all 142 tests are green! You tell Pontus to push the red button;
 deployment scripts start, your software is being installed on all the AWS servers the
-company could afford, a few database servers with replication for faster reads and
-a single leader for the writes, load balancers, reverse proxy servers for serving
-static data and another bunch of servers running your application. After a few minutes,
+company could afford, a few databases with replication for faster reads and
+a single leader for the writes, load balancers, reverse proxies for serving
+static data and another bunch of instances running your application. After a few minutes,
 the deployment is a success, your baby is ALIVE and by tomorrow morning your product will
 be featured in all the Swedish newspapers (you live in Stockholm, the European capital for startups).
 
@@ -81,7 +81,7 @@ I believe that one of the strongest points of any language is its type system.
 It is not the same to use a statically typed language with a strong type system (e.g. Haskell),
 than to program in a dynamic and more flexible language. For instance,
 the notion of *transducers*, introduced by the dynamic language Clojure,
-is attractive to other languages but really hard to implement in a typed language.
+is attractive to other languages but difficult to implement in a typed language.
 
 Our approach in this book will be practical,
 focusing and taking advantage of the type system (and its restrictions).
