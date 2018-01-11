@@ -1,6 +1,6 @@
 # Object-oriented concepts, revisited
 
-<span class="firstcharacter">I</span>n this chapter we cover basic concepts
+<span class="firstcharacter">I</span>n this chapter you will learn basic concepts
 from *type theory* as well as common concepts from object-oriented languages.
 Apart from these, we cover two concepts that object-oriented languages borrowed
 from the functional paradigm: *lambdas* and *closures*.
@@ -70,12 +70,13 @@ need to ensure by yourself. Going back to the previous example, now written in P
 ```python
 class Reader(object):
   def readingString(s):
-    s.toArray()
+    s.toList()
 ```
 
-If I have an instance of a `Reader`, I can potentially call `reader.readingString("Test")`
-and it will work. However, I can also call `reader.readingString(None)`, and
-the program will throw an error at runtime -- `None` does not have a method called `toArray()`.
+If you have an instance of a `Reader` class, `reader`, you can potentially call `reader.readingString("Test")`
+and return a singleton list with the string you passed. However,
+you could also call `reader.readingString(True)`, and
+the program will throw an error at runtime -- `True` does not have a method called `toList()`.
 
 [^oop-type-system-notes]: In the research literature, there are languages that
   mix static and dynamic type systems but these are outside the scope of the book.
