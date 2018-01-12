@@ -146,7 +146,6 @@ public enum Stars {
 public class Restaurant {
   // Michelin stars
   private Stars stars;
-
   private String street;
   private int zipcode;
   private Country country;
@@ -211,7 +210,8 @@ after the creation of the object and, for all purposes in this book, it is the s
 
 
 Python provides a special syntax for getters and setters that wrap the attribute
-into a function with that very same name. For instance, the getter for the `stars`
+into a function with that very same name. In Python, these are called decorators.
+For instance, the getter for the `stars`
 attribute is created by declaring a method with the name of the attribute and the
 `@property` on top of it. The body of the method just fetches the attribute.
 
@@ -278,11 +278,27 @@ class Restaurant:
 
 ### Objects
 
-TODO:
+If you think of classes as blank templates, objects are the ink in the template.
+Classes represent a static view of your software. They declare attributes,
+and methods, but they are static and have no content. As soon as your software
+run and you create an instance of a class, you are injecting runtime state
+to the empty template. *Objects represent the runtime of your program*.
+
+I could expand on and talk about how to create instances, call methods, access
+attributes and so on. I assume that the reader is already familiar with
+these details and will proceed with the next concept.
+
 
 ### Inheritance
 
-TODO:
+Inheritance is a key concept in object-oriented programming, misunderstood
+by new developers and recent graduates.
+
+To explain:
+
+* creates a hierarchy
+* should not be used to not repeat the same attributes
+* use wisely
 
 ### Interfaces
 
@@ -311,5 +327,3 @@ TODO:
 ### Parametric functions
 
 TODO:
-
-[^recap-note]: We cannot cover the object-oriented core ideas in depth; the reader should understand this chapter as a quick reminder; if you are not familiar with the notions presented in this chapter, we would recommend the following reading material: Reading material
