@@ -203,11 +203,11 @@ class Restaurant:
 Lets examine this code in more detail.
 
 The constructor `def __init__(self, stars, street, zipcode, country):` method
-takes explicitly an instance of itself (`self`) and the remaining arguments.
+takes an explicitly instance of itself (`self`) together with the remaining arguments,
+setting its internal state.
 
 [^constructor]: this is not technically a constructor, although it is called right
 after the creation of the object and, for all purposes in this book, it is the same.
-
 
 Python provides a special syntax for getters and setters that wrap the attribute
 into a function with that very same name. In Python, these are called decorators.
@@ -228,6 +228,8 @@ restaurant = Restaurant(3. "Lane Street", 75421, "Sweden")
 restaurant.stars
 ```
 
+which internally calls `self.__stars`.
+
 Setters work in the same way, except that they are annotated with the attribute's
 name followed by the `setter` word, e.g. `@stars.setter` for the `stars` setter method.
 From now on, we can set the attribute as if we had access to the internal attributes:
@@ -246,7 +248,8 @@ you are building uses an external API to fetch data from nearby restaurants and,
 this information to the class below. You use fields such as `street`, `zipcode` and
 `country` from the external API, but the `star` rating and `id` come from your application.
 Using the external API, your class partially contains all the values, except
-the ratings, which you pull on demand. Thanks to the decorator, you can
+the ratings, which you pull on demand, when the user clicks or is nearby a place.
+Thanks to the decorator, you can
 refer to `restaurant.stars` and the method will transparently handle
 if the information already exists from a previous visit or if there is
 a need to connect to the server a get the information.
@@ -257,6 +260,7 @@ class Restaurant:
     self.__id = -1
     self.__api = GuideSingleton()
     self.__stars  = stars
+    self.__my_rating = None
     self.__street = street
     self.__zipcode = zipcode
     self.__country  = country
@@ -271,10 +275,15 @@ class Restaurant:
 
   @stars.setter
   def stars(self, stars):
-    self.__stars = stars
+    self.__my_rating = self.__my_rating
+    self.__api.add_rating(self.user.id, self.__id, self.__my_rating)
 ```
 
 *Example 3.1.1.2 Introductory example to Python*
+
+Even more, now the setter method allows you to set your rating in the
+restaurant and send this information to the server, so that your friends
+know about it.
 
 ### Objects
 
