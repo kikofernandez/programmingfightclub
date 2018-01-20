@@ -60,7 +60,7 @@ The image above explains the situation of many self-taught developers (as well
 as young developers and engineers who have just finished their degree)
 who can read APIs, look on stackoverflow.com and find a solution
 to most problems. However, to be a good engineer / developer,
-being able to code does not mean that your exhibits good software qualities,
+being able to code does not mean that your code exhibits good software qualities,
 i.e. that your code is flexible and maintainable.
 This book will introduce you to design principles for creating a flexible
 and maintanable code.
