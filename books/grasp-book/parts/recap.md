@@ -40,12 +40,15 @@ behaves accordingly, always rejecting programs that are illegal according to
 the mathematical rules[^oop-lambda-calculus].
 
 [^oop-lambda-calculus]: For more information on these mathematical models, subscribe to the
-  [Lambda Calculus for the Working Programmer](/lambda-calculus/toc/) book.
+  [Lambda Calculus for the Working Programmer](WEB/lambda-calculus/toc/) book ().
 
 Type checking can happen at compile time or at run time; when the type checking
 happens at compile time, we have a statically typed language. If the type checking
 happens at runtime, we have a dynamically typed language.
 For all purposes in this book, there are only static and dynamic type systems[^oop-type-system-notes].
+
+[^oop-type-system-notes]: In the research literature, there are languages that
+  mix static and dynamic type systems but these are outside the scope of the book.
 
 ```java
 public class Reader {
@@ -78,8 +81,6 @@ and return a singleton list with the string you passed. However,
 you could also call `reader.readingString(True)`, and
 the program will throw an error at runtime -- `True` does not have a method called `toList()`.
 
-[^oop-type-system-notes]: In the research literature, there are languages that
-  mix static and dynamic type systems but these are outside the scope of the book.
 
 +-------------------------------------+------------------------------------------+
 |             Static                  |              Dynamic                     |
@@ -183,6 +184,9 @@ mean that the attribute is private, i.e. the attribute `stars` should be written
 Unlike Java, the name of the class is not the constructor[^constructor], but rather
 the method `def __init__(self)`. If you write the example above in Python:
 
+[^constructor]: this is not technically a constructor, although it is called right
+after the creation of the object and, for all purposes in this book, it is the same.
+
 ```python
 class Restaurant:
   def __init__(self, stars, street, zipcode, country):
@@ -205,9 +209,6 @@ Lets examine this code in more detail.
 The constructor `def __init__(self, stars, street, zipcode, country):` method
 takes an explicitly instance of itself (`self`) together with the remaining arguments,
 setting its internal state.
-
-[^constructor]: this is not technically a constructor, although it is called right
-after the creation of the object and, for all purposes in this book, it is the same.
 
 Python provides a special syntax for getters and setters that wrap the attribute
 into a function with that very same name. In Python, these are called decorators.

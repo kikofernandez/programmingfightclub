@@ -125,8 +125,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 }</code></pre></div>
 <p><strong>Listing 1.1 High coupled <code>Guide</code> class</strong></p>
 <div class="figure">
-<img src="../assets/grasp/GuideUML.png" />
-
+<img src="../assets/grasp/GuideUML.png" alt="GuideUML" />
+<p class="caption">GuideUML</p>
 </div>
 <p><strong>Fig.1.1 High coupled <code>Guide</code> class</strong></p>
 <p>Before we analyse this design: Can you identify some poor design decisions? Try to name a few of them before you read any further.</p>
@@ -141,8 +141,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>So, given this poor design (Fig 1.1, Listing 1.1), how could we reduce coupling a <code>Guide</code> to other elements? The most obvious alternative would be to put less responsibilities in the <code>Guide</code>. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain.</p>
 <p>For example, a <code>Guide</code> does not need to be concerned about its visibility and we can group different places (restaurants, hotels, bars, etc) contained in a guide under the idea of a point of interest (Fig. 1.2). These two changes reduce the responsibilities of the <code>Guide</code> class, thus reducing coupling (Listing 1.2).</p>
 <div class="figure">
-<img src="../assets/grasp/LooselyGuideUML.png" />
-
+<img src="../assets/grasp/LooselyGuideUML.png" alt="LooselyGuideUML" />
+<p class="caption">LooselyGuideUML</p>
 </div>
 <p><strong>Fig. 1.2 Loosely coupled <code>Guide</code> class</strong></p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> Guide {
@@ -178,8 +178,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Cohesion refers to keeping the responsibilities of the class focused. A cohesive class does one thing and does it well. Highly cohesive code is focused and, as side effect, doesn't talk to too many objects.</p>
 <p>Often, you'll see code that contains many methods, attributes, and a lot of logic and magic. This code builds the antipattern known as &quot;The Blob&quot;, which results in high coupled code with low cohesion, e.g. Fig. 1.3.1.</p>
 <div class="figure">
-<img src="../assets/grasp/TheBlob.png" />
-
+<img src="../assets/grasp/TheBlob.png" alt="The Blob" />
+<p class="caption">The Blob</p>
 </div>
 <p><strong>Fig. 1.3.1 &quot;The Blob&quot;, a class that swallows everything</strong></p>
 <p>This example (Listing 1.1 or Fig. 1.3.1) shows the <code>Guide</code> class, which exhibits multiple responsibilities, such as keeping the data of the class, managing its visibility and each possible point of interest, individually. Listing 1.2 shows a more cohesive code, where the guide is responsible for handling its content. This change keeps the class focus on what it does and it's easier to understand because the class doesn't mix different responsibilities.</p>
@@ -218,8 +218,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 }</code></pre></div>
 <p><strong>Listing 1.3.2 <code>Review</code> class</strong></p>
 <div class="figure">
-<img src="../assets/grasp/Review.png" />
-
+<img src="../assets/grasp/Review.png" alt="Review class" />
+<p class="caption">Review class</p>
 </div>
 <p><strong>Fig. 1.3.2 <code>Review</code> class diagram</strong></p>
 <p>The code in Listing 1.3.2 is highly coupled for its small size and exhibits low cohesion:</p>
@@ -258,8 +258,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 }</code></pre></div>
 <p><strong>Listing 1.3.3 Refactored <code>Review</code> class</strong></p>
 <div class="figure">
-<img src="../assets/grasp/RefactoredReview.png" />
-
+<img src="../assets/grasp/RefactoredReview.png" alt="Refactored Review class" />
+<p class="caption">Refactored Review class</p>
 </div>
 <p><strong>Fig. 1.3.3 Refactored <code>Review</code> class</strong></p>
 <p><strong>Exercise</strong>: Given the code in Listing 1.3.2, add the following functionality:</p>
@@ -299,8 +299,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>Image</code> class</li>
 </ul>
 <div class="figure">
-<img src="../assets/grasp/Comment.png" />
-
+<img src="../assets/grasp/Comment.png" alt="Comment class" />
+<p class="caption">Comment class</p>
 </div>
 <p><strong>Fig. 1.4 Relation between comments, hotels, images, and ratings</strong></p>
 <p>The <code>Hotel</code> and <code>Restaurant</code> are usually created by a user, who has to fill out some details regarding these classes. This does not mean that a<code>User</code> class creates the guides, they are probably created by a controller (see the Controller principle in this chapter). The <code>Comment</code> class could be created by another controller or by a specific class such as <code>Hotel</code> and <code>Restaurant</code> (depends on the level of abstraction and design patterns used, Part III of this book). A comment has associated with it a rating of the place, for fast visual aid, and an image and should be the creator of <code>Image</code> and <code>Rating</code> classes.</p>
@@ -321,8 +321,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p><code>Guide</code> class</p></li>
 </ol>
 <div class="figure">
-<img src="../assets/grasp/UsersGuidePOI.png" />
-
+<img src="../assets/grasp/UsersGuidePOI.png" alt="Relation between Users, POI and Comments" />
+<p class="caption">Relation between Users, POI and Comments</p>
 </div>
 <p><strong>Fig. 1.5 Relation between users, guides, point of interest, and comments</strong></p>
 <p>This one is easy. Lets consider each option:</p>
@@ -342,8 +342,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="controller">Controller</h2>
 <p>Most applications have a user interface (UI), which limits the actions that users can take. The user interface needs to communicate to other layers of your software. This principle tell us which object receives and handles events / actions coming from the UI. For example, a mobile application talks to the server via a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a>, i.e. whenever the user clicks on an icon on the phone, the mobile application sends a packet to your server, which responds with the requested information. Using this principle, you can decouple the user interface from the class that takes action on the event.</p>
 <div class="figure">
-<img src="../assets/grasp/Controller.png" />
-
+<img src="../assets/grasp/Controller.png" alt="Controller GRASP principle" />
+<p class="caption">Controller GRASP principle</p>
 </div>
 <p><strong>Fig. 1.6 Controller</strong></p>
 <p>The example in Fig. 1.6 represents the most common pattern in web frameworks, Model-View-Controller (<em>MVC</em>). The <code>GuideView</code> is decoupled from its model (<code>GuideModel</code>), which is the class in charge of business logic, including saving and retrieving guides from a database . This design pattern, <em>MVC</em>, is explained in further chapters.</p>
@@ -354,8 +354,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <!-- which is also polymorphic on the (opaque or bounded) type variable.-->
 <p>This principle allows classes to specify the same responsibilities via an interface but decouples the behaviour for each type. For instance, in our application, we want to show a special logo on top of the pictures of famous users who have confirmed their identity. A valid design, that does not scale, has a single <code>User</code> class with an attribute named <code>confirmedIdentity</code> which sets the flag to true when the user has confirmed its identity. This design works for two kind of users, the normal and confirmed users. Tomorrow, Johan (CEO) wants to add a new kind of user who represents a company; companies cannot create accounts, their identity is always confirmed (the cannot exist companies where the identity is not confirmed, and multiple employees from the company want to sign in using different password, one per employee. Creating a company's profile as a confirmed user seems wrong and error prone, it makes no sense the attribute <code>confirmedIdentity</code> for a company's profile because we know that this will always be true. The reuse of a confirmed user as a company leaves dangling the possibility of programming mistakes where a company could be created but without a confirmed identity. The current code before the companies profiles were added are in Listing 1.7.1, Fig. 1.7.1.</p>
 <div class="figure">
-<img src="../assets/grasp/UserBorePolymorphism.png" />
-
+<img src="../assets/grasp/UserBorePolymorphism.png" alt="User Polymorphism" />
+<p class="caption">User Polymorphism</p>
 </div>
 <p><strong>Fig. 1.7.1 <code>User</code> code before existence of companies profiles</strong></p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> User {
@@ -435,14 +435,14 @@ Python is a dynamic language with strong typing. This means the language assigns
 <p>To the untrained eye, after applying the principle, it may seem as if two objects that were coupled are still coupled but to an intermediary object. This is right, except that this indirection breaks the idea of one object having a direct relation to the other one. The layer in between breaks the coupling directionality, and creates a more flexible design, since the two initially coupled objects do not need to know anything about each other anymore. Lets out this principle in perspective with an example and an analysis of the solutions prior to the introduction of this principle.</p>
 <p><em>A guide can be seen by multiple friends and each of your friends may see a different cover image.</em></p>
 <div class="figure">
-<img src="../assets/grasp/IndirectionDuplication.png" />
-
+<img src="../assets/grasp/IndirectionDuplication.png" alt="Duplication of Guides" />
+<p class="caption">Duplication of Guides</p>
 </div>
 <p><strong>Fig. 1.8.1 Duplication of guides</strong></p>
 <p>A poor strawman's solution duplicates the guide for each friend and recalculates the cover image for each friend. This is a really bad design, as it's redundant, consumes memory, and duplicates data. Moreover, an update on one guide's description involves updating all copies of that guide.</p>
 <div class="figure">
-<img src="../assets/grasp/IndirectionAfterApplication.png" />
-
+<img src="../assets/grasp/IndirectionAfterApplication.png" alt="Indirection After Application" />
+<p class="caption">Indirection After Application</p>
 </div>
 <p><strong>Fig. 1.8.2 Example after application of indirection principle</strong></p>
 <p>A better solution, applying this principle, is to add a new level of indirection between a guide and its cover image, named <code>CoverManager</code> (Fig. 1.8.2). The <code>CoverManager</code> knows how to retrieve the best cover image for the calling object. Internally, the manager may have to call the AI algorithm from time to time to update the image, cache it if the same user keeps coming to the same guide, and even persist in the database this mapping of guide-cover image.</p>
@@ -464,8 +464,8 @@ Solution: you never assume that there is a connection and instead create an inte
 <p>The term &quot;pure fabrication&quot; means to make something up. You should use this principle whenever you observe that your domain classes are getting too overloaded, i.e., the start to exhibit high coupling and low cohesion.</p>
 <p>The principle adds a new indirection between two domain objects that would otherwise be directly connected (coupled). The indirection means adding a new object that mediates the communication between two other entities. This mediator is not part of the domain, that is, it is a software concept. Examples of this principle are: object pools, database classes, and pretty much any class that sits in between two domain objects. This principle is quite common in the adapter pattern (Fig. 1.9)</p>
 <div class="figure">
-<img src="../assets/grasp/AdapterPureFabrication.png" />
-
+<img src="../assets/grasp/AdapterPureFabrication.png" alt="Pure fabrication" />
+<p class="caption">Pure fabrication</p>
 </div>
 <p><strong>Fig. 1.9 Adapter pattern using pure fabrication</strong></p>
 <p>In this example (Fig. 1.9), the <code>PaymentAdapter</code> has an overloaded constructor, taking either a <code>Paypal</code> or a <code>CreditCard</code> object. A user that calls on the <code>pay</code> method does <em>not</em> need to know whether this class, <code>PaymentAdapter</code> does the payment using a credit card or a paypal account, the implementation of the adapter solves this issue.</p>
@@ -489,8 +489,8 @@ This principle is easy to apply and, in practice, requires you to be good at for
 -->
 <p>The core idea of this principle is to shield your code in places where you expect changes, let that be via interfaces or other means. For example, from the case study, if we were to provide special guides that users can buy, we would need to integrate with a payment platform. If you are not sure which one is best, you'll end up picking one that seems good enough, and call their methods where necessary. However, what happens when CEO Johan finds out that there is a new platform that has lower commissions? He wants you to change to this better option. Refactoring may not be so easy because both payment solutions have different libraries with different APIs. Now, you need to change all those specific method calls from the old library to the new library, possibly including changes in the workflow.</p>
 <div class="figure">
-<img src="../assets/grasp/ProtectedVariation.png" />
-
+<img src="../assets/grasp/ProtectedVariation.png" alt="Protected variation" />
+<p class="caption">Protected variation</p>
 </div>
 <p><strong>Fig. 1.10 Example of protected variation principle</strong></p>
 <p>One way of solving this problem is via an interface (<code>IPayment</code>) and different classes that implement those methods (Fig. 1.10). In this design, you are protecting yourself from future changes. Your concrete classes, the ones implementing the interface (<code>PaypalAdapter</code> and <code>StripeAdapter</code>), work out of the box. This means that, adding a new payment method, e.g. <code>ApplePay</code>, should be as simple as creating a class that implements the interface and hides the details of the concrete method calls of <code>ApplePay</code>.</p>

@@ -1,7 +1,7 @@
 # Case Study
 
 <div class="figure">
-![](MEDIA/assets/VWKombi@theBeachbyCarolineGutman640.jpg)
+![Family Trip](MEDIA/assets/VWKombi@theBeachbyCarolineGutman640.jpg)
 <p>
 (Image public domain https://commons.m.wikimedia.org/wiki/File:VWKombi@theBeach(byCarolineGutman).jpg)
 </p>

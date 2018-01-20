@@ -52,7 +52,7 @@ bullet and everyone in the team was using them (same thing happens with new fram
 The problem is understanding when to use those shiny new features and how they affect your design.
 
 <div class="figure">
-![](https://imgs.xkcd.com/comics/code_quality.png)
+![Code Quality](https://imgs.xkcd.com/comics/code_quality.png)
 <p>(Image from https://xkcd.com/1513/)</p>
 </div>
 
