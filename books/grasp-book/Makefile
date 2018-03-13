@@ -1,5 +1,5 @@
 # List of dependencies and special treatment
-DEPENDENCIES=introduction case-study recap grasp-principles
+DEPENDENCIES=introduction case-study type-systems recap grasp-principles
 SPECIAL_DEPENDENCIES=toc preface
 DEPS=$(SPECIAL_DEPEDENCIES) $(DEPENDENCIES)
 

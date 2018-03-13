@@ -1,20 +1,20 @@
 # Introduction
 
-<span class="firstcharacter">Y</span>ou worked really hard for over a year in the next billion dollar web app in a
+<span class="firstcharacter">Y</span>ou worked hard for over a year in the next billion dollar web app in a
 small startup: the CEO, Johan, seems happy that the product is (almost) feature
 complete; the designer, Anders, is happy with the UX and graphics and the CTO, Pontus,
 just wants to press the red button and release the product. You tell them to wait
-10 more minutes, the unit tests, integration tests and system tests are still running
-(adding tests was a long battle with management because it slowed down the project
-quite a lot, but you are a good engineer and tests will catch many errors in the future).
+10 more minutes, the unit tests, integration tests and system tests are still running.
+Adding tests was a long battle with management because it slowed down the project
+quite a lot, but you are a good engineer and tests will catch many errors in the future.
 
 - Ding, ding, ding (sound)
 
 You look at the screen, all 142 tests are green! You tell Pontus to push the red button;
 deployment scripts start, your software is being installed on all the AWS servers the
-company could afford, a few database servers with replication for faster reads and
-a single leader for the writes, load balancers, reverse proxy servers for serving
-static data and another bunch of servers running your application. After a few minutes,
+company could afford, a few databases with replication for faster reads and
+a single leader for the writes, load balancers, reverse proxies for serving
+static data and another bunch of instances running your application. After a few minutes,
 the deployment is a success, your baby is ALIVE and by tomorrow morning your product will
 be featured in all the Swedish newspapers (you live in Stockholm, the European capital for startups).
 
@@ -31,21 +31,20 @@ if you are *releasing* the lock. If your intuition is right, you'll fix the code
 add the test that should have covered that case and be *presto* in 5 min to re-deploy the application.
 
 There is one problem though, the code doesn't have a well defined structure and the
-lock somehow was passed inside a lambda - someone had to try out lambdas,
-they are cool - so you have no way to releasing the lock directly after the lambda call.
-Calling the release method of the lock inside the lambda call means
-figuring out which of all the lambdas is missing is released, but it's doable,
+lock somehow was passed inside a lambda -- someone had to try out lambdas,
+they are cool -- so you have no way to releasing the lock directly after the lambda call.
+You decide to look for the lambda that has a lock and does not release it,
 even when this method is reused by more than 130 queries (true story of my life).
 To your horror, you observe that the things going on in the lambda call are indeed updated
-atomically but the rest of the method body is not. It seems like it is time
-to start refactoring your use of lambdas in those 130 queries.
+atomically but the rest of the method body in which the lambda is called is not.
+It seems like it is time to start refactoring the use of lambdas in those 130 queries.
 <!-- Moreover, this method is used for multiple purposes and -->
 <!-- you are passing a bunch of lambdas and there's no easy way to tell which one has -->
 <!-- the damn lock!  -->
 Shit, if only your teammate knew when it made sense to use lambdas and all the
 cool features of the language!
 
-**How did you end up in this situation?**
+#### **How did you end up in this situation?**
 
 You coded a system considering all the functional requirements and the architecture
 but you failed to create a good design. The hype of new features seemed like a silver
@@ -53,7 +52,7 @@ bullet and everyone in the team was using them (same thing happens with new fram
 The problem is understanding when to use those shiny new features and how they affect your design.
 
 <div class="figure">
-![](https://imgs.xkcd.com/comics/code_quality.png)
+![Code Quality](https://imgs.xkcd.com/comics/code_quality.png)
 <p>(Image from https://xkcd.com/1513/)</p>
 </div>
 
@@ -82,7 +81,7 @@ I believe that one of the strongest points of any language is its type system.
 It is not the same to use a statically typed language with a strong type system (e.g. Haskell),
 than to program in a dynamic and more flexible language. For instance,
 the notion of *transducers*, introduced by the dynamic language Clojure,
-is attractive to other languages but really hard to implement in a typed language.
+is attractive to other languages but difficult to implement in a typed language.
 
 Our approach in this book will be practical,
 focusing and taking advantage of the type system (and its restrictions).

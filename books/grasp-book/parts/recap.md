@@ -2,7 +2,7 @@
 
 <span class="firstcharacter">I</span>n this chapter you will learn basic concepts
 from *type theory* as well as common concepts from object-oriented languages.
-Apart from these, we cover two concepts that object-oriented languages borrowed
+We also cover two concepts that object-oriented languages borrowed
 from the functional paradigm: *lambdas* and *closures*.
 
 By the end of this chapter, you should understand:
@@ -31,8 +31,9 @@ By the end of this chapter, you should understand:
 
 ## Type systems
 
-A type system assigns types to programming constructs; type systems are a set
-of mathematical rules that are applied to a programming language. The main function of a
+A type system assigns types to programming constructs (functions, expressions, statements, variables, etc.);
+type systems are a set
+of mathematical rules applied to a programming language. The main function of a
 type system is to remove bugs in software, through a phase known as type checking,
 where the compiler assigns types to constructs and builds a sound mathematical model.
 Sound means that the type system guarantees that your program
@@ -45,10 +46,17 @@ the mathematical rules[^oop-lambda-calculus].
 Type checking can happen at compile time or at run time; when the type checking
 happens at compile time, we have a statically typed language. If the type checking
 happens at runtime, we have a dynamically typed language.
-For all purposes in this book, there are only static and dynamic type systems[^oop-type-system-notes].
+For all purposes in this book, we consider only static and dynamic type systems[^oop-type-system-notes].
 
 [^oop-type-system-notes]: In the research literature, there are languages that
   mix static and dynamic type systems but these are outside the scope of the book.
+
+For example, Java is a statically typed language
+and would reject the program below, at compile time, if you
+call the method `readingString` with an argument of type `int`,
+e.g. `reader.readingString(34)`; this is because the method expects
+an argument with a `String` type, not an argument with type `int`.
+
 
 ```java
 public class Reader {
@@ -56,19 +64,13 @@ public class Reader {
 }
 ```
 
-Java is a statically typed language and would reject the program above at compile time if you
-call the method `readingString` with an argument of type `int` (e.g. `reader.readingString(34)`).
-This is because the method expects an argument with a `String` type, not an
-argument with type `int`.
-
-
 On the other side, we have dynamic languages such as Python. Most dynamic languages
-use *duck typing*. Duck typing means that we do not rely on types to
-specify whether the methods of an object exists; call methods on objects
+use *duck typing*. From the pragmatic point of view, duck typing means that
+we do not rely on types to specify whether the methods of an object exists: you call methods on objects
 as if they exist and, at runtime, if they do, great, if they don't, the program throws
-an error. From another point of view, you are telling the object the behaviour
+an error. You can look at it from this other point of view: you are telling the object the behaviour
 that it should implement, whether it does or not is another story that you
-need to ensure by yourself. Going back to the previous example, now written in Python:
+need to ensure yourself. Going back to the previous example, now written in Python:
 
 ```python
 class Reader(object):
