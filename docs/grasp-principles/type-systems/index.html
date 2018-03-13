@@ -61,9 +61,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 <h1 id="type-systems">Type systems</h1>
-<p><span class="firstcharacter">I</span>n this chapter you will learn basic concepts from <em>type theory</em>: the difference between static and dynamic type systems.</p>
-<p>A type system assigns types to programming constructs, by programming constructs we mean functions, expressions, statements, variables, etc. Type systems are a set of mathematical rules applied to a programming language.</p>
-<p>The main function of the type system is to remove bugs in software, through a phase known as type checking, where the compiler assigns types to constructs and builds a sound mathematical model. Sound means that the type system guarantees that your program behaves accordingly, always rejecting programs that are illegal according to the mathematical rules<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p><span class="firstcharacter">I</span>n this chapter you will learn what is a type system and the difference between static and dynamic type systems</p>
+<p>A type system <em>assigns types to programming constructs</em>. By programming constructs we mean functions, expressions, statements, variables, etc. The main function of the type system is to remove bugs in software, through a phase known as type checking, where the compiler assigns types to constructs and builds a sound mathematical model. <!-- Formally, type systems are a set of mathematical rules applied to a programming language. --> Sound means that the type system guarantees that your program behaves properly, always rejecting programs that are illegal according to the mathematical rules<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
 <p>Type checking can happen at compile time or at run time; when the type checking happens at compile time, we have a statically typed language. If the type checking happens at runtime, we have a dynamically typed language. For all purposes in this book, we consider only static and dynamic type systems<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
 <p>For example, Java is a statically typed language and would reject the program below, at compile time, if you call the method <code>readingString</code> with an argument of type <code>int</code>, e.g. <code>reader.readingString(34)</code>; this is because the method expects an argument with a <code>String</code> type, not an argument with type <code>int</code>.</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> <span class="bu">Reader</span> {
@@ -74,6 +73,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="kw">def</span> readingString(s):
     s.toList()</code></pre></div>
 <p>If you have an instance of a <code>Reader</code> class, <code>reader</code>, you can potentially call <code>reader.readingString(&quot;Test&quot;)</code> and return a singleton list with the string you passed. However, you could also call <code>reader.readingString(True)</code>, and the program will throw an error at runtime -- <code>True</code> does not have a method called <code>toList()</code>.</p>
+<p>The following table shows the main and most pragmatic differences between static and dynamic languages.</p>
 <table>
 <caption>Static vs Dynamic type systems from pragmatic point of view.</caption>
 <colgroup>
@@ -105,7 +105,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>For more information on these mathematical models, subscribe to the <a href="http://www.programmingfightclub.com/lambda-calculus/toc/">Lambda Calculus for the Working Programmer</a> book ().<a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p>For more information on these mathematical models, subscribe to the <a href="http://www.programmingfightclub.com/lambda-calculus/toc/">Lambda Calculus for the Working Programmer</a> book.<a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>In the research literature, there are languages that mix static and dynamic type systems but these are outside the scope of the book.<a href="#fnref2">↩</a></p></li>
 </ol>
 </div>

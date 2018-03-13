@@ -1,21 +1,21 @@
 # Type systems
 
-<span class="firstcharacter">I</span>n this chapter you will learn basic concepts
-from *type theory*: the difference between static and dynamic type systems.
+<span class="firstcharacter">I</span>n this chapter you will learn
+what is a type system and
+the difference between static and dynamic type systems
 
-A type system assigns types to programming constructs, by programming constructs we mean
-functions, expressions, statements, variables, etc. Type systems are a set
-of mathematical rules applied to a programming language.
-
+A type system *assigns types to programming constructs*. By programming constructs we mean
+functions, expressions, statements, variables, etc.
 The main function of the
 type system is to remove bugs in software, through a phase known as type checking,
 where the compiler assigns types to constructs and builds a sound mathematical model.
+<!-- Formally, type systems are a set of mathematical rules applied to a programming language. -->
 Sound means that the type system guarantees that your program
-behaves accordingly, always rejecting programs that are illegal according to
+behaves properly, always rejecting programs that are illegal according to
 the mathematical rules[^oop-lambda-calculus].
 
 [^oop-lambda-calculus]: For more information on these mathematical models, subscribe to the
-  [Lambda Calculus for the Working Programmer](WEB/lambda-calculus/toc/) book ().
+  [Lambda Calculus for the Working Programmer](WEB/lambda-calculus/toc/) book.
 
 Type checking can happen at compile time or at run time; when the type checking
 happens at compile time, we have a statically typed language. If the type checking
@@ -57,6 +57,8 @@ and return a singleton list with the string you passed. However,
 you could also call `reader.readingString(True)`, and
 the program will throw an error at runtime -- `True` does not have a method called `toList()`.
 
+The following table shows the main and most pragmatic differences between
+static and dynamic languages.
 
 +-------------------------------------+------------------------------------------+
 |             Static                  |              Dynamic                     |
