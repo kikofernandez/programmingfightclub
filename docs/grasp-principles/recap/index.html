@@ -237,13 +237,50 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 <p>If you think of classes as blank templates, objects are the ink in the template. Classes represent a static view of your software. They declare attributes, and methods, but they are static and have no content. As soon as your software run and you create an instance of a class, you are injecting runtime state to the empty template. <em>Objects represent the runtime of your program</em>.</p>
 <p>I could expand on and talk about how to create instances, call methods, access attributes and so on. I assume that the reader is already familiar with these details and will proceed with the next concept.</p>
 <h3 id="inheritance">Inheritance</h3>
-<p>Inheritance is a key concept in object-oriented programming, misunderstood by new developers and recent graduates.</p>
 <p>To explain:</p>
 <ul>
+<li>what is subtyping?</li>
 <li>creates a hierarchy</li>
 <li>should not be used to not repeat the same attributes</li>
 <li>use wisely</li>
 </ul>
+<p>Inheritance is a key concept in object-oriented programming, misunderstood by new developers and recent graduates. The main use of inheritance is to create a specialiasion of a <em>super</em> class (type) and take advantage of the subtyping polymorphism. In a statically typed language, there is the notion of variance, which establishes the relationship between the super and the derived types. Dynamic languages cannot make this static check and do not bother to consider this concept.</p>
+<p><strong>Java</strong></p>
+<p>In a statically typed language, subtyping has two types of variances: covariant and contravariant. The variance on return, generics and arguments types explains the relationship between the super and specialiased (derived) type. Covariant refers to the subtyping relationship established by the programmer, e.g. <code>Cat</code> is a subtype of an <code>Animal</code> class. When the relationship is reversed, we call it contravariant. Variances to take into account are:</p>
+<ul>
+<li>overloading return type (covariant),</li>
+<li>overloading method argument's type (covariant) and</li>
+<li>generics (contravariant)</li>
+</ul>
+<p>Lets understand this with examples. First, lets look at the super and derived classes:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> AnimalShelter {
+  <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}
+}
+
+<span class="kw">public</span> <span class="kw">class</span> Animal {
+  ...
+}
+
+<span class="kw">public</span> <span class="kw">class</span> Cat <span class="kw">extends</span> Animal {
+  ...
+}</code></pre></div>
+<p>If I want to create a <code>CatShelter</code>, the return type of the method <code>getAnimalShelter()</code> must be covariant. This means that I can return a <code>Cat</code> instead of an <code>Animal</code>. Following the same reasoning, overloading a method argument's type is covariant, i.e. it is type safe to pass a more specialised type to the subclass than the type in the super class. This is illustrated in the following code, method <code>putAnimal(Cat animal)</code>.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> CatShelter {
+  <span class="kw">public</span> Cat <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Cat animal) { <span class="kw">... </span>}
+}</code></pre></div>
+<p>In contrast, the use of generics uses contravariance subtyping<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. This means that if <code>Cat</code> is a subtype of <code>Animal</code> and we refer to a generic implementation, e.g. <code>List</code>, <code>List&lt;Cat&gt;</code> is not a subtype of <code>List&lt;Animal&gt;</code>. To understand this, lets look at the following example:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="bu">List</span>&lt;Cat&gt; lcat = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;Cat&gt;();
+<span class="bu">List</span>&lt;Animal&gt; lanimal = lcat;</code></pre></div>
+<p>I have just aliased the <code>lcat</code> variable. If I now add an element to the <code>Animal</code> list:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">lanimal.<span class="fu">add</span>(<span class="kw">new</span> <span class="fu">Dog</span>());</code></pre></div>
+<p>and get the first cat available from the <code>lcat</code> lists (was aliased by the animal lists):</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">Cat cat = lcat.<span class="fu">get</span>(<span class="dv">0</span>);</code></pre></div>
+<p>I would be treating a <code>Dog</code> as if it were a <code>Cat</code>. For this reason, Java uses contravariant generic subtyping.</p>
+<p><strong>Python</strong></p>
+<p><strong>Common mistakes</strong></p>
+<p>Create super class so that you do not repeat arguments in derived classes.</p>
 <h3 id="interfaces">Interfaces</h3>
 <p>TODO:</p>
 <h3 id="abstract-classes">Abstract classes</h3>
@@ -264,6 +301,7 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 <li id="fn1"><p>For more information on these mathematical models, subscribe to the <a href="http://www.programmingfightclub.com/lambda-calculus/toc/">Lambda Calculus for the Working Programmer</a> book ().<a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>In the research literature, there are languages that mix static and dynamic type systems but these are outside the scope of the book.<a href="#fnref2">↩</a></p></li>
 <li id="fn3"><p>this is not technically a constructor, although it is called right after the creation of the object and, for all purposes in this book, it is the same.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p><a href="https://docs.oracle.com/javase/tutorial/extra/generics/subtype.html">Link to official documentation</a><a href="#fnref4">↩</a></p></li>
 </ol>
 </div>
 <div class="footnotes">

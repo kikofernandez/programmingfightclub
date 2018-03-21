@@ -303,14 +303,103 @@ these details and will proceed with the next concept.
 
 ### Inheritance
 
-Inheritance is a key concept in object-oriented programming, misunderstood
-by new developers and recent graduates.
-
 To explain:
 
+* what is subtyping?
 * creates a hierarchy
 * should not be used to not repeat the same attributes
 * use wisely
+
+
+Inheritance is a key concept in object-oriented programming, misunderstood
+by new developers and recent graduates. The main use of inheritance is to
+create a specialiasion of a *super* class (type) and take
+advantage of the subtyping polymorphism. In a statically typed language,
+there is the notion of variance, which establishes the relationship
+between the super and the derived types. Dynamic languages cannot make
+this static check and do not bother to consider this concept.
+
+**Java**
+
+In a statically typed language, subtyping has two types of variances: covariant and contravariant.
+The variance on return, generics and arguments types explains the relationship
+between the super and specialiased (derived) type. Covariant refers to the subtyping
+relationship established by the programmer, e.g. `Cat` is a subtype of an `Animal` class.
+When the relationship is reversed, we call it contravariant.
+Variances to take into account are:
+
+* overloading return type (covariant),
+* overloading method argument's type (covariant) and
+* generics (contravariant)
+
+Lets understand this with examples. First, lets look at the super and derived classes:
+
+```java
+public class AnimalShelter {
+  public Animal getAnimalForAdoption(){ ... }
+  public void putAnimal(Animal a) { ... }
+}
+
+public class Animal {
+  ...
+}
+
+public class Cat extends Animal {
+  ...
+}
+```
+
+If I want to create a `CatShelter`, the return type of the method `getAnimalShelter()`
+must be covariant. This means that I can return a `Cat` instead of an `Animal`.
+Following the same reasoning, overloading a method argument's type is covariant, i.e.
+it is type safe to pass a more specialised type to the subclass than the
+type in the super class. This is illustrated in the following code, method
+`putAnimal(Cat animal)`.
+
+
+```java
+public class CatShelter {
+  public Cat getAnimalForAdoption(){ ... }
+  public void putAnimal(Cat animal) { ... }
+}
+```
+
+In contrast, the use of generics uses contravariance subtyping[^java-tutorial-generics].
+This means that if `Cat` is a subtype of `Animal` and we refer to a generic
+implementation, e.g. `List`, `List<Cat>` is not a subtype of `List<Animal>`.
+To understand this, lets look at the following example:
+
+```java
+List<Cat> lcat = new ArrayList<Cat>();
+List<Animal> lanimal = lcat;
+```
+
+I have just aliased the `lcat` variable. If I now add an element to the `Animal`
+list:
+
+```java
+lanimal.add(new Dog());
+```
+
+and get the first cat available from the `lcat` lists (was aliased by the animal lists):
+
+```java
+Cat cat = lcat.get(0);
+```
+
+I would be treating a `Dog` as if it were a `Cat`. For this reason, Java uses
+contravariant generic subtyping.
+
+[^java-tutorial-generics]: [Link to official documentation](https://docs.oracle.com/javase/tutorial/extra/generics/subtype.html)
+
+
+
+**Python**
+
+
+**Common mistakes**
+
+Create super class so that you do not repeat arguments in derived classes.
 
 ### Interfaces
 
