@@ -1,13 +1,12 @@
 # Object-oriented concepts, revisited
 
-<span class="firstcharacter">I</span>n this chapter you will learn basic concepts
-from *type theory* as well as common concepts from object-oriented languages.
-We also cover two concepts that object-oriented languages borrowed
+<span class="firstcharacter">I</span>n this chapter you are reminded about basic concepts
+from object-oriented languages and two concepts that object-oriented languages borrowed
 from the functional paradigm: *lambdas* and *closures*.
+We cover these concepts in a static language, Java, and in a dynamic language, Python.
 
 By the end of this chapter, you should understand:
 
-* difference between static and dynamic type systems,
 * classes and objects,
 * inheritance,
 * interfaces,
@@ -16,119 +15,34 @@ By the end of this chapter, you should understand:
 * parametric classes and
 * lambdas and closures
 
+If you are already familiar with object-oriented programming,
+you can go ahead and move on to the next chapter. If you would like to review
+a few concepts, jump in to the one you would like to remember.
 
-
-<!-- Among these abstractions, we will remind the reader about important concepts such -->
-<!-- as classes, parametric polymorphism (*generics* in Java), interfaces, abstract -->
-<!-- classes, mixins and lambdas and closures. -->
-
-<!-- This section covers basic concepts from *type theory* and the object-oriented paradigm. -->
-
-<!-- Today's object-oriented paradigm borrows two concepts from functional programming: lambdas and closures. -->
-<!-- During this recap, we will go through the core ideas of object-oriented programming using Java and Python. [^recap-note] -->
-
-
-
-## Type systems
-
-A type system assigns types to programming constructs (functions, expressions, statements, variables, etc.);
-type systems are a set
-of mathematical rules applied to a programming language. The main function of a
-type system is to remove bugs in software, through a phase known as type checking,
-where the compiler assigns types to constructs and builds a sound mathematical model.
-Sound means that the type system guarantees that your program
-behaves accordingly, always rejecting programs that are illegal according to
-the mathematical rules[^oop-lambda-calculus].
-
-[^oop-lambda-calculus]: For more information on these mathematical models, subscribe to the
-  [Lambda Calculus for the Working Programmer](WEB/lambda-calculus/toc/) book ().
-
-Type checking can happen at compile time or at run time; when the type checking
-happens at compile time, we have a statically typed language. If the type checking
-happens at runtime, we have a dynamically typed language.
-For all purposes in this book, we consider only static and dynamic type systems[^oop-type-system-notes].
-
-[^oop-type-system-notes]: In the research literature, there are languages that
-  mix static and dynamic type systems but these are outside the scope of the book.
-
-For example, Java is a statically typed language
-and would reject the program below, at compile time, if you
-call the method `readingString` with an argument of type `int`,
-e.g. `reader.readingString(34)`; this is because the method expects
-an argument with a `String` type, not an argument with type `int`.
-
-
-```java
-public class Reader {
-  public [String] readingString(String s){ s.toArray(); }
-}
-```
-
-On the other side, we have dynamic languages such as Python. Most dynamic languages
-use *duck typing*. From the pragmatic point of view, duck typing means that
-we do not rely on types to specify whether the methods of an object exists: you call methods on objects
-as if they exist and, at runtime, if they do, great, if they don't, the program throws
-an error. You can look at it from this other point of view: you are telling the object the behaviour
-that it should implement, whether it does or not is another story that you
-need to ensure yourself. Going back to the previous example, now written in Python:
-
-```python
-class Reader(object):
-  def readingString(s):
-    s.toList()
-```
-
-If you have an instance of a `Reader` class, `reader`, you can potentially call `reader.readingString("Test")`
-and return a singleton list with the string you passed. However,
-you could also call `reader.readingString(True)`, and
-the program will throw an error at runtime -- `True` does not have a method called `toList()`.
-
-
-+-------------------------------------+------------------------------------------+
-|             Static                  |              Dynamic                     |
-+=====================================+==========================================+
-| * Specify allowed behaviour based   | * Declare behaviour that you expect      |
-| on types                            |                                          |
-|                                     |                                          |
-| * Type annotations ensure that      | * For each method, ensure that you       |
-| only constructs that respect the    |   pass  arguments that your declared     |
-| types can run                       |   behaviour                              |
-|                                     |                                          |
-| * Catches errors at compile time    | * Catches error at runtime               |
-+-------------------------------------+------------------------------------------+
-
-Table: Static vs Dynamic type systems from pragmatic point of view.
-
-It is completely normal if you do not fully understand everything mentioned in
-this section. If that is the case, please continue ahead and go back to
-this section once you have gone through the [Object-oriented reminder](#object-oriented-concepts).
-
-## Object-oriented concepts
-
-This section is a basic reminder of the main concepts of object-oriented programming
-using Java and Python. If you are already familiar with object-oriented programming,
-you can go ahead and move to the next chapter. If you would like to review
-a few concepts, jump in to the one you would need to remember / clarify.
-
-### Classes
+## Classes
 
 Classes declare and implement the state and behaviour of an object.
 *The state of a class lives in its attributes while the behaviour is expressed via its methods*.
 A class that hides its attributes with a `private` access modifier
-(remember `public`, `protected` and `private`?) protects its internal state from other
+protects its internal state from other
 classes. The only way to update the internal state is via method calls on the object.
 Method calls *represent the behaviour of the object*.
 
 As a general advice, you should not expose the internal state of your class to others;
-you should expose your behaviour. This makes great abstractions easy to use and
+you should expose your behaviour. If followed, this simple advice allows you to build
+great abstractions that are easy to use and
 understand. For example, when using the `Future` API in Java 8, you do not have to think about the
-possible locks that may exist in the internal representation of a `CompletableFuture`, you
+possible locks that may exist in the internal representation of a `CompletableFuture` instance, you
 just use it according to its defined behaviour, i.e. public methods.
 
-#### Getters and setters
+### Getters and setters
 
 Methods that get attributes and set them are called *getters* and *setters*.
-As an example, imagine that you have been asked to create a restaurant guide app
+Not all classes should have getters and/or setters. As a rule of thump,
+I like to think that mostly domain classes should use them. A domain class
+is a class that belongs to the domain that you are modelling.
+We are going to show how getters and setters work in Java and Python
+with the following example: imagine that you are asked to create a restaurant guide application
 that shows restaurants nearby with their ratings.
 
 **Java**
@@ -244,13 +158,21 @@ restaurant.stars = 5
 
 #### **Why would we want to use getters and setters like that?**
 
-**They are an abstraction**. Today, you only want to retrieve the data but, with this
-abstraction, you could be returning cached data that otherwise needs to be fetched from
-a database, or some remote server. For instance, lets assume that the mobile application
-you are building uses an external API to fetch data from nearby restaurants and, you map
-this information to the class below. You use fields such as `street`, `zipcode` and
-`country` from the external API, but the `star` rating and `id` come from your application.
-Using the external API, your class partially contains all the values, except
+**They encapsulate behaviour**. Today, you only want to retrieve the data but, with this
+simple abstraction, you give yourself some flexibility in the future.
+For instance, you can easily expand and return cached data that otherwise would
+need to be fetched fromsome remote server. If you did not add the getter and setter,
+now you have an application that allows access to all their internals and it is much
+more difficult to do this update, since you did not encapsulate your behaviour.
+Another typical example is adding validation when setting an attribute.
+
+Lets show a concrete scenario: assume that the application
+you are building uses an external API (Google) to fetch data of nearby restaurants and you map
+this information to the class below. You copy trustworthy information from the external
+API, such as `street`, `zipcode` and `country`. However, the number of `star` ratings
+come from what your users think of the restaurant, since you are targeting
+some specialised audience.
+From the external API, your `Restaurant` class partially contains all the values, except
 the ratings, which you pull on demand, when the user clicks or is nearby a place.
 Thanks to the decorator, you can
 refer to `restaurant.stars` and the method will transparently handle
@@ -284,24 +206,23 @@ class Restaurant:
 
 *Example 3.1.1.2 Introductory example to Python*
 
-Even more, now the setter method allows you to set your rating in the
+The setter method allows you to set your rating in the
 restaurant and send this information to the server, so that your friends
 know about it.
 
-### Objects
+## Objects
 
 If you think of classes as blank templates, objects are the ink in the template.
-Classes represent a static view of your software. They declare attributes,
+Classes represent a static view of your software; classes declare attributes,
 and methods, but they are static and have no content. As soon as your software
-run and you create an instance of a class, you are injecting runtime state
+runs and you create an instance of a class, you are injecting runtime state
 to the empty template. *Objects represent the runtime of your program*.
 
-I could expand on and talk about how to create instances, call methods, access
-attributes and so on. I assume that the reader is already familiar with
-these details and will proceed with the next concept.
+<!-- I could expand on and talk about how to create instances, call methods, access -->
+<!-- attributes and so on. I assume that the reader is already familiar with -->
+<!-- these details and will proceed with the next concept. -->
 
-
-### Inheritance
+## Inheritance
 
 To explain:
 
@@ -311,26 +232,27 @@ To explain:
 * use wisely
 
 
-Inheritance is a key concept in object-oriented programming, misunderstood
-by new developers and recent graduates. The main use of inheritance is to
-create a specialiasion of a *super* class (type) and take
+<!-- Inheritance is a key concept in object-oriented programming, misunderstood -->
+<!-- by new developers and recent graduates.  -->
+The main use of inheritance is to
+create a specialiasion (derived class) of a *super* class (type) and take
 advantage of the subtyping polymorphism. In a statically typed language,
-there is the notion of variance, which establishes the relationship
-between the super and the derived types. Dynamic languages cannot make
+there is the notion of *variance*, which establishes the relationship
+between the *super* and the *derived* types. Dynamic languages cannot make
 this static check and do not bother to consider this concept.
 
 **Java**
 
-In a statically typed language, subtyping has two types of variances: covariant and contravariant.
+In a statically typed language, subtyping has three types of variances: covariant, contravariant and invariant.
 The variance on return, generics and arguments types explains the relationship
 between the super and specialiased (derived) type. Covariant refers to the subtyping
 relationship established by the programmer, e.g. `Cat` is a subtype of an `Animal` class.
-When the relationship is reversed, we call it contravariant.
-Variances to take into account are:
+When the relationship is reversed, we call it contravariant. Invariant means
+that the types must exactly match. Variances to take into account are:
 
 * overloading return type (covariant),
-* overloading method argument's type (covariant) and
-* generics (contravariant)
+* generics (contravariant) and,
+* overriding method argument's type (invariant)
 
 Lets understand this with examples. First, lets look at the super and derived classes:
 
@@ -393,23 +315,106 @@ contravariant generic subtyping.
 [^java-tutorial-generics]: [Link to official documentation](https://docs.oracle.com/javase/tutorial/extra/generics/subtype.html)
 
 
+Overriding the method arguments' types is invariant, although Java allows
+*overloaded* methods (coming next). To tell the compiler that you are overriding a method
+in a subclass, you use the `@Override` on top of the method:
+
+```java
+public class AnimalShelter {
+  public Animal getAnimalForAdoption(){ ... }
+  public void putAnimal(Animal a) { ... }
+}
+
+public class CatShelter {
+  @Override
+  public Animal getAnimalForAdoption(){ ... }
+
+  @Override
+  public void putAnimal(Animal a) { ... }
+}
+```
+
+If you do not add this notation and change the name of the method `getAnimalShelter()`
+in the super class `AnimalShelter`, the compiler would think that the `CatShelter`
+defines a method that does not exist in the super class. A good practice is to
+always add the `@Override` annotation.
+
+Overloaded methods are method that have the same name but receive different
+arguments of types. Java knows which of the methods you are referring to and
+uses the right method. For instance, we can overload the method `putAnimal`
+from the `CatShelter` class as follows:
+
+```java
+public class CatShelter {
+  public void putAnimal(Animal a) { ... }
+  public void putAnimal(Cat a) { ... }
+}
+```
+
+Whenever there is a call to the `putAnimal` method, Java uses one or the other
+method.
 
 **Python**
 
+Inheritance in Python looks similar to Java. The example above, written in
+Python, looks as follows:
+
+```python
+class AnimalShelter(object):
+  def getAnimalForAdoption():
+    ...
+
+  def putAnimal(animal):
+    ...
+
+class CatShelter(AnimalShelter):
+  def getAnimalForAdoption():
+    ...
+
+  def putAnimal(animal):
+    ...
+```
+
+In this example, the `putAnimal` method in `CatShelter` overrides the parents
+method. There is no `@Override` annotation to prevent the error discussed
+in the Java section.
+
+Overloading is always given, i.e. the lack of type annotations forbids
+overloading methods, since there is no way to know which arguments types
+you are passing to the function. If you overide a function by passing
+more arguments, the first function is actually deleted and not available anymore.
+Example:
+
+```python
+def getAnimal(animal):
+  return animal
+
+def getAnimal(animal, cat):
+  return cat
+```
+
+If you were to call the function `getAnimal(animal)` (for some instance of `Animal` named `animal`),
+ Python will throw an error
+because the name has been rebound and the function that takes a single argument
+does not exist anymore.
+
+This gives Python a lot of flexibility,
+although you can also easily misuse duck typing and run into a runtime error.
 
 **Common mistakes**
 
+TODO:
 Create super class so that you do not repeat arguments in derived classes.
 
-### Interfaces
+## Interfaces
 
 TODO:
 
-### Abstract classes
+## Abstract classes
 
 TODO:
 
-### Parametric classes
+## Parametric classes
 
 TODO:
 
@@ -417,14 +422,14 @@ TODO:
 
 TODO:
 
-### Anonymous functions / lambdas
+## Anonymous functions / lambdas
 
 TODO:
 
-### High-order functions
+## High-order functions
 
 TODO:
 
-### Parametric functions
+## Parametric functions
 
 TODO:
