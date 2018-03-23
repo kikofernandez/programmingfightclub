@@ -58,9 +58,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="TOC">
 <ul>
 <li><a href="#object-oriented-concepts-revisited">Object-oriented concepts, revisited</a><ul>
-<li><a href="#classes">Classes</a><ul>
-<li><a href="#getters-and-setters">Getters and setters</a></li>
-</ul></li>
+<li><a href="#classes">Classes</a></li>
 <li><a href="#objects">Objects</a></li>
 <li><a href="#inheritance">Inheritance</a></li>
 <li><a href="#interfaces">Interfaces</a></li>
@@ -89,7 +87,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="classes">Classes</h2>
 <p>Classes declare and implement the state and behaviour of an object. <em>The state of a class lives in its attributes while the behaviour is expressed via its methods</em>. A class that hides its attributes with a <code>private</code> access modifier protects its internal state from other classes. The only way to update the internal state is via method calls on the object. Method calls <em>represent the behaviour of the object</em>.</p>
 <p>As a general advice, you should not expose the internal state of your class to others; you should expose your behaviour. If followed, this simple advice allows you to build great abstractions that are easy to use and understand. For example, when using the <code>Future</code> API in Java 8, you do not have to think about the possible locks that may exist in the internal representation of a <code>CompletableFuture</code> instance, you just use it according to its defined behaviour, i.e. public methods.</p>
-<h3 id="getters-and-setters">Getters and setters</h3>
+<h4 id="getters-and-setters">Getters and setters</h4>
 <p>Methods that get attributes and set them are called <em>getters</em> and <em>setters</em>. Not all classes should have getters and/or setters. As a rule of thump, I like to think that mostly domain classes should use them. A domain class is a class that belongs to the domain that you are modelling. We are going to show how getters and setters work in Java and Python with the following example: imagine that you are asked to create a restaurant guide application that shows restaurants nearby with their ratings.</p>
 <p><strong>Java</strong></p>
 <p>The class <code>Restaurant</code> has all attributes defined as private (not accesible from outside the class). The constructor of the class (<code>public Restaurant(...)</code>) creates a new <code>Restaurant</code> and sets its state.</p>
@@ -190,13 +188,11 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 <!-- attributes and so on. I assume that the reader is already familiar with -->
 <!-- these details and will proceed with the next concept. -->
 <h2 id="inheritance">Inheritance</h2>
-<p>To explain:</p>
-<ul>
-<li>what is subtyping?</li>
-<li>creates a hierarchy</li>
-<li>should not be used to not repeat the same attributes</li>
-<li>use wisely</li>
-</ul>
+<!-- To explain: -->
+<!-- * what is subtyping? -->
+<!-- * creates a hierarchy -->
+<!-- * should not be used to not repeat the same attributes -->
+<!-- * use wisely -->
 <!-- Inheritance is a key concept in object-oriented programming, misunderstood -->
 <!-- by new developers and recent graduates.  -->
 <p>The main use of inheritance is to create a specialiasion (derived class) of a <em>super</em> class (type) and take advantage of the subtyping polymorphism. In a statically typed language, there is the notion of <em>variance</em>, which establishes the relationship between the <em>super</em> and the <em>derived</em> types. Dynamic languages cannot make this static check and do not bother to consider this concept.</p>
@@ -274,11 +270,20 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
   <span class="cf">return</span> animal
 
 <span class="kw">def</span> getAnimal(animal, cat):
-  <span class="cf">return</span> cat</code></pre></div>
-<p>If you were to call the function <code>getAnimal(animal)</code> (for some instance of <code>Animal</code> named <code>animal</code>), Python will throw an error because the name has been rebound and the function that takes a single argument does not exist anymore.</p>
-<p>This gives Python a lot of flexibility, although you can also easily misuse duck typing and run into a runtime error.</p>
-<p><strong>Common mistakes</strong></p>
-<p>TODO: Create super class so that you do not repeat arguments in derived classes.</p>
+  <span class="cf">if</span> cat <span class="op">!=</span> <span class="va">None</span>:
+    <span class="cf">return</span> cat
+  <span class="cf">else</span>:
+    <span class="cf">return</span> animal</code></pre></div>
+<p>If you were to call the function <code>getAnimal(animal)</code> (for some instance of <code>Animal</code> named <code>animal</code>), Python will throw an error because the name has been rebound and the function that takes a single argument does not exist anymore. One way to overcome this is by using default parameters, i.e. parameters that start with a default value, which can be overriden. Following the example above, the same function could be rewritten as follows:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> getAnimal(animal, cat<span class="op">=</span><span class="va">None</span>):
+  <span class="cf">if</span> cat <span class="op">!=</span> <span class="va">None</span>:
+    <span class="cf">return</span> cat
+  <span class="cf">else</span>:
+    <span class="cf">return</span> animal</code></pre></div>
+<p>This function can be called with one or two arguments, i.e. <code>getAnimal(a)</code>, which sets the <code>cat</code> argument to <code>None</code>, by default; at the same time, you can call <code>getAnimal(a, c)</code> which overrides the default value of <code>cat</code> by <code>c</code>. This gives Python a lot of flexibility, although you can also easily misuse it and run into runtime errors.</p>
+<!-- **Common mistakes** -->
+<!-- TODO: -->
+<!-- * Create super class so that you do not repeat arguments in derived classes. -->
 <h2 id="interfaces">Interfaces</h2>
 <p>TODO:</p>
 <h2 id="abstract-classes">Abstract classes</h2>

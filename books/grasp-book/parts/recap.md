@@ -35,7 +35,7 @@ understand. For example, when using the `Future` API in Java 8, you do not have 
 possible locks that may exist in the internal representation of a `CompletableFuture` instance, you
 just use it according to its defined behaviour, i.e. public methods.
 
-### Getters and setters
+#### Getters and setters
 
 Methods that get attributes and set them are called *getters* and *setters*.
 Not all classes should have getters and/or setters. As a rule of thump,
@@ -224,13 +224,11 @@ to the empty template. *Objects represent the runtime of your program*.
 
 ## Inheritance
 
-To explain:
-
-* what is subtyping?
-* creates a hierarchy
-* should not be used to not repeat the same attributes
-* use wisely
-
+<!-- To explain: -->
+<!-- * what is subtyping? -->
+<!-- * creates a hierarchy -->
+<!-- * should not be used to not repeat the same attributes -->
+<!-- * use wisely -->
 
 <!-- Inheritance is a key concept in object-oriented programming, misunderstood -->
 <!-- by new developers and recent graduates.  -->
@@ -390,21 +388,36 @@ def getAnimal(animal):
   return animal
 
 def getAnimal(animal, cat):
-  return cat
+  if cat != None:
+    return cat
+  else:
+    return animal
 ```
 
 If you were to call the function `getAnimal(animal)` (for some instance of `Animal` named `animal`),
- Python will throw an error
+Python will throw an error
 because the name has been rebound and the function that takes a single argument
-does not exist anymore.
+does not exist anymore. One way to overcome this is by using default parameters,
+i.e. parameters that start with a default value, which can be overriden. Following
+the example above, the same function could be rewritten as follows:
 
+```python
+def getAnimal(animal, cat=None):
+  if cat != None:
+    return cat
+  else:
+    return animal
+```
+
+This function can be called with one or two arguments, i.e. `getAnimal(a)`, which
+sets the `cat` argument to `None`, by default; at the same time, you can call
+`getAnimal(a, c)` which overrides the default value of `cat` by `c`.
 This gives Python a lot of flexibility,
-although you can also easily misuse duck typing and run into a runtime error.
+although you can also easily misuse it and run into runtime errors.
 
-**Common mistakes**
-
-TODO:
-Create super class so that you do not repeat arguments in derived classes.
+<!-- **Common mistakes** -->
+<!-- TODO: -->
+<!-- * Create super class so that you do not repeat arguments in derived classes. -->
 
 ## Interfaces
 
