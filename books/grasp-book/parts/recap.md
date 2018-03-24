@@ -224,6 +224,10 @@ to the empty template. *Objects represent the runtime of your program*.
 
 ## Inheritance
 
+TODO:
+
+* Missing multiple inheritance in Python, a.k.a. mixins
+
 <!-- To explain: -->
 <!-- * what is subtyping? -->
 <!-- * creates a hierarchy -->
@@ -354,8 +358,9 @@ method.
 
 **Python**
 
-Inheritance in Python looks similar to Java. The example above, written in
-Python, looks as follows:
+Python allows multiple inheritance, in contrast to Java. Before jumping in
+the concept of multiple inheritance, we continue with the example given in the
+Java section, now written in Python:
 
 ```python
 class AnimalShelter(object):
@@ -415,13 +420,36 @@ sets the `cat` argument to `None`, by default; at the same time, you can call
 This gives Python a lot of flexibility,
 although you can also easily misuse it and run into runtime errors.
 
-<!-- **Common mistakes** -->
-<!-- TODO: -->
-<!-- * Create super class so that you do not repeat arguments in derived classes. -->
+Multiple inheritance permits a Python class to inherit from multiple classes.
+In case there is a method name collision, Python will execute the method
+that inherited from the first class, ignoring the second possible method.
+Lets take a closer look:
+
+```python
+class Photogapher(object):
+  def shoot(self):
+    return "Click"
+
+class SecretAgent(object):
+  def shoot(self):
+    return "Bang!"
+
+class JamesBond(Photographer, SecretAgent):
+  pass
+```
+
+In this example, *James Bond* is a photographer and a secret agent.
+When he needs to shoot, `bond.shoot()`, he gets confused and decides to take a last picture before
+getting killed. Don't get me wrong, it is useful but you need to use it wisely.
+
+The concept of multiple inheritance brought the semantic concept of mixins,
+reviewed later on in this chapter.
 
 ## Interfaces
 
-TODO:
+An interface declares the behaviour of your software, implemented in a class;
+with the use of interfaces, you create classes that expose that behaviour,
+exploited through polymorhism.
 
 ## Abstract classes
 
