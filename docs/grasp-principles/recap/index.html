@@ -296,10 +296,27 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 
 <span class="kw">class</span> JamesBond(Photographer, SecretAgent):
   <span class="cf">pass</span></code></pre></div>
-<p>In this example, <em>James Bond</em> is a photographer and a secret agent. When he needs to shoot, <code>bond.shoot()</code>, he gets confused and decides to take a last picture before getting killed. Don't get me wrong, it is useful but you need to use it wisely.</p>
-<p>The concept of multiple inheritance brought the semantic concept of mixins, reviewed later on in this chapter.</p>
+<p>In this example, <em>James Bond</em> is a photographer and a secret agent. When he needs to shoot, <code>bond.shoot()</code>, he gets confused and decides to take a picture before getting killed. Multiple inheritance is useful but you should use it wisely. The concept of multiple inheritance brought the semantic concept of mixins, reviewed later on in this chapter.</p>
+<p>TODO:</p>
+<ul>
+<li>Talk about mixins</li>
+</ul>
 <h2 id="interfaces">Interfaces</h2>
-<p>An interface declares the behaviour of your software, implemented in a class; with the use of interfaces, you create classes that expose that behaviour, exploited through polymorhism.</p>
+<p>An interface declares the behaviour of your software, whose implementation lives in a class; with the use of interfaces, your classes expose the behaviour, which is further exploited by polymorphism. This means more than one class can implement the interface, so that you can interchangeably use one class or another. Java has interfaces and Python does not need them. We will come to the why they are not needed in Python in its corresponding section.</p>
+<p><strong>Java</strong></p>
+<p>An interface can be seen as a promise of proper behaviour from any type that implements it. Since Java 8, interfaces not only declare expected behaviour, but they can also implement methods as long as the implementation relies on calling other public methods, great for code reuse. We will look at James Bond example:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">interface</span> SecretAgentSkills {
+  <span class="dt">static</span> <span class="dt">final</span> <span class="dt">float</span> probabilityOnTarget = <span class="fl">0.9</span>;
+  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">pokerFace</span>();
+  <span class="kw">default</span> Damage <span class="fu">shoot</span>(Person p) {
+    <span class="dt">float</span> probability = SecretAgentSkills.<span class="fu">probabilityOnTarget</span> - p.<span class="fu">hide</span>();
+    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Damage</span>(probability);
+  }
+}</code></pre></div>
+<p>In the example above, we declare that any class that wants to be a secret agent needs to have a poker face and know how to shoot, and we provide a default implementation for the <em>shooting</em> method, which can potentially be overriden by classes that implement the interface <code>SecretAgentSkills</code>.</p>
+<p><strong>Python</strong></p>
+<p>Interfaces cannot be represented in dynamically typed languages. This is reasonable, since a dynamic language cannot statically enforce the use of types at the signature level. Furthermore, duck typing removes the need of interfaces, i.e. declare the behaviour that you expect and enforce that the arguments you pass comply with the expected behaviour -- public API.</p>
+<p>In Python, you can encode interfaces in terms of abstract classes, which we cover next.</p>
 <h2 id="abstract-classes">Abstract classes</h2>
 <p>TODO:</p>
 <h2 id="parametric-classes">Parametric classes</h2>
