@@ -188,6 +188,10 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 <!-- attributes and so on. I assume that the reader is already familiar with -->
 <!-- these details and will proceed with the next concept. -->
 <h2 id="inheritance">Inheritance</h2>
+<p>TODO:</p>
+<ul>
+<li>Missing multiple inheritance in Python, a.k.a. mixins</li>
+</ul>
 <!-- To explain: -->
 <!-- * what is subtyping? -->
 <!-- * creates a hierarchy -->
@@ -195,7 +199,7 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 <!-- * use wisely -->
 <!-- Inheritance is a key concept in object-oriented programming, misunderstood -->
 <!-- by new developers and recent graduates.  -->
-<p>The main use of inheritance is to create a specialiasion (derived class) of a <em>super</em> class (type) and take advantage of the subtyping polymorphism. In a statically typed language, there is the notion of <em>variance</em>, which establishes the relationship between the <em>super</em> and the <em>derived</em> types. Dynamic languages cannot make this static check and do not bother to consider this concept.</p>
+<p>The main use of inheritance is to create a specialiasion (derived class) of a <em>super</em> class (type) and take advantage of the subtyping polymorphism. In a statically typed language, there is the notion of <em>variance</em>, which establishes the relationship between the <em>super</em> and the <em>derived</em> types. Dynamic languages cannot make this static check and do not bother to consider this concept. On the other hand, Python (not all dynamic languages) has multiple inheritance, which we explain in the Python section.</p>
 <p><strong>Java</strong></p>
 <p>In a statically typed language, subtyping has three types of variances: covariant, contravariant and invariant. The variance on return, generics and arguments types explains the relationship between the super and specialiased (derived) type. Covariant refers to the subtyping relationship established by the programmer, e.g. <code>Cat</code> is a subtype of an <code>Animal</code> class. When the relationship is reversed, we call it contravariant. Invariant means that the types must exactly match. Variances to take into account are:</p>
 <ul>
@@ -250,7 +254,7 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 }</code></pre></div>
 <p>Whenever there is a call to the <code>putAnimal</code> method, Java uses one or the other method.</p>
 <p><strong>Python</strong></p>
-<p>Inheritance in Python looks similar to Java. The example above, written in Python, looks as follows:</p>
+<p>Python allows multiple inheritance, in contrast to Java. Before jumping in the concept of multiple inheritance, we continue with the example given in the Java section, now written in Python:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> AnimalShelter(<span class="bu">object</span>):
   <span class="kw">def</span> getAnimalForAdoption():
     ...
@@ -281,11 +285,21 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
   <span class="cf">else</span>:
     <span class="cf">return</span> animal</code></pre></div>
 <p>This function can be called with one or two arguments, i.e. <code>getAnimal(a)</code>, which sets the <code>cat</code> argument to <code>None</code>, by default; at the same time, you can call <code>getAnimal(a, c)</code> which overrides the default value of <code>cat</code> by <code>c</code>. This gives Python a lot of flexibility, although you can also easily misuse it and run into runtime errors.</p>
-<!-- **Common mistakes** -->
-<!-- TODO: -->
-<!-- * Create super class so that you do not repeat arguments in derived classes. -->
+<p>Multiple inheritance permits a Python class to inherit from multiple classes. In case there is a method name collision, Python will execute the method that inherited from the first class, ignoring the second possible method. Lets take a closer look:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Photogapher(<span class="bu">object</span>):
+  <span class="kw">def</span> shoot(<span class="va">self</span>):
+    <span class="cf">return</span> <span class="st">&quot;Click&quot;</span>
+
+<span class="kw">class</span> SecretAgent(<span class="bu">object</span>):
+  <span class="kw">def</span> shoot(<span class="va">self</span>):
+    <span class="cf">return</span> <span class="st">&quot;Bang!&quot;</span>
+
+<span class="kw">class</span> JamesBond(Photographer, SecretAgent):
+  <span class="cf">pass</span></code></pre></div>
+<p>In this example, <em>James Bond</em> is a photographer and a secret agent. When he needs to shoot, <code>bond.shoot()</code>, he gets confused and decides to take a last picture before getting killed. Don't get me wrong, it is useful but you need to use it wisely.</p>
+<p>The concept of multiple inheritance brought the semantic concept of mixins, reviewed later on in this chapter.</p>
 <h2 id="interfaces">Interfaces</h2>
-<p>TODO:</p>
+<p>An interface declares the behaviour of your software, implemented in a class; with the use of interfaces, you create classes that expose that behaviour, exploited through polymorhism.</p>
 <h2 id="abstract-classes">Abstract classes</h2>
 <p>TODO:</p>
 <h2 id="parametric-classes">Parametric classes</h2>

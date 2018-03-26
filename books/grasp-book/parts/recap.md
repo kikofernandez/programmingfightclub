@@ -241,7 +241,9 @@ create a specialiasion (derived class) of a *super* class (type) and take
 advantage of the subtyping polymorphism. In a statically typed language,
 there is the notion of *variance*, which establishes the relationship
 between the *super* and the *derived* types. Dynamic languages cannot make
-this static check and do not bother to consider this concept.
+this static check and do not bother to consider this concept. On the other
+hand, Python (not all dynamic languages) has multiple inheritance, which we
+explain in the Python section.
 
 **Java**
 
