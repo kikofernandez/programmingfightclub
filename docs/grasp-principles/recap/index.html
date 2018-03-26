@@ -78,7 +78,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>classes and objects,</li>
 <li>inheritance,</li>
 <li>interfaces,</li>
-<li>traits and mixins,</li>
+<li>mixins,</li>
 <li>abstract classes,</li>
 <li>parametric classes and</li>
 <li>lambdas and closures</li>
@@ -182,23 +182,17 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
     <span class="va">self</span>.__api.add_rating(<span class="va">self</span>.user.<span class="bu">id</span>, <span class="va">self</span>.__id, <span class="va">self</span>.__my_rating)</code></pre></div>
 <p><em>Example 3.1.1.2 Introductory example to Python</em></p>
 <p>The setter method allows you to set your rating in the restaurant and send this information to the server, so that your friends know about it.</p>
+<p>TODO:</p>
+<ul>
+<li>Python class methods vs static methods</li>
+<li>Java class methods</li>
+</ul>
 <h2 id="objects">Objects</h2>
 <p>If you think of classes as blank templates, objects are the ink in the template. Classes represent a static view of your software; classes declare attributes, and methods, but they are static and have no content. As soon as your software runs and you create an instance of a class, you are injecting runtime state to the empty template. <em>Objects represent the runtime of your program</em>.</p>
 <!-- I could expand on and talk about how to create instances, call methods, access -->
 <!-- attributes and so on. I assume that the reader is already familiar with -->
 <!-- these details and will proceed with the next concept. -->
 <h2 id="inheritance">Inheritance</h2>
-<p>TODO:</p>
-<ul>
-<li>Missing multiple inheritance in Python, a.k.a. mixins</li>
-</ul>
-<!-- To explain: -->
-<!-- * what is subtyping? -->
-<!-- * creates a hierarchy -->
-<!-- * should not be used to not repeat the same attributes -->
-<!-- * use wisely -->
-<!-- Inheritance is a key concept in object-oriented programming, misunderstood -->
-<!-- by new developers and recent graduates.  -->
 <p>The main use of inheritance is to create a specialiasion (derived class) of a <em>super</em> class (type) and take advantage of the subtyping polymorphism. In a statically typed language, there is the notion of <em>variance</em>, which establishes the relationship between the <em>super</em> and the <em>derived</em> types. Dynamic languages cannot make this static check and do not bother to consider this concept. On the other hand, Python (not all dynamic languages) has multiple inheritance, which we explain in the Python section.</p>
 <p><strong>Java</strong></p>
 <p>In a statically typed language, subtyping has three types of variances: covariant, contravariant and invariant. The variance on return, generics and arguments types explains the relationship between the super and specialiased (derived) type. Covariant refers to the subtyping relationship established by the programmer, e.g. <code>Cat</code> is a subtype of an <code>Animal</code> class. When the relationship is reversed, we call it contravariant. Invariant means that the types must exactly match. Variances to take into account are:</p>
@@ -296,11 +290,27 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 
 <span class="kw">class</span> JamesBond(Photographer, SecretAgent):
   <span class="cf">pass</span></code></pre></div>
-<p>In this example, <em>James Bond</em> is a photographer and a secret agent. When he needs to shoot, <code>bond.shoot()</code>, he gets confused and decides to take a picture before getting killed. Multiple inheritance is useful but you should use it wisely. The concept of multiple inheritance brought the semantic concept of mixins, reviewed later on in this chapter.</p>
-<p>TODO:</p>
-<ul>
-<li>Talk about mixins</li>
-</ul>
+<p>In this example, <em>James Bond</em> is a photographer and a secret agent. When he needs to shoot, <code>bond.shoot()</code>, he gets confused and decides to take a picture before getting killed. Multiple inheritance is useful but you should use it wisely.</p>
+<p>The concept of multiple inheritance brought the semantic concept of mixins. The basic idea of mixins is to create small classes that cannot work alone by themselves but, when combined, provide functionality can be reused. For instance, any secret agent needs to know how to shoot, and play poker. But a hunter needs to know how to shoot as well. Lets encode this functionality using mixins:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> ShootMixin(<span class="bu">object</span>):
+
+  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, probability<span class="op">=</span><span class="fl">0.9</span>):
+    <span class="va">self</span>.__probability <span class="op">=</span> <span class="fl">0.9</span>
+
+  <span class="at">@property</span>
+  <span class="kw">def</span> probability(<span class="va">self</span>):
+    <span class="cf">return</span> <span class="va">self</span>.__probability
+
+  <span class="kw">def</span> shoot(<span class="va">self</span>, person):
+    <span class="cf">return</span> <span class="va">self</span>.probability <span class="op">-</span> person.hiding()
+
+<span class="kw">class</span> PokerMixin(<span class="bu">object</span>):
+  <span class="kw">def</span> pokerFace(<span class="va">self</span>):
+    <span class="bu">print</span>(<span class="st">&quot;Poker face&quot;</span>)
+
+<span class="kw">class</span> SecretAgent(ShootMixin, PokerMixin):
+  <span class="cf">pass</span></code></pre></div>
+<p>The mixins <code>ShootMixin</code> and <code>PokerMixin</code> do not make much sense on their own, as classes. However, we can combine their behaviour to compositionally build classes with more advanced behaviour, such as the <code>SecretAgent</code> class. This class inherits these two mixins to provide any secret agent the ability to shoot and put a poker face.</p>
 <h2 id="interfaces">Interfaces</h2>
 <p>An interface declares the behaviour of your software, whose implementation lives in a class; with the use of interfaces, your classes expose the behaviour, which is further exploited by polymorphism. This means more than one class can implement the interface, so that you can interchangeably use one class or another. Java has interfaces and Python does not need them. We will come to the why they are not needed in Python in its corresponding section.</p>
 <p><strong>Java</strong></p>
@@ -319,6 +329,9 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 <p>In Python, you can encode interfaces in terms of abstract classes, which we cover next.</p>
 <h2 id="abstract-classes">Abstract classes</h2>
 <p>TODO:</p>
+<ul>
+<li><a href="https://www.python.org/dev/peps/pep-3119/#rationale">Python</a></li>
+</ul>
 <h2 id="parametric-classes">Parametric classes</h2>
 <p>TODO:</p>
 <h2 id="functional-concepts">Functional concepts</h2>

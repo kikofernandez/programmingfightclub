@@ -10,7 +10,7 @@ By the end of this chapter, you should understand:
 * classes and objects,
 * inheritance,
 * interfaces,
-* traits and mixins,
+* mixins,
 * abstract classes,
 * parametric classes and
 * lambdas and closures
@@ -210,6 +210,11 @@ The setter method allows you to set your rating in the
 restaurant and send this information to the server, so that your friends
 know about it.
 
+TODO:
+
+* Python class methods vs static methods
+* Java class methods
+
 ## Objects
 
 If you think of classes as blank templates, objects are the ink in the template.
@@ -224,18 +229,6 @@ to the empty template. *Objects represent the runtime of your program*.
 
 ## Inheritance
 
-TODO:
-
-* Missing multiple inheritance in Python, a.k.a. mixins
-
-<!-- To explain: -->
-<!-- * what is subtyping? -->
-<!-- * creates a hierarchy -->
-<!-- * should not be used to not repeat the same attributes -->
-<!-- * use wisely -->
-
-<!-- Inheritance is a key concept in object-oriented programming, misunderstood -->
-<!-- by new developers and recent graduates.  -->
 The main use of inheritance is to
 create a specialiasion (derived class) of a *super* class (type) and take
 advantage of the subtyping polymorphism. In a statically typed language,
@@ -443,12 +436,40 @@ class JamesBond(Photographer, SecretAgent):
 In this example, *James Bond* is a photographer and a secret agent.
 When he needs to shoot, `bond.shoot()`, he gets confused and decides to take a picture before
 getting killed. Multiple inheritance is useful but you should use it wisely.
-The concept of multiple inheritance brought the semantic concept of mixins,
-reviewed later on in this chapter.
 
-TODO:
+The concept of multiple inheritance brought the semantic concept of mixins.
+The basic idea of mixins is to create small classes that cannot work alone
+by themselves but, when combined, provide functionality can be reused.
+For instance, any secret agent needs to know how to shoot, and play poker.
+But a hunter needs to know how to shoot as well. Lets encode this functionality
+using mixins:
 
-* Talk about mixins
+```python
+class ShootMixin(object):
+
+  def __init__(self, probability=0.9):
+    self.__probability = 0.9
+
+  @property
+  def probability(self):
+    return self.__probability
+
+  def shoot(self, person):
+    return self.probability - person.hiding()
+
+class PokerMixin(object):
+  def pokerFace(self):
+    print("Poker face")
+
+class SecretAgent(ShootMixin, PokerMixin):
+  pass
+```
+
+The mixins `ShootMixin` and `PokerMixin` do not make much sense on their own,
+as classes. However, we can combine their behaviour to compositionally build
+classes with more advanced behaviour, such as the `SecretAgent` class. This
+class inherits these two mixins to provide any secret agent the ability
+to shoot and put a poker face.
 
 ## Interfaces
 
@@ -496,6 +517,8 @@ In Python, you can encode interfaces in terms of abstract classes, which we cove
 ## Abstract classes
 
 TODO:
+
+* [Python](https://www.python.org/dev/peps/pep-3119/#rationale)
 
 ## Parametric classes
 
