@@ -210,12 +210,26 @@ The setter method allows you to set your rating in the
 restaurant and send this information to the server, so that your friends
 know about it.
 
-### Static methods
+### Static methods and attributes
+
+So far, we have seen that objects have attributes and methods that save information
+on a per instance basis. Java and Python have what are known as static methods
+and attributes, which supports saving information at the class level.
+This means that we can encapsulate global variables in classes.
+
+The main drawback of class attributes is that they live forever and cannot be garbage collected
+since, at any point in time, the code can refer to them. Another drawback is
+that they are global variables and, as such, will be dificult to test and
+reason about when your software grows.
+
+Lets proceed with the implementation in each language and their variations,
+using as example a counter that counts the number of deployed British secret agents.
 
 **Java**
 
-A static method saves information at the class level, instead of at the instance.
-Static methods are commonly used to access static fields, e.g.:
+Static attributes save information at the class level, instead of at the instance.
+Static methods are commonly used to access static fields. In both cases,
+attributes and methods add the `static` annotation, e.g.:
 
 ```java
 public class SecretAgent {
@@ -231,27 +245,53 @@ public class SecretAgent {
 }
 ```
 
-As a recommendation, make all static methods `final`. This forbids overriding
-and you will be free of subtyping problems[^java-subtyping-static].
+In this example, we declare `numberFieldAgents` as a `private` and `static`
+attribute, so it is only visible within the class and the information is shared
+among all `SecretAgent` object instances. To access this data, we declare
+a static method that returns the number of fields agents. From anywhere,
+you can get this data calling `SecretAgent.getNumberFieldAgents();`.
+
+As a recommendation, all static methods should be `final`. This is because
+subclasses cannot override static methods, they hide the parent static methods
+and reimplement them. However, polymorhic classes do not behave as you would expect[^java-subtyping-static].
 
 [^java-subtyping-static]: Considerations of static
   subtying: https://docs.oracle.com/javase/tutorial/java/IandI/override.html
 
 **Python**
 
-Python has decorators called `@staticmethod` and `@classmethod`.
-Static methods are one way to relate functions that could stand alone in
+Static attributes are declared as attributes in a class and outside any method.
+For instance, if we are playing a game and we want to create
+characters and know how many of them shot to a target:
+
+```python
+class CharacterFactory(object):
+  shotsOnTarget = 0
+```
+
+The attribute `shotsOnTarget` is a class attribute and can be accessed
+either from an instance of the class or from the class, e.g.
+
+```python
+person = CharacterFactory()
+
+person.shotsOnTarget
+Character.shotsOnTarget
+```
+
+Python has a different approach to static methods:
+decorators called `@staticmethod` and `@classmethod`.
+More Concretly, static methods (`@staticmethod`) are one way to relate functions that could stand alone in
 a module, but that the author prefers to keep them in a class.
 A *static method* is a function
 that does not depend on the instance or class in which it is written into.
 For this reason, the signature of a static method does not contain the common
 instance's reference `self` nor the common
 class reference `cls`[^python-staticmethods].
-One of the main reasons for using class methods is to keep the class
+One of the main reasons for using static methods is to keep the class
 *cohesive* (covered in GRASP principles chapter).
 
-[^python-staticmethods]: Reference to Python's [static methods](https://docs.python.org/3/library/functions.html#staticmethod).
-
+[^python-staticmethods]: Reference to Python's static methods: https://docs.python.org/3/library/functions.html#staticmethod
 
 In constrast, class methods are useful to create alternate class constructors
 or perform setup computations before creating an actual class. Class methods
@@ -290,6 +330,7 @@ character.shoot(target)
 
 photographer = PhotographerFactory.create()
 photographer.shoot(target)
+photographer.shoot(target)
 ```
 
 In the example above, we are playing a game where the character can be a secret
@@ -297,15 +338,54 @@ agent, a photographer or a common citizen. Each class has attached information,
 `shotsOnTarget`, which displays the total shots made by each possible character.
 If we run the example and check the shots on target of the `character` and the
 `photographer`, e.g. `character.shotsOnTarget`, we can observe how we keep
-track of this information on a per class basis. This is in contrast to Java,
-which does not allow overriding static methods.
+track of this information on a per class basis. In the example,
+the `character.shotsOnTarget` returns `1` while the `photographer.shotsOnTarget`
+returns `2`.
 
-### Constant fields
+### Constants
 
-TODO:
+Sometimes it is important to be able to set attributes only once.
+Java has a special keyword for this, while Python follows a convention.
 
-* Java `final` annotation
-* Python constants
+**Java**
+
+To write a constant attribute, add the `final` annotation to your attribute:
+
+```java
+public class SecretAgent {
+  public final static String nationality = "British";
+  private final String id;
+  public SecretAgent(String id){
+    this.id = id;
+  }
+}
+```
+
+In the example above, we declare that all secret agents have British nationality
+and the `final` keyword prevent us from changing this. Moreover, the constructor
+sets the `final` attribute `id` to some value, which cannot be changed after the
+secret agent instance is created.
+
+<!-- TODO: -->
+<!-- * A `final` class in Java forbids derived classes (subtyping) -->
+
+**Python**
+
+In Python, class-level constants are written all uppercase while
+instance-level constants define a getter but no setter, so that it cannot be modified externally.
+The example from Java, written in Python is:
+
+```python
+class SecretAgent
+  NATIONALITY = "British"
+
+  def __init__(self, _id):
+    self.__id = _id
+
+  @property
+  def id(self):
+    return self.__id
+```
 
 ## Objects
 

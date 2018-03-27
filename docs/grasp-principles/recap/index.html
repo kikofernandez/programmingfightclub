@@ -60,8 +60,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#object-oriented-concepts-revisited">Object-oriented concepts, revisited</a><ul>
 <li><a href="#classes">Classes</a><ul>
 <li><a href="#getters-and-setters">Getters and setters</a></li>
-<li><a href="#static-methods">Static methods</a></li>
-<li><a href="#constant-fields">Constant fields</a></li>
+<li><a href="#static-methods-and-attributes">Static methods and attributes</a></li>
+<li><a href="#constants">Constants</a></li>
 </ul></li>
 <li><a href="#objects">Objects</a></li>
 <li><a href="#inheritance">Inheritance</a></li>
@@ -186,9 +186,12 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
     <span class="va">self</span>.__api.add_rating(<span class="va">self</span>.user.<span class="bu">id</span>, <span class="va">self</span>.__id, <span class="va">self</span>.__my_rating)</code></pre></div>
 <p><em>Example 3.1.1.2 Introductory example to Python</em></p>
 <p>The setter method allows you to set your rating in the restaurant and send this information to the server, so that your friends know about it.</p>
-<h3 id="static-methods">Static methods</h3>
+<h3 id="static-methods-and-attributes">Static methods and attributes</h3>
+<p>So far, we have seen that objects have attributes and methods that save information on a per instance basis. Java and Python have what are known as static methods and attributes, which supports saving information at the class level. This means that we can encapsulate global variables in classes.</p>
+<p>The main drawback of class attributes is that they live forever and cannot be garbage collected since, at any point in time, the code can refer to them. Another drawback is that they are global variables and, as such, will be dificult to test and reason about when your software grows.</p>
+<p>Lets proceed with the implementation in each language and their variations, using as example a counter that counts the number of deployed British secret agents.</p>
 <p><strong>Java</strong></p>
-<p>A static method saves information at the class level, instead of at the instance. Static methods are commonly used to access static fields, e.g.:</p>
+<p>Static attributes save information at the class level, instead of at the instance. Static methods are commonly used to access static fields. In both cases, attributes and methods add the <code>static</code> annotation, e.g.:</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> SecretAgent {
   <span class="kw">private</span> <span class="dt">static</span> <span class="dt">int</span> numberFieldAgents = <span class="dv">0</span>;
 
@@ -200,9 +203,18 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
     <span class="kw">return</span> numberFieldAgents;
   }
 }</code></pre></div>
-<p>As a recommendation, make all static methods <code>final</code>. This forbids overriding and you will be free of subtyping problems<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+<p>In this example, we declare <code>numberFieldAgents</code> as a <code>private</code> and <code>static</code> attribute, so it is only visible within the class and the information is shared among all <code>SecretAgent</code> object instances. To access this data, we declare a static method that returns the number of fields agents. From anywhere, you can get this data calling <code>SecretAgent.getNumberFieldAgents();</code>.</p>
+<p>As a recommendation, all static methods should be <code>final</code>. This is because subclasses cannot override static methods, they hide the parent static methods and reimplement them. However, polymorhic classes do not behave as you would expect<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
 <p><strong>Python</strong></p>
-<p>Python has decorators called <code>@staticmethod</code> and <code>@classmethod</code>. Static methods are one way to relate functions that could stand alone in a module, but that the author prefers to keep them in a class. A <em>static method</em> is a function that does not depend on the instance or class in which it is written into. For this reason, the signature of a static method does not contain the common instance's reference <code>self</code> nor the common class reference <code>cls</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. One of the main reasons for using class methods is to keep the class <em>cohesive</em> (covered in GRASP principles chapter).</p>
+<p>Static attributes are declared as attributes in a class and outside any method. For instance, if we are playing a game and we want to create characters and know how many of them shot to a target:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> CharacterFactory(<span class="bu">object</span>):
+  shotsOnTarget <span class="op">=</span> <span class="dv">0</span></code></pre></div>
+<p>The attribute <code>shotsOnTarget</code> is a class attribute and can be accessed either from an instance of the class or from the class, e.g.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">person <span class="op">=</span> CharacterFactory()
+
+person.shotsOnTarget
+Character.shotsOnTarget</code></pre></div>
+<p>Python has a different approach to static methods: decorators called <code>@staticmethod</code> and <code>@classmethod</code>. More Concretly, static methods (<code>@staticmethod</code>) are one way to relate functions that could stand alone in a module, but that the author prefers to keep them in a class. A <em>static method</em> is a function that does not depend on the instance or class in which it is written into. For this reason, the signature of a static method does not contain the common instance's reference <code>self</code> nor the common class reference <code>cls</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. One of the main reasons for using static methods is to keep the class <em>cohesive</em> (covered in GRASP principles chapter).</p>
 <p>In constrast, class methods are useful to create alternate class constructors or perform setup computations before creating an actual class. Class methods allows developers to embed information at the class level, which derived classes can override. This is simply not possible using static methods in Java. Example:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> CharacterFactory(<span class="bu">object</span>):
   shotsOnTarget <span class="op">=</span> <span class="dv">0</span>
@@ -233,14 +245,34 @@ character <span class="op">=</span> SecretAgentFactory.create()
 character.shoot(target)
 
 photographer <span class="op">=</span> PhotographerFactory.create()
+photographer.shoot(target)
 photographer.shoot(target)</code></pre></div>
-<p>In the example above, we are playing a game where the character can be a secret agent, a photographer or a common citizen. Each class has attached information, <code>shotsOnTarget</code>, which displays the total shots made by each possible character. If we run the example and check the shots on target of the <code>character</code> and the <code>photographer</code>, e.g. <code>character.shotsOnTarget</code>, we can observe how we keep track of this information on a per class basis. This is in contrast to Java, which does not allow overriding static methods.</p>
-<h3 id="constant-fields">Constant fields</h3>
-<p>TODO:</p>
-<ul>
-<li>Java <code>final</code> annotation</li>
-<li>Python constants</li>
-</ul>
+<p>In the example above, we are playing a game where the character can be a secret agent, a photographer or a common citizen. Each class has attached information, <code>shotsOnTarget</code>, which displays the total shots made by each possible character. If we run the example and check the shots on target of the <code>character</code> and the <code>photographer</code>, e.g. <code>character.shotsOnTarget</code>, we can observe how we keep track of this information on a per class basis. In the example, the <code>character.shotsOnTarget</code> returns <code>1</code> while the <code>photographer.shotsOnTarget</code> returns <code>2</code>.</p>
+<h3 id="constants">Constants</h3>
+<p>Sometimes it is important to be able to set attributes only once. Java has a special keyword for this, while Python follows a convention.</p>
+<p><strong>Java</strong></p>
+<p>To write a constant attribute, add the <code>final</code> annotation to your attribute:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> SecretAgent {
+  <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="bu">String</span> nationality = <span class="st">&quot;British&quot;</span>;
+  <span class="kw">private</span> <span class="dt">final</span> <span class="bu">String</span> id;
+  <span class="kw">public</span> <span class="fu">SecretAgent</span>(<span class="bu">String</span> id){
+    <span class="kw">this</span>.<span class="fu">id</span> = id;
+  }
+}</code></pre></div>
+<p>In the example above, we declare that all secret agents have British nationality and the <code>final</code> keyword prevent us from changing this. Moreover, the constructor sets the <code>final</code> attribute <code>id</code> to some value, which cannot be changed after the secret agent instance is created.</p>
+<!-- TODO: -->
+<!-- * A `final` class in Java forbids derived classes (subtyping) -->
+<p><strong>Python</strong></p>
+<p>In Python, class-level constants are written all uppercase while instance-level constants define a getter but no setter, so that it cannot be modified externally. The example from Java, written in Python is:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> SecretAgent
+  NATIONALITY <span class="op">=</span> <span class="st">&quot;British&quot;</span>
+
+  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, _id):
+    <span class="va">self</span>.__id <span class="op">=</span> _id
+
+  <span class="at">@property</span>
+  <span class="kw">def</span> <span class="bu">id</span>(<span class="va">self</span>):
+    <span class="cf">return</span> <span class="va">self</span>.__id</code></pre></div>
 <h2 id="objects">Objects</h2>
 <p>If you think of classes as blank templates, objects are the ink in the template. Classes represent a static view of your software; classes declare attributes, and methods, but they are static and have no content. As soon as your software runs and you create an instance of a class, you are injecting runtime state to the empty template. <em>Objects represent the runtime of your program</em>.</p>
 <!-- I could expand on and talk about how to create instances, call methods, access -->
@@ -401,7 +433,7 @@ photographer.shoot(target)</code></pre></div>
 <ol>
 <li id="fn1"><p>this is not technically a constructor, although it is called right after the creation of the object and, for all purposes in this book, it is the same.<a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>Considerations of static subtying: https://docs.oracle.com/javase/tutorial/java/IandI/override.html<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>Reference to Python's <a href="https://docs.python.org/3/library/functions.html#staticmethod">static methods</a>.<a href="#fnref3">↩</a></p></li>
+<li id="fn3"><p>Reference to Python's static methods: https://docs.python.org/3/library/functions.html#staticmethod<a href="#fnref3">↩</a></p></li>
 <li id="fn4"><p><a href="https://docs.oracle.com/javase/tutorial/extra/generics/subtype.html">Link to official documentation</a><a href="#fnref4">↩</a></p></li>
 </ol>
 </div>
