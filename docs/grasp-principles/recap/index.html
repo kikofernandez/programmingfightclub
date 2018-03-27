@@ -59,7 +59,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li><a href="#object-oriented-concepts-revisited">Object-oriented concepts, revisited</a><ul>
 <li><a href="#classes">Classes</a><ul>
+<li><a href="#getters-and-setters">Getters and setters</a></li>
 <li><a href="#static-methods">Static methods</a></li>
+<li><a href="#constant-fields">Constant fields</a></li>
 </ul></li>
 <li><a href="#objects">Objects</a></li>
 <li><a href="#inheritance">Inheritance</a></li>
@@ -89,7 +91,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="classes">Classes</h2>
 <p>Classes declare and implement the state and behaviour of an object. <em>The state of a class lives in its attributes while the behaviour is expressed via its methods</em>. A class that hides its attributes with a <code>private</code> access modifier protects its internal state from other classes. The only way to update the internal state is via method calls on the object. Method calls <em>represent the behaviour of the object</em>.</p>
 <p>As a general advice, you should not expose the internal state of your class to others; you should expose your behaviour. If followed, this simple advice allows you to build great abstractions that are easy to use and understand. For example, when using the <code>Future</code> API in Java 8, you do not have to think about the possible locks that may exist in the internal representation of a <code>CompletableFuture</code> instance, you just use it according to its defined behaviour, i.e. public methods.</p>
-<h4 id="getters-and-setters">Getters and setters</h4>
+<h3 id="getters-and-setters">Getters and setters</h3>
 <p>Methods that get attributes and set them are called <em>getters</em> and <em>setters</em>. Not all classes should have getters and/or setters. As a rule of thump, I like to think that mostly domain classes should use them. A domain class is a class that belongs to the domain that you are modelling. We are going to show how getters and setters work in Java and Python with the following example: imagine that you are asked to create a restaurant guide application that shows restaurants nearby with their ratings.</p>
 <p><strong>Java</strong></p>
 <p>The class <code>Restaurant</code> has all attributes defined as private (not accesible from outside the class). The constructor of the class (<code>public Restaurant(...)</code>) creates a new <code>Restaurant</code> and sets its state.</p>
@@ -233,6 +235,12 @@ character.shoot(target)
 photographer <span class="op">=</span> PhotographerFactory.create()
 photographer.shoot(target)</code></pre></div>
 <p>In the example above, we are playing a game where the character can be a secret agent, a photographer or a common citizen. Each class has attached information, <code>shotsOnTarget</code>, which displays the total shots made by each possible character. If we run the example and check the shots on target of the <code>character</code> and the <code>photographer</code>, e.g. <code>character.shotsOnTarget</code>, we can observe how we keep track of this information on a per class basis. This is in contrast to Java, which does not allow overriding static methods.</p>
+<h3 id="constant-fields">Constant fields</h3>
+<p>TODO:</p>
+<ul>
+<li>Java <code>final</code> annotation</li>
+<li>Python constants</li>
+</ul>
 <h2 id="objects">Objects</h2>
 <p>If you think of classes as blank templates, objects are the ink in the template. Classes represent a static view of your software; classes declare attributes, and methods, but they are static and have no content. As soon as your software runs and you create an instance of a class, you are injecting runtime state to the empty template. <em>Objects represent the runtime of your program</em>.</p>
 <!-- I could expand on and talk about how to create instances, call methods, access -->

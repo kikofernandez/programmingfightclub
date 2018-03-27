@@ -35,7 +35,7 @@ understand. For example, when using the `Future` API in Java 8, you do not have 
 possible locks that may exist in the internal representation of a `CompletableFuture` instance, you
 just use it according to its defined behaviour, i.e. public methods.
 
-#### Getters and setters
+### Getters and setters
 
 Methods that get attributes and set them are called *getters* and *setters*.
 Not all classes should have getters and/or setters. As a rule of thump,
@@ -299,6 +299,13 @@ If we run the example and check the shots on target of the `character` and the
 `photographer`, e.g. `character.shotsOnTarget`, we can observe how we keep
 track of this information on a per class basis. This is in contrast to Java,
 which does not allow overriding static methods.
+
+### Constant fields
+
+TODO:
+
+* Java `final` annotation
+* Python constants
 
 ## Objects
 
