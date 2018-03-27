@@ -58,7 +58,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="TOC">
 <ul>
 <li><a href="#object-oriented-concepts-revisited">Object-oriented concepts, revisited</a><ul>
-<li><a href="#classes">Classes</a></li>
+<li><a href="#classes">Classes</a><ul>
+<li><a href="#static-methods">Static methods</a></li>
+</ul></li>
 <li><a href="#objects">Objects</a></li>
 <li><a href="#inheritance">Inheritance</a></li>
 <li><a href="#interfaces">Interfaces</a></li>
@@ -182,11 +184,55 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
     <span class="va">self</span>.__api.add_rating(<span class="va">self</span>.user.<span class="bu">id</span>, <span class="va">self</span>.__id, <span class="va">self</span>.__my_rating)</code></pre></div>
 <p><em>Example 3.1.1.2 Introductory example to Python</em></p>
 <p>The setter method allows you to set your rating in the restaurant and send this information to the server, so that your friends know about it.</p>
-<p>TODO:</p>
-<ul>
-<li>Python class methods vs static methods</li>
-<li>Java class methods</li>
-</ul>
+<h3 id="static-methods">Static methods</h3>
+<p><strong>Java</strong></p>
+<p>A static method saves information at the class level, instead of at the instance. Static methods are commonly used to access static fields, e.g.:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> SecretAgent {
+  <span class="kw">private</span> <span class="dt">static</span> <span class="dt">int</span> numberFieldAgents = <span class="dv">0</span>;
+
+  <span class="kw">public</span> <span class="fu">SecretAgent</span>() {
+    ++numberFieldAgents;
+  }
+
+  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getNumberFieldAgents</span>() {
+    <span class="kw">return</span> numberFieldAgents;
+  }
+}</code></pre></div>
+<p>As a recommendation, make all static methods <code>final</code>. This forbids overriding and you will be free of subtyping problems<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+<p><strong>Python</strong></p>
+<p>Python has decorators called <code>@staticmethod</code> and <code>@classmethod</code>. Static methods are one way to relate functions that could stand alone in a module, but that the author prefers to keep them in a class. A <em>static method</em> is a function that does not depend on the instance or class in which it is written into. For this reason, the signature of a static method does not contain the common instance's reference <code>self</code> nor the common class reference <code>cls</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. One of the main reasons for using class methods is to keep the class <em>cohesive</em> (covered in GRASP principles chapter).</p>
+<p>In constrast, class methods are useful to create alternate class constructors or perform setup computations before creating an actual class. Class methods allows developers to embed information at the class level, which derived classes can override. This is simply not possible using static methods in Java. Example:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> CharacterFactory(<span class="bu">object</span>):
+  shotsOnTarget <span class="op">=</span> <span class="dv">0</span>
+
+  <span class="at">@classmethod</span>
+  <span class="kw">def</span> create(cls):
+    <span class="cf">return</span> cls()
+
+  <span class="at">@classmethod</span>
+  <span class="kw">def</span> updateOnTarget(cls):
+    cls.shotsOnTarget <span class="op">+=</span> <span class="dv">1</span>
+
+  <span class="kw">def</span> shoot(<span class="va">self</span>, target): <span class="cf">pass</span>
+
+<span class="kw">class</span> SecretAgentFactory(CharacterFactory):
+  <span class="kw">def</span> shoot(<span class="va">self</span>, target):
+    <span class="bu">super</span>().updateOnTarget()
+
+<span class="kw">class</span> PhotographerFactory(CharacterFactory):
+  <span class="kw">def</span> shoot(<span class="va">self</span>, target):
+    <span class="bu">super</span>().updateOnTarget()
+
+<span class="kw">class</span> CitizenFactory(CharacterFactory):
+  <span class="cf">pass</span>
+
+target <span class="op">=</span> CitizenFactory.create()
+character <span class="op">=</span> SecretAgentFactory.create()
+character.shoot(target)
+
+photographer <span class="op">=</span> PhotographerFactory.create()
+photographer.shoot(target)</code></pre></div>
+<p>In the example above, we are playing a game where the character can be a secret agent, a photographer or a common citizen. Each class has attached information, <code>shotsOnTarget</code>, which displays the total shots made by each possible character. If we run the example and check the shots on target of the <code>character</code> and the <code>photographer</code>, e.g. <code>character.shotsOnTarget</code>, we can observe how we keep track of this information on a per class basis. This is in contrast to Java, which does not allow overriding static methods.</p>
 <h2 id="objects">Objects</h2>
 <p>If you think of classes as blank templates, objects are the ink in the template. Classes represent a static view of your software; classes declare attributes, and methods, but they are static and have no content. As soon as your software runs and you create an instance of a class, you are injecting runtime state to the empty template. <em>Objects represent the runtime of your program</em>.</p>
 <!-- I could expand on and talk about how to create instances, call methods, access -->
@@ -219,7 +265,7 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
   <span class="kw">public</span> Cat <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}
   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Cat animal) { <span class="kw">... </span>}
 }</code></pre></div>
-<p>In contrast, the use of generics uses contravariance subtyping<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. This means that if <code>Cat</code> is a subtype of <code>Animal</code> and we refer to a generic implementation, e.g. <code>List</code>, <code>List&lt;Cat&gt;</code> is not a subtype of <code>List&lt;Animal&gt;</code>. To understand this, lets look at the following example:</p>
+<p>In contrast, the use of generics uses contravariance subtyping<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. This means that if <code>Cat</code> is a subtype of <code>Animal</code> and we refer to a generic implementation, e.g. <code>List</code>, <code>List&lt;Cat&gt;</code> is not a subtype of <code>List&lt;Animal&gt;</code>. To understand this, lets look at the following example:</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="bu">List</span>&lt;Cat&gt; lcat = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;Cat&gt;();
 <span class="bu">List</span>&lt;Animal&gt; lanimal = lcat;</code></pre></div>
 <p>I have just aliased the <code>lcat</code> variable. If I now add an element to the <code>Animal</code> list:</p>
@@ -233,7 +279,7 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}
 }
 
-<span class="kw">public</span> <span class="kw">class</span> CatShelter {
+<span class="kw">public</span> <span class="kw">class</span> CatShelter <span class="kw">extends</span> AnimalShelter {
   <span class="at">@Override</span>
   <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}
 
@@ -346,7 +392,9 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 <hr />
 <ol>
 <li id="fn1"><p>this is not technically a constructor, although it is called right after the creation of the object and, for all purposes in this book, it is the same.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p><a href="https://docs.oracle.com/javase/tutorial/extra/generics/subtype.html">Link to official documentation</a><a href="#fnref2">↩</a></p></li>
+<li id="fn2"><p>Considerations of static subtying: https://docs.oracle.com/javase/tutorial/java/IandI/override.html<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Reference to Python's <a href="https://docs.python.org/3/library/functions.html#staticmethod">static methods</a>.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p><a href="https://docs.oracle.com/javase/tutorial/extra/generics/subtype.html">Link to official documentation</a><a href="#fnref4">↩</a></p></li>
 </ol>
 </div>
 <div class="footnotes">

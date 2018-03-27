@@ -210,10 +210,95 @@ The setter method allows you to set your rating in the
 restaurant and send this information to the server, so that your friends
 know about it.
 
-TODO:
+### Static methods
 
-* Python class methods vs static methods
-* Java class methods
+**Java**
+
+A static method saves information at the class level, instead of at the instance.
+Static methods are commonly used to access static fields, e.g.:
+
+```java
+public class SecretAgent {
+  private static int numberFieldAgents = 0;
+
+  public SecretAgent() {
+    ++numberFieldAgents;
+  }
+
+  public static int getNumberFieldAgents() {
+    return numberFieldAgents;
+  }
+}
+```
+
+As a recommendation, make all static methods `final`. This forbids overriding
+and you will be free of subtyping problems[^java-subtyping-static].
+
+[^java-subtyping-static]: Considerations of static
+  subtying: https://docs.oracle.com/javase/tutorial/java/IandI/override.html
+
+**Python**
+
+Python has decorators called `@staticmethod` and `@classmethod`.
+Static methods are one way to relate functions that could stand alone in
+a module, but that the author prefers to keep them in a class.
+A *static method* is a function
+that does not depend on the instance or class in which it is written into.
+For this reason, the signature of a static method does not contain the common
+instance's reference `self` nor the common
+class reference `cls`[^python-staticmethods].
+One of the main reasons for using class methods is to keep the class
+*cohesive* (covered in GRASP principles chapter).
+
+[^python-staticmethods]: Reference to Python's [static methods](https://docs.python.org/3/library/functions.html#staticmethod).
+
+
+In constrast, class methods are useful to create alternate class constructors
+or perform setup computations before creating an actual class. Class methods
+allows developers to embed information at the class level, which derived classes
+can override. This is simply not possible using static methods in Java.
+Example:
+
+```python
+class CharacterFactory(object):
+  shotsOnTarget = 0
+
+  @classmethod
+  def create(cls):
+    return cls()
+
+  @classmethod
+  def updateOnTarget(cls):
+    cls.shotsOnTarget += 1
+
+  def shoot(self, target): pass
+
+class SecretAgentFactory(CharacterFactory):
+  def shoot(self, target):
+    super().updateOnTarget()
+
+class PhotographerFactory(CharacterFactory):
+  def shoot(self, target):
+    super().updateOnTarget()
+
+class CitizenFactory(CharacterFactory):
+  pass
+
+target = CitizenFactory.create()
+character = SecretAgentFactory.create()
+character.shoot(target)
+
+photographer = PhotographerFactory.create()
+photographer.shoot(target)
+```
+
+In the example above, we are playing a game where the character can be a secret
+agent, a photographer or a common citizen. Each class has attached information,
+`shotsOnTarget`, which displays the total shots made by each possible character.
+If we run the example and check the shots on target of the `character` and the
+`photographer`, e.g. `character.shotsOnTarget`, we can observe how we keep
+track of this information on a per class basis. This is in contrast to Java,
+which does not allow overriding static methods.
 
 ## Objects
 
@@ -322,7 +407,7 @@ public class AnimalShelter {
   public void putAnimal(Animal a) { ... }
 }
 
-public class CatShelter {
+public class CatShelter extends AnimalShelter {
   @Override
   public Animal getAnimalForAdoption(){ ... }
 
