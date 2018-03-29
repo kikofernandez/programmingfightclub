@@ -1,4 +1,4 @@
-# Object-oriented concepts, revisited
+# Object-oriented concepts revisited
 
 <span class="firstcharacter">I</span>n this chapter you are reminded about basic concepts
 from object-oriented languages and two concepts that object-oriented languages borrowed
@@ -17,7 +17,7 @@ By the end of this chapter, you should understand:
 
 If you are already familiar with object-oriented programming,
 you can go ahead and move on to the next chapter. If you would like to review
-a few concepts, jump in to the one you would like to remember.
+a few concepts, jump into the one you would like to remember.
 
 ## Classes
 
@@ -38,7 +38,7 @@ just use it according to its defined behaviour, i.e. public methods.
 ### Getters and setters
 
 Methods that get attributes and set them are called *getters* and *setters*.
-Not all classes should have getters and/or setters. As a rule of thump,
+Not all classes should have getters and/or setters. As a rule of thumb,
 I like to think that mostly domain classes should use them. A domain class
 is a class that belongs to the domain that you are modelling.
 We are going to show how getters and setters work in Java and Python
@@ -47,7 +47,7 @@ that shows restaurants nearby with their ratings.
 
 **Java**
 
-The class `Restaurant` has all attributes defined as private (not accesible from outside the class).
+The class `Restaurant` has all attributes defined as private (not accessible from outside the class).
 The constructor of the class (`public Restaurant(...)`) creates a new `Restaurant` and sets its
 state.
 
@@ -120,16 +120,15 @@ class Restaurant:
     self.__stars = stars
 ```
 
-Lets examine this code in more detail.
+Let's examine this code in more detail.
 
 The constructor `def __init__(self, stars, street, zipcode, country):` method
-takes an explicitly instance of itself (`self`) together with the remaining arguments,
+takes an explicit instance of itself (`self`) together with the remaining arguments,
 setting its internal state.
 
 Python provides a special syntax for getters and setters that wrap the attribute
 into a function with that very same name. In Python, these are called decorators.
-For instance, the getter for the `stars`
-attribute is created by declaring a method with the name of the attribute and the
+For instance, the getter for the attribute `stars` is created by declaring a method with the name of the attribute and the
 `@property` on top of it. The body of the method just fetches the attribute.
 
 ```python
@@ -161,23 +160,22 @@ restaurant.stars = 5
 **They encapsulate behaviour**. Today, you only want to retrieve the data but, with this
 simple abstraction, you give yourself some flexibility in the future.
 For instance, you can easily expand and return cached data that otherwise would
-need to be fetched fromsome remote server. If you did not add the getter and setter,
+need to be fetched from some remote server. If you did not add the getter and setter,
 now you have an application that allows access to all their internals and it is much
-more difficult to do this update, since you did not encapsulate your behaviour.
+more difficult to do this update since you did not encapsulate your behaviour.
 Another typical example is adding validation when setting an attribute.
 
-Lets show a concrete scenario: assume that the application
-you are building uses an external API (Google) to fetch data of nearby restaurants and you map
+Let's show a concrete scenario: assume that the application
+you are building uses an external API (Google) to fetch data from nearby restaurants and you map
 this information to the class below. You copy trustworthy information from the external
 API, such as `street`, `zipcode` and `country`. However, the number of `star` ratings
-come from what your users think of the restaurant, since you are targeting
+come from what your users think of the restaurant since you are targeting
 some specialised audience.
 From the external API, your `Restaurant` class partially contains all the values, except
-the ratings, which you pull on demand, when the user clicks or is nearby a place.
+the ratings, which you pull on demand when the user clicks or is nearby a place.
 Thanks to the decorator, you can
 refer to `restaurant.stars` and the method will transparently handle
-if the information already exists from a previous visit or if there is
-a need to connect to the server a get the information.
+if it needs to connect to the server to get the information or if the information is already present from a previous access.
 
 ```python
 class Restaurant:
@@ -213,17 +211,17 @@ know about it.
 ### Static methods and attributes
 
 So far, we have seen that objects have attributes and methods that save information
-on a per instance basis. Java and Python have what are known as static methods
+on a per-instance basis. Java and Python have what is known as static methods
 and attributes, which supports saving information at the class level.
 This means that we can encapsulate global variables in classes.
 
 The main drawback of class attributes is that they live forever and cannot be garbage collected
 since, at any point in time, the code can refer to them. Another drawback is
-that they are global variables and, as such, will be dificult to test and
+that they are global variables and, as such, will be difficult to test and
 reason about when your software grows.
 
-Lets proceed with the implementation in each language and their variations,
-using as example a counter that counts the number of deployed British secret agents.
+Let's proceed with the implementation in each language and their variations,
+using as an example a counter that counts the number of deployed British secret agents.
 
 **Java**
 
@@ -253,10 +251,10 @@ you can get this data calling `SecretAgent.getNumberFieldAgents();`.
 
 As a recommendation, all static methods should be `final`. This is because
 subclasses cannot override static methods, they hide the parent static methods
-and reimplement them. However, polymorhic classes do not behave as you would expect[^java-subtyping-static].
+and reimplement them. However, polymorphic classes do not behave as you would expect[^java-subtyping-static].
 
 [^java-subtyping-static]: Considerations of static
-  subtying: https://docs.oracle.com/javase/tutorial/java/IandI/override.html
+subtyping: https://docs.oracle.com/javase/tutorial/java/IandI/override.html
 
 **Python**
 
@@ -281,21 +279,21 @@ Character.shotsOnTarget
 
 Python has a different approach to static methods:
 decorators called `@staticmethod` and `@classmethod`.
-More Concretly, static methods (`@staticmethod`) are one way to relate functions that could stand alone in
+More concretely, static methods (`@staticmethod`) are one way to relate functions that could stand alone in
 a module, but that the author prefers to keep them in a class.
 A *static method* is a function
 that does not depend on the instance or class in which it is written into.
-For this reason, the signature of a static method does not contain the common
-instance's reference `self` nor the common
+For this reason, the signature of a static method does not contain the
+the instance's reference `self` nor the common
 class reference `cls`[^python-staticmethods].
 One of the main reasons for using static methods is to keep the class
 *cohesive* (covered in GRASP principles chapter).
 
 [^python-staticmethods]: Reference to Python's static methods: https://docs.python.org/3/library/functions.html#staticmethod
 
-In constrast, class methods are useful to create alternate class constructors
+In contrast, class methods are used to create alternate class constructors
 or perform setup computations before creating an actual class. Class methods
-allows developers to embed information at the class level, which derived classes
+allow developers to embed information at the class level, which derived classes
 can override. This is simply not possible using static methods in Java.
 Example:
 
@@ -372,7 +370,7 @@ secret agent instance is created.
 **Python**
 
 In Python, class-level constants are written all uppercase while
-instance-level constants define a getter but no setter, so that it cannot be modified externally.
+instance-level constants define a getter but no setter so that it cannot be modified externally.
 The example from Java, written in Python is:
 
 ```python
@@ -390,8 +388,7 @@ class SecretAgent
 ## Objects
 
 If you think of classes as blank templates, objects are the ink in the template.
-Classes represent a static view of your software; classes declare attributes,
-and methods, but they are static and have no content. As soon as your software
+Classes represent a static view of your software; classes declare attributes and methods, but they are static and have no content. As soon as your software
 runs and you create an instance of a class, you are injecting runtime state
 to the empty template. *Objects represent the runtime of your program*.
 
@@ -402,7 +399,7 @@ to the empty template. *Objects represent the runtime of your program*.
 ## Inheritance
 
 The main use of inheritance is to
-create a specialiasion (derived class) of a *super* class (type) and take
+create a specialisation (derived class) of a *super* class (type) and take
 advantage of the subtyping polymorphism. In a statically typed language,
 there is the notion of *variance*, which establishes the relationship
 between the *super* and the *derived* types. Dynamic languages cannot make
@@ -414,7 +411,7 @@ explain in the Python section.
 
 In a statically typed language, subtyping has three types of variances: covariant, contravariant and invariant.
 The variance on return, generics and arguments types explains the relationship
-between the super and specialiased (derived) type. Covariant refers to the subtyping
+between the super and specialised (derived) type. Covariant refers to the subtyping
 relationship established by the programmer, e.g. `Cat` is a subtype of an `Animal` class.
 When the relationship is reversed, we call it contravariant. Invariant means
 that the types must exactly match. Variances to take into account are:
@@ -423,7 +420,7 @@ that the types must exactly match. Variances to take into account are:
 * generics (contravariant) and,
 * overriding method argument's type (invariant)
 
-Lets understand this with examples. First, lets look at the super and derived classes:
+Let's understand this with examples. First, we look at the super and derived classes:
 
 ```java
 public class AnimalShelter {
@@ -508,7 +505,7 @@ in the super class `AnimalShelter`, the compiler would think that the `CatShelte
 defines a method that does not exist in the super class. A good practice is to
 always add the `@Override` annotation.
 
-Overloaded methods are method that have the same name but receive different
+Overloaded methods are methods that have the same name but receive different
 arguments of types. Java knows which of the methods you are referring to and
 uses the right method. For instance, we can overload the method `putAnimal`
 from the `CatShelter` class as follows:
@@ -545,13 +542,13 @@ class CatShelter(AnimalShelter):
     ...
 ```
 
-In this example, the `putAnimal` method in `CatShelter` overrides the parents
+In this example, the `putAnimal` method in `CatShelter` overrides the parent
 method. There is no `@Override` annotation to prevent the error discussed
 in the Java section.
 
 Overloading is always given, i.e. the lack of type annotations forbids
-overloading methods, since there is no way to know which arguments types
-you are passing to the function. If you overide a function by passing
+overloading methods since there is no way to know which arguments types
+you are passing to the function. If you override a function by passing
 more arguments, the first function is actually deleted and not available anymore.
 Example:
 
@@ -570,7 +567,7 @@ If you were to call the function `getAnimal(animal)` (for some instance of `Anim
 Python will throw an error
 because the name has been rebound and the function that takes a single argument
 does not exist anymore. One way to overcome this is by using default parameters,
-i.e. parameters that start with a default value, which can be overriden. Following
+i.e. parameters that start with a default value, which can be overridden. Following
 the example above, the same function could be rewritten as follows:
 
 ```python
@@ -590,10 +587,12 @@ although you can also easily misuse it and run into runtime errors.
 Multiple inheritance permits a Python class to inherit from multiple classes.
 In case there is a method name collision, Python will execute the method
 that inherited from the first class, ignoring the second possible method.
-Lets take a closer look:
+Let's take a closer look:
 
 ```python
-class Photogapher(object):
+    return "Click"
+class Photographer(object):
+def shoot(self):
   def shoot(self):
     return "Click"
 
@@ -613,7 +612,7 @@ The concept of multiple inheritance brought the semantic concept of mixins.
 The basic idea of mixins is to create small classes that cannot work alone
 by themselves but, when combined, provide functionality can be reused.
 For instance, any secret agent needs to know how to shoot, and play poker.
-But a hunter needs to know how to shoot as well. Lets encode this functionality
+But a hunter needs to know how to shoot as well. Let's encode this functionality
 using mixins:
 
 ```python
@@ -640,7 +639,7 @@ class SecretAgent(ShootMixin, PokerMixin):
 The mixins `ShootMixin` and `PokerMixin` do not make much sense on their own,
 as classes. However, we can combine their behaviour to compositionally build
 classes with more advanced behaviour, such as the `SecretAgent` class. This
-class inherits these two mixins to provide any secret agent the ability
+class inherits these two mixins to provide any secret agent with the ability
 to shoot and put a poker face.
 
 ## Interfaces
@@ -648,9 +647,8 @@ to shoot and put a poker face.
 An interface declares the behaviour of your software, whose implementation lives in a class;
 with the use of interfaces, your classes expose the behaviour, which is further
 exploited by polymorphism. This means more than one class can implement
-the interface, so that you can interchangeably use one class or another.
-Java has interfaces and Python does not need them. We will come to the why they
-are not needed in Python in its corresponding section.
+the interface so that you can interchangeably use one class or another.
+Java has interfaces and Python does not need them. This is explained later in this chapter.
 
 **Java**
 
@@ -673,14 +671,14 @@ public interface SecretAgentSkills {
 
 In the example above, we declare that any class that wants to be a secret agent
 needs to have a poker face and know how to shoot, and we provide a default implementation
-for the *shooting* method, which can potentially be overriden by classes
+for the *shooting* method, which can potentially be overridden by classes
 that implement the interface `SecretAgentSkills`.
 
 **Python**
 
 Interfaces cannot be represented in dynamically typed languages. This is reasonable,
 since a dynamic language cannot statically enforce the use of types at the signature
-level. Furthermore, duck typing removes the need of interfaces, i.e.
+level. Furthermore, duck typing removes the need for interfaces, i.e.
 declare the behaviour that you expect and enforce that the arguments you pass
 comply with the expected behaviour -- public API.
 

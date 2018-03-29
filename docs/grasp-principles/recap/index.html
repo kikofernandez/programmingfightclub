@@ -57,7 +57,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="TOC">
 <ul>
-<li><a href="#object-oriented-concepts-revisited">Object-oriented concepts, revisited</a><ul>
+<li><a href="#object-oriented-concepts-revisited">Object-oriented concepts revisited</a><ul>
 <li><a href="#classes">Classes</a><ul>
 <li><a href="#getters-and-setters">Getters and setters</a></li>
 <li><a href="#static-methods-and-attributes">Static methods and attributes</a></li>
@@ -75,7 +75,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul>
 </div>
-<h1 id="object-oriented-concepts-revisited">Object-oriented concepts, revisited</h1>
+<h1 id="object-oriented-concepts-revisited">Object-oriented concepts revisited</h1>
 <p><span class="firstcharacter">I</span>n this chapter you are reminded about basic concepts from object-oriented languages and two concepts that object-oriented languages borrowed from the functional paradigm: <em>lambdas</em> and <em>closures</em>. We cover these concepts in a static language, Java, and in a dynamic language, Python.</p>
 <p>By the end of this chapter, you should understand:</p>
 <ul>
@@ -87,14 +87,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>parametric classes and</li>
 <li>lambdas and closures</li>
 </ul>
-<p>If you are already familiar with object-oriented programming, you can go ahead and move on to the next chapter. If you would like to review a few concepts, jump in to the one you would like to remember.</p>
+<p>If you are already familiar with object-oriented programming, you can go ahead and move on to the next chapter. If you would like to review a few concepts, jump into the one you would like to remember.</p>
 <h2 id="classes">Classes</h2>
 <p>Classes declare and implement the state and behaviour of an object. <em>The state of a class lives in its attributes while the behaviour is expressed via its methods</em>. A class that hides its attributes with a <code>private</code> access modifier protects its internal state from other classes. The only way to update the internal state is via method calls on the object. Method calls <em>represent the behaviour of the object</em>.</p>
 <p>As a general advice, you should not expose the internal state of your class to others; you should expose your behaviour. If followed, this simple advice allows you to build great abstractions that are easy to use and understand. For example, when using the <code>Future</code> API in Java 8, you do not have to think about the possible locks that may exist in the internal representation of a <code>CompletableFuture</code> instance, you just use it according to its defined behaviour, i.e. public methods.</p>
 <h3 id="getters-and-setters">Getters and setters</h3>
-<p>Methods that get attributes and set them are called <em>getters</em> and <em>setters</em>. Not all classes should have getters and/or setters. As a rule of thump, I like to think that mostly domain classes should use them. A domain class is a class that belongs to the domain that you are modelling. We are going to show how getters and setters work in Java and Python with the following example: imagine that you are asked to create a restaurant guide application that shows restaurants nearby with their ratings.</p>
+<p>Methods that get attributes and set them are called <em>getters</em> and <em>setters</em>. Not all classes should have getters and/or setters. As a rule of thumb, I like to think that mostly domain classes should use them. A domain class is a class that belongs to the domain that you are modelling. We are going to show how getters and setters work in Java and Python with the following example: imagine that you are asked to create a restaurant guide application that shows restaurants nearby with their ratings.</p>
 <p><strong>Java</strong></p>
-<p>The class <code>Restaurant</code> has all attributes defined as private (not accesible from outside the class). The constructor of the class (<code>public Restaurant(...)</code>) creates a new <code>Restaurant</code> and sets its state.</p>
+<p>The class <code>Restaurant</code> has all attributes defined as private (not accessible from outside the class). The constructor of the class (<code>public Restaurant(...)</code>) creates a new <code>Restaurant</code> and sets its state.</p>
 <p>To get the state outside the class we use <em>getters</em> and <em>setters</em> methods. These are preceded by the words <code>get</code> and <code>set</code> following the attributes name, e.g. <code>getStars()</code> (Example 3.1.1.1).</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">enum</span> Stars {
   ONE_STAR, TWO_STAR, THREE_STAR,
@@ -146,9 +146,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="at">@stars.setter</span>
   <span class="kw">def</span> stars(<span class="va">self</span>, stars):
     <span class="va">self</span>.__stars <span class="op">=</span> stars</code></pre></div>
-<p>Lets examine this code in more detail.</p>
-<p>The constructor <code>def __init__(self, stars, street, zipcode, country):</code> method takes an explicitly instance of itself (<code>self</code>) together with the remaining arguments, setting its internal state.</p>
-<p>Python provides a special syntax for getters and setters that wrap the attribute into a function with that very same name. In Python, these are called decorators. For instance, the getter for the <code>stars</code> attribute is created by declaring a method with the name of the attribute and the <code>@property</code> on top of it. The body of the method just fetches the attribute.</p>
+<p>Let's examine this code in more detail.</p>
+<p>The constructor <code>def __init__(self, stars, street, zipcode, country):</code> method takes an explicit instance of itself (<code>self</code>) together with the remaining arguments, setting its internal state.</p>
+<p>Python provides a special syntax for getters and setters that wrap the attribute into a function with that very same name. In Python, these are called decorators. For instance, the getter for the attribute <code>stars</code> is created by declaring a method with the name of the attribute and the <code>@property</code> on top of it. The body of the method just fetches the attribute.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@property</span>
     <span class="kw">def</span> stars(<span class="va">self</span>):
       <span class="cf">return</span> <span class="va">self</span>.__stars</code></pre></div>
@@ -160,8 +160,8 @@ restaurant.stars</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">restaurant <span class="op">=</span> Restaurant(<span class="dv">3</span>. <span class="st">&quot;Lane Street&quot;</span>, <span class="dv">75421</span>, <span class="st">&quot;Sweden&quot;</span>)
 restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre></div>
 <h4 id="why-would-we-want-to-use-getters-and-setters-like-that"><strong>Why would we want to use getters and setters like that?</strong></h4>
-<p><strong>They encapsulate behaviour</strong>. Today, you only want to retrieve the data but, with this simple abstraction, you give yourself some flexibility in the future. For instance, you can easily expand and return cached data that otherwise would need to be fetched fromsome remote server. If you did not add the getter and setter, now you have an application that allows access to all their internals and it is much more difficult to do this update, since you did not encapsulate your behaviour. Another typical example is adding validation when setting an attribute.</p>
-<p>Lets show a concrete scenario: assume that the application you are building uses an external API (Google) to fetch data of nearby restaurants and you map this information to the class below. You copy trustworthy information from the external API, such as <code>street</code>, <code>zipcode</code> and <code>country</code>. However, the number of <code>star</code> ratings come from what your users think of the restaurant, since you are targeting some specialised audience. From the external API, your <code>Restaurant</code> class partially contains all the values, except the ratings, which you pull on demand, when the user clicks or is nearby a place. Thanks to the decorator, you can refer to <code>restaurant.stars</code> and the method will transparently handle if the information already exists from a previous visit or if there is a need to connect to the server a get the information.</p>
+<p><strong>They encapsulate behaviour</strong>. Today, you only want to retrieve the data but, with this simple abstraction, you give yourself some flexibility in the future. For instance, you can easily expand and return cached data that otherwise would need to be fetched from some remote server. If you did not add the getter and setter, now you have an application that allows access to all their internals and it is much more difficult to do this update since you did not encapsulate your behaviour. Another typical example is adding validation when setting an attribute.</p>
+<p>Let's show a concrete scenario: assume that the application you are building uses an external API (Google) to fetch data from nearby restaurants and you map this information to the class below. You copy trustworthy information from the external API, such as <code>street</code>, <code>zipcode</code> and <code>country</code>. However, the number of <code>star</code> ratings come from what your users think of the restaurant since you are targeting some specialised audience. From the external API, your <code>Restaurant</code> class partially contains all the values, except the ratings, which you pull on demand when the user clicks or is nearby a place. Thanks to the decorator, you can refer to <code>restaurant.stars</code> and the method will transparently handle if it needs to connect to the server to get the information or if the information is already present from a previous access.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Restaurant:
   <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, street, zipcode, country, stars<span class="op">=</span><span class="va">None</span>):
     <span class="va">self</span>.__id <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>
@@ -187,9 +187,9 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 <p><em>Example 3.1.1.2 Introductory example to Python</em></p>
 <p>The setter method allows you to set your rating in the restaurant and send this information to the server, so that your friends know about it.</p>
 <h3 id="static-methods-and-attributes">Static methods and attributes</h3>
-<p>So far, we have seen that objects have attributes and methods that save information on a per instance basis. Java and Python have what are known as static methods and attributes, which supports saving information at the class level. This means that we can encapsulate global variables in classes.</p>
-<p>The main drawback of class attributes is that they live forever and cannot be garbage collected since, at any point in time, the code can refer to them. Another drawback is that they are global variables and, as such, will be dificult to test and reason about when your software grows.</p>
-<p>Lets proceed with the implementation in each language and their variations, using as example a counter that counts the number of deployed British secret agents.</p>
+<p>So far, we have seen that objects have attributes and methods that save information on a per-instance basis. Java and Python have what is known as static methods and attributes, which supports saving information at the class level. This means that we can encapsulate global variables in classes.</p>
+<p>The main drawback of class attributes is that they live forever and cannot be garbage collected since, at any point in time, the code can refer to them. Another drawback is that they are global variables and, as such, will be difficult to test and reason about when your software grows.</p>
+<p>Let's proceed with the implementation in each language and their variations, using as an example a counter that counts the number of deployed British secret agents.</p>
 <p><strong>Java</strong></p>
 <p>Static attributes save information at the class level, instead of at the instance. Static methods are commonly used to access static fields. In both cases, attributes and methods add the <code>static</code> annotation, e.g.:</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> SecretAgent {
@@ -204,7 +204,7 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
   }
 }</code></pre></div>
 <p>In this example, we declare <code>numberFieldAgents</code> as a <code>private</code> and <code>static</code> attribute, so it is only visible within the class and the information is shared among all <code>SecretAgent</code> object instances. To access this data, we declare a static method that returns the number of fields agents. From anywhere, you can get this data calling <code>SecretAgent.getNumberFieldAgents();</code>.</p>
-<p>As a recommendation, all static methods should be <code>final</code>. This is because subclasses cannot override static methods, they hide the parent static methods and reimplement them. However, polymorhic classes do not behave as you would expect<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+<p>As a recommendation, all static methods should be <code>final</code>. This is because subclasses cannot override static methods, they hide the parent static methods and reimplement them. However, polymorphic classes do not behave as you would expect<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
 <p><strong>Python</strong></p>
 <p>Static attributes are declared as attributes in a class and outside any method. For instance, if we are playing a game and we want to create characters and know how many of them shot to a target:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> CharacterFactory(<span class="bu">object</span>):
@@ -214,8 +214,8 @@ restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre
 
 person.shotsOnTarget
 Character.shotsOnTarget</code></pre></div>
-<p>Python has a different approach to static methods: decorators called <code>@staticmethod</code> and <code>@classmethod</code>. More Concretly, static methods (<code>@staticmethod</code>) are one way to relate functions that could stand alone in a module, but that the author prefers to keep them in a class. A <em>static method</em> is a function that does not depend on the instance or class in which it is written into. For this reason, the signature of a static method does not contain the common instance's reference <code>self</code> nor the common class reference <code>cls</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. One of the main reasons for using static methods is to keep the class <em>cohesive</em> (covered in GRASP principles chapter).</p>
-<p>In constrast, class methods are useful to create alternate class constructors or perform setup computations before creating an actual class. Class methods allows developers to embed information at the class level, which derived classes can override. This is simply not possible using static methods in Java. Example:</p>
+<p>Python has a different approach to static methods: decorators called <code>@staticmethod</code> and <code>@classmethod</code>. More concretely, static methods (<code>@staticmethod</code>) are one way to relate functions that could stand alone in a module, but that the author prefers to keep them in a class. A <em>static method</em> is a function that does not depend on the instance or class in which it is written into. For this reason, the signature of a static method does not contain the the instance's reference <code>self</code> nor the common class reference <code>cls</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. One of the main reasons for using static methods is to keep the class <em>cohesive</em> (covered in GRASP principles chapter).</p>
+<p>In contrast, class methods are used to create alternate class constructors or perform setup computations before creating an actual class. Class methods allow developers to embed information at the class level, which derived classes can override. This is simply not possible using static methods in Java. Example:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> CharacterFactory(<span class="bu">object</span>):
   shotsOnTarget <span class="op">=</span> <span class="dv">0</span>
 
@@ -263,7 +263,7 @@ photographer.shoot(target)</code></pre></div>
 <!-- TODO: -->
 <!-- * A `final` class in Java forbids derived classes (subtyping) -->
 <p><strong>Python</strong></p>
-<p>In Python, class-level constants are written all uppercase while instance-level constants define a getter but no setter, so that it cannot be modified externally. The example from Java, written in Python is:</p>
+<p>In Python, class-level constants are written all uppercase while instance-level constants define a getter but no setter so that it cannot be modified externally. The example from Java, written in Python is:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> SecretAgent
   NATIONALITY <span class="op">=</span> <span class="st">&quot;British&quot;</span>
 
@@ -274,20 +274,20 @@ photographer.shoot(target)</code></pre></div>
   <span class="kw">def</span> <span class="bu">id</span>(<span class="va">self</span>):
     <span class="cf">return</span> <span class="va">self</span>.__id</code></pre></div>
 <h2 id="objects">Objects</h2>
-<p>If you think of classes as blank templates, objects are the ink in the template. Classes represent a static view of your software; classes declare attributes, and methods, but they are static and have no content. As soon as your software runs and you create an instance of a class, you are injecting runtime state to the empty template. <em>Objects represent the runtime of your program</em>.</p>
+<p>If you think of classes as blank templates, objects are the ink in the template. Classes represent a static view of your software; classes declare attributes and methods, but they are static and have no content. As soon as your software runs and you create an instance of a class, you are injecting runtime state to the empty template. <em>Objects represent the runtime of your program</em>.</p>
 <!-- I could expand on and talk about how to create instances, call methods, access -->
 <!-- attributes and so on. I assume that the reader is already familiar with -->
 <!-- these details and will proceed with the next concept. -->
 <h2 id="inheritance">Inheritance</h2>
-<p>The main use of inheritance is to create a specialiasion (derived class) of a <em>super</em> class (type) and take advantage of the subtyping polymorphism. In a statically typed language, there is the notion of <em>variance</em>, which establishes the relationship between the <em>super</em> and the <em>derived</em> types. Dynamic languages cannot make this static check and do not bother to consider this concept. On the other hand, Python (not all dynamic languages) has multiple inheritance, which we explain in the Python section.</p>
+<p>The main use of inheritance is to create a specialisation (derived class) of a <em>super</em> class (type) and take advantage of the subtyping polymorphism. In a statically typed language, there is the notion of <em>variance</em>, which establishes the relationship between the <em>super</em> and the <em>derived</em> types. Dynamic languages cannot make this static check and do not bother to consider this concept. On the other hand, Python (not all dynamic languages) has multiple inheritance, which we explain in the Python section.</p>
 <p><strong>Java</strong></p>
-<p>In a statically typed language, subtyping has three types of variances: covariant, contravariant and invariant. The variance on return, generics and arguments types explains the relationship between the super and specialiased (derived) type. Covariant refers to the subtyping relationship established by the programmer, e.g. <code>Cat</code> is a subtype of an <code>Animal</code> class. When the relationship is reversed, we call it contravariant. Invariant means that the types must exactly match. Variances to take into account are:</p>
+<p>In a statically typed language, subtyping has three types of variances: covariant, contravariant and invariant. The variance on return, generics and arguments types explains the relationship between the super and specialised (derived) type. Covariant refers to the subtyping relationship established by the programmer, e.g. <code>Cat</code> is a subtype of an <code>Animal</code> class. When the relationship is reversed, we call it contravariant. Invariant means that the types must exactly match. Variances to take into account are:</p>
 <ul>
 <li>overloading return type (covariant),</li>
 <li>generics (contravariant) and,</li>
 <li>overriding method argument's type (invariant)</li>
 </ul>
-<p>Lets understand this with examples. First, lets look at the super and derived classes:</p>
+<p>Let's understand this with examples. First, we look at the super and derived classes:</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> AnimalShelter {
   <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}
   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}
@@ -327,7 +327,7 @@ photographer.shoot(target)</code></pre></div>
   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}
 }</code></pre></div>
 <p>If you do not add this notation and change the name of the method <code>getAnimalShelter()</code> in the super class <code>AnimalShelter</code>, the compiler would think that the <code>CatShelter</code> defines a method that does not exist in the super class. A good practice is to always add the <code>@Override</code> annotation.</p>
-<p>Overloaded methods are method that have the same name but receive different arguments of types. Java knows which of the methods you are referring to and uses the right method. For instance, we can overload the method <code>putAnimal</code> from the <code>CatShelter</code> class as follows:</p>
+<p>Overloaded methods are methods that have the same name but receive different arguments of types. Java knows which of the methods you are referring to and uses the right method. For instance, we can overload the method <code>putAnimal</code> from the <code>CatShelter</code> class as follows:</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> CatShelter {
   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}
   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Cat a) { <span class="kw">... </span>}
@@ -348,8 +348,8 @@ photographer.shoot(target)</code></pre></div>
 
   <span class="kw">def</span> putAnimal(animal):
     ...</code></pre></div>
-<p>In this example, the <code>putAnimal</code> method in <code>CatShelter</code> overrides the parents method. There is no <code>@Override</code> annotation to prevent the error discussed in the Java section.</p>
-<p>Overloading is always given, i.e. the lack of type annotations forbids overloading methods, since there is no way to know which arguments types you are passing to the function. If you overide a function by passing more arguments, the first function is actually deleted and not available anymore. Example:</p>
+<p>In this example, the <code>putAnimal</code> method in <code>CatShelter</code> overrides the parent method. There is no <code>@Override</code> annotation to prevent the error discussed in the Java section.</p>
+<p>Overloading is always given, i.e. the lack of type annotations forbids overloading methods since there is no way to know which arguments types you are passing to the function. If you override a function by passing more arguments, the first function is actually deleted and not available anymore. Example:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> getAnimal(animal):
   <span class="cf">return</span> animal
 
@@ -358,15 +358,17 @@ photographer.shoot(target)</code></pre></div>
     <span class="cf">return</span> cat
   <span class="cf">else</span>:
     <span class="cf">return</span> animal</code></pre></div>
-<p>If you were to call the function <code>getAnimal(animal)</code> (for some instance of <code>Animal</code> named <code>animal</code>), Python will throw an error because the name has been rebound and the function that takes a single argument does not exist anymore. One way to overcome this is by using default parameters, i.e. parameters that start with a default value, which can be overriden. Following the example above, the same function could be rewritten as follows:</p>
+<p>If you were to call the function <code>getAnimal(animal)</code> (for some instance of <code>Animal</code> named <code>animal</code>), Python will throw an error because the name has been rebound and the function that takes a single argument does not exist anymore. One way to overcome this is by using default parameters, i.e. parameters that start with a default value, which can be overridden. Following the example above, the same function could be rewritten as follows:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> getAnimal(animal, cat<span class="op">=</span><span class="va">None</span>):
   <span class="cf">if</span> cat <span class="op">!=</span> <span class="va">None</span>:
     <span class="cf">return</span> cat
   <span class="cf">else</span>:
     <span class="cf">return</span> animal</code></pre></div>
 <p>This function can be called with one or two arguments, i.e. <code>getAnimal(a)</code>, which sets the <code>cat</code> argument to <code>None</code>, by default; at the same time, you can call <code>getAnimal(a, c)</code> which overrides the default value of <code>cat</code> by <code>c</code>. This gives Python a lot of flexibility, although you can also easily misuse it and run into runtime errors.</p>
-<p>Multiple inheritance permits a Python class to inherit from multiple classes. In case there is a method name collision, Python will execute the method that inherited from the first class, ignoring the second possible method. Lets take a closer look:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Photogapher(<span class="bu">object</span>):
+<p>Multiple inheritance permits a Python class to inherit from multiple classes. In case there is a method name collision, Python will execute the method that inherited from the first class, ignoring the second possible method. Let's take a closer look:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="cf">return</span> <span class="st">&quot;Click&quot;</span>
+<span class="kw">class</span> Photographer(<span class="bu">object</span>):
+<span class="kw">def</span> shoot(<span class="va">self</span>):
   <span class="kw">def</span> shoot(<span class="va">self</span>):
     <span class="cf">return</span> <span class="st">&quot;Click&quot;</span>
 
@@ -377,7 +379,7 @@ photographer.shoot(target)</code></pre></div>
 <span class="kw">class</span> JamesBond(Photographer, SecretAgent):
   <span class="cf">pass</span></code></pre></div>
 <p>In this example, <em>James Bond</em> is a photographer and a secret agent. When he needs to shoot, <code>bond.shoot()</code>, he gets confused and decides to take a picture before getting killed. Multiple inheritance is useful but you should use it wisely.</p>
-<p>The concept of multiple inheritance brought the semantic concept of mixins. The basic idea of mixins is to create small classes that cannot work alone by themselves but, when combined, provide functionality can be reused. For instance, any secret agent needs to know how to shoot, and play poker. But a hunter needs to know how to shoot as well. Lets encode this functionality using mixins:</p>
+<p>The concept of multiple inheritance brought the semantic concept of mixins. The basic idea of mixins is to create small classes that cannot work alone by themselves but, when combined, provide functionality can be reused. For instance, any secret agent needs to know how to shoot, and play poker. But a hunter needs to know how to shoot as well. Let's encode this functionality using mixins:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> ShootMixin(<span class="bu">object</span>):
 
   <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, probability<span class="op">=</span><span class="fl">0.9</span>):
@@ -396,9 +398,9 @@ photographer.shoot(target)</code></pre></div>
 
 <span class="kw">class</span> SecretAgent(ShootMixin, PokerMixin):
   <span class="cf">pass</span></code></pre></div>
-<p>The mixins <code>ShootMixin</code> and <code>PokerMixin</code> do not make much sense on their own, as classes. However, we can combine their behaviour to compositionally build classes with more advanced behaviour, such as the <code>SecretAgent</code> class. This class inherits these two mixins to provide any secret agent the ability to shoot and put a poker face.</p>
+<p>The mixins <code>ShootMixin</code> and <code>PokerMixin</code> do not make much sense on their own, as classes. However, we can combine their behaviour to compositionally build classes with more advanced behaviour, such as the <code>SecretAgent</code> class. This class inherits these two mixins to provide any secret agent with the ability to shoot and put a poker face.</p>
 <h2 id="interfaces">Interfaces</h2>
-<p>An interface declares the behaviour of your software, whose implementation lives in a class; with the use of interfaces, your classes expose the behaviour, which is further exploited by polymorphism. This means more than one class can implement the interface, so that you can interchangeably use one class or another. Java has interfaces and Python does not need them. We will come to the why they are not needed in Python in its corresponding section.</p>
+<p>An interface declares the behaviour of your software, whose implementation lives in a class; with the use of interfaces, your classes expose the behaviour, which is further exploited by polymorphism. This means more than one class can implement the interface so that you can interchangeably use one class or another. Java has interfaces and Python does not need them. This is explained later in this chapter.</p>
 <p><strong>Java</strong></p>
 <p>An interface can be seen as a promise of proper behaviour from any type that implements it. Since Java 8, interfaces not only declare expected behaviour, but they can also implement methods as long as the implementation relies on calling other public methods, great for code reuse. We will look at James Bond example:</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">interface</span> SecretAgentSkills {
@@ -409,9 +411,9 @@ photographer.shoot(target)</code></pre></div>
     <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Damage</span>(probability);
   }
 }</code></pre></div>
-<p>In the example above, we declare that any class that wants to be a secret agent needs to have a poker face and know how to shoot, and we provide a default implementation for the <em>shooting</em> method, which can potentially be overriden by classes that implement the interface <code>SecretAgentSkills</code>.</p>
+<p>In the example above, we declare that any class that wants to be a secret agent needs to have a poker face and know how to shoot, and we provide a default implementation for the <em>shooting</em> method, which can potentially be overridden by classes that implement the interface <code>SecretAgentSkills</code>.</p>
 <p><strong>Python</strong></p>
-<p>Interfaces cannot be represented in dynamically typed languages. This is reasonable, since a dynamic language cannot statically enforce the use of types at the signature level. Furthermore, duck typing removes the need of interfaces, i.e. declare the behaviour that you expect and enforce that the arguments you pass comply with the expected behaviour -- public API.</p>
+<p>Interfaces cannot be represented in dynamically typed languages. This is reasonable, since a dynamic language cannot statically enforce the use of types at the signature level. Furthermore, duck typing removes the need for interfaces, i.e. declare the behaviour that you expect and enforce that the arguments you pass comply with the expected behaviour -- public API.</p>
 <p>In Python, you can encode interfaces in terms of abstract classes, which we cover next.</p>
 <h2 id="abstract-classes">Abstract classes</h2>
 <p>TODO:</p>
@@ -432,7 +434,7 @@ photographer.shoot(target)</code></pre></div>
 <hr />
 <ol>
 <li id="fn1"><p>this is not technically a constructor, although it is called right after the creation of the object and, for all purposes in this book, it is the same.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>Considerations of static subtying: https://docs.oracle.com/javase/tutorial/java/IandI/override.html<a href="#fnref2">↩</a></p></li>
+<li id="fn2"><p>Considerations of static subtyping: https://docs.oracle.com/javase/tutorial/java/IandI/override.html<a href="#fnref2">↩</a></p></li>
 <li id="fn3"><p>Reference to Python's static methods: https://docs.python.org/3/library/functions.html#staticmethod<a href="#fnref3">↩</a></p></li>
 <li id="fn4"><p><a href="https://docs.oracle.com/javase/tutorial/extra/generics/subtype.html">Link to official documentation</a><a href="#fnref4">↩</a></p></li>
 </ol>
