@@ -1,6 +1,6 @@
 # Object-oriented concepts revisited
 
-<span class="firstcharacter">I</span>n this chapter you are reminded about basic concepts
+<span class="firstcharacter">I</span>n this chapter we go through basic concepts
 from object-oriented languages and two concepts that object-oriented languages borrowed
 from the functional paradigm: *lambdas* and *closures*.
 We cover these concepts in a static language, Java, and in a dynamic language, Python.
@@ -15,7 +15,7 @@ By the end of this chapter, you should understand:
 * parametric classes and
 * lambdas and closures
 
-If you are already familiar with object-oriented programming,
+If you are already familiar with object-oriented programming in Java and Python,
 you can go ahead and move on to the next chapter. If you would like to review
 a few concepts, jump into the one you would like to remember.
 
@@ -29,9 +29,9 @@ classes. The only way to update the internal state is via method calls on the ob
 Method calls *represent the behaviour of the object*.
 
 As a general advice, you should not expose the internal state of your class to others;
-you should expose your behaviour. If followed, this simple advice allows you to build
-great abstractions that are easy to use and
-understand. For example, when using the `Future` API in Java 8, you do not have to think about the
+you should expose your behaviour. If followed, you will build
+abstractions that are easy to use and
+understand. For example, when using the `Future` API from Java 8, you do not have to think about the
 possible locks that may exist in the internal representation of a `CompletableFuture` instance, you
 just use it according to its defined behaviour, i.e. public methods.
 
@@ -41,8 +41,9 @@ Methods that get attributes and set them are called *getters* and *setters*.
 Not all classes should have getters and/or setters. As a rule of thumb,
 I like to think that mostly domain classes should use them. A domain class
 is a class that belongs to the domain that you are modelling.
-We are going to show how getters and setters work in Java and Python
-with the following example: imagine that you are asked to create a restaurant guide application
+
+To see how getters and setters work we introduce an example:
+imagine that you are asked to create a restaurant guide application
 that shows restaurants nearby with their ratings.
 
 **Java**
@@ -51,7 +52,7 @@ The class `Restaurant` has all attributes defined as private (not accessible fro
 The constructor of the class (`public Restaurant(...)`) creates a new `Restaurant` and sets its
 state.
 
-To get the state outside the class we use *getters* and *setters* methods. These are preceded
+To get and set the state of the class we use *getters* and *setters* methods. These are preceded
 by the words `get` and `set` following the attributes name, e.g. `getStars()` (Example 3.1.1.1).
 
 ```java
@@ -98,7 +99,7 @@ mean that the attribute is private, i.e. the attribute `stars` should be written
 `__stars`. If you want the attribute to be public, just remove the double underscore.
 
 Unlike Java, the name of the class is not the constructor[^constructor], but rather
-the method `def __init__(self)`. If you write the example above in Python:
+the method `def __init__(self)`. The example above written in Python looks as follows:
 
 [^constructor]: this is not technically a constructor, although it is called right
 after the creation of the object and, for all purposes in this book, it is the same.
@@ -123,13 +124,14 @@ class Restaurant:
 Let's examine this code in more detail.
 
 The constructor `def __init__(self, stars, street, zipcode, country):` method
-takes an explicit instance of itself (`self`) together with the remaining arguments,
+takes an explicit instance of itself (`self`) and the remaining arguments,
 setting its internal state.
 
-Python provides a special syntax for getters and setters that wrap the attribute
-into a function with that very same name. In Python, these are called decorators.
-For instance, the getter for the attribute `stars` is created by declaring a method with the name of the attribute and the
-`@property` on top of it. The body of the method just fetches the attribute.
+Python has a special syntax for getters and setters that wraps the attributes
+into a function with that very same name. These functions are called decorators.
+For example, the getter for the attribute `stars` is created by declaring a method
+with the name of the attribute and the `@property` on top of it.
+The body of the method just fetches the attribute.
 
 ```python
     @property
