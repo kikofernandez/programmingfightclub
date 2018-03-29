@@ -17,7 +17,7 @@ the mathematical rules[^oop-lambda-calculus].
 [^oop-lambda-calculus]: For more information on these mathematical models, subscribe to the
   [Lambda Calculus for the Working Programmer](WEB/lambda-calculus/toc/) book.
 
-Type checking can happen at compile time or at run time; when the type checking
+Type checking can happen at compile time or at runtime; when the type checking
 happens at compile time, we have a statically typed language. If the type checking
 happens at runtime, we have a dynamically typed language.
 For all purposes in this book, we consider only static and dynamic type systems[^oop-type-system-notes].
