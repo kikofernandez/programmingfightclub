@@ -95,7 +95,7 @@ public class Restaurant {
 **Python**
 
 Python doesn't have access modifiers and uses (by convention) two underscores to
-mean that the attribute is private, i.e. the attribute `stars` should be written
+mean that the attribute is private, e.g. the attribute `stars` should be written
 `__stars`. If you want the attribute to be public, just remove the double underscore.
 
 Unlike Java, the name of the class is not the constructor[^constructor], but rather
@@ -124,8 +124,8 @@ class Restaurant:
 Let's examine this code in more detail.
 
 The constructor `def __init__(self, stars, street, zipcode, country):` method
-takes an explicit instance of itself (`self`) and the remaining arguments,
-setting its internal state.
+takes an explicit instance of itself (`self`) and the remaining arguments which
+set its internal state.
 
 Python has a special syntax for getters and setters that wraps the attributes
 into a function with that very same name. These functions are called decorators.
