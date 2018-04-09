@@ -688,9 +688,86 @@ In Python, you can encode interfaces in terms of abstract classes, which we cove
 
 ## Abstract classes
 
+Abstract classes are similar to interfaces, except that they may provide
+a method implementation. As with interfaces, they represent a contract between
+the base class and the derivations of the base class. Abstract classes exist
+in Java and Python.
+
+**Java**
+
 TODO:
 
-* [Python](https://www.python.org/dev/peps/pep-3119/#rationale)
+* abstract classes
+
+**Python**
+
+A declaration [abstract class](https://www.python.org/dev/peps/pep-3119/#rationale)
+of an abstract class looks similar to the simple and plain inheritance model. You would
+simply import `from abc import ABC` and make classes to inherit from `ABC`.
+The benefits of declaring an abstract class lies in the contract that you are creating.
+It basically states that any derived class of the abstract class implements the
+methods you have declared and no one can use the abstract class because it is incomplete.
+
+Let's look at examples of how you would write a secret agent class and its derivations
+without abstract classes and with abstract classes.
+
+```python
+class SecretAgent(object):
+  def shoot(self, target):
+    raise NotImplementedError()
+
+class JamesBond(SecretAgent):
+  def shoot(self, target):
+    ...
+
+class MrBean(SecretAgent):
+  pass
+```
+
+Nothing prevents you from creating an instance of `SecretAgent` and trying to `shoot`.
+For example, you can create an instance of Mr.Bean and try to shoot, just to
+realise that Mr.Bean does not actually know how to shoot:
+
+```python
+bean = MrBean()
+bean.shoot()
+```
+
+In this case, `bean.shoot()` raises the error `NotImplementedError:` inherited
+from the `SecretAgent` class. This runtime error happens only when you shoot.
+However, if `SecretAgent` is an abstract class, you can use the decorator `@abstractmethod` to enforce
+implementation of methods by the derivations of the class. If you do not provide
+an implementation, you get a runtime error at instantiation time, instead of
+at the actual call of the behaviour. This design catches errors much faster and
+make your class hierarchy more understandable and maintanable.
+
+The example above using abstract classes and abstract methods is now defined as:
+
+```python
+from abc import ABC, abstractmethod
+class SecretAgent(ABC):
+  @abstractmethod
+  def shoot(self, target):
+    raise NotImplementedError()
+
+class JamesBond(SecretAgent):
+  def shoot(self, target):
+    ...
+
+class MrBean(SecretAgent):
+  pass
+```
+
+The creation of an instance of Mr.Bean crashes at instantion time, instead of
+when calling the shooting method:
+
+```python
+bean = MrBean()
+```
+
+produces the error `TypeError: Can't instantiate abstract class MrBean with abstract methods shoot`,
+forcing you to implement the behaviour of the method. Failing to do so produces
+a runtime error as soon as possible, at instantiation time.
 
 ## Parametric classes
 
