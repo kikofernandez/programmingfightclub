@@ -525,10 +525,93 @@ This principle is easy to apply and, in practice, requires you to be good at for
 <p>You should apply this pattern in instability points (classes) and, specially, when using third party libraries that you don’t have previous experience with.</p>
 <h2 id="pure-functions">Pure functions</h2>
 <p>This principle is not part of the common and well known GRASP principles but, in my experience, you should consider it. Lambdas, closures and pure functions are ubiquitous nowadays. My advice is that you stop using closures that captures mutable state. The main reason is that, at one point or another, you’ll benchmark your application and start using parallel capabilities of your computer: task, futures, actors or whatever is the next parallel abstraction. If you encapsulate mutable state in closures, you are building your own coffin for the not so far away future. Things like processing an recognitive computation cannot be used anymore if the object the closure captures is shared between two threads – unless you can guarantee data race freedom. Data race freedom code is hard to write, maintain and make fast, so using locks may get you out of troubles at the cost of losing horizontal scalability <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<article class="npost">
+<div class="post-content">
+<h4 class="post-title">
+Mailing list
+</h4>
+<p>
+</p>
+<div id="mc_embed_signup">
+<form action="https://wordpress.us16.list-manage.com/subscribe/post?u=a7901243cc48256f8de50e906&amp;id=746329749a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<div id="mc_embed_signup_scroll">
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter email address" required>
+<div style="position: absolute; left: -5000px;" data-aria-hidden="true">
+<input type="text" name="b_a7901243cc48256f8de50e906_746329749a" tabindex="-1" value="">
+</div>
+<div class="clear">
+<input type="submit" value="Subscribe me!" name="subscribe" id="mc-embedded-subscribe" class="button">
+</div>
+</div>
+</form>
+</div>
+</div>
+</article>
 <section class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>TODO: Explain horizontal scalability<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1">TODO: Explain horizontal scalability <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+#mc_embed_signup .button {
+clear: both;
+background-color: #7005a7;
+border: 0 none;
+border-radius: 4px;
+letter-spacing: .03em;
+color: #FFFFFF;
+cursor: pointer;
+display: inline-block;
+font-size: 15px;
+height: 32px;
+line-height: 32px;
+margin: 0 5px 10px 0;
+padding: 0;
+text-align: center;
+text-decoration: none;
+vertical-align: top;
+white-space: nowrap;
+width: auto;
+transition: all 0.23s ease-in-out 0s;
+}
+.npost {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+      align-items: stretch;
+  min-height: 11rem;
+  -webkit-border-radius: 10px;
+      border-radius: 10px;
+  overflow: hidden;
+  -webkit-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+  -webkit-box-shadow: 2px 2px 7px 0 rgba(31, 35, 46, 0.15);
+      box-shadow: 2px 2px 7px 0 rgba(31, 35, 46, 0.15);
+}
+.npost .post-content {
+  padding: 2rem;
+  width: 90%;
+}
+.npost .post-content .post-title {
+  margin: 0 0 10px;
+  font-size: 30px;
+  font-weight: 400;
+}
+</style>
+<a href="#fnref1" class="footnote-back">↩</a></li>
 </ol>
 </section>
 <div class="footnotes">
