@@ -1,8 +1,10 @@
 # GRASP principles
 
-<p class="para"><span class="dropcaps">B</span>efore you learn advanced design patterns, it's useful to look at common principles / recommendation rules to guide your design. By following these principles, you will design and write code that's easy to understand, maintain, and refactor.
+<p class="para"><span class="dropcaps">G</span>rasp principles
+are recommendation rules to guide your design. Keep these principles
+and you will design and write code that is easy to understand, maintain, and refactor.
 
-By the end of this chapter you will have grok these principles and they will become second nature to you. Next, we introduce these principles ( which can be applied to any object-oriented language):
+By the end of this chapter you will have grok these principles:
 
 - low coupling,
 - high cohesion,
@@ -14,22 +16,17 @@ By the end of this chapter you will have grok these principles and they will bec
 - pure fabrication, and
 - protected variation.
 
-There are exercises for each principle at the end of the chapter to help you understand the difference between them.
+There are exercises for each principle at the end of the chapter to help you
+understand the difference between them.
 
 ## Low Coupling
 
-This principle states that a class should only depend on the minimum and required amount of classes, no more and no less. A low coupled class is easy to maintain and refactor because it interacts with a minimum amount of objects.
+This principle states that a class should only depend on the minimum and required
+amount of classes, no more and no less. A low coupled class is easy to maintain and
+refactor because it interacts with a minimum amount of objects.
 
-When a design is low coupled, changes in a class do not spread across multiple classes.
-On the opposite side, high coupled designs contain classes with many dependencies to other objects, which makes them rigid and difficult to maintain.
-
-<!--
- and has low cohesion, i. e. it is not focused, has too many responsibilities and does too many things.
--->
-
-In the beginning of your journey to become a better programmer, it's difficult to acknowledge this principle until you deal with its counterpart, a high coupled design, a.k.a. a bowl of spaghetti code. If you find yourself with code that is rigid, hard to maintain and even more difficult to deal with when adding new features or making changes, then you are the owner of a high coupled design, and a refactoring is advisable.
-
-To make the idea of coupling more concrete, we define coupling as any code that satisfies items in the following list:
+To make the idea of coupling more concrete, we define coupling as any code that
+satisfies any items in the following list:
 
 - the class has an attribute to another object,
 - calls on methods of other objects,
@@ -37,9 +34,31 @@ To make the idea of coupling more concrete, we define coupling as any code that 
 - implements one or more interfaces, and
 - inherits mixins
 
-The reader should notice that there will always exist coupling but, dependencies to stable items are not problematic - standard library - because these have been well designed and do not change often. In general, the problem is not coupling per se, but creating a coupled design to unstable elements.
+The reader should notice that there will **always** exist coupling but dependencies
+to stable items are not problematic, e.g. standard library, because these have been
+well designed and do not change often. In general, the problem is not coupling per se,
+but creating a coupled design to unstable elements.
 
-An example of a poor design drawing ideas from the case study is shown in Fig. 1.1, Listing 1.1. In this example, guides contain images, visibility (who can watch the content), title, description, and reviews of restaurants, hotels, pubs, things to do, etc.
+For instance, a class that has an attribute to a `List` class is coupled to
+a non-breaking library whose external structure does not change (otherwise, there would
+be breaking changes in the API). The `List` class always exposes the same methods
+(behaviour) to its users, and internal changes are never breaking the contract
+of what the programmer expects.
+
+When a design is low coupled, changes in a class do not spread across multiple classes.
+On the opposite side, high coupled designs contain classes with many dependencies
+to other objects, which makes them rigid and difficult to maintain.
+
+In the beginning of your journey to become a better programmer,
+it's difficult to acknowledge this principle until you deal with its counterpart:
+a high coupled design, a.k.a. a bowl of spaghetti code. If you find yourself
+with code that is rigid and hard to maintain, then you are the owner of a high
+coupled design, and a refactoring is advisable.
+
+An example of a poor design, drawing ideas from the case study, is shown
+in Fig. 1.1, Listing 1.1. In this example, guides contain images,
+visibility (who can watch the content),
+title, description, and reviews of restaurants, hotels, pubs, things to do, etc.
 
 ```java
 public class Guide {
@@ -69,7 +88,9 @@ public class Guide {
 
 **Fig.1.1 High coupled `Guide` class**
 
-Before we analyse this design: Can you identify some poor design decisions? Try to name a few of them before you read any further.
+Before we analyse this design:
+
+* Can you identify some poor design decisions? Try to name a few of them before you read any further.
 
 The problems with this design are:
 
@@ -79,9 +100,16 @@ The problems with this design are:
 * hotels, restaurants and others should implement a common interface, si that you can dispatch polymorphously. If you don't do this, adding a few new places, e.g. `SushiBar` class, implies the creation of more attributes and respective methods to get those elements,
 * the constructor receives an `ArrayList`, which binds an implementation detail to the list abstraction.
 
-So, given this poor design (Fig 1.1, Listing 1.1), how could we reduce coupling a `Guide` to other elements? The most obvious alternative would be to put less responsibilities in the `Guide`. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain.
+So, given this poor design (Fig 1.1, Listing 1.1), how could we reduce coupling
+a `Guide` to other elements? The most obvious alternative would be to put less
+responsibilities in the `Guide`. This reduces coupling to other elements
+and, as a side effect, keeps the class focus on what it should do, i.e. the class
+is easy to understand, test, and maintain.
 
- For example, a `Guide` does not need to be concerned about its visibility and we can group different places (restaurants, hotels, bars, etc) contained in a guide under the idea of a point of interest (Fig. 1.2). These two changes reduce the responsibilities of the `Guide` class, thus reducing coupling (Listing 1.2).
+For example, a `Guide` does not need to be concerned about its visibility
+and we can group different places (restaurants, hotels, bars, etc) contained in a
+guide under the idea of a point of interest (Fig. 1.2). These two changes reduce
+the responsibilities of the `Guide` class, thus reducing coupling (Listing 1.2).
 
 ![LooselyGuideUML](MEDIA/assets/grasp/LooselyGuideUML.png)
 
