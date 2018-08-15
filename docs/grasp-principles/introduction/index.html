@@ -1,42 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="generator" content="pandoc" />
-  <meta name="author" content="Kiko Fernandez-Reyes" />
-  <title>GRASP principles for the Object-oriented mind</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="/grasp-principles/assets/pandoc.css" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> <link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Inconsolata" rel="stylesheet">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112034462-1"></script>
-  <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag("js", new Date());
-  gtag("config", "UA-112034462-1"); </script>
-</head>
-<body>
-<div id="header">
-<h1 class="title"><a href="/grasp-principles/toc/">GRASP principles for the Object-oriented mind</a></h1>
-<h2 class="author">Kiko Fernandez-Reyes</h2>
-</div>
-<div id="TOC">
-<ul>
-<li><a href="#introduction">Introduction</a><ul>
-<li><a href="#software-design">Software Design</a><ul>
-<li><a href="#what-is-a-good-design">What is a good design?</a></li>
-<li><a href="#design-principles">Design principles</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</div>
 <h1 id="introduction">Introduction</h1>
-<p><span class="firstcharacter">Y</span>ou worked hard for over a year in the next billion dollar web app in a small startup: the CEO, Johan, seems happy that the product is (almost) feature complete; the designer, Anders, is happy with the UX and graphics and the CTO, Pontus, just wants to press the red button and release the product. You tell them to wait 10 more minutes, the unit tests, integration tests and system tests are still running. Adding tests was a long battle with management because it slowed down the project quite a lot, but you are a good engineer and tests will catch many errors in the future.</p>
+<p class="para">
+<span class="dropcaps">Y</span>ou worked hard for over a year in the next billion dollar web app in a small startup: the CEO, Johan, seems happy that the product is (almost) feature complete; the designer, Anders, is happy with the UX and graphics and the CTO, Pontus, just wants to press the red button and release the product. You tell them to wait 10 more minutes, the unit tests, integration tests and system tests are still running. Adding tests was a long battle with management because it slowed down the project quite a lot, but you are a good engineer and tests will catch many errors in the future.
+</p>
 <ul>
 <li>Ding, ding, ding (sound)</li>
 </ul>
 <p>You look at the screen, all 142 tests are green! You tell Pontus to push the red button; deployment scripts start, your software is being installed on all the AWS servers the company could afford, a few databases with replication for faster reads and a single leader for the writes, load balancers, reverse proxies for serving static data and another bunch of instances running your application. After a few minutes, the deployment is a success, your baby is ALIVE and by tomorrow morning your product will be featured in all the Swedish newspapers (you live in Stockholm, the European capital for startups).</p>
 <p>The next day comes, you try the app and observe that the system is just f****** slow. It seems that connections time out and you observe in your monitoring tools that the server is not processing that many requests. <em>What the hell is going on!?</em></p>
-<p>The CTO has the intuition that it could be related to that reusable query class that receives lambdas, updates a bunch of fields from different objects and saves them into the database as a single transaction. There were many things going on there and, to guarantee those transactions are atomic, someone in the team introduced a lock. You think that the first thing to check is if you are <em>releasing</em> the lock. If your intuition is right, you'll fix the code, add the test that should have covered that case and be <em>presto</em> in 5 min to re-deploy the application.</p>
-<p>There is one problem though, the code doesn't have a well-defined structure and the lock somehow was passed inside a lambda -- someone had to try out lambdas, they are cool -- so you have no way of releasing the lock directly after the lambda call. You decide to look for the lambda that has a lock and does not release it, even when this method is reused by more than 130 queries (true story of my life). To your horror, you observe that the things going on in the lambda call are indeed updated atomically but the rest of the method body in which the lambda is called is not. It seems like it is time to start refactoring the use of lambdas in those 130 queries. <!-- Moreover, this method is used for multiple purposes and --> <!-- you are passing a bunch of lambdas and there's no easy way to tell which one has --> <!-- the damn lock!  --> Shit, if only your teammate knew when it made sense to use lambdas and all the cool features of the language!</p>
+<p>The CTO has the intuition that it could be related to that reusable query class that receives lambdas, updates a bunch of fields from different objects and saves them into the database as a single transaction. There were many things going on there and, to guarantee those transactions are atomic, someone in the team introduced a lock. You think that the first thing to check is if you are <em>releasing</em> the lock. If your intuition is right, you’ll fix the code, add the test that should have covered that case and be <em>presto</em> in 5 min to re-deploy the application.</p>
+<p>There is one problem though, the code doesn’t have a well-defined structure and the lock somehow was passed inside a lambda – someone had to try out lambdas, they are cool – so you have no way of releasing the lock directly after the lambda call. You decide to look for the lambda that has a lock and does not release it, even when this method is reused by more than 130 queries (true story of my life). To your horror, you observe that the things going on in the lambda call are indeed updated atomically but the rest of the method body in which the lambda is called is not. It seems like it is time to start refactoring the use of lambdas in those 130 queries. <!-- Moreover, this method is used for multiple purposes and --> <!-- you are passing a bunch of lambdas and there's no easy way to tell which one has --> <!-- the damn lock!  --> Shit, if only your teammate knew when it made sense to use lambdas and all the cool features of the language!</p>
 <h4 id="how-did-you-end-up-in-this-situation"><strong>How did you end up in this situation?</strong></h4>
 <p>You coded a system considering all the functional requirements and the architecture but you failed to create a good design. The hype of new features seemed like a silver bullet and everyone in the team was using them (the same thing happens with new frameworks all the time). The problem is understanding when to use those shiny new features and how they affect your design.</p>
 <div class="figure">
@@ -45,11 +17,11 @@
 (Image from https://xkcd.com/1513/)
 </p>
 </div>
-<p>The image above explains the situation of many self-taught developers (as well as young developers and engineers who have just finished their degree) who can read APIs, look on stackoverflow.com and find a solution to most problems. However, to be a good engineer/developer, being able to code does not mean that your code exhibits good software qualities, i.e. that your code is flexible and maintainable. This book will introduce you to design principles for creating a flexible and maintainable code.</p>
+<p>The image above explains the situation of many self-taught developers (as well as young developers and engineers who have just finished their degree) who can read APIs, look on stackoverflow.com and find a solution to most problems. However, to be a good engineer/developer, being able to code does not mean that your code exhibits good software qualities, i.e. that your code is flexible and maintainable. This book will introduce you to design principles for creating a flexible and maintainable code.</p>
 <h2 id="software-design">Software Design</h2>
 <p><strong>Software design</strong> is the process of <strong>finding a satisfactory solution to a problem</strong>.</p>
-<p>Many books explain software design with a focus on one language and assume that this knowledge can be &quot;easily&quot; extrapolated to other languages and/or paradigms. While it is true that you have to start somewhere, it is also true that as soon as you try to put the learnt design patterns in another language, their explanations may not be easy to follow or not make sense at all, from the language's perspective.</p>
-<p>After coding for more than 10 years, teaching a course on Advanced Software Design at Uppsala University (Sweden), and doing (still working on it) a PhD on Programming Languages, I believe that one of the strongest points of any language is its type system. It is not the same to use a statically typed language with a strong type system (e.g. Haskell), than to program in a dynamic and more flexible language. For instance, the notion of <em>transducers</em>, introduced by the dynamic language Clojure, is attractive to other languages but difficult to implement in a typed language.</p>
+<p>Many books explain software design with a focus on one language and assume that this knowledge can be “easily” extrapolated to other languages and/or paradigms. While it is true that you have to start somewhere, it is also true that as soon as you try to put the learnt design patterns in another language, their explanations may not be easy to follow or not make sense at all, from the language’s perspective.</p>
+<p>After coding for more than 10 years, teaching a course on Advanced Software Design at Uppsala University (Sweden), and doing (still working on it) a PhD on Programming Languages, I believe that one of the strongest points of any language is its type system. It is not the same to use a statically typed language with a strong type system (e.g. Haskell), than to program in a dynamic and more flexible language. For instance, the notion of <em>transducers</em>, introduced by the dynamic language Clojure, is attractive to other languages but difficult to implement in a typed language.</p>
 <p>Our approach in this book will be practical, focusing and taking advantage of the type system (and its restrictions). With this in mind, the knowledge can be extrapolated to other languages, because we have built a common understanding of how the type system interplays with the language.</p>
 <p>Throughout the book, <!-- For this reason, we are going to cover design principles from the perspective of --> <!-- different languages and type systems, and  --> we show different approaches to solving the same problem using a static and a dynamic language. You will learn to take advantage of each of the languages constructs, when to use them and when to avoid them.</p>
 <p>Given that each language has different features, we use a visual modelling language to express the main idea and let each language do their own implementation. This visual language, called UML (<em>Unified Modelling Language</em>), is explained in later chapters.</p>
@@ -101,34 +73,3 @@
 </ul>
 <p><em>Enjoy the ride!</em></p>
 <!-- Next chapter: Case Study -->
-<div class="footnotes">
-<hr>
-<div class="container">
-<nav class="pagination" role="pagination">
-<ul>
-<p>
-<span class="page-number">If you like this book, please consider buying me a coffee
-</p>
-<style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#ffffff !important;background-color:#BB5794 !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 23px !important;letter-spacing: 0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:"Cookie", cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#ffffff !important;}</style>
-<link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/graspdesign"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:5px">Buy me a coffee</span></a>
-</ul>
-</nav>
-</div>
-</div>
-<div class="footnotes">
-<hr>
-<div class="container">
-<nav class="pagination" role="pagination">
-<ul>
-<p>
-<span class="page-number">Designed with</span> ❤️ <span class="page-number"> from Uppsala, Sweden</span>
-</p>
-<p>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-</p>
-</ul>
-</nav>
-</div>
-</div>
-</body>
-</html>

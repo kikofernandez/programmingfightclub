@@ -1,6 +1,6 @@
 # Object-oriented concepts revisited
 
-<span class="firstcharacter">I</span>n this chapter we go through basic concepts
+<p class="para"><span class="dropcaps">I</span>n this chapter we go through basic concepts
 from object-oriented languages and two concepts that object-oriented languages borrowed
 from the functional paradigm: *lambdas* and *closures*.
 We cover these concepts in a static language, Java, and in a dynamic language, Python.

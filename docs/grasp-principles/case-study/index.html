@@ -1,30 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="generator" content="pandoc" />
-  <meta name="author" content="Kiko Fernandez-Reyes" />
-  <title>GRASP principles for the Object-oriented mind</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="/grasp-principles/assets/pandoc.css" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> <link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Inconsolata" rel="stylesheet">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112034462-1"></script>
-  <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag("js", new Date());
-  gtag("config", "UA-112034462-1"); </script>
-</head>
-<body>
-<div id="header">
-<h1 class="title"><a href="/grasp-principles/toc/">GRASP principles for the Object-oriented mind</a></h1>
-<h2 class="author">Kiko Fernandez-Reyes</h2>
-</div>
-<div id="TOC">
-<ul>
-<li><a href="#case-study">Case Study</a><ul>
-<li><a href="#startup-idea">Startup idea</a></li>
-</ul></li>
-</ul>
-</div>
 <h1 id="case-study">Case Study</h1>
 <div class="figure">
 <img src="../assets/VWKombi@theBeachbyCarolineGutman640.jpg" alt="Family Trip" />
@@ -38,10 +11,10 @@
 <p>To build this idea, there will be a web server (backend) and a mobile app (front-end). The backend is were your logic lives: getting information from database, handling submission of pictures, resizing algorithm, AI for choosing the most relevant guide cover, recommendation system, etc. The front-end talks to the server via a REST API, shows the information on screen, handles cases with poor internet connection, and syncs with the server. In the examples of this book, we will mainly focus on the backend, although mobile devices are getting faster and many of the design patterns covered in the book are also well suited for programming mobile devices.</p>
 <p>The startup that you work for has the following idea:</p>
 <ul>
-<li><p>Based on your friends recommendations, you get your own personal guides with places to visit, restaurants, hotels, etc., all based on curated content from people you trust. These guides don't show the typical and perfect pictures from the owner of the place, but the ones your friends have uploaded. If there are too many pictures from your friends, the system selects the best pictures using an AI algorithm and shows these in the cover of the guide. The comments are limited to 200 characters, making sure recommendations go directly to the point. Future work will allow any use to post also video comment of no more than 30 seconds.*</p></li>
+<li><p>Based on your friends recommendations, you get your own personal guides with places to visit, restaurants, hotels, etc., all based on curated content from people you trust. These guides don’t show the typical and perfect pictures from the owner of the place, but the ones your friends have uploaded. If there are too many pictures from your friends, the system selects the best pictures using an AI algorithm and shows these in the cover of the guide. The comments are limited to 200 characters, making sure recommendations go directly to the point. Future work will allow any use to post also video comment of no more than 30 seconds.*</p></li>
 <li><p>Another important feature is to show the location of the places (in a guide) in a map and pinpoint the exact distance to the place and average time by public transport and walking time.*</p></li>
 <li><p>All of these features are meaningless unless you can use the app offline. Thus, the app should work in offline mode and sync with the server once there is internet connection.*</p></li>
-<li><p>In the beginning, your friends may not yet be part of this platform. If this is the case, one way to get you started with relevant content from your friends is to enable the integration with TripAdvisor, where we will import your reviews, your friends' and also photos from your friends and people you follow.*</p></li>
+<li><p>In the beginning, your friends may not yet be part of this platform. If this is the case, one way to get you started with relevant content from your friends is to enable the integration with TripAdvisor, where we will import your reviews, your friends’ and also photos from your friends and people you follow.*</p></li>
 </ul>
 <!--
 Another idea is a publishing site that sells book chapters and whole books. As a user, you can buy a few chapters to see whether the story is interesting and stop reading if you don't find it appealing. Have you ever thought about introductory books from which you know most of the content except one chapter or two. With this platform, you can buy those individual chapters alone and focus on your needs. Start learning smart!
@@ -53,8 +26,8 @@ Your team uses an agile methodology, *Scrum*, and there are post-it everywhere w
 
 -->
 <h4 id="how-to-get-started"><strong>How to get started?</strong></h4>
-<p><span class="firstcharacter">M</span> ore often than not, when given a big task, such as the case study from above, you may be wondering how you should begin to work on this behemoth task. My recommendation is to start by identifying classes and build, little by little, the layers of abstraction that your software requires <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
-<p>One way to identify classes is to look at the <em>domain model</em> <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>, since the concepts from the domain need to be coded in the application. Given the sales pitch above, you can easily identify the following concepts:</p>
+<p><span class="firstcharacter">M</span> ore often than not, when given a big task, such as the case study from above, you may be wondering how you should begin to work on this behemoth task. My recommendation is to start by identifying classes and build, little by little, the layers of abstraction that your software requires <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>One way to identify classes is to look at the <em>domain model</em> <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, since the concepts from the domain need to be coded in the application. Given the sales pitch above, you can easily identify the following concepts:</p>
 <ul>
 <li>Lodge (Hotel, apartment, etc)</li>
 <li>Point of interest (POI)</li>
@@ -72,41 +45,10 @@ Your team uses an agile methodology, *Scrum*, and there are post-it everywhere w
 </ul>
 <p>The domain concepts represent important ideas of our domain. These will be coded into classes that represent the data layer of our application and contains business logic that is encapsulated within each of the classes.</p>
 <p>We proceed to explain object-oriented programming using examples this domain.</p>
-<div class="footnotes">
+<section class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Code is always in constant flux: it needs to be maintained and improved. Your design will change too. A good design helps you to create software that is flexible and as much pain free as possible (with respect to refactorings).<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>This refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.<a href="#fnref2">↩</a></p></li>
+<li id="fn1"><p>Code is always in constant flux: it needs to be maintained and improved. Your design will change too. A good design helps you to create software that is flexible and as much pain free as possible (with respect to refactorings).<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>This refers to the concepts of the domain in discourse, that is, the entities and ideas that make up the travelling social network.<a href="#fnref2" class="footnote-back">↩</a></p></li>
 </ol>
-</div>
-<div class="footnotes">
-<hr>
-<div class="container">
-<nav class="pagination" role="pagination">
-<ul>
-<p>
-<span class="page-number">If you like this book, please consider buying me a coffee
-</p>
-<style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#ffffff !important;background-color:#BB5794 !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 23px !important;letter-spacing: 0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:"Cookie", cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#ffffff !important;}</style>
-<link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/graspdesign"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:5px">Buy me a coffee</span></a>
-</ul>
-</nav>
-</div>
-</div>
-<div class="footnotes">
-<hr>
-<div class="container">
-<nav class="pagination" role="pagination">
-<ul>
-<p>
-<span class="page-number">Designed with</span> ❤️ <span class="page-number"> from Uppsala, Sweden</span>
-</p>
-<p>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-</p>
-</ul>
-</nav>
-</div>
-</div>
-</body>
-</html>
+</section>

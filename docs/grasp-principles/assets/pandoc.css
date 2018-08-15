@@ -9,15 +9,58 @@ html {
     -ms-text-size-adjust: 100%;
 }
 
-.firstcharacter {
-    color: #7103a7;
-    float: left;
-    font-family: Georgia;
-    font-size: 75px;
-    line-height: 60px;
-    padding-top: 4px;
-    padding-right: 8px;
-    padding-left: 3px;
+/* .firstcharacter { */
+/*     color: #7103a7; */
+/*     float: left; */
+/*     font-family: Georgia; */
+/*     font-size: 75px; */
+/*     line-height: 60px; */
+/*     padding-top: 4px; */
+/*     padding-right: 8px; */
+/*     padding-left: 3px; */
+/* } */
+
+p.para {
+    font-size: 1em;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: justify;
+    text-indent: 0;
+}
+
+@media (min-width: 1200px)
+{
+  span.dropcaps
+    {
+     float: left;
+     font-family: Georgia;
+     font-size: 75px;
+     line-height: 60px;
+     padding-top: 4px;
+     padding-right: 8px;
+     padding-left: 3px;
+    }
+}
+
+@media amzn-kf8 and (min-width: 1920)
+{
+    span.dropcaps
+    {
+        font-weight: normal;
+        font-size: 320%;
+        float: left;
+        margin-top: -0.3225em;
+        margin-bottom: -0.3245em;
+    }
+}
+
+@media amzn-mobi
+{
+    span.dropcaps
+    {
+        font-size: 3em;
+        font-weight: bold;
+    }
 }
 
 body {

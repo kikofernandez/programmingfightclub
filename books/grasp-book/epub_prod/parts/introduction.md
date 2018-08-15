@@ -1,12 +1,12 @@
 # Introduction
 
-<span class="firstcharacter">Y</span>ou worked hard for over a year in the next billion dollar web app in a
+<p class="para"><span class="dropcaps">Y</span>ou worked hard for over a year in the next billion dollar web app in a
 small startup: the CEO, Johan, seems happy that the product is (almost) feature
 complete; the designer, Anders, is happy with the UX and graphics and the CTO, Pontus,
 just wants to press the red button and release the product. You tell them to wait
 10 more minutes, the unit tests, integration tests and system tests are still running.
 Adding tests was a long battle with management because it slowed down the project
-quite a lot, but you are a good engineer and tests will catch many errors in the future.
+quite a lot, but you are a good engineer and tests will catch many errors in the future.</p>
 
 - Ding, ding, ding (sound)
 
@@ -30,9 +30,9 @@ introduced a lock. You think that the first thing to check is
 if you are *releasing* the lock. If your intuition is right, you'll fix the code,
 add the test that should have covered that case and be *presto* in 5 min to re-deploy the application.
 
-There is one problem though, the code doesn't have a well defined structure and the
+There is one problem though, the code doesn't have a well-defined structure and the
 lock somehow was passed inside a lambda -- someone had to try out lambdas,
-they are cool -- so you have no way to releasing the lock directly after the lambda call.
+they are cool -- so you have no way of releasing the lock directly after the lambda call.
 You decide to look for the lambda that has a lock and does not release it,
 even when this method is reused by more than 130 queries (true story of my life).
 To your horror, you observe that the things going on in the lambda call are indeed updated
@@ -48,7 +48,7 @@ cool features of the language!
 
 You coded a system considering all the functional requirements and the architecture
 but you failed to create a good design. The hype of new features seemed like a silver
-bullet and everyone in the team was using them (same thing happens with new frameworks all the time).
+bullet and everyone in the team was using them (the same thing happens with new frameworks all the time).
 The problem is understanding when to use those shiny new features and how they affect your design.
 
 <div class="figure">
@@ -59,17 +59,17 @@ The problem is understanding when to use those shiny new features and how they a
 The image above explains the situation of many self-taught developers (as well
 as young developers and engineers who have just finished their degree)
 who can read APIs, look on stackoverflow.com and find a solution
-to most problems. However, to be a good engineer / developer,
-being able to code does not mean that your exhibits good software qualities,
+to most problems. However, to be a good engineer/developer,
+being able to code does not mean that your code exhibits good software qualities,
 i.e. that your code is flexible and maintainable.
 This book will introduce you to design principles for creating a flexible
-and maintanable code.
+and maintainable code.
 
 ## Software Design
 
 **Software design** is the process of **finding a satisfactory solution to a problem**.
 
-Many books explain software design with focus on one language and assume that this
+Many books explain software design with a focus on one language and assume that this
 knowledge can be "easily" extrapolated to other languages and/or paradigms. While
 it is true that you have to start somewhere, it is also true that as soon as you
 try to put the learnt design patterns in another language, their explanations may
@@ -93,8 +93,8 @@ Throughout the book,
 <!-- For this reason, we are going to cover design principles from the perspective of -->
 <!-- different languages and type systems, and  -->
 we show different approaches to solving the same problem using a static and a dynamic language.
-You will learn to take advantage of each of the language
-constructs, when to use them and when avoid them.
+You will learn to take advantage of each of the languages
+constructs, when to use them and when to avoid them.
 
 Given that each language has different features, we use a visual modelling language
 to express the main idea and let each language do their own implementation.
@@ -113,7 +113,7 @@ in later chapters.
 
 <!-- Given the definition above, designing software seems to be completely disjoint -->
 <!-- from agile methodologies, e.g. Scrum, where you break user stories into smaller -->
-<!-- tasks until everything is clear to the whole team. In Scrum there seems to be no -->
+<!-- tasks until everything is clear to the whole team. In Scrum, there seems to be no -->
 <!-- domain model, not a single static and/or behavioural diagram, no architecture, etc, -->
 <!-- just code-what-the-post-it says. There is one problem if this approach is taken literally -->
 <!-- though: the post-it tells you what the problem is but not how to design it! You, as a -->
@@ -140,7 +140,7 @@ in later chapters.
 
 In general, a good design is one that can deal with change.
 
-As a software engineer / developer, you have to think about a piece of code that today is a car,
+As a software engineer/developer, you have to think about a piece of code that today is a car,
 tomorrow is a submarine and the next day is a tank. This happens because it is just
 code, anyone can update it and it is not set in stone, ever.
 

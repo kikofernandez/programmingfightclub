@@ -19,6 +19,9 @@ BOOK_FOLDER=grasp-principles
 # Path to build production website
 DOCS=../../$(DOC_FOLDER)/$(BOOK_FOLDER)
 
+# Data-dir
+DATADIR=../../data-dir
+
 # Internals variables used in book
 WEB=http:\/\/www.programmingfightclub.com
 MEDIA=
@@ -26,12 +29,15 @@ MEDIA=
 all: epub web
 
 # Building and cleaning an .epub file
+# Override the data-dir to remove the inner styles to code listings.
+# The overrided data-dir/templates/default.epub contains that inner styles in the .css
 epub: epub_clean
 	@mkdir -p $(EPUB_PROD)/parts
 	@cp -r parts $(EPUB_PROD)
 	@sed -i '' -e 's/WEB/$(WEB)/g' $(EPUB_PROD)/parts/recap.md
 	@find $(EPUB_PROD)/./ -type f -exec sed -i '' -e 's/MEDIA/./g' {} \;
-	@pandoc -s --toc metadata.yaml $(addprefix $(EPUB_PROD)/parts/, $(DEPS:=.md)) -o $(EPUB_PROD)/book.epub
+	pandoc -s --data-dir=$(DATADIR) --template=mytemplate.epub --toc metadata.yaml $(addprefix $(EPUB_PROD)/parts/, $(DEPS:=.md)) -o $(EPUB_PROD)/book.epub
+
 epub_clean:
 	@rm -rf $(EPUB_PROD)
 

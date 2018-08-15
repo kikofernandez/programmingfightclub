@@ -1,6 +1,5 @@
 # Preface
-
-<span class="firstcharacter">T</span>he purpose of this book is to show how to write flexible and maintanable
+<p class="para"><span class="dropcaps">T</span>he purpose of this book is to show how to write flexible and maintanable
 code from a unique perspective: the type system of a language. For this reason, this book is
 not a definitive guide to any language but a starting point to writing better software,
 taking advantage of the type system of the language.

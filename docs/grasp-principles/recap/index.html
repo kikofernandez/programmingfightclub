@@ -1,82 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="generator" content="pandoc" />
-  <meta name="author" content="Kiko Fernandez-Reyes" />
-  <title>GRASP principles for the Object-oriented mind</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-  </style>
-  <link rel="stylesheet" href="/grasp-principles/assets/pandoc.css" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> <link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Inconsolata" rel="stylesheet">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112034462-1"></script>
-  <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag("js", new Date());
-  gtag("config", "UA-112034462-1"); </script>
-</head>
-<body>
-<div id="header">
-<h1 class="title"><a href="/grasp-principles/toc/">GRASP principles for the Object-oriented mind</a></h1>
-<h2 class="author">Kiko Fernandez-Reyes</h2>
-</div>
-<div id="TOC">
-<ul>
-<li><a href="#object-oriented-concepts-revisited">Object-oriented concepts revisited</a><ul>
-<li><a href="#classes">Classes</a><ul>
-<li><a href="#getters-and-setters">Getters and setters</a></li>
-<li><a href="#static-methods-and-attributes">Static methods and attributes</a></li>
-<li><a href="#constants">Constants</a></li>
-</ul></li>
-<li><a href="#objects">Objects</a></li>
-<li><a href="#inheritance">Inheritance</a></li>
-<li><a href="#interfaces">Interfaces</a></li>
-<li><a href="#abstract-classes">Abstract classes</a></li>
-<li><a href="#parametric-classes">Parametric classes</a></li>
-<li><a href="#functional-concepts">Functional concepts</a></li>
-<li><a href="#anonymous-functions-lambdas">Anonymous functions / lambdas</a></li>
-<li><a href="#high-order-functions">High-order functions</a></li>
-<li><a href="#parametric-functions">Parametric functions</a></li>
-</ul></li>
-</ul>
-</div>
 <h1 id="object-oriented-concepts-revisited">Object-oriented concepts revisited</h1>
-<p><span class="firstcharacter">I</span>n this chapter we go through basic concepts from object-oriented languages and two concepts that object-oriented languages borrowed from the functional paradigm: <em>lambdas</em> and <em>closures</em>. We cover these concepts in a static language, Java, and in a dynamic language, Python.</p>
+<p class="para">
+<p><span class="dropcaps">I</span>n this chapter we go through basic concepts from object-oriented languages and two concepts that object-oriented languages borrowed from the functional paradigm: <em>lambdas</em> and <em>closures</em>. We cover these concepts in a static language, Java, and in a dynamic language, Python.</p>
 <p>By the end of this chapter, you should understand:</p>
 <ul>
 <li>classes and objects,</li>
@@ -90,190 +14,190 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>If you are already familiar with object-oriented programming in Java and Python, you can go ahead and move on to the next chapter. If you would like to review a few concepts, jump into the one you would like to remember.</p>
 <h2 id="classes">Classes</h2>
 <p>Classes declare and implement the state and behaviour of an object. <em>The state of a class lives in its attributes while the behaviour is expressed via its methods</em>. A class that hides its attributes with a <code>private</code> access modifier protects its internal state from other classes. The only way to update the internal state is via method calls on the object. Method calls <em>represent the behaviour of the object</em>.</p>
-<p>As a general advice, you should not expose the internal state of your class to others; you should expose your behaviour. If followed, you will build abstractions that are easy to use and understand. For example, when using the <code>Future</code> API from Java 8, you do not have to think about the possible locks that may exist in the internal representation of a <code>CompletableFuture</code> instance, you just use it according to its defined behaviour, i.e. public methods.</p>
+<p>As a general advice, you should not expose the internal state of your class to others; you should expose your behaviour. If followed, you will build abstractions that are easy to use and understand. For example, when using the <code>Future</code> API from Java 8, you do not have to think about the possible locks that may exist in the internal representation of a <code>CompletableFuture</code> instance, you just use it according to its defined behaviour, i.e. public methods.</p>
 <h3 id="getters-and-setters">Getters and setters</h3>
 <p>Methods that get attributes and set them are called <em>getters</em> and <em>setters</em>. Not all classes should have getters and/or setters. As a rule of thumb, I like to think that mostly domain classes should use them. A domain class is a class that belongs to the domain that you are modelling.</p>
 <p>To see how getters and setters work we introduce an example: imagine that you are asked to create a restaurant guide application that shows restaurants nearby with their ratings.</p>
 <p><strong>Java</strong></p>
 <p>The class <code>Restaurant</code> has all attributes defined as private (not accessible from outside the class). The constructor of the class (<code>public Restaurant(...)</code>) creates a new <code>Restaurant</code> and sets its state.</p>
 <p>To get and set the state of the class we use <em>getters</em> and <em>setters</em> methods. These are preceded by the words <code>get</code> and <code>set</code> following the attributes name, e.g. <code>getStars()</code> (Example 3.1.1.1).</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">enum</span> Stars {
-  ONE_STAR, TWO_STAR, THREE_STAR,
-  FOUR_STAR, FIVE_STAR, ZERO_STAR
-}
-
-<span class="kw">public</span> <span class="kw">class</span> Restaurant {
-  <span class="co">// Michelin stars</span>
-  <span class="kw">private</span> Stars stars;
-  <span class="kw">private</span> <span class="bu">String</span> street;
-  <span class="kw">private</span> <span class="dt">int</span> zipcode;
-  <span class="kw">private</span> Country country;
-
-  <span class="co">// constructor</span>
-  <span class="kw">public</span> <span class="fu">Restaurant</span>(Stars stars, <span class="bu">String</span> street, <span class="dt">int</span> zipcode, Country country){
-    <span class="kw">this</span>.<span class="fu">stars</span> = stars;
-    <span class="kw">this</span>.<span class="fu">street</span> = street;
-    <span class="kw">this</span>.<span class="fu">zipcode</span> = zipcode;
-    <span class="kw">this</span>.<span class="fu">country</span> = country;
-  }
-
-  <span class="co">// getter method</span>
-  <span class="kw">public</span> Stars <span class="fu">getStars</span>(){
-    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">stars</span>;
-  }
-
-  <span class="co">// setter method</span>
-  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setStars</span>(Stars stars){
-    <span class="kw">this</span>.<span class="fu">stars</span> = stars;
-  }
-
-  ...
-}</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="kw">enum</span> Stars {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  ONE_STAR, TWO_STAR, THREE_STAR,</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  FOUR_STAR, FIVE_STAR, ZERO_STAR</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">public</span> <span class="kw">class</span> Restaurant {</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="co">// Michelin stars</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="kw">private</span> Stars stars;</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw">private</span> <span class="bu">String</span> street;</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="kw">private</span> <span class="dt">int</span> zipcode;</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">  <span class="kw">private</span> Country country;</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">  <span class="co">// constructor</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">  <span class="kw">public</span> <span class="fu">Restaurant</span>(Stars stars, <span class="bu">String</span> street, <span class="dt">int</span> zipcode, Country country){</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">    <span class="kw">this</span>.<span class="fu">stars</span> = stars;</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">    <span class="kw">this</span>.<span class="fu">street</span> = street;</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">    <span class="kw">this</span>.<span class="fu">zipcode</span> = zipcode;</a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">    <span class="kw">this</span>.<span class="fu">country</span> = country;</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">  }</a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">  <span class="co">// getter method</span></a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">  <span class="kw">public</span> Stars <span class="fu">getStars</span>(){</a>
+<a class="sourceLine" id="cb1-23" data-line-number="23">    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">stars</span>;</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24">  }</a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb1-26" data-line-number="26">  <span class="co">// setter method</span></a>
+<a class="sourceLine" id="cb1-27" data-line-number="27">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setStars</span>(Stars stars){</a>
+<a class="sourceLine" id="cb1-28" data-line-number="28">    <span class="kw">this</span>.<span class="fu">stars</span> = stars;</a>
+<a class="sourceLine" id="cb1-29" data-line-number="29">  }</a>
+<a class="sourceLine" id="cb1-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb1-31" data-line-number="31">  ...</a>
+<a class="sourceLine" id="cb1-32" data-line-number="32">}</a></code></pre></div>
 <p><em>Example 3.1.1.1. Introductory example to Java</em></p>
 <p><strong>Python</strong></p>
-<p>Python doesn't have access modifiers and uses (by convention) two underscores to mean that the attribute is private, i.e. the attribute <code>stars</code> should be written <code>__stars</code>. If you want the attribute to be public, just remove the double underscore.</p>
-<p>Unlike Java, the name of the class is not the constructor<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, but rather the method <code>def __init__(self)</code>. The example above written in Python looks as follows:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Restaurant:
-  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, stars, street, zipcode, country):
-    <span class="va">self</span>.__stars  <span class="op">=</span> stars
-    <span class="va">self</span>.__street <span class="op">=</span> street
-    <span class="va">self</span>.__zipcode <span class="op">=</span> zipcode
-    <span class="va">self</span>.__country  <span class="op">=</span> country
-
-  <span class="at">@property</span>
-  <span class="kw">def</span> stars(<span class="va">self</span>):
-    <span class="cf">return</span> <span class="va">self</span>.__stars
-
-  <span class="at">@stars.setter</span>
-  <span class="kw">def</span> stars(<span class="va">self</span>, stars):
-    <span class="va">self</span>.__stars <span class="op">=</span> stars</code></pre></div>
-<p>Let's examine this code in more detail.</p>
-<p>The constructor <code>def __init__(self, stars, street, zipcode, country):</code> method takes an explicit instance of itself (<code>self</code>) and the remaining arguments, setting its internal state.</p>
+<p>Python doesn’t have access modifiers and uses (by convention) two underscores to mean that the attribute is private, e.g. the attribute <code>stars</code> should be written <code>__stars</code>. If you want the attribute to be public, just remove the double underscore.</p>
+<p>Unlike Java, the name of the class is not the constructor<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, but rather the method <code>def __init__(self)</code>. The example above written in Python looks as follows:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">class</span> Restaurant:</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, stars, street, zipcode, country):</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="va">self</span>.__stars  <span class="op">=</span> stars</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    <span class="va">self</span>.__street <span class="op">=</span> street</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">    <span class="va">self</span>.__zipcode <span class="op">=</span> zipcode</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">    <span class="va">self</span>.__country  <span class="op">=</span> country</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">  <span class="at">@property</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">  <span class="kw">def</span> stars(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">    <span class="cf">return</span> <span class="va">self</span>.__stars</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">  <span class="at">@stars.setter</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">  <span class="kw">def</span> stars(<span class="va">self</span>, stars):</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">    <span class="va">self</span>.__stars <span class="op">=</span> stars</a></code></pre></div>
+<p>Let’s examine this code in more detail.</p>
+<p>The constructor <code>def __init__(self, stars, street, zipcode, country):</code> method takes an explicit instance of itself (<code>self</code>) and the remaining arguments which set its internal state.</p>
 <p>Python has a special syntax for getters and setters that wraps the attributes into a function with that very same name. These functions are called decorators. For example, the getter for the attribute <code>stars</code> is created by declaring a method with the name of the attribute and the <code>@property</code> on top of it. The body of the method just fetches the attribute.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@property</span>
-    <span class="kw">def</span> stars(<span class="va">self</span>):
-      <span class="cf">return</span> <span class="va">self</span>.__stars</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1">    <span class="at">@property</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">    <span class="kw">def</span> stars(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">      <span class="cf">return</span> <span class="va">self</span>.__stars</a></code></pre></div>
 <p>If we had an instance of the <code>Restaurant</code> class, you could get the <code>stars</code> as follows:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">restaurant <span class="op">=</span> Restaurant(<span class="dv">3</span>. <span class="st">&quot;Lane Street&quot;</span>, <span class="dv">75421</span>, <span class="st">&quot;Sweden&quot;</span>)
-restaurant.stars</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1">restaurant <span class="op">=</span> Restaurant(<span class="fl">3.</span> <span class="st">&quot;Lane Street&quot;</span>, <span class="dv">75421</span>, <span class="st">&quot;Sweden&quot;</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">restaurant.stars</a></code></pre></div>
 <p>which internally calls <code>self.__stars</code>.</p>
-<p>Setters work in the same way, except that they are annotated with the attribute's name followed by the <code>setter</code> word, e.g. <code>@stars.setter</code> for the <code>stars</code> setter method. From now on, we can set the attribute as if we had access to the internal attributes:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">restaurant <span class="op">=</span> Restaurant(<span class="dv">3</span>. <span class="st">&quot;Lane Street&quot;</span>, <span class="dv">75421</span>, <span class="st">&quot;Sweden&quot;</span>)
-restaurant.stars <span class="op">=</span> <span class="dv">5</span></code></pre></div>
+<p>Setters work in the same way, except that they are annotated with the attribute’s name followed by the <code>setter</code> word, e.g. <code>@stars.setter</code> for the <code>stars</code> setter method. From now on, we can set the attribute as if we had access to the internal attributes:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1">restaurant <span class="op">=</span> Restaurant(<span class="fl">3.</span> <span class="st">&quot;Lane Street&quot;</span>, <span class="dv">75421</span>, <span class="st">&quot;Sweden&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">restaurant.stars <span class="op">=</span> <span class="dv">5</span></a></code></pre></div>
 <h4 id="why-would-we-want-to-use-getters-and-setters-like-that"><strong>Why would we want to use getters and setters like that?</strong></h4>
 <p><strong>They encapsulate behaviour</strong>. Today, you only want to retrieve the data but, with this simple abstraction, you give yourself some flexibility in the future. For instance, you can easily expand and return cached data that otherwise would need to be fetched from some remote server. If you did not add the getter and setter, now you have an application that allows access to all their internals and it is much more difficult to do this update since you did not encapsulate your behaviour. Another typical example is adding validation when setting an attribute.</p>
-<p>Let's show a concrete scenario: assume that the application you are building uses an external API (Google) to fetch data from nearby restaurants and you map this information to the class below. You copy trustworthy information from the external API, such as <code>street</code>, <code>zipcode</code> and <code>country</code>. However, the number of <code>star</code> ratings come from what your users think of the restaurant since you are targeting some specialised audience. From the external API, your <code>Restaurant</code> class partially contains all the values, except the ratings, which you pull on demand when the user clicks or is nearby a place. Thanks to the decorator, you can refer to <code>restaurant.stars</code> and the method will transparently handle if it needs to connect to the server to get the information or if the information is already present from a previous access.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Restaurant:
-  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, street, zipcode, country, stars<span class="op">=</span><span class="va">None</span>):
-    <span class="va">self</span>.__id <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>
-    <span class="va">self</span>.__api <span class="op">=</span> GuideSingleton()
-    <span class="va">self</span>.__stars  <span class="op">=</span> stars
-    <span class="va">self</span>.__my_rating <span class="op">=</span> <span class="va">None</span>
-    <span class="va">self</span>.__street <span class="op">=</span> street
-    <span class="va">self</span>.__zipcode <span class="op">=</span> zipcode
-    <span class="va">self</span>.__country  <span class="op">=</span> country
-    <span class="va">self</span>.__name <span class="op">=</span> name
-
-  <span class="at">@property</span>
-  <span class="kw">def</span> stars(<span class="va">self</span>):
-    <span class="cf">if</span> <span class="va">self</span>.__stars:
-      <span class="cf">return</span> <span class="va">self</span>.__stars
-    <span class="cf">else</span>:
-      <span class="va">self</span>.__stars <span class="op">=</span> <span class="va">self</span>.__api.find_stars(street<span class="op">=</span>this.__street, name<span class="op">=</span>this.__name)
-
-  <span class="at">@stars.setter</span>
-  <span class="kw">def</span> stars(<span class="va">self</span>, stars):
-    <span class="va">self</span>.__my_rating <span class="op">=</span> <span class="va">self</span>.__my_rating
-    <span class="va">self</span>.__api.add_rating(<span class="va">self</span>.user.<span class="bu">id</span>, <span class="va">self</span>.__id, <span class="va">self</span>.__my_rating)</code></pre></div>
+<p>Let’s show a concrete scenario: assume that the application you are building uses an external API (Google) to fetch data from nearby restaurants and you map this information to the class below. You copy trustworthy information from the external API, such as <code>street</code>, <code>zipcode</code> and <code>country</code>. However, the number of <code>star</code> ratings come from what your users think of the restaurant since you are targeting some specialised audience. From the external API, your <code>Restaurant</code> class partially contains all the values, except the ratings, which you pull on demand when the user clicks or is nearby a place. Thanks to the decorator, you can refer to <code>restaurant.stars</code> and the method will transparently handle if it needs to connect to the server to get the information or if the information is already present from a previous access.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">class</span> Restaurant:</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, street, zipcode, country, stars<span class="op">=</span><span class="va">None</span>):</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="va">self</span>.__id <span class="op">=</span> <span class="dv">-1</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">    <span class="va">self</span>.__api <span class="op">=</span> GuideSingleton()</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">    <span class="va">self</span>.__stars  <span class="op">=</span> stars</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">    <span class="va">self</span>.__my_rating <span class="op">=</span> <span class="va">None</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">    <span class="va">self</span>.__street <span class="op">=</span> street</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">    <span class="va">self</span>.__zipcode <span class="op">=</span> zipcode</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">    <span class="va">self</span>.__country  <span class="op">=</span> country</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">    <span class="va">self</span>.__name <span class="op">=</span> name</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">  <span class="at">@property</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">  <span class="kw">def</span> stars(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">    <span class="cf">if</span> <span class="va">self</span>.__stars:</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">      <span class="cf">return</span> <span class="va">self</span>.__stars</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">    <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">      <span class="va">self</span>.__stars <span class="op">=</span> <span class="va">self</span>.__api.find_stars(street<span class="op">=</span>this.__street, name<span class="op">=</span>this.__name)</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19">  <span class="at">@stars.setter</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">  <span class="kw">def</span> stars(<span class="va">self</span>, stars):</a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">    <span class="va">self</span>.__my_rating <span class="op">=</span> <span class="va">self</span>.__my_rating</a>
+<a class="sourceLine" id="cb6-22" data-line-number="22">    <span class="va">self</span>.__api.add_rating(<span class="va">self</span>.user.<span class="bu">id</span>, <span class="va">self</span>.__id, <span class="va">self</span>.__my_rating)</a></code></pre></div>
 <p><em>Example 3.1.1.2 Introductory example to Python</em></p>
 <p>The setter method allows you to set your rating in the restaurant and send this information to the server, so that your friends know about it.</p>
 <h3 id="static-methods-and-attributes">Static methods and attributes</h3>
 <p>So far, we have seen that objects have attributes and methods that save information on a per-instance basis. Java and Python have what is known as static methods and attributes, which supports saving information at the class level. This means that we can encapsulate global variables in classes.</p>
 <p>The main drawback of class attributes is that they live forever and cannot be garbage collected since, at any point in time, the code can refer to them. Another drawback is that they are global variables and, as such, will be difficult to test and reason about when your software grows.</p>
-<p>Let's proceed with the implementation in each language and their variations, using as an example a counter that counts the number of deployed British secret agents.</p>
+<p>Let’s proceed with the implementation in each language and their variations, using as an example a counter that counts the number of deployed British secret agents.</p>
 <p><strong>Java</strong></p>
 <p>Static attributes save information at the class level, instead of at the instance. Static methods are commonly used to access static fields. In both cases, attributes and methods add the <code>static</code> annotation, e.g.:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> SecretAgent {
-  <span class="kw">private</span> <span class="dt">static</span> <span class="dt">int</span> numberFieldAgents = <span class="dv">0</span>;
-
-  <span class="kw">public</span> <span class="fu">SecretAgent</span>() {
-    ++numberFieldAgents;
-  }
-
-  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getNumberFieldAgents</span>() {
-    <span class="kw">return</span> numberFieldAgents;
-  }
-}</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> SecretAgent {</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="kw">private</span> <span class="dt">static</span> <span class="dt">int</span> numberFieldAgents = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="kw">public</span> <span class="fu">SecretAgent</span>() {</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">    ++numberFieldAgents;</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getNumberFieldAgents</span>() {</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="kw">return</span> numberFieldAgents;</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">}</a></code></pre></div>
 <p>In this example, we declare <code>numberFieldAgents</code> as a <code>private</code> and <code>static</code> attribute, so it is only visible within the class and the information is shared among all <code>SecretAgent</code> object instances. To access this data, we declare a static method that returns the number of fields agents. From anywhere, you can get this data calling <code>SecretAgent.getNumberFieldAgents();</code>.</p>
-<p>As a recommendation, all static methods should be <code>final</code>. This is because subclasses cannot override static methods, they hide the parent static methods and reimplement them. However, polymorphic classes do not behave as you would expect<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+<p>As a recommendation, all static methods should be <code>final</code>. This is because subclasses cannot override static methods, they hide the parent static methods and reimplement them. However, polymorphic classes do not behave as you would expect<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
 <p><strong>Python</strong></p>
 <p>Static attributes are declared as attributes in a class and outside any method. For instance, if we are playing a game and we want to create characters and know how many of them shot to a target:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> CharacterFactory(<span class="bu">object</span>):
-  shotsOnTarget <span class="op">=</span> <span class="dv">0</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">class</span> CharacterFactory(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  shotsOnTarget <span class="op">=</span> <span class="dv">0</span></a></code></pre></div>
 <p>The attribute <code>shotsOnTarget</code> is a class attribute and can be accessed either from an instance of the class or from the class, e.g.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">person <span class="op">=</span> CharacterFactory()
-
-person.shotsOnTarget
-Character.shotsOnTarget</code></pre></div>
-<p>Python has a different approach to static methods: decorators called <code>@staticmethod</code> and <code>@classmethod</code>. More concretely, static methods (<code>@staticmethod</code>) are one way to relate functions that could stand alone in a module, but that the author prefers to keep them in a class. A <em>static method</em> is a function that does not depend on the instance or class in which it is written into. For this reason, the signature of a static method does not contain the the instance's reference <code>self</code> nor the common class reference <code>cls</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. One of the main reasons for using static methods is to keep the class <em>cohesive</em> (covered in GRASP principles chapter).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1">person <span class="op">=</span> CharacterFactory()</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">person.shotsOnTarget</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">Character.shotsOnTarget</a></code></pre></div>
+<p>Python has a different approach to static methods: decorators called <code>@staticmethod</code> and <code>@classmethod</code>. More concretely, static methods (<code>@staticmethod</code>) are one way to relate functions that could stand alone in a module, but that the author prefers to keep them in a class. A <em>static method</em> is a function that does not depend on the instance or class in which it is written into. For this reason, the signature of a static method does not contain the the instance’s reference <code>self</code> nor the common class reference <code>cls</code><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. One of the main reasons for using static methods is to keep the class <em>cohesive</em> (covered in GRASP principles chapter).</p>
 <p>In contrast, class methods are used to create alternate class constructors or perform setup computations before creating an actual class. Class methods allow developers to embed information at the class level, which derived classes can override. This is simply not possible using static methods in Java. Example:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> CharacterFactory(<span class="bu">object</span>):
-  shotsOnTarget <span class="op">=</span> <span class="dv">0</span>
-
-  <span class="at">@classmethod</span>
-  <span class="kw">def</span> create(cls):
-    <span class="cf">return</span> cls()
-
-  <span class="at">@classmethod</span>
-  <span class="kw">def</span> updateOnTarget(cls):
-    cls.shotsOnTarget <span class="op">+=</span> <span class="dv">1</span>
-
-  <span class="kw">def</span> shoot(<span class="va">self</span>, target): <span class="cf">pass</span>
-
-<span class="kw">class</span> SecretAgentFactory(CharacterFactory):
-  <span class="kw">def</span> shoot(<span class="va">self</span>, target):
-    <span class="bu">super</span>().updateOnTarget()
-
-<span class="kw">class</span> PhotographerFactory(CharacterFactory):
-  <span class="kw">def</span> shoot(<span class="va">self</span>, target):
-    <span class="bu">super</span>().updateOnTarget()
-
-<span class="kw">class</span> CitizenFactory(CharacterFactory):
-  <span class="cf">pass</span>
-
-target <span class="op">=</span> CitizenFactory.create()
-character <span class="op">=</span> SecretAgentFactory.create()
-character.shoot(target)
-
-photographer <span class="op">=</span> PhotographerFactory.create()
-photographer.shoot(target)
-photographer.shoot(target)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">class</span> CharacterFactory(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">  shotsOnTarget <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="at">@classmethod</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  <span class="kw">def</span> create(cls):</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">    <span class="cf">return</span> cls()</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">  <span class="at">@classmethod</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">  <span class="kw">def</span> updateOnTarget(cls):</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">    cls.shotsOnTarget <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">  <span class="kw">def</span> shoot(<span class="va">self</span>, target): <span class="cf">pass</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="kw">class</span> SecretAgentFactory(CharacterFactory):</a>
+<a class="sourceLine" id="cb10-15" data-line-number="15">  <span class="kw">def</span> shoot(<span class="va">self</span>, target):</a>
+<a class="sourceLine" id="cb10-16" data-line-number="16">    <span class="bu">super</span>().updateOnTarget()</a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="kw">class</span> PhotographerFactory(CharacterFactory):</a>
+<a class="sourceLine" id="cb10-19" data-line-number="19">  <span class="kw">def</span> shoot(<span class="va">self</span>, target):</a>
+<a class="sourceLine" id="cb10-20" data-line-number="20">    <span class="bu">super</span>().updateOnTarget()</a>
+<a class="sourceLine" id="cb10-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="kw">class</span> CitizenFactory(CharacterFactory):</a>
+<a class="sourceLine" id="cb10-23" data-line-number="23">  <span class="cf">pass</span></a>
+<a class="sourceLine" id="cb10-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb10-25" data-line-number="25">target <span class="op">=</span> CitizenFactory.create()</a>
+<a class="sourceLine" id="cb10-26" data-line-number="26">character <span class="op">=</span> SecretAgentFactory.create()</a>
+<a class="sourceLine" id="cb10-27" data-line-number="27">character.shoot(target)</a>
+<a class="sourceLine" id="cb10-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb10-29" data-line-number="29">photographer <span class="op">=</span> PhotographerFactory.create()</a>
+<a class="sourceLine" id="cb10-30" data-line-number="30">photographer.shoot(target)</a>
+<a class="sourceLine" id="cb10-31" data-line-number="31">photographer.shoot(target)</a></code></pre></div>
 <p>In the example above, we are playing a game where the character can be a secret agent, a photographer or a common citizen. Each class has attached information, <code>shotsOnTarget</code>, which displays the total shots made by each possible character. If we run the example and check the shots on target of the <code>character</code> and the <code>photographer</code>, e.g. <code>character.shotsOnTarget</code>, we can observe how we keep track of this information on a per class basis. In the example, the <code>character.shotsOnTarget</code> returns <code>1</code> while the <code>photographer.shotsOnTarget</code> returns <code>2</code>.</p>
 <h3 id="constants">Constants</h3>
 <p>Sometimes it is important to be able to set attributes only once. Java has a special keyword for this, while Python follows a convention.</p>
 <p><strong>Java</strong></p>
 <p>To write a constant attribute, add the <code>final</code> annotation to your attribute:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> SecretAgent {
-  <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="bu">String</span> nationality = <span class="st">&quot;British&quot;</span>;
-  <span class="kw">private</span> <span class="dt">final</span> <span class="bu">String</span> id;
-  <span class="kw">public</span> <span class="fu">SecretAgent</span>(<span class="bu">String</span> id){
-    <span class="kw">this</span>.<span class="fu">id</span> = id;
-  }
-}</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> SecretAgent {</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">  <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="bu">String</span> nationality = <span class="st">&quot;British&quot;</span>;</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">  <span class="kw">private</span> <span class="dt">final</span> <span class="bu">String</span> id;</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">  <span class="kw">public</span> <span class="fu">SecretAgent</span>(<span class="bu">String</span> id){</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">    <span class="kw">this</span>.<span class="fu">id</span> = id;</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">}</a></code></pre></div>
 <p>In the example above, we declare that all secret agents have British nationality and the <code>final</code> keyword prevent us from changing this. Moreover, the constructor sets the <code>final</code> attribute <code>id</code> to some value, which cannot be changed after the secret agent instance is created.</p>
 <!-- TODO: -->
 <!-- * A `final` class in Java forbids derived classes (subtyping) -->
 <p><strong>Python</strong></p>
 <p>In Python, class-level constants are written all uppercase while instance-level constants define a getter but no setter so that it cannot be modified externally. The example from Java, written in Python is:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> SecretAgent
-  NATIONALITY <span class="op">=</span> <span class="st">&quot;British&quot;</span>
-
-  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, _id):
-    <span class="va">self</span>.__id <span class="op">=</span> _id
-
-  <span class="at">@property</span>
-  <span class="kw">def</span> <span class="bu">id</span>(<span class="va">self</span>):
-    <span class="cf">return</span> <span class="va">self</span>.__id</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">class</span> SecretAgent</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">  NATIONALITY <span class="op">=</span> <span class="st">&quot;British&quot;</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, _id):</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">    <span class="va">self</span>.__id <span class="op">=</span> _id</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">  <span class="at">@property</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">  <span class="kw">def</span> <span class="bu">id</span>(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">    <span class="cf">return</span> <span class="va">self</span>.__id</a></code></pre></div>
 <h2 id="objects">Objects</h2>
 <p>If you think of classes as blank templates, objects are the ink in the template. Classes represent a static view of your software; classes declare attributes and methods, but they are static and have no content. As soon as your software runs and you create an instance of a class, you are injecting runtime state to the empty template. <em>Objects represent the runtime of your program</em>.</p>
 <!-- I could expand on and talk about how to create instances, call methods, access -->
@@ -286,141 +210,176 @@ photographer.shoot(target)</code></pre></div>
 <ul>
 <li>overloading return type (covariant),</li>
 <li>generics (contravariant) and,</li>
-<li>overriding method argument's type (invariant)</li>
+<li>overriding method argument’s type (invariant)</li>
 </ul>
-<p>Let's understand this with examples. First, we look at the super and derived classes:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> AnimalShelter {
-  <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}
-  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}
-}
-
-<span class="kw">public</span> <span class="kw">class</span> Animal {
-  ...
-}
-
-<span class="kw">public</span> <span class="kw">class</span> Cat <span class="kw">extends</span> Animal {
-  ...
-}</code></pre></div>
-<p>If I want to create a <code>CatShelter</code>, the return type of the method <code>getAnimalShelter()</code> must be covariant. This means that I can return a <code>Cat</code> instead of an <code>Animal</code>. Following the same reasoning, overloading a method argument's type is covariant, i.e. it is type safe to pass a more specialised type to the subclass than the type in the super class. This is illustrated in the following code, method <code>putAnimal(Cat animal)</code>.</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> CatShelter {
-  <span class="kw">public</span> Cat <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}
-  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Cat animal) { <span class="kw">... </span>}
-}</code></pre></div>
-<p>In contrast, the use of generics uses contravariance subtyping<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. This means that if <code>Cat</code> is a subtype of <code>Animal</code> and we refer to a generic implementation, e.g. <code>List</code>, <code>List&lt;Cat&gt;</code> is not a subtype of <code>List&lt;Animal&gt;</code>. To understand this, lets look at the following example:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="bu">List</span>&lt;Cat&gt; lcat = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;Cat&gt;();
-<span class="bu">List</span>&lt;Animal&gt; lanimal = lcat;</code></pre></div>
+<p>Let’s understand this with examples. First, we look at the super and derived classes:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> AnimalShelter {</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="kw">public</span> <span class="kw">class</span> Animal {</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">  ...</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="kw">public</span> <span class="kw">class</span> Cat <span class="kw">extends</span> Animal {</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11">  ...</a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">}</a></code></pre></div>
+<p>If I want to create a <code>CatShelter</code>, the return type of the method <code>getAnimalShelter()</code> must be covariant. This means that I can return a <code>Cat</code> instead of an <code>Animal</code>. Following the same reasoning, overloading a method argument’s type is covariant, i.e. it is type safe to pass a more specialised type to the subclass than the type in the super class. This is illustrated in the following code, method <code>putAnimal(Cat animal)</code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> CatShelter {</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">  <span class="kw">public</span> Cat <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Cat animal) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">}</a></code></pre></div>
+<p>In contrast, the use of generics uses contravariance subtyping<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. This means that if <code>Cat</code> is a subtype of <code>Animal</code> and we refer to a generic implementation, e.g. <code>List</code>, <code>List&lt;Cat&gt;</code> is not a subtype of <code>List&lt;Animal&gt;</code>. To understand this, lets look at the following example:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="bu">List</span>&lt;Cat&gt; lcat = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;Cat&gt;();</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="bu">List</span>&lt;Animal&gt; lanimal = lcat;</a></code></pre></div>
 <p>I have just aliased the <code>lcat</code> variable. If I now add an element to the <code>Animal</code> list:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">lanimal.<span class="fu">add</span>(<span class="kw">new</span> <span class="fu">Dog</span>());</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb16-1" data-line-number="1">lanimal.<span class="fu">add</span>(<span class="kw">new</span> <span class="fu">Dog</span>());</a></code></pre></div>
 <p>and get the first cat available from the <code>lcat</code> lists (was aliased by the animal lists):</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">Cat cat = lcat.<span class="fu">get</span>(<span class="dv">0</span>);</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb17-1" data-line-number="1">Cat cat = lcat.<span class="fu">get</span>(<span class="dv">0</span>);</a></code></pre></div>
 <p>I would be treating a <code>Dog</code> as if it were a <code>Cat</code>. For this reason, Java uses contravariant generic subtyping.</p>
-<p>Overriding the method arguments' types is invariant, although Java allows <em>overloaded</em> methods (coming next). To tell the compiler that you are overriding a method in a subclass, you use the <code>@Override</code> on top of the method:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> AnimalShelter {
-  <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}
-  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}
-}
-
-<span class="kw">public</span> <span class="kw">class</span> CatShelter <span class="kw">extends</span> AnimalShelter {
-  <span class="at">@Override</span>
-  <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}
-
-  <span class="at">@Override</span>
-  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}
-}</code></pre></div>
+<p>Overriding the method arguments’ types is invariant, although Java allows <em>overloaded</em> methods (coming next). To tell the compiler that you are overriding a method in a subclass, you use the <code>@Override</code> on top of the method:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> AnimalShelter {</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="kw">public</span> <span class="kw">class</span> CatShelter <span class="kw">extends</span> AnimalShelter {</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">  <span class="at">@Override</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">  <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb18-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb18-10" data-line-number="10">  <span class="at">@Override</span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb18-12" data-line-number="12">}</a></code></pre></div>
 <p>If you do not add this notation and change the name of the method <code>getAnimalShelter()</code> in the super class <code>AnimalShelter</code>, the compiler would think that the <code>CatShelter</code> defines a method that does not exist in the super class. A good practice is to always add the <code>@Override</code> annotation.</p>
 <p>Overloaded methods are methods that have the same name but receive different arguments of types. Java knows which of the methods you are referring to and uses the right method. For instance, we can overload the method <code>putAnimal</code> from the <code>CatShelter</code> class as follows:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> CatShelter {
-  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}
-  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Cat a) { <span class="kw">... </span>}
-}</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> CatShelter {</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Cat a) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">}</a></code></pre></div>
 <p>Whenever there is a call to the <code>putAnimal</code> method, Java uses one or the other method.</p>
 <p><strong>Python</strong></p>
 <p>Python allows multiple inheritance, in contrast to Java. Before jumping in the concept of multiple inheritance, we continue with the example given in the Java section, now written in Python:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> AnimalShelter(<span class="bu">object</span>):
-  <span class="kw">def</span> getAnimalForAdoption():
-    ...
-
-  <span class="kw">def</span> putAnimal(animal):
-    ...
-
-<span class="kw">class</span> CatShelter(AnimalShelter):
-  <span class="kw">def</span> getAnimalForAdoption():
-    ...
-
-  <span class="kw">def</span> putAnimal(animal):
-    ...</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">class</span> AnimalShelter(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  <span class="kw">def</span> getAnimalForAdoption():</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">    ...</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">  <span class="kw">def</span> putAnimal(animal):</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">    ...</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="kw">class</span> CatShelter(AnimalShelter):</a>
+<a class="sourceLine" id="cb20-9" data-line-number="9">  <span class="kw">def</span> getAnimalForAdoption():</a>
+<a class="sourceLine" id="cb20-10" data-line-number="10">    ...</a>
+<a class="sourceLine" id="cb20-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12">  <span class="kw">def</span> putAnimal(animal):</a>
+<a class="sourceLine" id="cb20-13" data-line-number="13">    ...</a></code></pre></div>
 <p>In this example, the <code>putAnimal</code> method in <code>CatShelter</code> overrides the parent method. There is no <code>@Override</code> annotation to prevent the error discussed in the Java section.</p>
-<p>Overloading is always given, i.e. the lack of type annotations forbids overloading methods since there is no way to know which arguments types you are passing to the function. If you override a function by passing more arguments, the first function is actually deleted and not available anymore. Example:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> getAnimal(animal):
-  <span class="cf">return</span> animal
-
-<span class="kw">def</span> getAnimal(animal, cat):
-  <span class="cf">if</span> cat <span class="op">!=</span> <span class="va">None</span>:
-    <span class="cf">return</span> cat
-  <span class="cf">else</span>:
-    <span class="cf">return</span> animal</code></pre></div>
-<p>If you were to call the function <code>getAnimal(animal)</code> (for some instance of <code>Animal</code> named <code>animal</code>), Python will throw an error because the name has been rebound and the function that takes a single argument does not exist anymore. One way to overcome this is by using default parameters, i.e. parameters that start with a default value, which can be overridden. Following the example above, the same function could be rewritten as follows:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> getAnimal(animal, cat<span class="op">=</span><span class="va">None</span>):
-  <span class="cf">if</span> cat <span class="op">!=</span> <span class="va">None</span>:
-    <span class="cf">return</span> cat
-  <span class="cf">else</span>:
-    <span class="cf">return</span> animal</code></pre></div>
+<p>Overloading is always given, i.e. the lack of type annotations forbids overloading methods since there is no way to know which arguments types you are passing to the function. If you override a function by passing more arguments, the first function is actually deleted and not available anymore. Example:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">def</span> getAnimal(animal):</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">  <span class="cf">return</span> animal</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="kw">def</span> getAnimal(animal, cat):</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">  <span class="cf">if</span> cat <span class="op">!=</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">    <span class="cf">return</span> cat</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">  <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">    <span class="cf">return</span> animal</a></code></pre></div>
+<p>If you were to call the function <code>getAnimal(animal)</code> (for some instance of <code>Animal</code> named <code>animal</code>), Python will throw an error because the name has been rebound and the function that takes a single argument does not exist anymore. One way to overcome this is by using default parameters, i.e. parameters that start with a default value, which can be overridden. Following the example above, the same function could be rewritten as follows:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">def</span> getAnimal(animal, cat<span class="op">=</span><span class="va">None</span>):</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">  <span class="cf">if</span> cat <span class="op">!=</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">    <span class="cf">return</span> cat</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">  <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">    <span class="cf">return</span> animal</a></code></pre></div>
 <p>This function can be called with one or two arguments, i.e. <code>getAnimal(a)</code>, which sets the <code>cat</code> argument to <code>None</code>, by default; at the same time, you can call <code>getAnimal(a, c)</code> which overrides the default value of <code>cat</code> by <code>c</code>. This gives Python a lot of flexibility, although you can also easily misuse it and run into runtime errors.</p>
-<p>Multiple inheritance permits a Python class to inherit from multiple classes. In case there is a method name collision, Python will execute the method that inherited from the first class, ignoring the second possible method. Let's take a closer look:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="cf">return</span> <span class="st">&quot;Click&quot;</span>
-<span class="kw">class</span> Photographer(<span class="bu">object</span>):
-<span class="kw">def</span> shoot(<span class="va">self</span>):
-  <span class="kw">def</span> shoot(<span class="va">self</span>):
-    <span class="cf">return</span> <span class="st">&quot;Click&quot;</span>
-
-<span class="kw">class</span> SecretAgent(<span class="bu">object</span>):
-  <span class="kw">def</span> shoot(<span class="va">self</span>):
-    <span class="cf">return</span> <span class="st">&quot;Bang!&quot;</span>
-
-<span class="kw">class</span> JamesBond(Photographer, SecretAgent):
-  <span class="cf">pass</span></code></pre></div>
+<p>Multiple inheritance permits a Python class to inherit from multiple classes. In case there is a method name collision, Python will execute the method that inherited from the first class, ignoring the second possible method. Let’s take a closer look:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" data-line-number="1">    <span class="cf">return</span> <span class="st">&quot;Click&quot;</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">class</span> Photographer(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="kw">def</span> shoot(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">  <span class="kw">def</span> shoot(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">    <span class="cf">return</span> <span class="st">&quot;Click&quot;</span></a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="kw">class</span> SecretAgent(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb23-8" data-line-number="8">  <span class="kw">def</span> shoot(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb23-9" data-line-number="9">    <span class="cf">return</span> <span class="st">&quot;Bang!&quot;</span></a>
+<a class="sourceLine" id="cb23-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb23-11" data-line-number="11"><span class="kw">class</span> JamesBond(Photographer, SecretAgent):</a>
+<a class="sourceLine" id="cb23-12" data-line-number="12">  <span class="cf">pass</span></a></code></pre></div>
 <p>In this example, <em>James Bond</em> is a photographer and a secret agent. When he needs to shoot, <code>bond.shoot()</code>, he gets confused and decides to take a picture before getting killed. Multiple inheritance is useful but you should use it wisely.</p>
-<p>The concept of multiple inheritance brought the semantic concept of mixins. The basic idea of mixins is to create small classes that cannot work alone by themselves but, when combined, provide functionality can be reused. For instance, any secret agent needs to know how to shoot, and play poker. But a hunter needs to know how to shoot as well. Let's encode this functionality using mixins:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> ShootMixin(<span class="bu">object</span>):
-
-  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, probability<span class="op">=</span><span class="fl">0.9</span>):
-    <span class="va">self</span>.__probability <span class="op">=</span> <span class="fl">0.9</span>
-
-  <span class="at">@property</span>
-  <span class="kw">def</span> probability(<span class="va">self</span>):
-    <span class="cf">return</span> <span class="va">self</span>.__probability
-
-  <span class="kw">def</span> shoot(<span class="va">self</span>, person):
-    <span class="cf">return</span> <span class="va">self</span>.probability <span class="op">-</span> person.hiding()
-
-<span class="kw">class</span> PokerMixin(<span class="bu">object</span>):
-  <span class="kw">def</span> pokerFace(<span class="va">self</span>):
-    <span class="bu">print</span>(<span class="st">&quot;Poker face&quot;</span>)
-
-<span class="kw">class</span> SecretAgent(ShootMixin, PokerMixin):
-  <span class="cf">pass</span></code></pre></div>
+<p>The concept of multiple inheritance brought the semantic concept of mixins. The basic idea of mixins is to create small classes that cannot work alone by themselves but, when combined, provide functionality can be reused. For instance, any secret agent needs to know how to shoot, and play poker. But a hunter needs to know how to shoot as well. Let’s encode this functionality using mixins:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">class</span> ShootMixin(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, probability<span class="op">=</span><span class="fl">0.9</span>):</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">    <span class="va">self</span>.__probability <span class="op">=</span> <span class="fl">0.9</span></a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">  <span class="at">@property</span></a>
+<a class="sourceLine" id="cb24-7" data-line-number="7">  <span class="kw">def</span> probability(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb24-8" data-line-number="8">    <span class="cf">return</span> <span class="va">self</span>.__probability</a>
+<a class="sourceLine" id="cb24-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb24-10" data-line-number="10">  <span class="kw">def</span> shoot(<span class="va">self</span>, person):</a>
+<a class="sourceLine" id="cb24-11" data-line-number="11">    <span class="cf">return</span> <span class="va">self</span>.probability <span class="op">-</span> person.hiding()</a>
+<a class="sourceLine" id="cb24-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb24-13" data-line-number="13"><span class="kw">class</span> PokerMixin(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb24-14" data-line-number="14">  <span class="kw">def</span> pokerFace(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb24-15" data-line-number="15">    <span class="bu">print</span>(<span class="st">&quot;Poker face&quot;</span>)</a>
+<a class="sourceLine" id="cb24-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb24-17" data-line-number="17"><span class="kw">class</span> SecretAgent(ShootMixin, PokerMixin):</a>
+<a class="sourceLine" id="cb24-18" data-line-number="18">  <span class="cf">pass</span></a></code></pre></div>
 <p>The mixins <code>ShootMixin</code> and <code>PokerMixin</code> do not make much sense on their own, as classes. However, we can combine their behaviour to compositionally build classes with more advanced behaviour, such as the <code>SecretAgent</code> class. This class inherits these two mixins to provide any secret agent with the ability to shoot and put a poker face.</p>
 <h2 id="interfaces">Interfaces</h2>
 <p>An interface declares the behaviour of your software, whose implementation lives in a class; with the use of interfaces, your classes expose the behaviour, which is further exploited by polymorphism. This means more than one class can implement the interface so that you can interchangeably use one class or another. Java has interfaces and Python does not need them. This is explained later in this chapter.</p>
 <p><strong>Java</strong></p>
 <p>An interface can be seen as a promise of proper behaviour from any type that implements it. Since Java 8, interfaces not only declare expected behaviour, but they can also implement methods as long as the implementation relies on calling other public methods, great for code reuse. We will look at James Bond example:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">interface</span> SecretAgentSkills {
-  <span class="dt">static</span> <span class="dt">final</span> <span class="dt">float</span> probabilityOnTarget = <span class="fl">0.9</span>;
-  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">pokerFace</span>();
-  <span class="kw">default</span> Damage <span class="fu">shoot</span>(Person p) {
-    <span class="dt">float</span> probability = SecretAgentSkills.<span class="fu">probabilityOnTarget</span> - p.<span class="fu">hide</span>();
-    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Damage</span>(probability);
-  }
-}</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">public</span> <span class="kw">interface</span> SecretAgentSkills {</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">  <span class="dt">static</span> <span class="dt">final</span> <span class="dt">float</span> probabilityOnTarget = <span class="fl">0.9</span>;</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">pokerFace</span>();</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">  <span class="kw">default</span> Damage <span class="fu">shoot</span>(Person p) {</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">    <span class="dt">float</span> probability = SecretAgentSkills.<span class="fu">probabilityOnTarget</span> - p.<span class="fu">hide</span>();</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Damage</span>(probability);</a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">}</a></code></pre></div>
 <p>In the example above, we declare that any class that wants to be a secret agent needs to have a poker face and know how to shoot, and we provide a default implementation for the <em>shooting</em> method, which can potentially be overridden by classes that implement the interface <code>SecretAgentSkills</code>.</p>
 <p><strong>Python</strong></p>
-<p>Interfaces cannot be represented in dynamically typed languages. This is reasonable, since a dynamic language cannot statically enforce the use of types at the signature level. Furthermore, duck typing removes the need for interfaces, i.e. declare the behaviour that you expect and enforce that the arguments you pass comply with the expected behaviour -- public API.</p>
+<p>Interfaces cannot be represented in dynamically typed languages. This is reasonable, since a dynamic language cannot statically enforce the use of types at the signature level. Furthermore, duck typing removes the need for interfaces, i.e. declare the behaviour that you expect and enforce that the arguments you pass comply with the expected behaviour – public API.</p>
 <p>In Python, you can encode interfaces in terms of abstract classes, which we cover next.</p>
 <h2 id="abstract-classes">Abstract classes</h2>
+<p>Abstract classes are similar to interfaces, except that they may provide a method implementation. As with interfaces, they represent a contract between the base class and the derivations of the base class. Abstract classes exist in Java and Python.</p>
+<p><strong>Java</strong></p>
 <p>TODO:</p>
 <ul>
-<li><a href="https://www.python.org/dev/peps/pep-3119/#rationale">Python</a></li>
+<li>abstract classes</li>
 </ul>
+<p><strong>Python</strong></p>
+<p>A declaration <a href="https://www.python.org/dev/peps/pep-3119/#rationale">abstract class</a> of an abstract class looks similar to the simple and plain inheritance model. You would simply import <code>from abc import ABC</code> and make classes to inherit from <code>ABC</code>. The benefits of declaring an abstract class lies in the contract that you are creating. It basically states that any derived class of the abstract class implements the methods you have declared and no one can use the abstract class because it is incomplete.</p>
+<p>Let’s look at examples of how you would write a secret agent class and its derivations without abstract classes and with abstract classes.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">class</span> SecretAgent(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">  <span class="kw">def</span> shoot(<span class="va">self</span>, target):</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">    <span class="cf">raise</span> <span class="pp">NotImplementedError</span>()</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="kw">class</span> JamesBond(SecretAgent):</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">  <span class="kw">def</span> shoot(<span class="va">self</span>, target):</a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">    ...</a>
+<a class="sourceLine" id="cb26-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb26-9" data-line-number="9"><span class="kw">class</span> MrBean(SecretAgent):</a>
+<a class="sourceLine" id="cb26-10" data-line-number="10">  <span class="cf">pass</span></a></code></pre></div>
+<p>Nothing prevents you from creating an instance of <code>SecretAgent</code> and trying to <code>shoot</code>. For example, you can create an instance of Mr.Bean and try to shoot, just to realise that Mr.Bean does not actually know how to shoot:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" data-line-number="1">bean <span class="op">=</span> MrBean()</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">bean.shoot()</a></code></pre></div>
+<p>In this case, <code>bean.shoot()</code> raises the error <code>NotImplementedError:</code> inherited from the <code>SecretAgent</code> class. This runtime error happens only when you shoot. However, if <code>SecretAgent</code> is an abstract class, you can use the decorator <code>@abstractmethod</code> to enforce implementation of methods by the derivations of the class. If you do not provide an implementation, you get a runtime error at instantiation time, instead of at the actual call of the behaviour. This design catches errors much faster and make your class hierarchy more understandable and maintanable.</p>
+<p>The example above using abstract classes and abstract methods is now defined as:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="im">from</span> abc <span class="im">import</span> ABC, abstractmethod</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw">class</span> SecretAgent(ABC):</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">  <span class="at">@abstractmethod</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">  <span class="kw">def</span> shoot(<span class="va">self</span>, target):</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">    <span class="cf">raise</span> <span class="pp">NotImplementedError</span>()</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="kw">class</span> JamesBond(SecretAgent):</a>
+<a class="sourceLine" id="cb28-8" data-line-number="8">  <span class="kw">def</span> shoot(<span class="va">self</span>, target):</a>
+<a class="sourceLine" id="cb28-9" data-line-number="9">    ...</a>
+<a class="sourceLine" id="cb28-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb28-11" data-line-number="11"><span class="kw">class</span> MrBean(SecretAgent):</a>
+<a class="sourceLine" id="cb28-12" data-line-number="12">  <span class="cf">pass</span></a></code></pre></div>
+<p>The creation of an instance of Mr.Bean crashes at instantion time, instead of when calling the shooting method:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" data-line-number="1">bean <span class="op">=</span> MrBean()</a></code></pre></div>
+<p>produces the error <code>TypeError: Can't instantiate abstract class MrBean with abstract methods shoot</code>, forcing you to implement the behaviour of the method. Failing to do so produces a runtime error as soon as possible, at instantiation time.</p>
 <h2 id="parametric-classes">Parametric classes</h2>
 <p>TODO:</p>
 <h2 id="functional-concepts">Functional concepts</h2>
@@ -431,43 +390,12 @@ photographer.shoot(target)</code></pre></div>
 <p>TODO:</p>
 <h2 id="parametric-functions">Parametric functions</h2>
 <p>TODO:</p>
-<div class="footnotes">
+<section class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>this is not technically a constructor, although it is called right after the creation of the object and, for all purposes in this book, it is the same.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>Considerations of static subtyping: https://docs.oracle.com/javase/tutorial/java/IandI/override.html<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>Reference to Python's static methods: https://docs.python.org/3/library/functions.html#staticmethod<a href="#fnref3">↩</a></p></li>
-<li id="fn4"><p><a href="https://docs.oracle.com/javase/tutorial/extra/generics/subtype.html">Link to official documentation</a><a href="#fnref4">↩</a></p></li>
+<li id="fn1"><p>this is not technically a constructor, although it is called right after the creation of the object and, for all purposes in this book, it is the same.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Considerations of static subtyping: https://docs.oracle.com/javase/tutorial/java/IandI/override.html<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Reference to Python’s static methods: https://docs.python.org/3/library/functions.html#staticmethod<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p><a href="https://docs.oracle.com/javase/tutorial/extra/generics/subtype.html">Link to official documentation</a><a href="#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
-</div>
-<div class="footnotes">
-<hr>
-<div class="container">
-<nav class="pagination" role="pagination">
-<ul>
-<p>
-<span class="page-number">If you like this book, please consider buying me a coffee
-</p>
-<style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#ffffff !important;background-color:#BB5794 !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 23px !important;letter-spacing: 0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:"Cookie", cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#ffffff !important;}</style>
-<link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/graspdesign"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:5px">Buy me a coffee</span></a>
-</ul>
-</nav>
-</div>
-</div>
-<div class="footnotes">
-<hr>
-<div class="container">
-<nav class="pagination" role="pagination">
-<ul>
-<p>
-<span class="page-number">Designed with</span> ❤️ <span class="page-number"> from Uppsala, Sweden</span>
-</p>
-<p>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-</p>
-</ul>
-</nav>
-</div>
-</div>
-</body>
-</html>
+</section>

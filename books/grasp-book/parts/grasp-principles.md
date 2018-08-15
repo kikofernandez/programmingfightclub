@@ -1,6 +1,6 @@
 # GRASP principles
 
-Before you learn advanced design patterns, it's useful to look at common principles / recommendation rules to guide your design. By following these principles, you will design and write code that's easy to understand, maintain, and refactor.
+<p class="para"><span class="dropcaps">B</span>efore you learn advanced design patterns, it's useful to look at common principles / recommendation rules to guide your design. By following these principles, you will design and write code that's easy to understand, maintain, and refactor.
 
 By the end of this chapter you will have grok these principles and they will become second nature to you. Next, we introduce these principles ( which can be applied to any object-oriented language):
 
