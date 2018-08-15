@@ -26,7 +26,7 @@ DATADIR=../../data-dir
 WEB=http:\/\/www.programmingfightclub.com
 MEDIA=
 
-all: epub web
+all: epub web_prod
 
 # Building and cleaning an .epub file
 # Override the data-dir to remove the inner styles to code listings.
@@ -63,14 +63,14 @@ $(SPECIAL_DEPENDENCIES):
 	@sed -i '' -e 's/MEDIA/../g' $(WEB_PROD)/parts/$@.md
 	@sed -i '' -e 's/WEB/$(WEB)/g' $(WEB_PROD)/parts/$@.md
 	@cat parts/mailinglist.html >> $(WEB_PROD)/parts/$@.md
-	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(WEB_PROD)/$@/index.html
+	@pandoc -s --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(WEB_PROD)/$@/index.html
 
 $(DEPENDENCIES):
 	@mkdir -p $(WEB_PROD)/$@
 	@cp parts/$@.md $(WEB_PROD)/parts
 	@sed -i '' -e 's/MEDIA/../g' $(WEB_PROD)/parts/$@.md
 	@sed -i '' -e 's/WEB/$(WEB)/g' $(WEB_PROD)/parts/$@.md
-	@pandoc --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(WEB_PROD)/$@/index.html
+	@pandoc -s --toc web-metadata.yaml $(WEB_PROD)/parts/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(WEB_PROD)/$@/index.html
 
 local:
 	for chapter in $(DEPENDENCIES); do \
