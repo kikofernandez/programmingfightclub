@@ -21,7 +21,7 @@ understand the difference between them.
 
 ## Low Coupling
 
-This principle states that a class should only depend on the minimum and required
+This principle states that a class depends on the minimum and required
 amount of classes, no more and no less. A low coupled class is easy to maintain and
 refactor because it interacts with a minimum amount of objects.
 
@@ -34,26 +34,27 @@ satisfies any items in the following list:
 - implements one or more interfaces, and
 - inherits mixins
 
-The reader should notice that there will **always** exist coupling but dependencies
-to stable items are not problematic, e.g. standard library, because these have been
-well designed and do not change often. In general, the problem is not coupling per se,
+There will **always** exist coupling but dependencies
+to stable items are not problematic, e.g. standard library, because these are
+well designed and do not often change. Thus, the problem is not coupling per se,
 but creating a coupled design to unstable elements.
 
 For instance, a class that has an attribute to a `List` class is coupled to
-a non-breaking library whose external structure does not change (otherwise, there would
+a library whose external structure does not change (otherwise, there would
 be breaking changes in the API). The `List` class always exposes the same methods
 (behaviour) to its users, and internal changes are never breaking the contract
-of what the programmer expects.
+of what the programmer expects oblivious to the programmers.
 
-When a design is low coupled, changes in a class do not spread across multiple classes.
+<!-- When a design is low coupled, changes in a class do not spread across multiple classes. -->
 On the opposite side, high coupled designs contain classes with many dependencies
 to other objects, which makes them rigid and difficult to maintain.
-
+<!--
 In the beginning of your journey to become a better programmer,
 it's difficult to acknowledge this principle until you deal with its counterpart:
-a high coupled design, a.k.a. a bowl of spaghetti code. If you find yourself
-with code that is rigid and hard to maintain, then you are the owner of a high
-coupled design, and a refactoring is advisable.
+a high coupled design, a.k.a. a bowl of spaghetti code. -->
+If you find yourself
+with code that is rigid and in which any minimal change involves updating a bunch
+of other classes, then you are the owner of a high coupled design, and a refactoring is advisable.
 
 An example of a poor design, drawing ideas from the case study, is shown
 in Fig. 1.1, Listing 1.1. In this example, guides contain images,
@@ -94,10 +95,18 @@ Before we analyse this design:
 
 The problems with this design are:
 
-* assuming that `Image` is a class, this design couples images with a guide, but the guide should display images personalised to each viewer! (See section Case study),
-* the visibility attribute maintains a list of users that can read the guide; this solution does not scale when there are many users. The same field may be used for different visibility settings, which makes the logic more difficult to test and understand, since the attribute has different meaning based on other properties,
-* the use of multiple, non-overlapping, booleans makes the code difficult to follow as you will introduce branches and its related logic in each case,
-* hotels, restaurants and others should implement a common interface, si that you can dispatch polymorphously. If you don't do this, adding a few new places, e.g. `SushiBar` class, implies the creation of more attributes and respective methods to get those elements,
+* assuming that `Image` is a class, this design couples images with a guide,
+  but the guide should display images personalised to each viewer! (see section Case study),
+* the visibility attribute maintains a list of users that can read the guide;
+  this solution does not scale when there are many users. The same field may be
+  used for different visibility settings, which makes the logic more difficult to test
+  and understand, since the attribute has different meaning based on other properties,
+* the use of multiple, non-overlapping, booleans makes the code difficult to follow
+  as you will introduce branches and its related logic in each case,
+* hotels, restaurants and others should implement a common interface, so that you can
+  dispatch using polymorphism (covered later).
+  If you decide to not do this, adding a few new categorical places, such as a `SushiBar` class, implies the
+  creation of more attributes and their respective methods,
 * the constructor receives an `ArrayList`, which binds an implementation detail to the list abstraction.
 
 So, given this poor design (Fig 1.1, Listing 1.1), how could we reduce coupling
@@ -122,7 +131,7 @@ public class Guide {
   private String description;
   private List<IPointOfInterest> poi;
 
-  public Guide(ArrayList<IImage> images,
+  public Guide(List<IImage> images,
                           String title,
                           String description){
     \\ Initialise method
@@ -142,9 +151,13 @@ public interface IPointOfInterest {
 
 **Exercise**: Given the refactoring above, how does a guide deal with its visibility?
 
-**Exercise**: Why should we promote interfaces over inheritance?
+**Exercise**: We have appended an uppercase `I` to every interface, e.g. `IImage`,
+to make a difference between the `Image` class.
+Why should we promote interfaces over a direct association to a class?
 
-**Exercise**: Does it make sense that the class`Hotel` declares methods that do not exist in the interface `IPointOfInterest`? (Note:  you may need to read the section on polymorphism)
+**Exercise**: Does it make sense that the class`Hotel` (Fig. 1.2) declares methods that
+do not exist in the interface `IPointOfInterest`?
+(Note:  you may need to read the section on polymorphism)
 
 <!--
 
