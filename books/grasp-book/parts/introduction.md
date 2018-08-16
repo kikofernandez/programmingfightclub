@@ -1,5 +1,9 @@
 # Introduction
 
+<div class="figure">
+![Introduction](MEDIA/assets/art-artist-artistic-316465.jpg)
+</div>
+
 <p class="para"><span class="dropcaps">Y</span>ou worked hard for over a year in the next billion dollar web app in a
 small startup: the CEO, Johan, seems happy that the product is (almost) feature
 complete; the designer, Anders, is happy with the UX and graphics and the CTO, Pontus,
