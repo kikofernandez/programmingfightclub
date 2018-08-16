@@ -1,5 +1,5 @@
 # List of dependencies and special treatment
-DEPENDENCIES=toc preface introduction type-systems recap grasp-principles
+DEPENDENCIES=toc preface introduction type-systems case-study recap grasp-principles
 
 # Production ready folder for web and epub
 WEB_PROD=web_prod

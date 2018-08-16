@@ -113,8 +113,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <h1 id="grasp-principles">GRASP principles</h1>
 <p class="para">
-<p><span class="dropcaps">B</span>efore you learn advanced design patterns, it’s useful to look at common principles / recommendation rules to guide your design. By following these principles, you will design and write code that’s easy to understand, maintain, and refactor.</p>
-<p>By the end of this chapter you will have grok these principles and they will become second nature to you. Next, we introduce these principles ( which can be applied to any object-oriented language):</p>
+<p><span class="dropcaps">G</span>rasp principles are recommendation rules to guide your design. Keep these principles and you will design and write code that is easy to understand, maintain, and refactor.</p>
+<p>By the end of this chapter you will have grok these principles:</p>
 <ul>
 <li>low coupling,</li>
 <li>high cohesion,</li>
@@ -128,13 +128,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>There are exercises for each principle at the end of the chapter to help you understand the difference between them.</p>
 <h2 id="low-coupling">Low Coupling</h2>
-<p>This principle states that a class should only depend on the minimum and required amount of classes, no more and no less. A low coupled class is easy to maintain and refactor because it interacts with a minimum amount of objects.</p>
-<p>When a design is low coupled, changes in a class do not spread across multiple classes. On the opposite side, high coupled designs contain classes with many dependencies to other objects, which makes them rigid and difficult to maintain.</p>
-<!--
- and has low cohesion, i. e. it is not focused, has too many responsibilities and does too many things.
--->
-<p>In the beginning of your journey to become a better programmer, it’s difficult to acknowledge this principle until you deal with its counterpart, a high coupled design, a.k.a. a bowl of spaghetti code. If you find yourself with code that is rigid, hard to maintain and even more difficult to deal with when adding new features or making changes, then you are the owner of a high coupled design, and a refactoring is advisable.</p>
-<p>To make the idea of coupling more concrete, we define coupling as any code that satisfies items in the following list:</p>
+<p>This principle states that a class depends on the minimum and required amount of classes, no more and no less. A low coupled class is easy to maintain and refactor because it interacts with a minimum amount of objects.</p>
+<p>To make the idea of coupling more concrete, we define coupling as any code that satisfies any items in the following list:</p>
 <ul>
 <li>the class has an attribute to another object,</li>
 <li>calls on methods of other objects,</li>
@@ -142,8 +137,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>implements one or more interfaces, and</li>
 <li>inherits mixins</li>
 </ul>
-<p>The reader should notice that there will always exist coupling but, dependencies to stable items are not problematic - standard library - because these have been well designed and do not change often. In general, the problem is not coupling per se, but creating a coupled design to unstable elements.</p>
-<p>An example of a poor design drawing ideas from the case study is shown in Fig. 1.1, Listing 1.1. In this example, guides contain images, visibility (who can watch the content), title, description, and reviews of restaurants, hotels, pubs, things to do, etc.</p>
+<p>There will <strong>always</strong> exist coupling but dependencies to stable items are not problematic, e.g. standard library, because these are well designed and do not often change. Thus, the problem is not coupling per se, but creating a coupled design to unstable elements.</p>
+<p>For instance, a class that has an attribute to a <code>List</code> class is coupled to a library whose external structure does not change (otherwise, there would be breaking changes in the API). The <code>List</code> class always exposes the same methods (behaviour) to its users, and internal changes are never breaking the contract of what the programmer expects oblivious to the programmers.</p>
+<!-- When a design is low coupled, changes in a class do not spread across multiple classes. -->
+<p>On the opposite side, high coupled designs contain classes with many dependencies to other objects, which makes them rigid and difficult to maintain. <!--
+In the beginning of your journey to become a better programmer,
+it's difficult to acknowledge this principle until you deal with its counterpart:
+a high coupled design, a.k.a. a bowl of spaghetti code. --> If you find yourself with code that is rigid and in which any minimal change involves updating a bunch of other classes, then you are the owner of a high coupled design, and a refactoring is advisable.</p>
+<p>An example of a poor design, drawing ideas from the case study, is shown in Fig. 1.1, Listing 1.1. In this example, guides contain images, visibility (who can watch the content), title, description, and reviews of restaurants, hotels, pubs, things to do, etc.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> Guide {</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">private</span> <span class="bu">List</span>&lt;<span class="bu">Image</span>&gt; images;</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">private</span> <span class="bu">List</span>&lt;User&gt; visibility;</a>
@@ -169,16 +170,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="../assets/grasp/GuideUML.png" alt="GuideUML" /><figcaption>GuideUML</figcaption>
 </figure>
 <p><strong>Fig.1.1 High coupled <code>Guide</code> class</strong></p>
-<p>Before we analyse this design: Can you identify some poor design decisions? Try to name a few of them before you read any further.</p>
+<p>Before we analyse this design:</p>
+<ul>
+<li>Can you identify some poor design decisions? Try to name a few of them before you read any further.</li>
+</ul>
 <p>The problems with this design are:</p>
 <ul>
-<li>assuming that <code>Image</code> is a class, this design couples images with a guide, but the guide should display images personalised to each viewer! (See section Case study),</li>
+<li>assuming that <code>Image</code> is a class, this design couples images with a guide, but the guide should display images personalised to each viewer! (see section Case study),</li>
 <li>the visibility attribute maintains a list of users that can read the guide; this solution does not scale when there are many users. The same field may be used for different visibility settings, which makes the logic more difficult to test and understand, since the attribute has different meaning based on other properties,</li>
 <li>the use of multiple, non-overlapping, booleans makes the code difficult to follow as you will introduce branches and its related logic in each case,</li>
-<li>hotels, restaurants and others should implement a common interface, si that you can dispatch polymorphously. If you don’t do this, adding a few new places, e.g. <code>SushiBar</code> class, implies the creation of more attributes and respective methods to get those elements,</li>
+<li>hotels, restaurants and others should implement a common interface, so that you can dispatch using polymorphism (covered later). If you decide to not do this, adding a few new categorical places, such as a <code>SushiBar</code> class, implies the creation of more attributes and their respective methods,</li>
 <li>the constructor receives an <code>ArrayList</code>, which binds an implementation detail to the list abstraction.</li>
 </ul>
-<p>So, given this poor design (Fig 1.1, Listing 1.1), how could we reduce coupling a <code>Guide</code> to other elements? The most obvious alternative would be to put less responsibilities in the <code>Guide</code>. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e., the class is easy to understand, test, and maintain.</p>
+<p>So, given this poor design (Fig 1.1, Listing 1.1), how could we reduce coupling a <code>Guide</code> to other elements? The most obvious alternative would be to put less responsibilities in the <code>Guide</code>. This reduces coupling to other elements and, as a side effect, keeps the class focus on what it should do, i.e. the class is easy to understand, test, and maintain.</p>
 <p>For example, a <code>Guide</code> does not need to be concerned about its visibility and we can group different places (restaurants, hotels, bars, etc) contained in a guide under the idea of a point of interest (Fig. 1.2). These two changes reduce the responsibilities of the <code>Guide</code> class, thus reducing coupling (Listing 1.2).</p>
 <figure>
 <img src="../assets/grasp/LooselyGuideUML.png" alt="LooselyGuideUML" /><figcaption>LooselyGuideUML</figcaption>
@@ -190,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="kw">private</span> <span class="bu">String</span> description;</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="kw">private</span> <span class="bu">List</span>&lt;IPointOfInterest&gt; poi;</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="kw">public</span> <span class="fu">Guide</span>(<span class="bu">ArrayList</span>&lt;IImage&gt; images,</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="kw">public</span> <span class="fu">Guide</span>(<span class="bu">List</span>&lt;IImage&gt; images,</a>
 <a class="sourceLine" id="cb2-8" data-line-number="8">                          <span class="bu">String</span> title,</a>
 <a class="sourceLine" id="cb2-9" data-line-number="9">                          <span class="bu">String</span> description){</a>
 <a class="sourceLine" id="cb2-10" data-line-number="10">    \\ Initialise method</a>
@@ -206,8 +210,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-20" data-line-number="20">}</a></code></pre></div>
 <p><strong>Listing 1.2 Loosely coupled <code>Guide</code> class</strong></p>
 <p><strong>Exercise</strong>: Given the refactoring above, how does a guide deal with its visibility?</p>
-<p><strong>Exercise</strong>: Why should we promote interfaces over inheritance?</p>
-<p><strong>Exercise</strong>: Does it make sense that the class<code>Hotel</code> declares methods that do not exist in the interface <code>IPointOfInterest</code>? (Note: you may need to read the section on polymorphism)</p>
+<p><strong>Exercise</strong>: We have appended an uppercase <code>I</code> to every interface, e.g. <code>IImage</code>, to make a difference between the <code>Image</code> class. Why should we promote interfaces over a direct association to a class?</p>
+<p><strong>Exercise</strong>: Does it make sense that the class<code>Hotel</code> (Fig. 1.2) declares methods that do not exist in the interface <code>IPointOfInterest</code>? (Note: you may need to read the section on polymorphism)</p>
 <!--
 
 (Solution: we are coupling to an interface but, interfaces do not expose their implementation, so this coupling is much weaker than a direct class. Furthermore, we use interfaces in instability points. For example, the CEO may add a sushi restaurant as a point of interest and, because you know that in early stages of development things change, try to create a design as loosely coupled add possible)
