@@ -163,9 +163,8 @@ restaurant.stars = 5
 simple abstraction, you give yourself some flexibility in the future.
 For instance, you can easily expand and return cached data that otherwise would
 need to be fetched from some remote server. If you did not add the getter and setter,
-now you have an application that allows access to all their internals and it is much
-more difficult to do this update since you did not encapsulate your behaviour.
-Another typical example is adding validation when setting an attribute.
+you would have a class that allows access to its internals and new programmers
+can change internal state that should not have been modified.
 
 Let's show a concrete scenario: assume that the application
 you are building uses an external API (Google) to fetch data from nearby restaurants and you map
@@ -209,6 +208,28 @@ class Restaurant:
 The setter method allows you to set your rating in the
 restaurant and send this information to the server, so that your friends
 know about it.
+
+Another typical example is adding validation when setting an attribute.
+In Example 3.1.1.3, the setter checks that the image file is less than
+3 MB and raises an error if the file size is exceeded.
+
+```python
+class Restaurant:
+  def __init__(image):
+    self.__image = image
+
+  ...
+
+  @image.setter
+  def image(im):
+    threeMB = 3*1024*1024
+    if im.size() < threeMB:
+      self.__image = im
+    else:
+      raise Exception("Image file is bigger than 3 MB.")
+```
+
+*Example 3.1.1.3 Validation example in Python*
 
 ### Static methods and attributes
 
