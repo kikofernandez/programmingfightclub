@@ -12,6 +12,69 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
   <link rel="stylesheet" href="/grasp-principles/assets/pandoc.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
@@ -57,7 +120,18 @@
 <p>You look at the screen, all 142 tests are green! You tell Pontus to push the red button; deployment scripts start, your software is being installed on all the AWS servers the company could afford, a few databases with replication for faster reads and a single leader for the writes, load balancers, reverse proxies for serving static data and another bunch of instances running your application. After a few minutes, the deployment is a success, your baby is ALIVE and by tomorrow morning your product will be featured in all the Swedish newspapers (you live in Stockholm, the European capital for startups).</p>
 <p>The next day comes, you try the app and observe that the system is just f****** slow. It seems that connections time out and you observe in your monitoring tools that the server is not processing that many requests. <em>What the hell is going on!?</em></p>
 <p>The CTO has the intuition that it could be related to that reusable query class that receives lambdas, updates a bunch of fields from different objects and saves them into the database as a single transaction. There were many things going on there and, to guarantee those transactions are atomic, someone in the team introduced a lock. You think that the first thing to check is if you are <em>releasing</em> the lock. If your intuition is right, you’ll fix the code, add the test that should have covered that case and be <em>presto</em> in 5 min to re-deploy the application.</p>
-<p>There is one problem though, the code doesn’t have a well-defined structure and the lock somehow was passed inside a lambda – someone had to try out lambdas, they are cool – so you have no way of releasing the lock directly after the lambda call. You decide to look for the lambda that has a lock and does not release it, even when this method is reused by more than 130 queries (true story of my life). To your horror, you observe that the things going on in the lambda call are indeed updated atomically but the rest of the method body in which the lambda is called is not. It seems like it is time to start refactoring the use of lambdas in those 130 queries. <!-- Moreover, this method is used for multiple purposes and --> <!-- you are passing a bunch of lambdas and there's no easy way to tell which one has --> <!-- the damn lock!  --> Shit, if only your teammate knew when it made sense to use lambdas and all the cool features of the language!</p>
+<p>There is one problem though, the code doesn’t have a well-defined structure and the lock somehow was passed inside a lambda – someone had to try out lambdas, they are cool – so you have no way of releasing the lock directly after the lambda call. To your horror, you observe that the lambda captured a the lock variable and was not passed as a parameter. You also observe some <code>if</code>-condition statement that releases the lock in the <code>else</code> clause, but you have no idea why only in the <code>else</code>. You realise that, if someone had explained to your team mate that the lock should have never been captured by the lambda, instead:</p>
+<ol type="1">
+<li>grab the lock</li>
+<li>call lambda function</li>
+<li>unlock</li>
+</ol>
+<p>By following these simple steps, any lambda could have been used in this method:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">def</span> complex_query(lock, fn, <span class="op">*</span>args, <span class="op">**</span>kwargs):</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  lock.acquire()</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  fn(args, kwargs)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  lock.release()</a></code></pre></div>
+<p>Shit, if only your teammate had used a better design…</p>
 <h4 id="how-did-you-end-up-in-this-situation"><strong>How did you end up in this situation?</strong></h4>
 <p>You coded a system considering all the functional requirements and the architecture but you failed to create a good design. The hype of new features seemed like a silver bullet and everyone in the team was using them (the same thing happens with new frameworks all the time). The problem is understanding when to use those shiny new features and how they affect your design.</p>
 <div class="figure">

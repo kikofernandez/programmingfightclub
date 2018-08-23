@@ -37,16 +37,26 @@ add the test that should have covered that case and be *presto* in 5 min to re-d
 There is one problem though, the code doesn't have a well-defined structure and the
 lock somehow was passed inside a lambda -- someone had to try out lambdas,
 they are cool -- so you have no way of releasing the lock directly after the lambda call.
-You decide to look for the lambda that has a lock and does not release it,
-even when this method is reused by more than 130 queries (true story of my life).
-To your horror, you observe that the things going on in the lambda call are indeed updated
-atomically but the rest of the method body in which the lambda is called is not.
-It seems like it is time to start refactoring the use of lambdas in those 130 queries.
-<!-- Moreover, this method is used for multiple purposes and -->
-<!-- you are passing a bunch of lambdas and there's no easy way to tell which one has -->
-<!-- the damn lock!  -->
-Shit, if only your teammate knew when it made sense to use lambdas and all the
-cool features of the language!
+To your horror, you observe that the lambda captured a the lock variable and
+was not passed as a parameter. You also observe some `if`-condition statement
+that releases the lock in the `else` clause, but you have no idea why only in
+the `else`. You realise that, if someone had explained to your team mate that
+the lock should have never been captured by the lambda, instead:
+
+1. grab the lock
+2. call lambda function
+3. unlock
+
+By following these simple steps, any lambda could have been used in this method:
+
+```python
+def complex_query(lock, fn, *args, **kwargs):
+  lock.acquire()
+  fn(args, kwargs)
+  lock.release()
+```
+
+Shit, if only your teammate had used a better design...
 
 #### **How did you end up in this situation?**
 
