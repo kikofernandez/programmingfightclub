@@ -1,8 +1,7 @@
 # Type systems
 
-<span class="firstcharacter">I</span>n this chapter you will learn
-what is a type system and
-the difference between static and dynamic type systems
+In this chapter you will learn what is a type system and
+the difference between static and dynamic type systems.
 
 A type system *assigns types to programming constructs*. By programming constructs we mean
 functions, expressions, statements, variables, etc.
