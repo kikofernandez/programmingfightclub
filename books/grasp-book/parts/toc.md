@@ -1,7 +1,9 @@
+If you like this book, please consider
 <a href="https://app.publica.com/grasp-principles">
-  If you like it, please consider funding the book on the Publica blockchain,
+funding the book on the Publica blockchain,
 <a/>
-spreading the word or <a href="https://www.buymeacoffee.com/graspdesign">buying me a coffee</a>
+spreading the word or
+<a href="https://www.buymeacoffee.com/graspdesign">buying me a coffee</a>
 
 
 
