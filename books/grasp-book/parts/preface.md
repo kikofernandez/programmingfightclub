@@ -27,8 +27,8 @@ Part I:
 
 Part II:
 
-* Chapter 5: Case Study <span style="color: #9d85b5">(COMING SOON)</span>
-* Chapter 6: GRASP principles <span style="color: #9d85b5">(COMING SOON)</span>
+* [Chapter 5: Case Study](/grasp-principles/case-study/)
+* [Chapter 6: GRASP principles](/grasp-principles/recap/) (work-in-progress)
 
 Part III:
 
