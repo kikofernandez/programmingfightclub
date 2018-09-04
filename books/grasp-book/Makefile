@@ -63,7 +63,7 @@ web_prod: web_clean folder_gen $(DEPENDENCIES)
 blog_prod: blog_clean $(BLOG_DEPENDENCIES)
 	mkdir -p $(DOCS)/$(BLOG_FOLDER)/
 	cp -r assets $(DOCS)/
-	mv $(BLOG_PROD)/* $(DOCS)/$(BLOG_FOLDER)/
+	mv -f $(BLOG_PROD)/* $(DOCS)/$(BLOG_FOLDER)/
 
 $(BLOG_DEPENDENCIES):
 	mkdir -p $(BLOG_PROD)/$@
