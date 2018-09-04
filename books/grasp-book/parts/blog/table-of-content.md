@@ -1,6 +1,6 @@
 # Blog Entry list
 
-1. [Type Systems]((/grasp-principles/blog/type-systems/))
+1. [Type Systems](/grasp-principles/blog/type-systems/)
 2. Recap
 
    2.1. Classes
