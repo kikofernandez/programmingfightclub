@@ -1,8 +1,10 @@
 # List of dependencies and special treatment
 DEPENDENCIES=toc preface introduction type-systems case-study recap grasp-principles
+BLOG_DEPENDENCIES=table-of-content type-systems-post
 
 # Production ready folder for web and epub
 WEB_PROD=web_prod
+BLOG_PROD=blog_prod
 EPUB_PROD=epub_prod
 
 # Assets folder for formatting web and epub
@@ -13,9 +15,11 @@ DOC_FOLDER=docs
 
 # Book folder and subpath on the web
 BOOK_FOLDER=grasp-principles
+BLOG_FOLDER=blog
 
 # Path to build production website
 DOCS=../../$(DOC_FOLDER)/$(BOOK_FOLDER)
+
 
 # Data-dir
 DATADIR=../../data-dir
@@ -54,6 +58,16 @@ web_prod: web_clean folder_gen $(DEPENDENCIES)
 	@mv $(WEB_PROD)/* $(DOCS)
 	@cp $(DOCS)/toc/index.html $(DOCS)
 	@rm -rf $(DOCS)/parts
+
+
+blog_prod: blog_clean $(BLOG_DEPENDENCIES)
+	mkdir -p $(DOCS)/$(BLOG_FOLDER)/
+	cp -r assets $(DOCS)/
+	mv $(BLOG_PROD)/* $(DOCS)/$(BLOG_FOLDER)/
+
+$(BLOG_DEPENDENCIES):
+	mkdir -p $(BLOG_PROD)/$@
+	pandoc -s --toc web-metadata.yaml parts/$(BLOG_FOLDER)/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(BLOG_PROD)/$@/index.html
 
 $(DEPENDENCIES):
 	@mkdir -p $(WEB_PROD)/$@
@@ -101,4 +115,7 @@ epub_clean:
 web_clean:
 	@rm -rf $(WEB_PROD) $(DOCS)
 
-.PHONY: clean $(DEPS) pandoc web_clean epub_clean epub web_prod local
+blog_clean:
+	@rm -rf $(BLOG_PROD)
+
+.PHONY: clean $(DEPENDENCIES) $(BLOG_DEPENDENCIES) pandoc web_clean epub_clean epub web_prod local
