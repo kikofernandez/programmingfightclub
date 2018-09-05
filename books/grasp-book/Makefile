@@ -69,7 +69,7 @@ blog_prod: blog_clean $(BLOG_DEPENDENCIES)
 
 $(BLOG_DEPENDENCIES):
 	mkdir -p $(BLOG_PROD)/$@
-	pandoc -s --toc blog-metadata.yaml parts/$(BLOG_FOLDER)/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(BLOG_PROD)/$@/index.html
+	pandoc -s blog-metadata.yaml parts/$(BLOG_FOLDER)/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(BLOG_PROD)/$@/index.html
 
 $(DEPENDENCIES):
 	@mkdir -p $(WEB_PROD)/$@
