@@ -1,13 +1,13 @@
 # Blog Entry list
 
-1. [Type Systems](/grasp-principles/blog/type-systems/)
+1. [Type Systems](/grasp-principles/blog/type-systems-post/)
 2. Recap
 
-   2.1. Classes
+   2.1. [Classes](/grasp-principles/blog/classes-post/)
 
-   2.2. Static methods and attributes
+   2.2. [Static methods and attributes](/grasp-principles/blog/static-methods-post/)
 
-   2.3. Constants
+   2.3. [Constants and objects](/grasp-principles/blog/constants-objects-post/)
 
    2.4. Inheritance
 
