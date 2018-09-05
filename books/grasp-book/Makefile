@@ -1,7 +1,8 @@
 # List of dependencies and special treatment
 DEPENDENCIES=toc preface introduction type-systems case-study recap grasp-principles
 BLOG_DEPENDENCIES=table-of-contents type-systems-post classes-post \
-	static-methods-post constants-objects-post
+	static-methods-post constants-objects-post inheritance-post \
+	interfaces-post
 
 # Production ready folder for web and epub
 WEB_PROD=web_prod

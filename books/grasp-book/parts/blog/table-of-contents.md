@@ -9,9 +9,9 @@
 
    2.3. [Constants and objects](/grasp-principles/blog/constants-objects-post/)
 
-   2.4. Inheritance
+   2.4. [Inheritance](/grasp-principles/blog/inheritance-post/)
 
-   2.5. Interfaces
+   2.5. [Interfaces](/grasp-principles/blog/interfaces-post/)
 
    2.6. Abstract classes
 

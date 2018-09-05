@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Kiko Fernandez-Reyes" />
+  <title>GRASP principles for the Object-oriented mind</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/grasp-principles/assets/pandoc.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Inconsolata" rel="stylesheet">
+  <link href="/grasp-principles/assets/pandoc.css" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112034462-1"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "UA-112034462-1");
+  </script>
+</head>
+<body>
+<p>If you like this blog, please consider
+<a href="https://app.publica.com/grasp-principles">
+funding the book on the Publica blockchain,
+<a/>
+spreading the word or
+<a href="https://www.buymeacoffee.com/graspdesign">buying me a coffee</a>.
+Thanks and enjoy!
+</p>
+<header>
+<h1 class="title"><a href="/grasp-principles/blog/">GRASP principles for the Object-oriented mind</a></h1>
+<p class="author">Kiko Fernandez-Reyes</p>
+</header>
+<h1 id="inheritance">Inheritance</h1>
+<p>The main use of inheritance is to create a specialisation (derived class) of a <em>super</em> class (type) and take advantage of the subtyping polymorphism. In a statically typed language, there is the notion of <em>variance</em>, which establishes the relationship between the <em>super</em> and the <em>derived</em> types. Dynamic languages cannot make this static check and do not bother to consider this concept. On the other hand, Python (not all dynamic languages) has multiple inheritance, which we explain in the Python section.</p>
+<p><strong>Java</strong></p>
+<p>In a statically typed language, subtyping has three types of variances: covariant, contravariant and invariant. The variance on return, generics and arguments types explains the relationship between the super and specialised (derived) type. Covariant refers to the subtyping relationship established by the programmer, e.g. <code>Cat</code> is a subtype of an <code>Animal</code> class. When the relationship is reversed, we call it contravariant. Invariant means that the types must exactly match. Variances to take into account are:</p>
+<ul>
+<li>overloading return type (covariant),</li>
+<li>generics (contravariant) and,</li>
+<li>overriding method argument’s type (invariant)</li>
+</ul>
+<p>Let’s understand this with examples. First, we look at the super and derived classes:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> AnimalShelter {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">public</span> <span class="kw">class</span> Animal {</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  ...</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw">public</span> <span class="kw">class</span> Cat <span class="kw">extends</span> Animal {</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">  ...</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">}</a></code></pre></div>
+<p>If I want to create a <code>CatShelter</code>, the return type of the method <code>getAnimalShelter()</code> must be covariant. This means that I can return a <code>Cat</code> instead of an <code>Animal</code>. Following the same reasoning, overloading a method argument’s type is covariant, i.e. it is type safe to pass a more specialised type to the subclass than the type in the super class. This is illustrated in the following code, method <code>putAnimal(Cat animal)</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> CatShelter {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">public</span> Cat <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Cat animal) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">}</a></code></pre></div>
+<p>In contrast, the use of generics uses contravariance subtyping<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. This means that if <code>Cat</code> is a subtype of <code>Animal</code> and we refer to a generic implementation, e.g. <code>List</code>, <code>List&lt;Cat&gt;</code> is not a subtype of <code>List&lt;Animal&gt;</code>. To understand this, lets look at the following example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="bu">List</span>&lt;Cat&gt; lcat = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;Cat&gt;();</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="bu">List</span>&lt;Animal&gt; lanimal = lcat;</a></code></pre></div>
+<p>I have just aliased the <code>lcat</code> variable. If I now add an element to the <code>Animal</code> list:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" data-line-number="1">lanimal.<span class="fu">add</span>(<span class="kw">new</span> <span class="fu">Dog</span>());</a></code></pre></div>
+<p>and get the first cat available from the <code>lcat</code> lists (was aliased by the animal lists):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" data-line-number="1">Cat cat = lcat.<span class="fu">get</span>(<span class="dv">0</span>);</a></code></pre></div>
+<p>I would be treating a <code>Dog</code> as if it were a <code>Cat</code>. For this reason, Java uses contravariant generic subtyping.</p>
+<p>Overriding the method arguments’ types is invariant, although Java allows <em>overloaded</em> methods (coming next). To tell the compiler that you are overriding a method in a subclass, you use the <code>@Override</code> on top of the method:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> AnimalShelter {</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw">public</span> <span class="kw">class</span> CatShelter <span class="kw">extends</span> AnimalShelter {</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">  <span class="at">@Override</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">  <span class="kw">public</span> Animal <span class="fu">getAnimalForAdoption</span>(){ <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">  <span class="at">@Override</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">}</a></code></pre></div>
+<p>If you do not add this notation and change the name of the method <code>getAnimalShelter()</code> in the super class <code>AnimalShelter</code>, the compiler would think that the <code>CatShelter</code> defines a method that does not exist in the super class. A good practice is to always add the <code>@Override</code> annotation.</p>
+<p>Overloaded methods are methods that have the same name but receive different arguments of types. Java knows which of the methods you are referring to and uses the right method. For instance, we can overload the method <code>putAnimal</code> from the <code>CatShelter</code> class as follows:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> CatShelter {</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Animal a) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putAnimal</span>(Cat a) { <span class="kw">... </span>}</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">}</a></code></pre></div>
+<p>Whenever there is a call to the <code>putAnimal</code> method, Java uses one or the other method.</p>
+<p><strong>Python</strong></p>
+<p>Python allows multiple inheritance, in contrast to Java. Before jumping in the concept of multiple inheritance, we continue with the example given in the Java section, now written in Python:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">class</span> AnimalShelter(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="kw">def</span> getAnimalForAdoption():</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">    ...</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">  <span class="kw">def</span> putAnimal(animal):</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">    ...</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw">class</span> CatShelter(AnimalShelter):</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">  <span class="kw">def</span> getAnimalForAdoption():</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">    ...</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">  <span class="kw">def</span> putAnimal(animal):</a>
+<a class="sourceLine" id="cb8-13" data-line-number="13">    ...</a></code></pre></div>
+<p>In this example, the <code>putAnimal</code> method in <code>CatShelter</code> overrides the parent method. There is no <code>@Override</code> annotation to prevent the error discussed in the Java section.</p>
+<p>Overloading is always given, i.e. the lack of type annotations forbids overloading methods since there is no way to know which arguments types you are passing to the function. If you override a function by passing more arguments, the first function is actually deleted and not available anymore. Example:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">def</span> getAnimal(animal):</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="cf">return</span> animal</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">def</span> getAnimal(animal, cat):</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="cf">if</span> cat <span class="op">!=</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">    <span class="cf">return</span> cat</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">  <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">    <span class="cf">return</span> animal</a></code></pre></div>
+<p>If you were to call the function <code>getAnimal(animal)</code> (for some instance of <code>Animal</code> named <code>animal</code>), Python will throw an error because the name has been rebound and the function that takes a single argument does not exist anymore. One way to overcome this is by using default parameters, i.e. parameters that start with a default value, which can be overridden. Following the example above, the same function could be rewritten as follows:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">def</span> getAnimal(animal, cat<span class="op">=</span><span class="va">None</span>):</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">  <span class="cf">if</span> cat <span class="op">!=</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    <span class="cf">return</span> cat</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">    <span class="cf">return</span> animal</a></code></pre></div>
+<p>This function can be called with one or two arguments, i.e. <code>getAnimal(a)</code>, which sets the <code>cat</code> argument to <code>None</code>, by default; at the same time, you can call <code>getAnimal(a, c)</code> which overrides the default value of <code>cat</code> by <code>c</code>. This gives Python a lot of flexibility, although you can also easily misuse it and run into runtime errors.</p>
+<p>Multiple inheritance permits a Python class to inherit from multiple classes. In case there is a method name collision, Python will execute the method that inherited from the first class, ignoring the second possible method. Let’s take a closer look:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1">    <span class="cf">return</span> <span class="st">&quot;Click&quot;</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">class</span> Photographer(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">def</span> shoot(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">  <span class="kw">def</span> shoot(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">    <span class="cf">return</span> <span class="st">&quot;Click&quot;</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="kw">class</span> SecretAgent(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">  <span class="kw">def</span> shoot(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">    <span class="cf">return</span> <span class="st">&quot;Bang!&quot;</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="kw">class</span> JamesBond(Photographer, SecretAgent):</a>
+<a class="sourceLine" id="cb11-12" data-line-number="12">  <span class="cf">pass</span></a></code></pre></div>
+<p>In this example, <em>James Bond</em> is a photographer and a secret agent. When he needs to shoot, <code>bond.shoot()</code>, he gets confused and decides to take a picture before getting killed. Multiple inheritance is useful but you should use it wisely.</p>
+<p>The concept of multiple inheritance brought the semantic concept of mixins. The basic idea of mixins is to create small classes that cannot work alone by themselves but, when combined, provide functionality can be reused. For instance, any secret agent needs to know how to shoot, and play poker. But a hunter needs to know how to shoot as well. Let’s encode this functionality using mixins:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">class</span> ShootMixin(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, probability<span class="op">=</span><span class="fl">0.9</span>):</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">    <span class="va">self</span>.__probability <span class="op">=</span> <span class="fl">0.9</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">  <span class="at">@property</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">  <span class="kw">def</span> probability(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">    <span class="cf">return</span> <span class="va">self</span>.__probability</a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10">  <span class="kw">def</span> shoot(<span class="va">self</span>, person):</a>
+<a class="sourceLine" id="cb12-11" data-line-number="11">    <span class="cf">return</span> <span class="va">self</span>.probability <span class="op">-</span> person.hiding()</a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="kw">class</span> PokerMixin(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb12-14" data-line-number="14">  <span class="kw">def</span> pokerFace(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb12-15" data-line-number="15">    <span class="bu">print</span>(<span class="st">&quot;Poker face&quot;</span>)</a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="kw">class</span> SecretAgent(ShootMixin, PokerMixin):</a>
+<a class="sourceLine" id="cb12-18" data-line-number="18">  <span class="cf">pass</span></a></code></pre></div>
+<p>The mixins <code>ShootMixin</code> and <code>PokerMixin</code> do not make much sense on their own, as classes. However, we can combine their behaviour to compositionally build classes with more advanced behaviour, such as the <code>SecretAgent</code> class. This class inherits these two mixins to provide any secret agent with the ability to shoot and put a poker face.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://docs.oracle.com/javase/tutorial/extra/generics/subtype.html">Link to official documentation</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+<div class="footnotes">
+<hr>
+<div class="container">
+ <nav class="pagination" role="pagination">
+ <ul>
+  <p><span class="page-number">If you like this book, please consider buying me a coffee</p>
+  <style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#ffffff !important;background-color:#BB5794 !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 23px !important;letter-spacing: 0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:"Cookie", cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#ffffff !important;}</style><link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/graspdesign"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:5px">Buy me a coffee</span></a>
+ </ul>
+ </nav>
+</div>
+</div>
+<div class="footnotes">
+<hr>
+<div class="container">
+ <nav class="pagination" role="pagination">
+ <ul>
+  <p><span class="page-number">Designed with</span> ❤️  <span class="page-number"> from Uppsala, Sweden</span></p>
+  <p>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+  </p>
+ </ul>
+ </nav>
+</div>
+</div>
+</body>
+</html>
