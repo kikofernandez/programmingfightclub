@@ -1,6 +1,6 @@
 # List of dependencies and special treatment
 DEPENDENCIES=toc preface introduction type-systems case-study recap grasp-principles
-BLOG_DEPENDENCIES=table-of-content type-systems-post
+BLOG_DEPENDENCIES=table-of-contents type-systems-post
 
 # Production ready folder for web and epub
 WEB_PROD=web_prod
@@ -64,6 +64,7 @@ blog_prod: blog_clean $(BLOG_DEPENDENCIES)
 	mkdir -p $(DOCS)/$(BLOG_FOLDER)/
 	cp -r assets $(DOCS)/
 	cp -r $(BLOG_PROD)/* $(DOCS)/$(BLOG_FOLDER)/
+	cp $(DOCS)/$(BLOG_FOLDER)/table-of-contents/index.html $(DOCS)/$(BLOG_FOLDER)
 	rm -rf $(BLOG_PROD)/*
 
 $(BLOG_DEPENDENCIES):
