@@ -6,7 +6,6 @@ BLOG_DEPENDENCIES=table-of-contents type-systems-post classes-post \
 
 # Production ready folder for web and epub
 WEB_PROD=web_prod
-BLOG_PROD=blog_prod
 EPUB_PROD=epub_prod
 
 # Assets folder for formatting web and epub
@@ -62,16 +61,14 @@ web_prod: web_clean folder_gen $(DEPENDENCIES)
 	@rm -rf $(DOCS)/parts
 
 
-blog_prod: blog_clean $(BLOG_DEPENDENCIES)
+blog_prod: $(BLOG_DEPENDENCIES)
 	mkdir -p $(DOCS)/$(BLOG_FOLDER)/
 	cp -r assets $(DOCS)/
-	cp -r $(BLOG_PROD)/* $(DOCS)/$(BLOG_FOLDER)/
 	cp $(DOCS)/$(BLOG_FOLDER)/table-of-contents/index.html $(DOCS)/$(BLOG_FOLDER)
-	rm -rf $(BLOG_PROD)/*
 
 $(BLOG_DEPENDENCIES):
-	mkdir -p $(BLOG_PROD)/$@
-	pandoc -s blog-metadata.yaml parts/$(BLOG_FOLDER)/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(BLOG_PROD)/$@/index.html
+	mkdir -p $(DOCS)/$(BLOG_FOLDER)/$@
+	pandoc -s blog-metadata.yaml parts/$(BLOG_FOLDER)/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(DOCS)/$(BLOG_FOLDER)/$@/index.html
 
 $(DEPENDENCIES):
 	@mkdir -p $(WEB_PROD)/$@
@@ -118,8 +115,5 @@ epub_clean:
 
 web_clean:
 	@rm -rf $(WEB_PROD) $(DOCS)
-
-blog_clean:
-	@rm -rf $(BLOG_PROD)
 
 .PHONY: clean $(DEPENDENCIES) $(BLOG_DEPENDENCIES) pandoc web_clean epub_clean epub web_prod local
