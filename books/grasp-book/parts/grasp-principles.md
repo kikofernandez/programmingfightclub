@@ -2,7 +2,7 @@
 
 <p class="para"><span class="dropcaps">G</span>rasp principles
 are recommendation rules to guide your design. Keep these principles
-and you will design and write code that is easy to understand, maintain, and refactor.
+and you will design and write code that is easy to understand, maintain, and refactor.</p>
 
 By the end of this chapter you will have grok these principles:
 

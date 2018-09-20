@@ -8,13 +8,13 @@
 to teach you important design concepts and principles. This case study is simple to
 understand and makes you think about your design and how things are affected
 by your decisions. Create a good design and you will have to do small changes
-to accommodate your new requirements or when pivoting based on feedback from your users.
+to accommodate your new requirements or when pivoting based on feedback from your users.</p>
 
 ### Travellers Guide application
 
 <p class="para"><span class="dropcaps">T</span>he startup you work for has this
 idea of building a travelling social network: a mix of Twitter, TripAdvisor and
-Pinterest all in one site. This application is called *Travellers Guide*.
+Pinterest all in one site. This application is called *Travellers Guide*.</p>
 
 To build this idea, there will be a web server (backend) and a  mobile app (front-end).
 The backend is were your logic lives: getting information from database,
