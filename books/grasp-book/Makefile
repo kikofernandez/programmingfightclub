@@ -1,5 +1,6 @@
 # List of dependencies and special treatment
-DEPENDENCIES=toc preface introduction type-systems case-study recap grasp-principles
+# toc preface acknowledgments about introduction type-systems case-study recap grasp-principles
+DEPENDENCIES=toc preface about introduction type-systems case-study recap grasp-principles
 BLOG_DEPENDENCIES=table-of-contents type-systems-post classes-post \
 	static-methods-post constants-objects-post inheritance-post \
 	interfaces-post
@@ -62,13 +63,11 @@ web_prod: web_clean folder_gen $(DEPENDENCIES)
 
 
 blog_prod: $(BLOG_DEPENDENCIES)
-	mkdir -p $(DOCS)/$(BLOG_FOLDER)/
-	cp -r assets $(DOCS)/
-	cp $(DOCS)/$(BLOG_FOLDER)/table-of-contents/index.html $(DOCS)/$(BLOG_FOLDER)
+	@cp $(DOCS)/$(BLOG_FOLDER)/table-of-contents/index.html $(DOCS)/$(BLOG_FOLDER)
 
 $(BLOG_DEPENDENCIES):
-	mkdir -p $(DOCS)/$(BLOG_FOLDER)/$@
-	pandoc -s blog-metadata.yaml parts/$(BLOG_FOLDER)/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(DOCS)/$(BLOG_FOLDER)/$@/index.html
+	@mkdir -p $(DOCS)/$(BLOG_FOLDER)/$@
+	@pandoc -s blog-metadata.yaml parts/$(BLOG_FOLDER)/$@.md -c /$(BOOK_FOLDER)/assets/pandoc.css -o $(DOCS)/$(BLOG_FOLDER)/$@/index.html
 
 $(DEPENDENCIES):
 	@mkdir -p $(WEB_PROD)/$@
