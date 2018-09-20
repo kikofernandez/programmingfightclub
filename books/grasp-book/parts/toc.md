@@ -2,6 +2,8 @@
 
 * [Preface](/grasp-principles/preface/)
 
+* [About](/grasp-principles/about/)
+
 Part I:
 
 * [Chapter 1: Introduction](/grasp-principles/introduction/)
@@ -18,8 +20,6 @@ Part III:
 
 * Chapter 7: Spark Java <span style="color: #9d85b5">(COMING SOON)</span>
 * Chapter 8: PySpark <span style="color: #9d85b5">(COMING SOON)</span>
-* Chapter 9: Taiga (Python) <span style="color: #9d85b5">(COMING SOON)</span>
-* Chapter 10: TBD (Java) <span style="color: #9d85b5">(COMING SOON)</span>
 
 Part IV:
 

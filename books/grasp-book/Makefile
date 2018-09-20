@@ -30,7 +30,7 @@ DATADIR=../../data-dir
 WEB=http:\/\/www.programmingfightclub.com
 MEDIA=
 
-all: epub web_prod
+all: web_prod blog_prod
 
 ##########################################
 ##
