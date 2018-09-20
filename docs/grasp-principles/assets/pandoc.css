@@ -384,3 +384,8 @@ table td {
         page-break-after: avoid;
     }
 }
+
+  #watermark
+  {
+      visibility: hidden;
+  }
