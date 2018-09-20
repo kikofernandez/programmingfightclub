@@ -41,75 +41,95 @@ spreading the word or
 </header>
 <nav id="TOC">
 <ul>
-<li><a href="#preface">Preface</a></li>
+<li><a href="#about-this-book">About this book</a><ul>
+<li><a href="#who-should-read-this-book">Who should read this book</a></li>
+<li><a href="#what-this-book-is-not">What this book is not</a></li>
+<li><a href="#how-is-this-book-organised-a-roadmap">How is this book organised: A roadmap</a></li>
+</ul></li>
 </ul>
 </nav>
-<h1 id="preface">Preface</h1>
+<h1 id="about-this-book">About this book</h1>
+<h2 id="who-should-read-this-book">Who should read this book</h2>
 <p class="para">
-<span class="dropcaps">D</span>uring his studies at his home university in Malaga (Spain), Kiko Fernandez-Reyes thought he knew what a software design is. Then he worked for a few years in industry and realised that code tends to end up in a non-maintanable ball of spaguetti really quickly.
+<span class="dropcaps">B</span>efore creating a complex software system one needs to lay down a solid foundation. General Responsibility Assignment Software Principles (GRASP) are guidelines to assign reponsibilities to software classes in object-oriented programming.
 </p>
-<p>After working in industry he decided to go back to school to pursue doctoral studies. During his doctoral studies, he became teacher assistant (TA) of the course Advanced Software Design and, only then, he realised the difference between design and implementation. After two years as TA, he became main lecturer of the course.</p>
-Nowadays, he continues teaching students the difference between design and implementation. This book is his legacy to all the students he has ever met. <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<p>Unfortunately, many resources for learning these principles do not consider the role of the type system and the programming language. To mitigate this problem, this book explores how the type system influences the way in which one can write these programming principles.</p>
+<p>Static and dynamic languages bring different benefits and drawbacks, so all examples in this book are written in Java 8 and Python 3.4.</p>
+<p>The book primarily targets young software engineers, developers and self-taught programmers familiar with object-oriented programming but seeking on improving the code they write. It is of special interest to programmers who want to understand the difference when writing clean code in a static and dynamic language. After reading this book, you will be able to apply GRASP principles in static and dynamic languages and make an informed decision before hacking on your next project.</p>
+<h2 id="what-this-book-is-not">What this book is not</h2>
+<p>This book shows how to write flexible and maintainable code through GRASP principles. However, it is not a definitive guide to any programming language but a starting point to writing better software. The book puts special emphasis on the language of choice, whether it is a dynamic or static language.</p>
+<h2 id="how-is-this-book-organised-a-roadmap">How is this book organised: A roadmap</h2>
+<p><em>GRASP principles for the Object-oriented mind</em> gradually explains the concepts needed to write GRASP principles in any object-oriented language. It is a beginner’s guide to design better object-oriented code and helps you to create a solid foundation.</p>
+<ul>
+<li><p><a href="/grasp-principles/introduction/">Unit 1</a> highlights the common problems in todays IT industry: new concepts do not mean silver bullets to fixing all problems with your software.</p></li>
+<li><p><a href="/grasp-principles/type-systems/">Unit 2</a> starts with a reminder of the different kinds of type systems, and finishes with a comparison between them.</p></li>
+<li><p><a href="/grasp-principles/recap/">Unit 3</a> introduces the Unified Modelling Language (UML), its importance and its syntactic notation. This notation will be used throughout the book together with the code examples.</p></li>
+<li><p>Unit 4 explains common concepts in object-oriented programming: inheritance, mixins and static classes among others.</p></li>
+<li><p><a href="/grasp-principles/case-study/">Unit 5</a> describes a case study that will be used in the explanation of GRASP principles.</p></li>
+<li><p>Unit 6 explains and demonstrates how GRASP principles are applied in different programming languages.</p></li>
+<li><p>Unit 7 and 8 analyses open source projects, finding points where GRASP principles have been applied and where they should have been applied.</p></li>
+<li>Unit 9 gives solutions to exercises introduced in each unit. <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
 #mc_embed_signup .button {
-    clear: both;
-    background-color: #7005a7;
-    border: 0 none;
-    border-radius: 4px;
-    letter-spacing: .03em;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 15px;
-    height: 32px;
-    line-height: 32px;
-    margin: 0 5px 10px 0;
-    padding: 0;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: top;
-    white-space: nowrap;
-    width: auto;
-    transition: all 0.23s ease-in-out 0s;
+  clear: both;
+  background-color: #7005a7;
+  border: 0 none;
+  border-radius: 4px;
+  letter-spacing: .03em;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  height: 32px;
+  line-height: 32px;
+  margin: 0 5px 10px 0;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  white-space: nowrap;
+  width: auto;
+  transition: all 0.23s ease-in-out 0s;
 }
 .npost {
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 1.5rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  min-height: 11rem;
-  -webkit-border-radius: 10px;
-          border-radius: 10px;
-  overflow: hidden;
-  -webkit-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease;
-  -webkit-box-shadow: 2px 2px 7px 0 rgba(31, 35, 46, 0.15);
-          box-shadow: 2px 2px 7px 0 rgba(31, 35, 46, 0.15);
+width: 100%;
+max-width: 100%;
+margin-bottom: 1.5rem;
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-orient: horizontal;
+-webkit-box-direction: normal;
+-webkit-flex-direction: row;
+    -ms-flex-direction: row;
+        flex-direction: row;
+-webkit-box-align: stretch;
+-webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+        align-items: stretch;
+min-height: 11rem;
+-webkit-border-radius: 10px;
+        border-radius: 10px;
+overflow: hidden;
+-webkit-transition: all .3s ease;
+-o-transition: all .3s ease;
+transition: all .3s ease;
+-webkit-box-shadow: 2px 2px 7px 0 rgba(31, 35, 46, 0.15);
+        box-shadow: 2px 2px 7px 0 rgba(31, 35, 46, 0.15);
 }
 .npost .post-content {
-  padding: 2rem;
-  width: 90%;
+padding: 2rem;
+width: 90%;
 }
 .npost .post-content .post-title {
-  margin: 0 0 10px;
-  font-size: 30px;
-  font-weight: 400;
+margin: 0 0 10px;
+font-size: 30px;
+font-weight: 400;
 }
-</style>
+</style></li>
+</ul>
 <article class="npost">
 <div class="post-content">
 <h4 class="post-title">
