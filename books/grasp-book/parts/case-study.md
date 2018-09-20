@@ -10,7 +10,7 @@ understand and makes you think about your design and how things are affected
 by your decisions. Create a good design and you will have to do small changes
 to accommodate your new requirements or when pivoting based on feedback from your users.</p>
 
-### Travellers Guide application
+### Travellers Guide application {-}
 
 <p class="para"><span class="dropcaps">T</span>he startup you work for has this
 idea of building a travelling social network: a mix of Twitter, TripAdvisor and
@@ -56,7 +56,7 @@ Your team uses an agile methodology, *Scrum*, and there are post-it everywhere w
 
 -->
 
-#### **How to get started?**
+#### **How to get started?** {-}
 
 More often than not, when given a big task, such as the case study from above,
 you may be wondering how you should begin to work on this behemoth task.

@@ -197,3 +197,15 @@ pre,pre.programlisting {
 /* code span.va { color: #19177c; } /\* Variable *\/ */
 /* code span.vs { color: #4070a0; } /\* VerbatimString *\/ */
 /* code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /\* Warning *\/ */
+
+
+  #watermark
+  {
+   position:fixed;
+   bottom:250px;
+   right:150px;
+   opacity:0.5;
+   z-index:99;
+   color:red;
+   font-size: 450%;
+  }

@@ -150,7 +150,7 @@ in later chapters.
 <!-- <p>(Image from http://xkcd.com/1695/)</p> -->
 <!-- </div> -->
 
-### What is a good design?
+## What is a good design?
 
 In general, a good design is one that can deal with change.
 
@@ -162,7 +162,7 @@ There are many ways to solve a problem and, more often than not, there exist wel
 common solutions. These well-documented solutions are called design principles and design patterns and they
 exist for all kinds of paradigms. In this book, we will focus on object-oriented design principles.
 
-### Design principles
+## Design principles
 
 Design principles are guidelines to separate responsibilities of different classes and create
 software that can be easily composed out of smaller pieces. The design principles

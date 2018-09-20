@@ -1,8 +1,8 @@
 # Table of Contents
 
-* [Preface](/grasp-principles/preface/)
+* [Preface](WEB/grasp-principles/preface/)
 
-* [About](/grasp-principles/about/)
+* [About](WEB/grasp-principles/about/)
 
 Part I:
 
