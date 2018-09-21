@@ -109,20 +109,20 @@ spreading the word or
 </nav>
 <h1 id="type-systems">Type systems</h1>
 <p>In this chapter you will learn what is a type system and the difference between static and dynamic type systems.</p>
-<p>A type system <em>assigns types to programming constructs</em>. By programming constructs we mean functions, expressions, statements, variables, etc. The main function of the type system is to remove bugs in software, through a phase known as type checking, where the compiler assigns types to constructs and builds a sound mathematical model. <!-- Formally, type systems are a set of mathematical rules applied to a programming language. --> Sound means that the type system guarantees that your program behaves properly, always rejecting programs that are illegal according to the mathematical rules<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
-<p>Type checking can happen at compile time or at runtime; when the type checking happens at compile time, we have a statically typed language. If the type checking happens at runtime, we have a dynamically typed language. For all purposes in this book, we consider only static and dynamic type systems<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
-<p>For example, Java is a statically typed language and would reject the program below, at compile time, if you call the method <code>readingString</code> with an argument of type <code>int</code>, e.g. <code>reader.readingString(34)</code>; this is because the method expects an argument with a <code>String</code> type, not an argument with type <code>int</code>.</p>
+<p>A type system <em>assigns types to programming constructs</em>. By programming constructs we mean functions, expressions, statements and variables among others. The main function of the type system is to remove bugs in software through a phase known as type checking. During type checking the compiler assigns types to language constructs and builds a sound mathematical model. Sound means that the type system guarantees rejects programs that are illegal according to the mathematical model [<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>].</p>
+<p>Type checking can happen at compile time or at run-time; when the type checking happens at compile time, we have a statically typed language. If the type checking happens at run-time, we have a dynamically typed language. For all purposes in this book, we consider only static and dynamic type systems [<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>].</p>
+<p>For example, Java is a statically typed language and would reject the program below when the method <code>readingString</code> receives an <code>int</code> argument (e.g. <code>reader.readingString(34)</code>). The method expects a <code>String</code> type, not <code>int</code> type.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> <span class="bu">Reader</span> {</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">public</span> [<span class="bu">String</span>] <span class="fu">readingString</span>(<span class="bu">String</span> s){ s.<span class="fu">toArray</span>(); }</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">}</a></code></pre></div>
-<p>On the other side, we have dynamic languages such as Python. Most dynamic languages use <em>duck typing</em>. From the pragmatic point of view, duck typing means that we do not rely on types to specify whether the methods of an object exists: you call methods on objects as if they exist and, at runtime, if they do, great, if they don’t, the program throws an error. You can look at it from this other point of view: you are telling the object the behaviour that it should implement, whether it does or not is another story that you need to ensure yourself. Going back to the previous example, now written in Python:</p>
+<p>On the other side, we have dynamic languages such as Python. Most dynamic languages use <em>duck typing</em>. From the pragmatic point of view, duck typing means that we do not rely on types to specify whether the methods of an object exists: you call methods on objects as if they exist and, at run-time, if they do, great, if they don’t, the program throws an error. You can look at it from this other point of view: you are telling the object the behaviour it should implement, and you must ensure this “contract”. Going back to the previous example, now written in Python:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">class</span> Reader(<span class="bu">object</span>):</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">def</span> readingString(s):</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">    s.toList()</a></code></pre></div>
-<p>If you have an instance of a <code>Reader</code> class, <code>reader</code>, you can potentially call <code>reader.readingString(&quot;Test&quot;)</code> and return a singleton list with the string you passed. However, you could also call <code>reader.readingString(True)</code>, and the program will throw an error at runtime – <code>True</code> does not have a method called <code>toList()</code>.</p>
+<p>Let’s assume we have a variable named <code>reader</code> which is an instance of the <code>Reader</code> class. You could make the method call <code>reader.readingString(&quot;Test&quot;)</code> and get back a singleton list. Moreover, you could also call <code>reader.readingString(True)</code> and the program would crash at run-time — <code>True</code> does not have a method called <code>toList()</code>.</p>
 <p>The following table shows the main and most pragmatic differences between static and dynamic languages.</p>
 <table>
-<caption>Static vs Dynamic type systems from pragmatic point of view.</caption>
+<caption>Static vs Dynamic type systems from a pragmatic point of view.</caption>
 <colgroup>
 <col style="width: 46%" />
 <col style="width: 53%" />
@@ -143,12 +143,12 @@ spreading the word or
 <td><ul>
 <li><p>Declare behaviour that you expect</p></li>
 <li><p>For each method, ensure that you pass arguments that your declared behaviour</p></li>
-<li><p>Catches error at runtime</p></li>
+<li><p>Catches error at run-time</p></li>
 </ul></td>
 </tr>
 </tbody>
 </table>
-It is completely normal if you do not fully understand everything mentioned in this section. As soon as we see examples in the next chapters everything will be much clear. <!-- If that is the case, please continue ahead and go back to --> <!-- this section once you have gone through the [Object-oriented reminder](#object-oriented-concepts). --> <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+It is completely normal if you do not fully understand everything mentioned in this section. As soon as we see examples in the next chapters everything will be much clear. <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
 #mc_embed_signup .button {

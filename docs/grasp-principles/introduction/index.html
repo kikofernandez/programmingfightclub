@@ -12,69 +12,6 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-  </style>
   <link rel="stylesheet" href="/grasp-principles/assets/pandoc.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
@@ -114,81 +51,51 @@ spreading the word or
 <h1 id="introduction">Introduction</h1>
 <div class="figure">
 <figure>
-<img src="../assets/art-artist-artistic-316465.jpg" alt="Introduction" /><figcaption>Introduction</figcaption>
+<img src="../assets/art-artist-artistic-316465.jpg" alt=" " /><figcaption> </figcaption>
 </figure>
 </div>
 <p class="para">
-<span class="dropcaps">Y</span>ou worked hard for over a year in the next billion dollar web app in a small startup: the CEO, Johan, seems happy that the product is (almost) feature complete; the designer, Anders, is happy with the UX and graphics and the CTO, Pontus, just wants to press the red button and release the product. You tell them to wait 10 more minutes, the unit tests, integration tests and system tests are still running. Adding tests was a long battle with management because it slowed down the project quite a lot, but you are a good engineer and tests will catch many errors in the future.
+<span class="dropcaps">Y</span>ou worked hard for over a year in the next billion dollar web app in a small startup: the CEO, Johan, seems happy that the product is (almost) feature complete; the designer, Anders, is happy with the UX and graphics and the CTO, Pontus, just wants to press the red button and release the product. You tell them to wait 10 more minutes, the unit tests, integration tests and system tests are still running. Adding tests was a long battle with management because it slowed down the project quite a lot, but you are a good engineer and tests will catch many errors.
 </p>
 <ul>
 <li>Ding, ding, ding (sound)</li>
 </ul>
-<p>You look at the screen, all 142 tests are green! You tell Pontus to push the red button; deployment scripts start, your software is being installed on all the AWS servers the company could afford, a few databases with replication for faster reads and a single leader for the writes, load balancers, reverse proxies for serving static data and another bunch of instances running your application. After a few minutes, the deployment is a success, your baby is ALIVE and by tomorrow morning your product will be featured in all the Swedish newspapers (you live in Stockholm, the European capital for startups).</p>
-<p>The next day comes, you try the app and observe that the system is just f****** slow. It seems that connections time out and you observe in your monitoring tools that the server is not processing that many requests. <em>What the hell is going on!?</em></p>
-<p>The CTO has the intuition that it could be related to that reusable query class that receives lambdas, updates a bunch of fields from different objects and saves them into the database as a single transaction. There were many things going on there and, to guarantee those transactions are atomic, someone in the team introduced a lock. You think that the first thing to check is if you are <em>releasing</em> the lock. If your intuition is right, you’ll fix the code, add the test that should have covered that case and be <em>presto</em> in 5 min to re-deploy the application.</p>
-<p>There is one problem though, the code doesn’t have a well-defined structure and the lock somehow was passed inside a lambda – someone had to try out lambdas, they are cool – so you have no way of releasing the lock directly after the lambda call. To your horror, you observe that the lambda captured a the lock variable and was not passed as a parameter. You also observe some <code>if</code>-condition statement that releases the lock in the <code>else</code> clause, but you have no idea why only in the <code>else</code>. You realise that, if someone had explained to your team mate that the lock should have never been captured by the lambda, instead:</p>
+<p>You look at the screen, all 142 tests are green! You tell Pontus to push the red button; deployment scripts start, your software is being installed on all the AWS servers the company could afford, a few databases with replication for faster reads and a single leader for the writes, load balancers, reverse proxies for serving static data and another bunch of instances running your application. After a few minutes, the deployment is a success, your baby is ALIVE and by tomorrow morning all Swedish newspapers will feature your product.</p>
+<p>The next day comes, you try the app and observe that the system is just f****** slow. Connections time out and you observe in your monitoring tools that the server is not processing that many requests. <em>What the hell is going on!?</em></p>
+<p>The CTO thinks that it is the reusable query function that receives lambdas, updates a bunch of fields from different objects and saves them into the database as a single transaction. To guarantee that those transactions are atomic, someone in the team introduced a lock. You check if the lock has been released. If your intuition is right, you will fix the code, add the test that should have covered that case and be <em>presto</em> in 5 min.</p>
+<p>There is one problem though, the code does not have a well-defined structure, and a lambda captures the lock — someone had to try out lambdas, they are cool — so you have no way of releasing the lock after the lambda call. I will repeat this to sink in: <em>the lambda captures the lock</em>, <em>the lock was not passed as a parameter</em>. You also observe some <code>if</code>-condition statement that releases the lock only in the <code>else</code> branch, but you do not understand why only in the <code>else</code> condition. You realise that, if someone had explained to your team mate that a lambda should never mutable state, the maintainability of the code would be much easier. The pattern is simple:</p>
 <ol type="1">
 <li>grab the lock</li>
-<li>call lambda function</li>
+<li>call a lambda function</li>
 <li>unlock</li>
 </ol>
-<p>By following these simple steps, any lambda could have been used in this method:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">def</span> complex_query(lock, fn, <span class="op">*</span>args, <span class="op">**</span>kwargs):</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  lock.acquire()</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  fn(args, kwargs)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  lock.release()</a></code></pre></div>
-<p>Shit, if only your teammate had used a better design…</p>
-<h4 id="how-did-you-end-up-in-this-situation"><strong>How did you end up in this situation?</strong></h4>
-<p>You coded a system considering all the functional requirements and the architecture but you failed to create a good design. The hype of new features seemed like a silver bullet and everyone in the team was using them (the same thing happens with new frameworks all the time). The problem is understanding when to use those shiny new features and how they affect your design.</p>
+<p>The code follows below:</p>
+<pre><code>def complex_query(lock, fn, *args, **kwargs):
+  lock.acquire()
+  fn(args, kwargs)
+  lock.release()</code></pre>
+<p>Shit, if only your team mate had used a better design…</p>
+<h4 id="how-did-you-end-up-in-this-situation" class="unnumbered"><strong>How did you end up in this situation?</strong></h4>
+<p>You considered the functional requirements and the architecture but you failed to create a good design. The hype of new features seemed like a silver bullet; everyone in the team uses them. The problem is to understand when to use the new features and how they affect your design.</p>
 <div class="figure">
-<img src="https://imgs.xkcd.com/comics/code_quality.png" alt="Code Quality" />
-<p>
-(Image from https://xkcd.com/1513/)
-</p>
+<figure>
+<img src="https://imgs.xkcd.com/comics/code_quality.png" alt="Code Quality []" /><figcaption>Code Quality [<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>]</figcaption>
+</figure>
 </div>
-<p>The image above explains the situation of many self-taught developers (as well as young developers and engineers who have just finished their degree) who can read APIs, look on stackoverflow.com and find a solution to most problems. However, to be a good engineer/developer, being able to code does not mean that your code exhibits good software qualities, i.e. that your code is flexible and maintainable. This book will introduce you to design principles for creating a flexible and maintainable code.</p>
+<p>Young developers and engineers (who have just finished their degree) can read APIs, look on stackoverflow.com and find a solution to most problems. However, good engineers write code that exhibits good software qualities, such as code that is flexible and maintainable. This book will introduce you to design principles for creating a flexible and maintainable code.</p>
 <h2 id="software-design">Software Design</h2>
 <p><strong>Software design</strong> is the process of <strong>finding a satisfactory solution to a problem</strong>.</p>
-<p>Many books explain software design with a focus on one language and assume that this knowledge can be “easily” extrapolated to other languages and/or paradigms. While it is true that you have to start somewhere, it is also true that as soon as you try to put the learnt design patterns in another language, their explanations may not be easy to follow or not make sense at all, from the language’s perspective.</p>
-<p>After coding for more than 10 years, teaching a course on Advanced Software Design at Uppsala University (Sweden), and doing (still working on it) a PhD on Programming Languages, I believe that one of the strongest points of any language is its type system. It is not the same to use a statically typed language with a strong type system (e.g. Haskell), than to program in a dynamic and more flexible language. For instance, the notion of <em>transducers</em>, introduced by the dynamic language Clojure, is attractive to other languages but difficult to implement in a typed language.</p>
-<p>Our approach in this book will be practical, focusing and taking advantage of the type system (and its restrictions). With this in mind, the knowledge can be extrapolated to other languages, because we have built a common understanding of how the type system interplays with the language.</p>
-<p>Throughout the book, <!-- For this reason, we are going to cover design principles from the perspective of --> <!-- different languages and type systems, and  --> we show different approaches to solving the same problem using a static and a dynamic language. You will learn to take advantage of each of the languages constructs, when to use them and when to avoid them.</p>
-<p>Given that each language has different features, we use a visual modelling language to express the main idea and let each language do their own implementation. This visual language, called UML (<em>Unified Modelling Language</em>), is explained in later chapters.</p>
-<!-- Before one can start with an implementation there needs to be a clear specification -->
-<!-- of the problem to solve and a good understanding of the domain of the system under -->
-<!-- design (you can draw a domain model to clarify ideas). You can also write an informal -->
-<!-- document that describes the steps necessary to solve the problem (class and sequence -->
-<!-- diagrams can help here) and notes about the expected non-functional requirements, i.e., -->
-<!-- importing your friends' favourite places cannot block the main thread and should finish -->
-<!-- in less than 30 seconds. -->
-<!-- ### Agile methodologies -->
-<!-- Given the definition above, designing software seems to be completely disjoint -->
-<!-- from agile methodologies, e.g. Scrum, where you break user stories into smaller -->
-<!-- tasks until everything is clear to the whole team. In Scrum, there seems to be no -->
-<!-- domain model, not a single static and/or behavioural diagram, no architecture, etc, -->
-<!-- just code-what-the-post-it says. There is one problem if this approach is taken literally -->
-<!-- though: the post-it tells you what the problem is but not how to design it! You, as a -->
-<!-- software engineer, should look at domain modelling, static and behaviour models and -->
-<!-- architectural diagrams as tools under your belt that may be used if required, even in -->
-<!-- agile methodologies. -->
-<!-- Software design is all about making decisions. -->
-<!-- Every problem involves taking small and big decisions and these influence the final -->
-<!-- outcome of your software. For instance, the "simple" task of choosing a programming -->
-<!-- language has a tremendous impact on your software. Choose a dynamic language and you'll -->
-<!-- find quite a lot of errors at runtime (even if you use a test-driven development approach). -->
-<!-- Other example is choosing between a object-oriented or a functional language. You can always -->
-<!-- write the same piece of software using one paradigm or the other. However, one of them will -->
-<!-- bring inherent benefits while the other one puts some extra burden in your code. -->
-<!-- <div class="figure"> -->
-<!-- ![](https://imgs.xkcd.com/comics/code_quality_2.png) -->
-<!-- <p>(Image from http://xkcd.com/1695/)</p> -->
-<!-- </div> -->
+<p>Many books explain software design with a focus on one language and assume that this knowledge can be extrapolated to other languages and paradigms. But the type system influences the implementation of the design patterns. For example, most dynamically typed languages have the notion of mixins, while these (mostly) do not exist in statically typed languages.</p>
+<p>After coding for over 10 years, teaching a course on Advanced Software Design at Uppsala University (Sweden), and doing (still working on it) a PhD on Programming Languages, I believe that one of the strongest points of any language is its type system. It is not the same to use a statically typed language with a strong type system (e.g. Haskell), than to program in a dynamic and more flexible language. For instance, the dynamic language Clojure introduced <em>transducers</em>. Transducers can be coded in statstatically typed languages but its implementation is much more difficult to code.</p>
+<p>Our approach in this book will be practical, focusing and taking advantage of the type system (and its restrictions). Then, this knowledge can be extrapolated to other languages — we have built a common understanding of how the type system interplays with the language.</p>
+<p>Throughout the book, we show different approaches to solving the same problem using a static and a dynamic language. You will learn to take advantage of each of the languages constructs when to use them and when to avoid them.</p>
+<p>Type systems influence the available language constructs. For this reason, the book introduces a visual modelling language, known as <em>Unified Modelling Language</em> (UML). UML expresses the design idea and each language provides its own implementation.</p>
 <h2 id="what-is-a-good-design">What is a good design?</h2>
-<p>In general, a good design is one that can deal with change.</p>
-<p>As a software engineer/developer, you have to think about a piece of code that today is a car, tomorrow is a submarine and the next day is a tank. This happens because it is just code, anyone can update it and it is not set in stone, ever.</p>
-<p>There are many ways to solve a problem and, more often than not, there exist well-study common solutions. These well-documented solutions are called design principles and design patterns and they exist for all kinds of paradigms. In this book, we will focus on object-oriented design principles.</p>
+<p>A good design is one that can deal with change.</p>
+<p>As a software engineer/developer, think about a piece of code that today is a car, tomorrow is a submarine and the next day is a tank. This happens because it is just code, anyone can update it and is not set in stone, ever.</p>
+<p>There are many ways to solve a problem and, more often than not, there exist well-study common solutions. These well-documented solutions receive the name of design principles and design patterns and they exist for all kinds of paradigms. In this book, we will focus on object-oriented design principles.</p>
 <h2 id="design-principles">Design principles</h2>
-<p>Design principles are guidelines to separate responsibilities of different classes and create software that can be easily composed out of smaller pieces. The design principles that we cover are known as <em>GRASP principles</em>, which stands for <em>General responsibility assignment software principles</em>. In this book, we cover the <em>GRASP principles</em>:</p>
+<p>Design principles are guidelines to separate responsibilities among classes, and to compose software out of smaller pieces. This book covers the <em>General responsibility assignment software principles</em> (<em>GRASP principles</em>), which includes:</p>
 <ul>
 <li>Controller,</li>
 <li>Creator,</li>
@@ -200,9 +107,7 @@ spreading the word or
 <li>Protected variation and,</li>
 <li>Pure fabrication</li>
 </ul>
-<p><em>Enjoy the ride!</em></p>
-<!-- Next chapter: Case Study -->
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<em>Enjoy the ride!</em> <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
 #mc_embed_signup .button {
@@ -285,6 +190,12 @@ Mailing list
 </div>
 </div>
 </article>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Image from https://xkcd.com/1513/<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
 <div class="footnotes">
 <hr>
 <div class="container">
