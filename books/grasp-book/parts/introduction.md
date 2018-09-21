@@ -1,7 +1,7 @@
 # Introduction
 
 <div class="figure">
-![](MEDIA/assets/art-artist-artistic-316465.jpg){#figure:intro}
+![\ ](MEDIA/assets/art-artist-artistic-316465.jpg)
 </div>
 
 <p class="para"><span class="dropcaps">Y</span>ou worked hard for over a year in the next billion dollar web app in a small startup: the CEO, Johan, seems happy that the product is (almost) feature complete; the designer, Anders, is happy with the UX and graphics and the CTO, Pontus, just wants to press the red button and release the product. You tell them to wait 10 more minutes, the unit tests, integration tests and system tests are still running. Adding tests was a long battle with management because it slowed down the project quite a lot, but you are a good engineer and tests will catch many errors.</p>
@@ -22,7 +22,7 @@ There is one problem though, the code does not have a well-defined structure, an
 
 The code follows below:
 
-```{#lst:code .python caption="Complex query function"}
+```
 def complex_query(lock, fn, *args, **kwargs):
   lock.acquire()
   fn(args, kwargs)
