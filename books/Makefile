@@ -1,16 +1,21 @@
 GRASP=grasp-book
 LAMBDA=lambda-book
+PANDOC=pandoc-book
 
-all: web_grasp web_lambda
+all: grasp_web_book web_lambda
 
 # Build GRASP principles book
-web_grasp:
-	make -C $(GRASP) web_prod
+grasp_web_book:
+	@make -C $(GRASP) $@
+
 web_grasp_test:
-	make -C $(GRASP) web_test
+	@make -C $(GRASP) web_test
 
 # Build Lambda book
 web_lambda:
-	make -C $(LAMBDA) web_prod
+	@make -C $(LAMBDA) web_prod
 
-.PHONY: web_grasp web_grasp_test web_lambda all
+pandoc_book:
+	@make -C $(PANDOC) epub
+
+.PHONY: grasp_web_book web_grasp_test web_lambda pandoc_book all

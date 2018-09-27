@@ -1,17 +1,17 @@
 SRC=books
 
-all: web_grasp web_lambda
+BOOKS=grasp_web_book pandoc_book
 
-web_grasp:
-	make -C $(SRC) $@
+all: $(BOOKS)
 
+$(BOOKS):
+	@make -C $(SRC) $@
+
+# this book is not ready.
 web_lambda:
-	make -C $(SRC) $@
-
-web_grasp_test:
-	make -C $(SRC) $@
+	@make -C $(SRC) $@
 
 clean:
-	make -C $(SRC) $@
+	@make -C $(SRC) $@
 
 .PHONY: clean web all

@@ -76,6 +76,8 @@ epub_demo:
 ##
 ##########################################
 
+grasp_web_book: web_prod blog_prod
+
 web_prod: web_clean folder_gen $(TOCDEPENDENCIES)
 	@mkdir -p $(DOCS)
 	@cp -r assets $(DOCS)
@@ -84,7 +86,7 @@ web_prod: web_clean folder_gen $(TOCDEPENDENCIES)
 	@rm -rf $(DOCS)/parts
 
 
-blog_prod: $(BLOG_DEPENDENCIES)
+blog_prod: web_prod $(BLOG_DEPENDENCIES)
 	@cp $(DOCS)/$(BLOG_FOLDER)/table-of-contents/index.html $(DOCS)/$(BLOG_FOLDER)
 
 $(BLOG_DEPENDENCIES):
