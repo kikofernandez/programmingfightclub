@@ -1,5 +1,6 @@
 # Pandoc: the perfect tool for writers
 
+Pandoc is a tool for converting files from one format into another format.
 Explain and motivate why Pandoc is the tool for writters.
 Whether you are a science fiction writter or researcher,
 Pandoc fits there.

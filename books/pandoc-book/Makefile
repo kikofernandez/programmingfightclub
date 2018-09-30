@@ -18,9 +18,17 @@ epub: $(DEPS)
 	@cp -r parts $(EPUB_FOLDER)
 
 	@pandoc -s -t epub -F pandoc-crossref \
-	--number-sections --no-highlight meta.yaml \
+	--number-sections meta.yaml \
 	$(addprefix $(EPUB_FOLDER)/parts/, $(MD_DEPS)) -o $(EPUB_FOLDER)/book.epub
 	@rm -rf $(EPUB_FOLDER)/parts/
+
+odt: $(DEPS)
+	@pandoc -s -F pandoc-crossref --reference-doc=custom-reference.odt \
+	--number-sections --no-highlight meta.yaml \
+	$(addprefix parts/, $(MD_DEPS)) -o book.odt
+
+odt2epub:
+	@pandoc -s meta.yaml custom-reference.odt -o $(EPUB_FOLDER)/book2.epub
 
 clean:
 	@rm -rf $(EPUB_FOLDER)

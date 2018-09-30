@@ -1,9 +1,10 @@
 ---
-title: 'Pandoc: your Swiss army knife'
+title: 'The Writing Tool'
+subtitle: 'Write. Format. Publish.
 publisher: 'Programming Language Fight Club'
 author: Kiko Fernandez-Reyes
 rights: 2018 Kiko Fernandez-Reyes, CC BY-SA 4.0 International
-cover-image: assets/pandoc.jpg
+cover-image: assets/TheWritingTool.png
 stylesheet: assets/epub.css
 toc-depth: 2
 ...
